@@ -147,7 +147,7 @@ function Tools() {
 
     return (
         <>
-            <Header />
+            <Header btncategory="Tool" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -156,6 +156,7 @@ function Tools() {
                     subtitle="Get pro tools fast—no upfront cost, low payments, no credit check."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Tool"
                 />
 
             </section>
@@ -216,6 +217,7 @@ function Tools() {
                 <GetStart
                     title="Get Started Today – No Credit Impact!"
                     subtitle="Upgrade your tools. Boost your productivity. Grow your business."
+                    btncategory="Tool"
                 />
             </section>
 

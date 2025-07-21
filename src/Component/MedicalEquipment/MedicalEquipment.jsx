@@ -133,7 +133,7 @@ function MedicalEquipment() {
     ];
     return (
         <>
-            <Header />
+            <Header btncategory="Medical_Equipment" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -142,6 +142,7 @@ function MedicalEquipment() {
                     subtitle="Affordable, Flexible Financing for the Equipment You Need"
                     imageSrc={ringimg}
                     imgealt="herosection image"
+                    btncategory="Medical_Equipment"
                 />
 
             </section>
@@ -231,6 +232,7 @@ function MedicalEquipment() {
                 <GetStart
                     title="Take the First Step Toward Elegance"
                     subtitle="Pre-Qualify Now – No Impact on Credit Score"
+                    btncategory="Medical_Equipment"
                 />
             </section>
 

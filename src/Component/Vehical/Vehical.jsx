@@ -138,7 +138,7 @@ function Vehical() {
 
     return (
         <>
-            <Header />
+            <Header btncategory="Vehicle" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -147,6 +147,8 @@ function Vehical() {
                     subtitle="Fast approvals, flexible plans, and vehicles for every budget."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                     btncategory="Vehicle"
+                    
                 />
 
             </section>
@@ -225,6 +227,7 @@ function Vehical() {
                 <GetStart
                     title="Ready to Start?"
                     subtitle="Pre-Qualify Now – No Impact on Credit Score"
+                     btncategory="Vehicle"
                 />
             </section>
 

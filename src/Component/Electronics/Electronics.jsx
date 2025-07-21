@@ -20,7 +20,7 @@ import useMeta from '../useMeta'
 function Electronics() {
     useMeta(
         " Electronics Financing | Laptops, TVs, Consoles & More",
-        "Shop electronics with ease. Finance your favorite gadgets- laptops, smart TVs, gaming consoles, etc through Lending Houz."
+        "Shop Electronics with ease. Finance your favorite gadgets- laptops, smart TVs, gaming consoles, etc through Lending Houz."
     )
     const steps = [
         {
@@ -138,7 +138,7 @@ function Electronics() {
     ];
     return (
         <>
-            <Header btncategory="electronics" />
+            <Header btncategory="Electronics" />
 
             {/* section 1 start  */}
 
@@ -148,7 +148,7 @@ function Electronics() {
                     subtitle="Get the Electronics You Want Today. Pay Over Time. No Credit? No Problem."
                     imageSrc={graphics}
                     imgealt="herosection image"
-                    btncategory="electronics"
+                    btncategory="Electronics"
                 />
 
             </section>
@@ -280,7 +280,7 @@ function Electronics() {
                 <GetStart
                     title="Ready to Get Started?"
                     subtitle="Apply now and bring home your pup as soon as today."
-                    btncategory="electronics"
+                    btncategory="Electronics"
                 />
             </section>
 

@@ -125,7 +125,7 @@ function LandscapEquipment() {
 
     return (
         <>
-            <Header />
+            <Header btncategory="Landscape_Equipment" />
 
 
             <section className='px-2 pb-10'>
@@ -134,6 +134,7 @@ function LandscapEquipment() {
                     subtitle="Finance mowers, trailers, trimmers, and more with low monthly payments."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Landscape_Equipment"
                 />
 
             </section>
@@ -258,6 +259,7 @@ function LandscapEquipment() {
                 <GetStart
                     title="Call to Action"
                     subtitle="Check your eligibility in seconds—no credit impact."
+                    btncategory="Landscape_Equipment"
                 />
             </section>
 

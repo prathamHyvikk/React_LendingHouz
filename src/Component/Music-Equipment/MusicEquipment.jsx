@@ -133,7 +133,7 @@ function MusicEquipment() {
     ];
     return (
         <>
-            <Header />
+            <Header btncategory="Music_Equipment" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -142,6 +142,7 @@ function MusicEquipment() {
                     subtitle="Turn Your Passion into Performance"
                     imageSrc={ringimg}
                     imgealt="guitar image"
+                     btncategory="Music_Equipment"
                 />
 
             </section>
@@ -224,6 +225,7 @@ function MusicEquipment() {
                 <GetStart
                     title="Your New Best Friend Is Waiting"
                     subtitle="Start your financing application today and bring your new companion home."
+                     btncategory="Music_Equipment"
                 />
             </section>
 

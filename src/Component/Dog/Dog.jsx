@@ -131,7 +131,7 @@ function Dog() {
     ];
     return (
         <>
-            <Header />
+            <Header btncategory="Dog"  />
 
             {/* section 1 start  */}
 
@@ -141,6 +141,7 @@ function Dog() {
                     subtitle="Affordable Monthly Plans | Fast Approval | No Hidden Fees"
                     imageSrc={dogimg}
                     imgealt="herosection image"
+                    btncategory="Dog" 
                 />
 
             </section>
@@ -204,6 +205,7 @@ function Dog() {
                 <GetStart
                     title="Start Your Dog Parenting Journey Today"
                     subtitle="Apply now and bring home your pup as soon as today."
+                    btncategory="Dog" 
                 />
             </section>
 

@@ -143,7 +143,7 @@ function SnowEquipment() {
 
     return (
         <>
-            <Header />
+            <Header btncategory="Snow_Equipment" />
 
 
             <section className='max-md:px-2  pb-10 px-10'>
@@ -152,6 +152,7 @@ function SnowEquipment() {
                     subtitle="Get the Tools You Need—When You Need Them Most"
                     imageSrc={ringimg}
                     imgealt="herosection image"
+                    btncategory="Snow_Equipment"
                 />
 
             </section>
@@ -211,6 +212,7 @@ function SnowEquipment() {
                 <GetStart
                     title="Take the First Step Toward Elegance"
                     subtitle="Pre-Qualify Now – No Impact on Credit Score"
+                    btncategory="Snow_Equipment"
                 />
             </section>
 

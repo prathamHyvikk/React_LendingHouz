@@ -132,7 +132,7 @@ function PowerSports() {
 
     return (
         <>
-            <Header />
+            <Header  btncategory="Power_Sports" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -141,6 +141,7 @@ function PowerSports() {
                     subtitle="Get the adrenaline without the upfront cost."
                     imageSrc={ringimg}
                     imgealt="herosection image"
+                    btncategory="Power_Sports" 
                 />
 
             </section>
@@ -322,6 +323,7 @@ function PowerSports() {
                 <GetStart
                     title="Ready to Ride?"
                     subtitle="Start your application today and bring home the thrill."
+                    btncategory="Power_Sports" 
                 />
             </section>
 

@@ -152,7 +152,7 @@ function PersonalProduct() {
 
     return (
         <>
-            <Header />
+            <Header  btncategory="Personal_Product" />
 
 
             <section className='max-md:px-2 lg:pb-5 px-10'>
@@ -161,6 +161,7 @@ function PersonalProduct() {
                     subtitle="Finance personal products with low monthly payments—no upfront cost, no credit impact."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Personal_Product"
                 />
 
             </section>
@@ -213,6 +214,7 @@ function PersonalProduct() {
                 <GetStart
                     title="Call to Action"
                     subtitle="Check your eligibility in seconds—no credit impact."
+                    btncategory="Personal_Product"
                 />
             </section>
 

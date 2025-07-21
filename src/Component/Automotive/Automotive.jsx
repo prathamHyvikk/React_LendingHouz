@@ -101,7 +101,7 @@ function Automotive() {
 
   return (
     <>
-      <Header />
+      <Header  btncategory="Automotive" />
       {/* section 1 start  */}
 
       <section className="container flex flex-col items-center gap-4 max-md:px-2 px-10">
@@ -109,7 +109,7 @@ function Automotive() {
           <h1 className='sora-regular tracking-tight'>Drive Your Dream Car Today</h1>
           <h6 className='primary-text sora-regular'>Auto Financing Made Simple – Fast Approvals, Flexible Plans</h6>
         </div>
-        <BtnGetStart />
+        <BtnGetStart category="Automotive" />
         <img src={section1img} className='mt-4 ' alt="" />
       </section>
 
@@ -239,7 +239,7 @@ function Automotive() {
                 Pre approval is quick, free, and doesn’t impact your credit score. Apply in just minutes using our secure online form. There’s no obligation, and you’ll instantly know where you stand. We make it easy to shop for your next car with confidence—no stress, no surprises.
               </h6>
               <div className='max-md:flex max-md:justify-center'>
-                <BtnGetStart />
+                <BtnGetStart category="Automotive"  />
               </div>
             </div>
           </div>

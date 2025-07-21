@@ -167,7 +167,7 @@ function Pet() {
 
     return (
         <>
-            <Header />
+            <Header btncategory="Pets" />
 
 
             <section className='max-md:px-2 pb-10  px-10'>
@@ -176,6 +176,7 @@ function Pet() {
                     subtitle="Flexible, Fast & Friendly Pet Financing Options Whether it’s a playful puppy or a cuddly kitten, our pet financing plans help you welcome your furry friend home without breaking the bank."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Pets"
                 />
 
             </section>
@@ -281,6 +282,7 @@ function Pet() {
                 <GetStart
                     title="Your New Best Friend Is Waiting"
                     subtitle="Start your financing application today and bring your new companion home."
+                    btncategory="Pets"
                 />
             </section>
 

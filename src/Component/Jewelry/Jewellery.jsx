@@ -132,7 +132,7 @@ function Jewellery() {
     ];
     return (
         <>
-            <Header />
+            <Header btncategory="Jewelry"  />
 
 
             <section className='max-md:px-2 px-10'>
@@ -141,6 +141,7 @@ function Jewellery() {
                     subtitle="Flexible Financing Plans for Every Budget"
                     imageSrc={ringimg}
                     imgealt="herosection image"
+                    btncategory="Jewelry"
                 />
 
             </section>
@@ -238,6 +239,7 @@ function Jewellery() {
                 <GetStart
                     title="Take the First Step Toward Elegance"
                     subtitle="Pre-Qualify Now – No Impact on Credit Score"
+                    btncategory="Jewelry"
                 />
             </section>
 

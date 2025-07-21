@@ -176,7 +176,7 @@ function ProfessionalTools() {
 
     return (
         <>
-            <Header />
+            <Header btncategory="Professional_Equipment" />
 
 
             <section className='px-2'>
@@ -185,6 +185,7 @@ function ProfessionalTools() {
                     subtitle="From power tools to diagnostics—we finance it all."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Professional_Equipment"
                 />
 
             </section>
@@ -241,6 +242,7 @@ function ProfessionalTools() {
                 <GetStart
                     title="Get Started Today – No Credit Impact!"
                     subtitle="Upgrade your tools. Boost your productivity. Grow your business."
+                    btncategory="Professional_Equipment"
                 />
             </section>
 

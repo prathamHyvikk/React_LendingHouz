@@ -4,7 +4,7 @@ import Footer from '../Footer'
 import '../Utility.css'
 import FAQAccordion from '../FAQAccordion'
 import TestimonialSlider from '../TestimonialSlider'
-import ringimg from '@assets/Images/pngwing.com-(36)-11.png' 
+import ringimg from '@assets/Images/pngwing.com-(36)-11.png'
 import HeroSection from '../HeroSection '
 import recreationimg from '@assets/Images/Group-1171275273.png'
 import quipmentimg from '@assets/Images/Frame-1707481172.png'
@@ -133,7 +133,7 @@ function Recreation() {
     ];
     return (
         <>
-            <Header />
+            <Header btncategory="Recreation" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -142,6 +142,7 @@ function Recreation() {
                     subtitle="Turn Your Passion into Performance"
                     imageSrc={ringimg}
                     imgealt="guitar image"
+                    btncategory="Recreation"
                 />
 
             </section>
@@ -196,7 +197,7 @@ function Recreation() {
                             </div>
                         </div>
                     </div>
-                     <img
+                    <img
                         src={recreationimg}
                         alt="Car on mountain road"
                         className="rounded-xl  max-w-[637px] w-full object-contain max-h-[637px] "
@@ -222,6 +223,7 @@ function Recreation() {
                 <GetStart
                     title="Call to Action"
                     subtitle="Start your next adventure today—financed your way."
+                    btncategory="Recreation"
                 />
             </section>
 

@@ -107,7 +107,7 @@ function LivestockEquipment() {
     ];
     return (
         <>
-            <Header />
+            <Header btncategory="Livestock_Equipment" />
 
 
             <section className='px-2'>
@@ -116,6 +116,7 @@ function LivestockEquipment() {
                     subtitle="Get the tools you need to grow your farm with flexible payment options and competitive rates."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Livestock_Equipment"
                 />
 
             </section>
@@ -187,7 +188,7 @@ function LivestockEquipment() {
                                 </li>
                             ))}
                         </ul>
-                        <BtnGetStart/>
+                        <BtnGetStart category="Livestock_Equipment"/>
                     </div>
 
                 </div>
@@ -213,6 +214,7 @@ function LivestockEquipment() {
                 <GetStart
                     title="Call to Action"
                     subtitle="Check your eligibility in seconds—no credit impact."
+                    btncategory="Livestock_Equipment"
                 />
             </section>
 

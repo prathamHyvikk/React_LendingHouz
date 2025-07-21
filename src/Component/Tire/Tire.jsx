@@ -131,7 +131,7 @@ function Tire() {
    
     return (
           <>
-            <Header />
+            <Header  btncategory="Tire" />
 
 
             <section className='max-md:px-2 px-10'>
@@ -140,6 +140,7 @@ function Tire() {
                     subtitle="Flexible tire financing with easy monthly payments. No credit? No problem."
                     imageSrc={gooddog}
                     imgealt="herosection image"
+                    btncategory="Tire"
                 />
 
             </section>
@@ -218,6 +219,7 @@ function Tire() {
                 <GetStart
                     title="Don’t Wait Drive Safe Today"
                     subtitle="Get brand new tires with no upfront cost."
+                    btncategory="Tire"
                 />
             </section>
 

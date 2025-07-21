@@ -97,7 +97,7 @@ function Cell() {
 
     return (
         <>
-            <Header btncategory="cellphone" />
+            <Header btncategory="Cell_Phone" />
 
             {/* section 1 start  */}
 
@@ -107,7 +107,7 @@ function Cell() {
                     subtitle="No credit check. Low monthly payments. Instant approval decision."
                     imageSrc={heroimg}
                     imgealt="herosection image"
-                    btncategory="cellphone"
+                    btncategory="Cell_Phone"
                 />
 
             </section>
@@ -122,7 +122,7 @@ function Cell() {
                     <div className="flex flex-col">
                         <h1 className=" sora-regular mb-4">How It Works</h1>
                         <h6 className="primary-text sora-regular mb-6">Simple, Fast, and Hassle-Free</h6>
-                        <BtnGetStart category='cellphone' />
+                        <BtnGetStart category='Cell_Phone' />
                     </div>
 
                     <div className="flex gap-10 lg:w-1/2 w-full max-md:flex-col ">
@@ -220,7 +220,7 @@ function Cell() {
                 <GetStart
                     title="Own the Phone You Deserve Without the Upfront Cost"
                     subtitle="Low monthly payments. Easy approval. No credit barriers."
-                    btncategory="cellphone"
+                    btncategory="Cell_Phone"
                 />
             </section>
 

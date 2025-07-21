@@ -6,9 +6,9 @@ import '../Utility.css'
 import BtnGetStart from '../BtnGetStart'
 import FAQAccordion from '../FAQAccordion'
 import TestimonialSlider from '../TestimonialSlider'
-import section1img from '../../../public/assets/Images/section1img.png'
-import section2img from '../../../public/assets/Images/Group-1171275195.png'
-import section6img from '../../../public/assets/Images/Group-1171275201.png'
+import section1img from '@assets/Images/section1img.png'
+import section2img from '@assets/Images/Group-1171275195.png'
+import section6img from '@assets/Images/Group-1171275201.png'
 import useMeta from '../useMeta'
 
 

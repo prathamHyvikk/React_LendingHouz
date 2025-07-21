@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Utility.css';
-import logo from '../../public/assets/Images/header-logo.png';
+import logo from '@assets/Images/header-logo.png';
 import { Link } from 'react-router-dom';
 import BtnGetStart from './BtnGetStart';
 

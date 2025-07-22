@@ -65,7 +65,7 @@ function Header({ btncategory }) {
                             Financing Options <i className={`transition-transform ${drop ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'}`}></i>
                         </button>
                         {drop && (
-                            <div className="absolute flex flex-col mt-2 w-52 bg-white border border-gray-200 rounded shadow z-10">
+                            <div className="absolute flex flex-col   md:h-64   md:overflow-y-scroll mt-2 w-52 bg-white border border-gray-200 rounded shadow z-10">
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/automotive">Automotive</Link>  
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/cell">Cell Phone</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/electronics">Electronics</Link>

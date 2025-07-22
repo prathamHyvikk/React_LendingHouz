@@ -49,10 +49,10 @@ function Header({ btncategory }) {
 
     return (
         <header className=" px-2">
-            <div className="container p-8 flex justify-between items-center rounded-lg  ">
-                <div className="logo">
+            <div className="container max-md:py-4 md:p-8 flex justify-between items-center rounded-lg  ">
+               <Link to='/' className="logo">
                     <img className="max-w-[223px] max-sm:w-1/2" src={logo} alt="Logo" />
-                </div>
+                </Link>
 
                 <ul className="flex items-center max-lg:hidden gap-4 min-xl:gap-10">
                     <li><Link to="/" className="sora-bold text-black hover:text-[#FF9201]">Home</Link></li>

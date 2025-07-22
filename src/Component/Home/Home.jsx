@@ -24,7 +24,8 @@ import useMeta from '../useMeta'
 function Home() {
   useMeta(
     'Lending Houz | Flexible Financing for Everyday Products',
-    'Shop smarter with Lending Houz. Get fast, easy financing for electronics, vehicles, tools, pets and more, all with simple terms and quick approvals.'
+    'Shop smarter with Lending Houz. Get fast, easy financing for electronics, vehicles, tools, pets and more, all with simple terms and quick approvals.',
+    '3BgjutyoDjGNnYj5r7wq5ZyQbfuG0xZ3hYbIi3_H0_w'
   );
   const features = [
     { label: "Quick Online Process", icon: "ri-group-line" },
@@ -144,7 +145,7 @@ function Home() {
   ];
   return (
     <>
-      <Header   />
+      <Header />
       {/* section 1 start  */}
 
       <section className='max-md:px-2 px-10 lg:pb-10 pb-2'>
@@ -153,7 +154,7 @@ function Home() {
           subtitle="Get approved in minutes. Low rates, fast closings, and expert support every step of the way."
           imageSrc={homeimg}
           imgealt="herosection image"
-          
+
         />
 
       </section>
@@ -301,7 +302,7 @@ function Home() {
         <GetStart
           title="Ready to Take the First Step?"
           subtitle="Pre-Qualify Now – No Impact on Credit Score"
-           
+
         />
       </section>
 

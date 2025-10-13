@@ -25,6 +25,9 @@ import About from './Component/About/About'
 import Faqs from './Component/FAQS/Faqs'
 import Testimonial from './Component/Testimonial/Testimonial'
 import SnowEquipment from './Component/SnowEquipment/SnowEquipment'
+import Kiosk from './Component/Kiosk/Kiosk'
+import Ebike from './Component/Ebike/Ebike'
+import ScubaDiving from './Component/Scuba-diving/ScubaDiving'
 
 function App() {
   return (
@@ -53,6 +56,9 @@ function App() {
         <Route path='/faqs' element={<Faqs/>} />
         <Route path='/testimonial' element={<Testimonial/>} />
         <Route path='/snow-equipment' element={<SnowEquipment/>} />
+        <Route path='/kiosk' element={<Kiosk/>} />
+        <Route path='/e-bike' element={<Ebike/>} />
+        <Route path='/scuba-diving' element={<ScubaDiving/>} />
       </Routes>
     </BrowserRouter>
   )

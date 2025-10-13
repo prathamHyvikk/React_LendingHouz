@@ -84,6 +84,9 @@ function Header({ btncategory }) {
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/tire">Tire</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/vehical">Vehicle</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/tools">Tool</Link> 
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/kiosk">Kiosk</Link> 
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/e-bike">E-Bike</Link> 
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/scuba-diving">Scuba-Diving</Link> 
                             </div>
                         )}
                     </li>
@@ -144,6 +147,9 @@ function Header({ btncategory }) {
                                 <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/tire">Tire</Link>
                                 <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/vehical">Vehicle</Link>
                                 <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/tools">Tool</Link>
+                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/kiosk">Kiosk</Link>
+                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/e-bike">E-Bike</Link>
+                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/scuba-diving">Scuba-Diving</Link>
                             </div>
                         )}
                     </div>

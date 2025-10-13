@@ -153,7 +153,7 @@ function Home2() {
             </section>
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={financingFaqs} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
             <div className="container px-2">
                 <div className='flex flex-col gap-2 items-center text-center'>

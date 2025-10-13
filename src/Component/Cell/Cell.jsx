@@ -197,7 +197,7 @@ function Cell() {
             {/* section 4 start  */}
 
             <section className='max-md:px-2 px-10' >
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={cellFAq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={cellFAq} />
             </section>
 
             {/* section 4 end  */}

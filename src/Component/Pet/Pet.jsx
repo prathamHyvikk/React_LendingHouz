@@ -265,7 +265,7 @@ function Pet() {
             </section>
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={PetFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={PetFaq} />
             </div>
 
 

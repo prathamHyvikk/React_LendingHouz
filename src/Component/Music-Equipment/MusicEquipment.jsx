@@ -208,7 +208,7 @@ function MusicEquipment() {
 
 
             <div className="container max-md:px-2 pt-10 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={musicFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={musicFaq} />
             </div>
 
 

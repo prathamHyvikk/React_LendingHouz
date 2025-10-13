@@ -215,7 +215,7 @@ function MedicalEquipment() {
                 <HowItWorks steps={steps} maintitle="Why Finance with Us" bgColor="bg-gray-100" />
             </section>
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={MedicalFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={MedicalFaq} />
             </div>
 
 

@@ -182,7 +182,7 @@ function Dog() {
             {/* section 4 start  */}
 
             <section className='max-md:px-2 px-10' >
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={dogFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={dogFaq} />
             </section>
 
             {/* section 4 end  */}

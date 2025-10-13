@@ -222,7 +222,7 @@ function Jewellery() {
                 <HowItWorks steps={steps} maintitle="How Jewellery Financing Works" bgColor="bg-gray-100" />
             </section>
             <div className="container max-md:px-2 py-10 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={jwelleryFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={jwelleryFaq} />
             </div>
 
 

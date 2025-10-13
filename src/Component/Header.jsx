@@ -12,7 +12,7 @@ function Header({ btncategory }) {
 
     const togglenav = () => {
         setOpen(!open);
-        setMobileDrop(false); 
+        setMobileDrop(false);
     };
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function Header({ btncategory }) {
     return (
         <header className=" px-2">
             <div className="container max-md:py-4 md:p-8 flex justify-between items-center rounded-lg  ">
-               <Link to='/' className="logo">
+                <Link to='/' className="logo">
                     <img className="max-w-[223px] max-sm:w-1/2" src={logo} alt="Logo" />
                 </Link>
 
@@ -66,11 +66,11 @@ function Header({ btncategory }) {
                         </button>
                         {drop && (
                             <div className="absolute flex flex-col   md:h-64   md:overflow-y-scroll mt-2 w-52 bg-white border border-gray-200 rounded shadow z-10">
-                                <Link className="px-4 py-2  hover:bg-gray-100" to="/automotive">Automotive</Link>  
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/automotive">Automotive</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/cell">Cell Phone</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/electronics">Electronics</Link>
-                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/dog">Dog</Link>
-                                <Link className="px-4 py-2  hover:bg-gray-100" to="/jewellery">Jewelry</Link>
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/dog">Dog</Link>
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/jewellery">Jewellery</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/landscap-equipment">Landscap Equipment</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/livestock-equipment">Livestock Equipment</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/medical-equipment">Medical Equipment</Link>
@@ -83,10 +83,10 @@ function Header({ btncategory }) {
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/snow-equipment">Snow Equipment</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/tire">Tire</Link>
                                 <Link className="px-4 py-2  hover:bg-gray-100" to="/vehical">Vehicle</Link>
-                                <Link className="px-4 py-2  hover:bg-gray-100" to="/tools">Tool</Link> 
-                                <Link className="px-4 py-2  hover:bg-gray-100" to="/kiosk">Kiosk</Link> 
-                                <Link className="px-4 py-2  hover:bg-gray-100" to="/e-bike">E-Bike</Link> 
-                                <Link className="px-4 py-2  hover:bg-gray-100" to="/scuba-diving">Scuba-Diving</Link> 
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/tools">Tool</Link>
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/kiosk">Kiosk</Link>
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/e-bike">E-Bike</Link>
+                                <Link className="px-4 py-2  hover:bg-gray-100" to="/scuba-diving">Scuba-Diving</Link>
                             </div>
                         )}
                     </li>
@@ -115,47 +115,47 @@ function Header({ btncategory }) {
                 ${open ? 'translate-x-0' : 'translate-x-full'}
             `}>
                 <button onClick={togglenav} className="text-right w-full mb-6 text-xl">
-                    <i className="ri-close-line text-black hover:text-[#FF9201]"></i>
+                    <i className="ri-close-line text-black "></i>
                 </button>
                 <nav className="flex flex-col overflow-y-auto h-full pb-10 gap-4">
-                    <Link to="/" className="sora-bold text-black hover:text-[#FF9201]">Home</Link>
-                    <Link to="/about" className="sora-bold text-black hover:text-[#FF9201]">About</Link>
+                    <Link to="/" className="sora-bold text-black  ">Home</Link>
+                    <Link to="/about" className="sora-bold text-black  ">About</Link>
                     <div className="relative">
                         <button
                             onClick={() => setMobileDrop(!mobiledrop)}
-                            className="sora-bold text-black hover:text-[#FF9201] cursor-pointer"
+                            className="sora-bold text-black   cursor-pointer"
                         >
                             Financing Options <i className={`transition-transform ${mobiledrop ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'}`}></i>
                         </button>
                         {mobiledrop && (
-                            <div className="mt-2 flex flex-col text-black hover:text-[#FF9201] border-gray-200">
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/automotive">Automotive</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/cell">Cell Phone</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/electronics">Electronics</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/dog">Dog</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/jewellery">Jewelry</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/landscap-equipment">Landscap Equipment</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/livestock-equipment">Livestock Equipment</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/medical-equipment">Medical Equipment</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/music-equipment">Music Equipment</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/personal-product">Personal Product</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/professional-tools">Professional Tools</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/pet">Pets</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/power-sports">Power Sports</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/recreation">Recreation</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/snow-equipment">Snow Equipment</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/tire">Tire</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/vehical">Vehicle</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/tools">Tool</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/kiosk">Kiosk</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/e-bike">E-Bike</Link>
-                                <Link className="px-4 py-2 hover:bg-gray-100 hover:text-black" to="/scuba-diving">Scuba-Diving</Link>
+                            <div className="mt-2 flex flex-col text-black   border-gray-200">
+                                <Link className="px-4 py-2   hover:text-black" to="/automotive">Automotive</Link>
+                                <Link className="px-4 py-2   hover:text-black" to="/cell">Cell Phone</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/electronics">Electronics</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/dog">Dog</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/jewellery">Jewellery</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/landscap-equipment">Landscap Equipment</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/livestock-equipment">Livestock Equipment</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/medical-equipment">Medical Equipment</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/music-equipment">Music Equipment</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/personal-product">Personal Product</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/professional-tools">Professional Tools</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/pet">Pets</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/power-sports">Power Sports</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/recreation">Recreation</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/snow-equipment">Snow Equipment</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/tire">Tire</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/vehical">Vehicle</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/tools">Tool</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/kiosk">Kiosk</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/e-bike">E-Bike</Link>
+                                <Link className="px-4 py-2  hover:text-black" to="/scuba-diving">Scuba-Diving</Link>
                             </div>
                         )}
                     </div>
-                    <Link to="/testimonial" className="sora-bold text-black hover:text-[#FF9201]">Testimonial</Link>
-                    <Link to="/faqs" className="sora-bold text-black hover:text-[#FF9201]">FAQs</Link>
-                    <button className="md:py-4 w-fit p-3 md:px-10 primary-text bg-white rounded-2xl sora-bold tracking-wide">
+                    <Link to="/testimonial" className="sora-bold text-black  ">Testimonial</Link>
+                    <Link to="/faqs" className="sora-bold text-black  ">FAQs</Link>
+                    <button className="md:py-4 w-fit p-3 cursor-pointer md:px-10 primary-text bg-white rounded-2xl sora-bold tracking-wide">
                         Get Started <i className="ri-arrow-right-long-line"></i>
                     </button>
                 </nav>

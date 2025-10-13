@@ -197,7 +197,7 @@ function PersonalProduct() {
 
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={PersonalFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={PersonalFaq} />
             </div>
 
 

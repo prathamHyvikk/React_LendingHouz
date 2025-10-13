@@ -225,7 +225,7 @@ function ProfessionalTools() {
  
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={ProfessionalFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={ProfessionalFaq} />
             </div>
 
 

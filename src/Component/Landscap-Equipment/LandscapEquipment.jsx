@@ -242,7 +242,7 @@ function LandscapEquipment() {
             <WhyWeChoose/>
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={landscapEquiFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={landscapEquiFaq} />
             </div>
 
 

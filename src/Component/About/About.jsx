@@ -339,7 +339,7 @@ function About() {
             </section>
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={financingFaqs} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
 
 

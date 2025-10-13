@@ -257,7 +257,7 @@ function Electronics() {
             {/* section 4 start  */}
 
             <section className='max-md:px-2 pt-10 px-10' >
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={ElectroFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={ElectroFaq} />
             </section>
 
             {/* section 4 end  */}

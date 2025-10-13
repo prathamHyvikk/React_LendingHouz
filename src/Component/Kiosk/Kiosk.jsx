@@ -351,7 +351,7 @@ function Kiosk() {
             </section>
 
             <section className='max-md:px-2 pt-10 px-10' >
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={KioskFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={KioskFaq} />
             </section>
 
             <section className='max-md:px-2 px-10' >

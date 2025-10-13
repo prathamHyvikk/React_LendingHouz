@@ -197,7 +197,7 @@ function LivestockEquipment() {
             <WhyWeChoose />
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={LivestockFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={LivestockFaq} />
             </div>
 
 

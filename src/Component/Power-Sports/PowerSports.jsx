@@ -306,7 +306,7 @@ function PowerSports() {
 
 
             <section className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Ask Questions"} faqs={PowerFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={PowerFaq} />
             </section>
 
 

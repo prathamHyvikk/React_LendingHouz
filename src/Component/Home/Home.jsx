@@ -279,7 +279,7 @@ function Home() {
       {/* section 4 start  */}
 
       <div className="container lg:py-10 max-md:px-2 px-10">
-        <FAQAccordion title={"Frequently Ask Questions"} faqs={financingFaqs} />
+        <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
       </div>
 
       {/* section 4 end  */}

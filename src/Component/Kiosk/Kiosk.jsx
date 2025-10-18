@@ -22,8 +22,8 @@ import kioskmdl3 from '@assets/Images/kioskmodl3.svg'
 
 function Kiosk() {
     useMeta(
-        " Kiosk Financing | Laptops, TVs, Consoles & More",
-        "Shop Kiosk with ease. Finance your favorite gadgets- laptops, smart TVs, gaming consoles, etc through Lending Houz."
+        "Kiosk Financing | Affordable Payment Plans with Lending Houz",
+        "Start your vending or self-service business with ease. Finance kiosks and pay over time with flexible, affordable options from Lending Houz."
     )
     const steps = [
         {
@@ -54,65 +54,50 @@ function Kiosk() {
 
     const KioskFaq = [
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "What makes your self-service kiosks unique?",
+            answer: " Our kiosks combine sleek design, fast performance, and smart management tools — built to enhance customer experience and reduce wait times.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "Can these kiosks operate 24/7?",
+            answer: "Yes. They’re designed for continuous use, allowing your business to serve customers anytime without additional staff.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "What types of kiosks do you offer?",
+            answer: "We provide indoor, outdoor, compact, and high-traffic kiosks — ideal for retail, restaurants, and service centers.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "Are the kiosks durable enough for heavy use?",
+            answer: " Absolutely. Each model is built with industrial-grade materials to withstand high traffic and long hours of operation.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "Do the kiosks support contactless payments?",
+            answer: " Yes. They’re equipped with secure payment systems including NFC, EMV, and QR for fast, touch-free transactions.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "How can I manage multiple kiosks?",
+            answer: " Our smart dashboard lets you track sales, monitor inventory, and access real-time analytics from any device.",
         },
+        {
+            question: "Are your kiosks eco-friendly?",
+            answer: "Yes. They’re designed to minimize paper use, optimize power consumption, and reduce overall waste.",
+        },
+        {
+            question: "Can the kiosks be customized for my business?",
+            answer: " Definitely. You can tailor branding, interface design, and functionality to match your specific operations and goals.",
+        },
+        {
+            question: "What’s the installation process like?",
+            answer: " Setup is quick and guided by our technical team — most kiosks are ready to run within a few hours of delivery.",
+        },
+        {
+            question: "What kind of support do you offer after installation?",
+            answer: "We provide ongoing technical support, software updates, and maintenance services to ensure your kiosks run smoothly 24/7.",
+        }
 
     ];
 

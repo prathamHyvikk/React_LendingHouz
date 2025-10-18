@@ -22,8 +22,8 @@ import kioskmdl3 from '@assets/Images/kioskmodl3.svg'
 
 function Ebike() {
     useMeta(
-        " Ebike Financing | Laptops, TVs, Consoles & More",
-        "Shop Ebike with ease. Finance your favorite gadgets- laptops, smart TVs, gaming consoles, etc through Lending Houz."
+        " E-Bike Financing | Ride Electric with Lending Houz",
+        "Go green and ride smarter. Finance your electric bike today with Lending Houz and enjoy easy monthly payments and quick approvals."
     )
     const steps = [
         {
@@ -54,65 +54,55 @@ function Ebike() {
 
     const EbikeFaq = [
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
+            question: "What makes your e-bikes stand out from others?",
+            answer: "  Our e-bikes combine elegant design, high-torque motors, and long-range batteries, delivering style and performance for every ride.",
+
+        },
+        {
+            question: "How far can I travel on a single charge?",
+            answer: "Our models offer 40–60 miles per charge, depending on terrain, speed, and assist level — perfect for daily commutes or weekend adventures",
+
+        },
+        {
+            question: "Are these bikes good for both city and off-road use?",
+            answer: " Yes! The City Commuter is ideal for smooth urban rides, while the Trail Blazer and Adventure X easily handle hills, gravel, and trails.",
+
+        },
+        {
+            question: "How powerful are the motors?",
+            answer: " Our high-torque motors provide instant acceleration and hill-climbing capability — offering smooth control even on steep terrain.",
+
+        },
+        {
+            question: " How long does charging take, and what’s the battery life?",
+            answer: " Charging takes about 4–6 hours. Each battery is built for 500+ full charge cycles, ensuring long-term reliability.",
+
+        },
+        {
+            question: "Are your e-bikes environmentally friendly?",
+            answer: " Absolutely. Our electric bikes produce zero emissions, helping you reduce your carbon footprint while enjoying a cleaner, greener ride.",
+        },
+        {
+            question: "Do I need a license, insurance, or registration?",
+            answer: " In most regions, standard e-bikes do not require a license or insurance. Just ride responsibly and follow local road rules.",
+        },
+        {
+            question: " What kind of maintenance do e-bikes require?",
+            answer: "  Minimal upkeep — just keep tires inflated, the chain clean, and battery charged. Our models are designed for easy care and long-term durability.",
+        },
+        {
+            question: "Which model is right for me?",
             points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
+                "City Commuter – daily travel and smooth roads.",
+                "Trail Blazer – off-road and adventure riding.",
+                "Adventure X – long-distance, all-terrain performance.Need help? Our experts can match you with the perfect model.",
+
             ],
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
-        },
-        {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
-        },
-        {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
-        },
-        {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
-        },
-        {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
-        },
+            question: "What kind of maintenance or care do e-bikes need?",
+            answer: " Our e-bikes require minimal maintenance — just keep the tires inflated, the chain clean, and charge the battery regularly. We also provide service tips and support to keep your bike performing like new.",
+        }
 
     ];
 
@@ -183,15 +173,15 @@ function Ebike() {
     ];
     return (
         <>
-            <Header btncategory="Ebike" />
+            <Header btncategory="e_bike" />
 
             <section className='max-md:px-2 pb-10 px-10'>
                 <HeroSection
                     title="Ride in Style. Go Farther, Go Greener."
-                    subtitle="Experience the thrill of our e-bikes – powerful, sustainable, and designed for every journey."
+                    subtitle="Experience the thrill of our e_bikes – powerful, sustainable, and designed for every journey."
                     imageSrc={graphics}
                     imgealt="herosection image"
-                     btncategory="e-bike" 
+                    btncategory="e_bike"
                 />
 
             </section>
@@ -256,7 +246,7 @@ function Ebike() {
                                 />
                             </div>
                             <h3 className="text-lg sora-semibold text-gray-900 mb-1">
-                               Trail Blazer
+                                Trail Blazer
                             </h3>
                             <p className="text-gray-600 sora-regular text-sm">
                                 High-torque, rugged design for conquering off-road terrain.
@@ -272,7 +262,7 @@ function Ebike() {
                                 />
                             </div>
                             <h3 className="text-lg sora-semibold text-gray-900 mb-1">
-                               Urban Raider
+                                Urban Raider
                             </h3>
                             <p className="text-gray-600 sora-regular text-sm">
                                 Street-ready setup with smooth handling for city rides.

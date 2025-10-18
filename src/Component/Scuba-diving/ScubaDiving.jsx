@@ -22,8 +22,8 @@ import kioskmdl3 from '@assets/Images/kioskmodl3.svg'
 
 function ScubaDiving() {
     useMeta(
-        " ScubaDiving Financing | Laptops, TVs, Consoles & More",
-        "Shop ScubaDiving with ease. Finance your favorite gadgets- laptops, smart TVs, gaming consoles, etc through Lending Houz."
+        " Scuba Diving Equipment Financing | Lending Houz",
+        " Make your next dive unforgettable. Finance scuba gear and equipment with Lending Houz’s flexible and affordable payment plans."
     )
     const steps = [
         {
@@ -80,64 +80,52 @@ function ScubaDiving() {
 
     const ScubaDivingFaq = [
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: " What scuba diving adventures do you offer?",
+            answer: "We offer reef, wreck, night, drift, and advanced dives like Nitrox and cave diving — for all experience levels.",
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: " Do I need certification to dive?",
+            answer: "Beginners don’t need certification. Certified instructors guide you through every step. Advanced dives require a valid certification.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "What gear do you provide?",
+            answer: " We offer high-quality wetsuits, masks, regulators, fins, and more from trusted brands, regularly inspected for safety.",
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "Can I buy diving gear online?",
+            answer: " Yes! You can shop for beginner and pro-level scuba equipment at fair, competitive prices on our website.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "Is scuba diving safe for beginners?",
+            answer: " Yes. Certified instructors lead all dives with full safety briefings and top-standard gear.",
+
         },
         {
-            question: "Resistance Training That Works",
-            answer: "“The purpose of exercise isn’t to lose weight. It’s to build a healthier, stronger you.”",
-            points: [
-                "Learn why muscle is the foundation of health and body composition.",
-                "Train with intention: Progressive resistance training 3–4x per week.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-                "Master proper form, full range of motion, and how to apply progressive overload.",
-            ],
+            question: "Where can I dive with you?",
+            answer: " We operate in top destinations like the Florida Keys, Cozumel, Bonaire, Hawaii, and Belize — all handpicked for safety and beauty.",
+
+        },
+        {
+            question: "What should I bring for my dive?",
+            answer: "Just your swimsuit, towel, sunscreen, and excitement — we’ll handle the rest.",
+
+        },
+        {
+            question: "How can I book a dive?",
+            answer: "Click “Get Started” and choose your package, and our team will help you schedule your dive or gear purchase.",
+
+        },
+        {
+            question: " Do you offer group or family packages?",
+            answer: " Yes. We offer custom diving experiences for families, friends, and corporate groups.",
+
+        },
+        {
+            question: " Why choose LendingHouz Scuba Adventures?",
+            answer: "With 15+ years of experience, premium gear, and 98% happy divers, we make every dive safe, fun, and unforgettable.",
+
         },
 
     ];
@@ -208,7 +196,7 @@ function ScubaDiving() {
     ];
     return (
         <>
-            <Header btncategory="scuba-diving" />
+            <Header btncategory="scuba_diving" />
 
             <section className='max-md:px-2 pb-10 px-10'>
                 <HeroSection
@@ -216,7 +204,7 @@ function ScubaDiving() {
                     subtitle="Step out of the ordinary and embrace the thrill of new experiences! From breathtaking destinations to unforgettable journeys, we bring you the excitement, fun, and memories you’ll cherish forever."
                     imageSrc={graphics}
                     imgealt="herosection image"
-                    btncategory="scuba-diving"
+                    btncategory="scuba_diving"
                 />
 
             </section>
@@ -231,7 +219,7 @@ function ScubaDiving() {
                     />
 
                     <div className="xl:ml-20 text-left">
-                        <h1 className="text-4xl sora-regular text-gray-800">Why Choose Us</h1>
+                        <h1 className="text-4xl sora-regular text-gray-800">Dive into the Depths</h1>
                         <h6 className='mt-2 sora-regular'>Discover our premium range of scuba diving equipment designed for safety, comfort, and performance. From wetsuits and masks to regulators and fins, we provide everything you need to explore underwater worlds with confidence.</h6>
                         <ul className="mt-4 space-y-2">
                             {options2.map((item, index) => (
@@ -333,7 +321,7 @@ function ScubaDiving() {
                 <GetStart
                     title="Ready to Take the First Step?"
                     subtitle="Pre-Qualify Now – No Impact on Credit Score."
-                    btncategory="scuba-diving"
+                    btncategory="scuba_diving"
                 />
             </section>
 

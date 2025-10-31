@@ -28,6 +28,8 @@ import SnowEquipment from './Component/SnowEquipment/SnowEquipment'
 import Kiosk from './Component/Kiosk/Kiosk'
 import Ebike from './Component/Ebike/Ebike'
 import ScubaDiving from './Component/Scuba-diving/ScubaDiving'
+import Form from './Component/Form/Form'
+import NotFound from './Component/NotFound'
 
 function App() {
   return (
@@ -59,6 +61,8 @@ function App() {
         <Route path='/kiosk' element={<Kiosk/>} />
         <Route path='/e-bike' element={<Ebike/>} />
         <Route path='/scuba-diving' element={<ScubaDiving/>} />
+        <Route path='/become-partner' element={<Form/>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

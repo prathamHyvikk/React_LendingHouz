@@ -54,7 +54,7 @@ function Header({ btncategory }) {
                     <img className="max-w-[223px] max-sm:w-1/2" src={logo} alt="Logo" />
                 </Link>
 
-                <ul className="flex items-center max-lg:hidden gap-4 min-xl:gap-10">
+                <ul className="flex items-center desk-element gap-4 min-xl:gap-10">
                     <li><Link to="/" className="sora-bold text-black hover:text-[#FF9201]">Home</Link></li>
                     <li><Link to="/about" className="sora-bold text-black hover:text-[#FF9201]">About</Link></li>
                     <li ref={dropdownRef} className="relative">
@@ -92,17 +92,18 @@ function Header({ btncategory }) {
                     </li>
                     <li><Link to="/testimonial" className="sora-bold text-black hover:text-[#FF9201]">Testimonial</Link></li>
                     <li><Link to="/faqs" className="sora-bold text-black hover:text-[#FF9201]">FAQs</Link></li>
+                    <li><Link to="/become-partner" className="sora-bold text-black hover:text-[#FF9201]">Become Partner</Link></li>
                 </ul>
 
                 {/* <button className="py-4 max-lg:hidden px-10 primary-text bg-white rounded-2xl sora-bold tracking-wide">
                     Get Started <i className="ri-arrow-right-long-line"></i>
                 </button> */}
-                <div className='max-lg:hidden '>
+                <div className='desk-element '>
                     <BtnGetStart category={btncategory} />
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                <div className="min-lg:hidden">
+                <div className="mobile-toggle">
                     <button onClick={togglenav}>
                         <i className="ri-bar-chart-horizontal-line text-black hover:text-[#FF9201] sora-bold"></i>
                     </button>
@@ -155,6 +156,7 @@ function Header({ btncategory }) {
                     </div>
                     <Link to="/testimonial" className="sora-bold text-black  ">Testimonial</Link>
                     <Link to="/faqs" className="sora-bold text-black  ">FAQs</Link>
+                    <Link to="/become-partner" className="sora-bold text-black  ">Become Partner</Link>
                     <button className="md:py-4 w-fit p-3 cursor-pointer md:px-10 primary-text bg-white rounded-2xl sora-bold tracking-wide">
                         Get Started <i className="ri-arrow-right-long-line"></i>
                     </button>

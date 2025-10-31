@@ -33,6 +33,7 @@
     src: url(@assets/Fonts/sora/Sora-Regular.ttf);
     font-weight: 400;
 }
+
 @font-face {
     font-family: sora;
     src: url(@assets/Fonts/sora/Sora-Thin.ttf);
@@ -52,7 +53,7 @@
     max-width: 1312px;
     width: 100%;
     margin: auto;
-  
+
 }
 
 .primary-bg {
@@ -90,6 +91,7 @@
     font-family: sora;
     font-weight: 400;
 }
+
 .sora-thin {
     font-family: sora;
     font-weight: 300;
@@ -108,6 +110,18 @@ h1 {
 h6 {
     font-size: 20px;
 }
+
+@media screen and (min-width:1130px) {
+    .mobile-toggle {
+        display: none;
+    }
+}
+@media screen and (max-width:1130px) {
+    .desk-element {
+        display: none;
+    }
+}
+
 
 @media screen and (max-width:768px) {
     h1 {

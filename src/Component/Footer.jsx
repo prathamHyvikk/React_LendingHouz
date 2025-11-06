@@ -1,19 +1,20 @@
 import React from "react";
 import logo from '@assets/Images/header-logo.png';
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden"> 
+    <footer className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-orange-50 via-white to-blue-50" />
       <div className="absolute -top-16 -right-20 h-64 w-64 rounded-full bg-orange-200/30 blur-3xl" />
       <div className="absolute -bottom-20 -left-24 h-64 w-64 rounded-full bg-blue-200/30 blur-3xl" />
 
-      
+
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16">
-       
+
         <div className="mb-12 rounded-2xl border border-orange-200/70 bg-white/80 backdrop-blur p-6 sm:p-8 shadow-lg">
           <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
             <div className="flex-1 text-center lg:text-left">
@@ -90,11 +91,11 @@ const Footer = () => {
               ))}
             </div>
 
-            
+
           </div>
 
           {/* Columns */}
-          <nav aria-label="Product" className="flex flex-col">
+          {/* <nav aria-label="Product" className="flex flex-col">
             <h3 className="text-base font-semibold text-gray-900">Solutions</h3>
             <ul className="mt-4 space-y-3">
               {["Pet Financing", "Medical Equipment", "Travel & Lifestyle", "Business & Equipment"].map(
@@ -110,25 +111,57 @@ const Footer = () => {
                 )
               )}
             </ul>
-          </nav>
+          </nav> */}
 
-          <nav aria-label="Resources" className="flex flex-col">
-            <h3 className="text-base font-semibold text-gray-900">Resources</h3>
+          
+
+          <nav aria-label="Product" className="flex flex-col">
+            <h3 className="text-base font-semibold text-gray-900">Solutions</h3>
             <ul className="mt-4 space-y-3">
-              {["How It Works", "FAQs", "Blog", "Support"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+              {[
+                { name: "Pet Financing", to: "/pet" },
+                { name: "Medical Equipment", to: "/medical-equipment" },
+                { name: "Travel & Lifestyle", to: "#" },  
+                { name: "Business & Equipment", to: "#" },     
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.to}
                     className="group inline-flex items-center text-gray-600 hover:text-[#F7941D] transition"
                   >
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <nav aria-label="Company" className="flex flex-col">
+
+
+
+          <nav aria-label="Resources" className="flex flex-col">
+            <h3 className="text-base font-semibold text-gray-900">Resources</h3>
+            <ul className="mt-4 space-y-3">
+              {[
+                { name: "How It Works", to: "#" },
+                { name: "FAQs", to: "/faqs" },
+                { name: "Blog", to: "#" },
+                { name: "Support", to: "#" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.to}
+                    className="group inline-flex items-center text-gray-600 hover:text-[#F7941D] transition"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+
+          {/* <nav aria-label="Company" className="flex flex-col">
             <h3 className="text-base font-semibold text-gray-900">Company</h3>
             <ul className="mt-4 space-y-3">
               {["About", "Testimonials", "Become a Partner", "Contact"].map((item) => (
@@ -142,7 +175,29 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+          </nav> */}
+
+          <nav aria-label="Company" className="flex flex-col">
+            <h3 className="text-base font-semibold text-gray-900">Company</h3>
+            <ul className="mt-4 space-y-3">
+              {[
+                { name: "About", to: "/about" },
+                { name: "Testimonials", to: "/testimonial" },
+                { name: "Become a Partner", to: "/become-partner" },
+                { name: "Contact", to: "/contact" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.to}
+                    className="group inline-flex items-center text-gray-600 hover:text-[#F7941D] transition"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
+
         </div>
 
         {/* Divider */}

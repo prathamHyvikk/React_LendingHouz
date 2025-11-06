@@ -65,7 +65,7 @@ function Faqs() {
                 title="Frequently Ask Questions"
             />
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
+                <FAQAccordion title={""} faqs={financingFaqs} />
             </div>
 
 

@@ -30,41 +30,45 @@ import Ebike from './Component/Ebike/Ebike'
 import ScubaDiving from './Component/Scuba-diving/ScubaDiving'
 import Form from './Component/Form/Form'
 import NotFound from './Component/NotFound'
+import ScrollToTop from './Component/ScrollToTop'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/automotive' element={<Automotive/>} />
-        <Route path='/jewellery' element={<Jewellery/>} />
-        <Route path='/medical-equipment' element={<MedicalEquipment/>} />
-        <Route path='/cell' element={<Cell/>} />
-        <Route path='/dog' element={<Dog/>} />
-        <Route path='/electronics' element={<Electronics/>} />
-        <Route path='/pet' element={<Pet/>} />
-        <Route path='/music-equipment' element={<MusicEquipment/>} />
-        <Route path='/power-sports' element={<PowerSports/>} />
-        <Route path='/vehical' element={<Vehical/>} />
-        <Route path='/tire' element={<Tire/>} />
-        <Route path='/tools' element={<Tools/>} />
-        <Route path='/professional-tools' element={<ProfessionalTools/>} />
-        <Route path='/recreation' element={<Recreation/>} />
-        <Route path='/personal-product' element={<PersonalProduct/>} />
-        <Route path='/landscap-equipment' element={<LandscapEquipment/>} />
-        <Route path='/livestock-equipment' element={<LivestockEquipment/>} />
-        <Route path='/home2' element={<Home2/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/faqs' element={<Faqs/>} />
-        <Route path='/testimonial' element={<Testimonial/>} />
-        <Route path='/snow-equipment' element={<SnowEquipment/>} />
-        <Route path='/kiosk' element={<Kiosk/>} />
-        <Route path='/e-bike' element={<Ebike/>} />
-        <Route path='/scuba-diving' element={<ScubaDiving/>} />
-        <Route path='/become-partner' element={<Form/>} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/automotive' element={<Automotive />} />
+          <Route path='/jewellery' element={<Jewellery />} />
+          <Route path='/medical-equipment' element={<MedicalEquipment />} />
+          <Route path='/cell' element={<Cell />} />
+          <Route path='/dog' element={<Dog />} />
+          <Route path='/electronics' element={<Electronics />} />
+          <Route path='/pet' element={<Pet />} />
+          <Route path='/music-equipment' element={<MusicEquipment />} />
+          <Route path='/power-sports' element={<PowerSports />} />
+          <Route path='/vehical' element={<Vehical />} />
+          <Route path='/tire' element={<Tire />} />
+          <Route path='/tools' element={<Tools />} />
+          <Route path='/professional-tools' element={<ProfessionalTools />} />
+          <Route path='/recreation' element={<Recreation />} />
+          <Route path='/personal-product' element={<PersonalProduct />} />
+          <Route path='/landscap-equipment' element={<LandscapEquipment />} />
+          <Route path='/livestock-equipment' element={<LivestockEquipment />} />
+          <Route path='/home2' element={<Home2 />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/faqs' element={<Faqs />} />
+          <Route path='/testimonial' element={<Testimonial />} />
+          <Route path='/snow-equipment' element={<SnowEquipment />} />
+          <Route path='/kiosk' element={<Kiosk />} />
+          <Route path='/e-bike' element={<Ebike />} />
+          <Route path='/scuba-diving' element={<ScubaDiving />} />
+          <Route path='/become-partner' element={<Form />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 

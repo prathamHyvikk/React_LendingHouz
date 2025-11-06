@@ -73,10 +73,10 @@ function Testimonial() {
 
             />
             <div className="container pt-10 max-md:px-2 px-10">
-                <div className='flex flex-col gap-2 items-center text-center'>
+                {/* <div className='flex flex-col gap-2 items-center text-center'>
                     <h1 className='sora-regular'>What Our Customers Say</h1>
                     <h6 className='sora-regular primary-text max-w-[630px]'>Discover how nexPay is transforming the way people manage their money with real stories from satisfied users</h6>
-                </div>
+                </div> */}
                 <TestimonialSlider testimonials={testimonialsData} />
             </div>
 

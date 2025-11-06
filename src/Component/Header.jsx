@@ -151,27 +151,7 @@ function Header({ btncategory }) {
                         </button>
                         {mobiledrop && (
                             <div className="mt-2 flex flex-col text-black   border-gray-200">
-                                {/* <Link className="px-4 py-2   hover:text-black" to="/automotive">Automotive</Link> */}
-                                {/* <Link className="px-4 py-2  hover:text-black" to="/vehical">Vehicle</Link> */}
-                                {/* <Link className="px-4 py-2   hover:text-black" to="/cell">Cell Phone</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/electronics">Electronics</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/dog">Dog</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/jewellery">Jewelry</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/landscap-equipment">Landscape Equipment</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/livestock-equipment">Livestock Equipment</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/medical-equipment">Medical Equipment</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/music-equipment">Music Equipment</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/personal-product">Personal Product</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/professional-tools">Professional Tools</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/pet">Pets</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/power-sports">Power Sports</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/recreation">Recreation</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/snow-equipment">Snow Equipment</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/tire">Tire</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/tools">Tools</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/kiosk">Kiosk</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/e-bike">E-Bike</Link>
-                                <Link className="px-4 py-2  hover:text-black" to="/scuba-diving">Scuba-Diving</Link> */}
+                               
 
                                 <Link className="px-4 py-2 hover:text-black" to="/cell">Cell Phone</Link>
                                 {/* <Link className="px-4 py-2 hover:text-black" to="/dog">Dog</Link> */}

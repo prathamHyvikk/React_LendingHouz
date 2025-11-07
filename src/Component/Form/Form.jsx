@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import useMeta from "../useMeta";
 import ReCAPTCHA from "react-google-recaptcha";
 import Select from "react-select";
-
+import toast, { Toaster } from "react-hot-toast";
 
 function Form() {
   useMeta(
@@ -21,7 +21,7 @@ function Form() {
     city: "",
     state: "",
     zip: "",
-    website: "",
+    website: "", // optional
   });
 
   const [captchaToken, setCaptchaToken] = useState("");
@@ -84,7 +84,6 @@ function Form() {
     { value: "WY", label: "Wyoming" },
   ];
 
-
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, "").substring(0, 10);
     const part1 = digits.substring(0, 3);
@@ -98,27 +97,27 @@ function Form() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (errors[name]) setErrors({ ...errors, [name]: "" });
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
 
-    if (name === "city" || name === "state") {
+    if (name === "city") {
       const sanitized = value.replace(/[^a-zA-Z\s]/g, "");
-      setFormData({ ...formData, [name]: sanitized });
+      setFormData((prev) => ({ ...prev, [name]: sanitized }));
       return;
     }
 
     if (name === "zip") {
       const sanitized = value.replace(/\D/g, "").substring(0, 5);
-      setFormData({ ...formData, [name]: sanitized });
+      setFormData((prev) => ({ ...prev, [name]: sanitized }));
       return;
     }
 
     if (name === "phone") {
       const formatted = formatPhone(value);
-      setFormData({ ...formData, [name]: formatted });
+      setFormData((prev) => ({ ...prev, [name]: formatted }));
       return;
     }
 
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCaptcha = (token) => {
@@ -128,7 +127,7 @@ function Form() {
 
   const validateForm = () => {
     const newErrors = {};
-    const { businessName, ownerName, email, phone, address, city, state, zip } = formData;
+    const { businessName, ownerName, email, phone, address, city, state, zip, website } = formData;
 
     if (!businessName.trim()) newErrors.businessName = "Business Name is required.";
     if (!ownerName.trim()) newErrors.ownerName = "Owner Name is required.";
@@ -149,6 +148,14 @@ function Form() {
 
     if (!zip.trim()) newErrors.zip = "ZIP code is required.";
     else if (zip.length !== 5) newErrors.zip = "ZIP code must be 5 digits.";
+
+    // WEBSITE: optional, but must be valid if provided
+    if (website.trim()) {
+      const urlRegex = /^(https?:\/\/)([\w-]+\.)+[\w-]{2,}(\/\S*)?$/i;
+      if (!urlRegex.test(website.trim())) {
+        newErrors.website = "Enter a valid URL that starts with http:// or https://";
+      }
+    }
 
     if (!captchaToken) newErrors.captcha = "Please verify that you're not a robot.";
 
@@ -192,8 +199,9 @@ function Form() {
 
       const result = await response.json();
 
-      if (response.ok) {
-        setSuccess(response?.message || "Your application has been submitted successfully!");
+      if (result?.success) {
+        toast.success(result?.message || "Partner request submitted successfully!");
+        setSuccess(result?.message || "Partner request submitted successfully!");
         setFormData({
           businessName: "",
           ownerName: "",
@@ -207,7 +215,7 @@ function Form() {
         });
         setCaptchaToken("");
       } else {
-        setError(result.message || "Something went wrong. Please try again.");
+        setError(result?.message || "Something went wrong. Please try again.");
       }
     } catch {
       setError("Network error. Please try again.");
@@ -217,12 +225,14 @@ function Form() {
   };
 
   const inputClass = (field) =>
-    `w-full border rounded-lg px-4 py-2 focus:ring-1 focus:outline-none ${errors[field] ? "border-red-500" : "border-gray-300"
+    `w-full border rounded-lg px-4 py-2 focus:ring-1 focus:outline-none ${
+      errors[field] ? "border-red-500" : "border-gray-300"
     }`;
 
   return (
     <>
       <Header />
+      <Toaster position="top-right" reverseOrder={false} />
 
       <section className="flex justify-center py-6 px-4">
         <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-3xl">
@@ -235,7 +245,6 @@ function Form() {
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
               <div>
                 <label className="block font-medium mb-2 text-gray-700">Business Name</label>
                 <input
@@ -315,36 +324,16 @@ function Form() {
                   {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
                 </div>
 
-                {/* <div className="flex-1">
-                  <label className="block font-medium mb-2 text-gray-700">State</label>
-                  <input
-                    type="text"
-                    name="state"
-                    placeholder="Enter your state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    className={inputClass("state")}
-                  />
-                  {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
-                </div> */}
-
                 <div className="flex-1">
                   <label className="block font-medium mb-2 text-gray-700">State</label>
-
                   <Select
                     id="state"
                     name="state"
                     options={stateOptions}
                     value={stateOptions.find((opt) => opt.value === formData.state) || null}
                     onChange={(selected) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        state: selected?.value || "",
-                      }));
-                      setErrors((prev) => ({
-                        ...prev,
-                        state: selected?.value ? "" : "State is required.",
-                      }));
+                      setFormData((prev) => ({ ...prev, state: selected?.value || "" }));
+                      setErrors((prev) => ({ ...prev, state: selected?.value ? "" : "State is required." }));
                     }}
                     placeholder="Select State"
                     isSearchable
@@ -355,16 +344,12 @@ function Form() {
                         borderRadius: "8px",
                         borderColor: errors.state ? "#ef4444" : "#d1d5db",
                         boxShadow: state.isFocused ? "0 0 0 1px #000" : "none",
-                        "&:hover": {
-                          borderColor: "#000",
-                        },
+                        "&:hover": { borderColor: "#000" },
                       }),
                     }}
                   />
-
                   {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
                 </div>
-
 
                 <div className="flex-1">
                   <label className="block font-medium mb-2 text-gray-700">ZIP</label>
@@ -381,26 +366,27 @@ function Form() {
               </div>
 
               <div className="md:col-span-2">
-                <label className="block font-medium mb-2 text-gray-700">Business Website (Optional)</label>
+                <label className="block font-medium mb-2 text-gray-700">
+                  Business Website (Optional)
+                </label>
                 <input
                   type="text"
                   name="website"
-                  placeholder="Enter your website URL"
+                  placeholder="https://example.com"
                   value={formData.website}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-1 focus:outline-none"
+                  className={inputClass("website")}
                 />
+                {errors.website && <p className="text-red-500 text-sm mt-1">{errors.website}</p>}
               </div>
+
               <div className="md:col-span-2 text-start origin-left scale-[0.80] sm:scale-100">
                 <ReCAPTCHA
                   sitekey="6Ld-HwQsAAAAAHjp-oWWUZVRqGTn8fG2W2tjjH6l"
                   onChange={handleCaptcha}
                 />
-                {errors.captcha && (
-                  <p className="text-red-500 text-sm mt-1">{errors.captcha}</p>
-                )}
+                {errors.captcha && <p className="text-red-500 text-sm mt-1">{errors.captcha}</p>}
               </div>
-
             </div>
 
             <div className="text-center pt-6">

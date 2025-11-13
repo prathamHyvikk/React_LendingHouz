@@ -61,20 +61,36 @@ function Home() {
   ];
   const financingFaqs = [
     {
-      question: "Do I need a good credit score to qualify?",
-      answer: "No. We offer no credit-check financing options. Your eligibility is based on your income and other basic information, not your credit score.",
+      question: "How fast can I get funded after applying?",
+      answer: "Most approvals are processed the same day, and funding is typically available the <b> next business day.</b>",
     },
     {
-      question: "Is there a down payment required?",
-      answer: "It depends on your credit profile...",
+      question: "Do I need perfect credit to qualify?",
+      answer: "Not at all. We work with a wide range of credit profiles and review each application individually.",
     },
     {
-      question: "What phones are available for financing?",
-      answer: "No. We offer no credit-check financing options...",
+      question: "Do I need to provide any collateral?",
+      answer: "No collateral is required. Our loans are credit-based and determined by your financial credit report",
     },
     {
-      question: "How long are the payment plans?",
-      answer: "It depends on your credit profile...",
+      question: "What are the typical loan terms and interest rates?",
+      answer: "Rates and terms vary depending on your credit profile and the details of your application. Each offer is customized to fit your financial situation",
+    },
+    {
+      question: "Are there pre-payment penalties if I repay early?",
+      answer: "No, there are no prepayment penalties. You’re free to pay off your loan anytime.",
+    },
+    {
+      question: "Which documents will I need for the application?",
+      answer: "You’ll just need a valid ID and your Social Security number to get started.",
+    },
+    {
+      question: "What loan amounts do you offer?",
+      answer: "Loan amounts depend on your credit qualifications and application details.",
+    },
+    {
+      question: "How do I start the process?",
+      answer: "Getting started is easy — simply [click here to apply].",
     },
   ];
 

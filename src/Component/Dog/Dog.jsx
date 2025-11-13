@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -13,6 +13,7 @@ import img2 from '@assets/Images/feature-icon.png'
 import img3 from '@assets/Images/Featured-icon-2.png'
 import img4 from '@assets/Images/Featured-icon-3.png'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Dog() {
@@ -55,28 +56,20 @@ function Dog() {
         { value: '150+', label: 'Dog Breeds Financed' },
     ];
 
-    const dogFaq = [
-        {
-            question: "What expenses can I finance?",
-            answer: "Purchase price, initial vet check, vaccinations, and registration fees.",
-        },
-        {
-            question: "Do you finance training or supplies?",
-            answer: "No financing covers the dog and requires medical paperwork only.",
-        },
-        {
-            question: "Is pet insurance required?",
-            answer: "We highly recommend insurance, but don’t mandate it.",
-        },
-        {
-            question: "Do you verify breeder licenses?",
-            answer: "Yes—we approve only licensed, reputable breeders for your protection.",
-        },
-        {
-            question: "Can I pay off early?",
-            answer: "Yes—settle the balance anytime without penalty.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/dogfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load dog FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -182,7 +175,7 @@ function Dog() {
             {/* section 4 start  */}
 
             <section className='max-md:px-2 px-10' >
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={dogFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </section>
 
             {/* section 4 end  */}

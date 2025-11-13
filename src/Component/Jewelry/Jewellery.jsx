@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -15,6 +15,7 @@ import img4 from '@assets/Images/jw-cil_happy.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Jewellery() {
@@ -49,28 +50,20 @@ function Jewellery() {
             bgColor: '#F0E6FA',
         },
     ];
-    const jwelleryFaq = [
-        {
-            question: "Do you finance both new and estate pieces?",
-            answer: " Yes, provided each piece is appraised and insured.",
-        },
-        {
-            question: "Is appraisal documentation required?",
-            answer: " Upload a certified appraisal dated within the last 12 months.",
-        },
-        {
-            question: "Can I insure through you?",
-            answer: "We partner with top jewelry insurers—add coverage during checkout.",
-        },
-        {
-            question: "What is the minimum purchase amount?",
-            answer: "Jewelry must retail for at least $750 to qualify for financing.",
-        },
-        {
-            question: "Can I upgrade the piece later?",
-            answer: " Yes—trade in and finance an upgrade once you pay 50 % of the balance.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/jewelleryfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load jewellery FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -222,7 +215,7 @@ function Jewellery() {
                 <HowItWorks steps={steps} maintitle="How Jewellery Financing Works" bgColor="bg-gray-100" />
             </section>
             <div className="container max-md:px-2 py-10 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={jwelleryFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
 
 

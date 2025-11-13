@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Which vehicles qualify?",
+    "answer": "We finance passenger cars, SUVs, and light trucks that are less than 10 years old or have fewer than 120,000 miles."
+  },
+  {
+    "question": "Do you require full-coverage insurance?",
+    "answer": "Yes. You must keep comprehensive and collision coverage for the life of the loan."
+  },
+  {
+    "question": "How long are loan terms?",
+    "answer": "Choose 24-, 36-, or 48-month terms—whichever best fits your budget."
+  },
+  {
+    "question": "Can I make extra payments?",
+    "answer": "Absolutely. Extra payments go straight to the principal and shorten your term."
+  },
+  {
+    "question": "Is there a pre-payment penalty?",
+    "answer": "No. Pay off early at any time without fees."
+  }
+]

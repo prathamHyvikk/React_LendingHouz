@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -11,6 +11,7 @@ import GetStart from '../GetStart'
 import WhyWeChoose from '../WhyWeChoose'
 import BtnGetStart from '../BtnGetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function LivestockEquipment() {
@@ -22,28 +23,20 @@ function LivestockEquipment() {
 
 
 
-    const LivestockFaq = [
-        {
-            question: "What can I finance?",
-            answer: "Squeeze chutes, feeders, watering systems, and barn improvements.",
-        },
-        {
-            question: "Do you require proof of farm income?",
-            answer: "We verify basic farm revenue but focus mainly on collateral value.",
-        },
-        {
-            question: "Can I bundle multiple items?",
-            answer: "Yes—group several pieces under one easy loan",
-        },
-        {
-            question: "How soon can I receive funding?",
-            answer: "Many deals fund within five business days of approval.",
-        },
-        {
-            question: "Is there a minimum purchase amount?",
-            answer: "Yes—equipment must total at least $2,000.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/livestockfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load livestock FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
 
     const options = [
@@ -197,7 +190,7 @@ function LivestockEquipment() {
             <WhyWeChoose />
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={LivestockFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
 
 

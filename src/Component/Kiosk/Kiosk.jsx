@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -15,6 +15,7 @@ import GetStart from '../GetStart'
 import TestimonialSlider from '../TestimonialSlider'
 import FAQAccordion from '../FAQAccordion'
 import useMeta from '../useMeta'
+import axios from 'axios'
 import kioskmodl1 from '@assets/Images/kisokmodl1.svg'
 import kioskmdl2 from '@assets/Images/kisokmodl2.svg'
 import kioskmdl3 from '@assets/Images/kioskmodl3.svg'
@@ -52,54 +53,20 @@ function Kiosk() {
         },
     ];
 
-    const KioskFaq = [
-        {
-            question: "What makes your self-service kiosks unique?",
-            answer: " Our kiosks combine sleek design, fast performance, and smart management tools — built to enhance customer experience and reduce wait times.",
+    const [financingFaqs, setFinancingFaqs] = useState([])
 
-        },
-        {
-            question: "Can these kiosks operate 24/7?",
-            answer: "Yes. They’re designed for continuous use, allowing your business to serve customers anytime without additional staff.",
-
-        },
-        {
-            question: "What types of kiosks do you offer?",
-            answer: "We provide indoor, outdoor, compact, and high-traffic kiosks — ideal for retail, restaurants, and service centers.",
-
-        },
-        {
-            question: "Are the kiosks durable enough for heavy use?",
-            answer: " Absolutely. Each model is built with industrial-grade materials to withstand high traffic and long hours of operation.",
-
-        },
-        {
-            question: "Do the kiosks support contactless payments?",
-            answer: " Yes. They’re equipped with secure payment systems including NFC, EMV, and QR for fast, touch-free transactions.",
-
-        },
-        {
-            question: "How can I manage multiple kiosks?",
-            answer: " Our smart dashboard lets you track sales, monitor inventory, and access real-time analytics from any device.",
-        },
-        {
-            question: "Are your kiosks eco-friendly?",
-            answer: "Yes. They’re designed to minimize paper use, optimize power consumption, and reduce overall waste.",
-        },
-        {
-            question: "Can the kiosks be customized for my business?",
-            answer: " Definitely. You can tailor branding, interface design, and functionality to match your specific operations and goals.",
-        },
-        {
-            question: "What’s the installation process like?",
-            answer: " Setup is quick and guided by our technical team — most kiosks are ready to run within a few hours of delivery.",
-        },
-        {
-            question: "What kind of support do you offer after installation?",
-            answer: "We provide ongoing technical support, software updates, and maintenance services to ensure your kiosks run smoothly 24/7.",
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/kioskfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load kiosk FAQs:', error)
+            }
         }
 
-    ];
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -336,7 +303,7 @@ function Kiosk() {
             </section>
 
             <section className='max-md:px-2 pt-10 px-10' >
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={KioskFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </section>
 
             <section className='max-md:px-2 px-10' >

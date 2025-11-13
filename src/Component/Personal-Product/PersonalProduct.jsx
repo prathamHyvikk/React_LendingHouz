@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -15,6 +15,7 @@ import img4 from '@assets/Images/tool-4.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function PersonalProduct() {
@@ -73,28 +74,20 @@ function PersonalProduct() {
         },
     ];
 
-    const PersonalFaq = [
-        {
-            question: "What falls under “personal product”?",
-            answer: " E-bikes, high-end fitness gear, drones, and hobby equipment.",
-        },
-        {
-            question: "Do I need a down payment?",
-            answer: " No—qualified applicants can finance 100 % of the cost.",
-        },
-        {
-            question: "How long are the terms?",
-            answer: "Choose 6-, 12-, or 24-month plans.",
-        },
-        {
-            question: "Can I add accessories?",
-            answer: " Yes—helmets, batteries, or add-ons may be included in the loan.",
-        },
-        {
-            question: "Is early payoff allowed?",
-            answer: "Absolutely—pay off anytime without fees",
-        },
-    ];
+    const [personalFaqs, setPersonalFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/personalproductfaq.json')
+                setPersonalFaqs(data)
+            } catch (error) {
+                console.error('Failed to load personal product FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -197,7 +190,7 @@ function PersonalProduct() {
 
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={PersonalFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={personalFaqs} />
             </div>
 
 

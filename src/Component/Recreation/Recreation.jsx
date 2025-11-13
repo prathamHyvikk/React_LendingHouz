@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -15,6 +15,7 @@ import quipmentimg4 from '@assets/Images/Frame-1707481172-(4).png'
 import quipmentimg5 from '@assets/Images/Frame-1707481172-(5).png'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Recreation() {
@@ -23,28 +24,20 @@ function Recreation() {
         "Recreation Product Financing | Boats, RVs, and More",
         "Finance your lifestyle. Lending Houz helps you purchase recreational gear, from boats to camping equipment with ease."
     )
-    const recreationFaq = [
-        {
-            question: "What’s included under recreation?",
-            answer: " RVs, campers, kayaks, high-end bicycles, and camping gear bundles.",
-        },
-        {
-            question: "Is a down payment required?",
-            answer: " Only for loans over $25,000; smaller purchases can be 0 % down.",
-        },
-        {
-            question: "How long are the loan terms?",
-            answer: "Terms range from 12 to 60 months based on purchase price",
-        },
-        {
-            question: "Can I finance seasonal gear?",
-            answer: "Yes—ski, surf, or diving packages can be financed if they meet minimum value.",
-        },
-        {
-            question: "Are storage or maintenance plans financeable?",
-            answer: "Yes—add prepaid service or storage plans to your loan at checkout.",
-        },
-    ];
+    const [recreationFaqs, setRecreationFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/recreationfaq.json')
+                setRecreationFaqs(data)
+            } catch (error) {
+                console.error('Failed to load recreation FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -206,7 +199,7 @@ function Recreation() {
             </section>
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={recreationFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={recreationFaqs} />
             </div>
 
 

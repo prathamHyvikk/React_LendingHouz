@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -17,6 +17,7 @@ import img6 from '@assets/Images/images 12.png'
 import GetStart from '../GetStart'
 import WhyWeChoose from '../WhyWeChoose'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function LandscapEquipment() {
@@ -48,28 +49,20 @@ function LandscapEquipment() {
     ];
 
 
-    const landscapEquiFaq = [
-        {
-            question: "Which equipment is eligible?",
-            answer: "Zero-turn mowers, trimmers, compact tractors, and skid steers.",
-        },
-        {
-            question: "Do you accept commercial buyers?",
-            answer: "Absolutely—sole proprietors, LLCs, and corporations are welcome.",
-        },
-        {
-            question: "Can I defer winter payments?",
-            answer: "Yes—ask about seasonal payment schedules that skip slow months.",
-        },
-        {
-            question: "Are attachments financeable?",
-            answer: " Yes—bundle blades, buckets, or trailers with the primary equipment.",
-        },
-        {
-            question: "What terms can I choose?",
-            answer: "Select 12-, 24-, or 36-month plans to match your cash flow.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/landscapefaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load landscape equipment FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -242,7 +235,7 @@ function LandscapEquipment() {
             <WhyWeChoose/>
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={landscapEquiFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
 
 

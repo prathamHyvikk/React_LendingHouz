@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -15,6 +15,7 @@ import quipmentimg4 from '@assets/Images/Frame-1707481172-(4).png'
 import quipmentimg5 from '@assets/Images/Frame-1707481172-(5).png'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 
@@ -24,28 +25,20 @@ function MusicEquipment() {
         "Music Equipment Financing | Buy Guitars, DJ Gear & More",
         "Whether you're a musician or hobbyist, Lending Houz helps you finance musical instruments and gear with simple payment plans."
     )
-    const musicFaq = [
-        {
-            question: "What gear qualifies?",
-            answer: "Guitars, keyboards, pro-audio mixers, studio monitors, and DJ setups.",
-        },
-        {
-            question: "Is there a minimum purchase?",
-            answer: "Yes—equipment must total at least $300 before tax.",
-        },
-        {
-            question: "Do you finance vintage instruments?",
-            answer: "We do, provided you supply a recent appraisal",
-        },
-        {
-            question: "Can I finance multiple items?",
-            answer: "Yes—bundle several pieces into one payment plan.",
-        },
-        {
-            question: "Are accessories included?",
-            answer: "Cases, cables, and stands can be added if financed with the main item.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/musicfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load music FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -208,7 +201,7 @@ function MusicEquipment() {
 
 
             <div className="container max-md:px-2 pt-10 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={musicFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
 
 

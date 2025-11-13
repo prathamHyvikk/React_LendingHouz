@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -20,6 +20,7 @@ import img4 from '@assets/Images/pet-Frame-3.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 
@@ -82,28 +83,20 @@ function Pet() {
         },
     ];
 
-    const PetFaq = [
-        {
-            question: "Which pets qualify?",
-            answer: "Puppies, kittens, and select exotics from licensed breeders.",
-        },
-        {
-            question: "Are vet exams covered?",
-            answer: "Financing covers the initial wellness exam and vaccinations.",
-        },
-        {
-            question: "Do you check breeder licensing?",
-            answer: "Yes—we verify every breeder to protect buyers.",
-        },
-        {
-            question: "Can I include microchipping costs?",
-            answer: "Yes—add microchipping and registration fees to the loan.",
-        },
-        {
-            question: "Is pet insurance required?",
-            answer: "Insurance is optional but strongly recommended.",
-        },
-    ];
+    const [petFaqs, setPetFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/petfaq.json')
+                setPetFaqs(data)
+            } catch (error) {
+                console.error('Failed to load pet FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -265,7 +258,7 @@ function Pet() {
             </section>
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={PetFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={petFaqs} />
             </div>
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -15,6 +15,7 @@ import img4 from '@assets/Images/se-4.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function SnowEquipment() {
@@ -48,24 +49,20 @@ function SnowEquipment() {
             bgColor: '#F0E6FA',
         },
     ];
-    const financingFaqs = [
-        {
-            question: "Do I need a good credit score to qualify?",
-            answer: "No. We offer no credit-check financing options. Your eligibility is based on your income and other basic information, not your credit score.",
-        },
-        {
-            question: "Is there a down payment required?",
-            answer: "It depends on your credit profile...",
-        },
-        {
-            question: "What phones are available for financing?",
-            answer: "No. We offer no credit-check financing options...",
-        },
-        {
-            question: "How long are the payment plans?",
-            answer: "It depends on your credit profile...",
-        },
-    ];
+    const [snowFaqs, setSnowFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/snowequipmentfaq.json')
+                setSnowFaqs(data)
+            } catch (error) {
+                console.error('Failed to load snow equipment FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -195,7 +192,7 @@ function SnowEquipment() {
                 <HowItWorks steps={steps} maintitle="Why Finance with Us" bgColor="bg-gray-100" />
             </section>
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={snowFaqs} />
             </div>
 
 

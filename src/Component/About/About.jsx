@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -10,6 +10,7 @@ import TestimonialSlider from '../TestimonialSlider'
 import GetStart from '../GetStart'
 import BtnGetStart from '../BtnGetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 
@@ -21,24 +22,20 @@ function About() {
         'Learn how Lending Houz is redefining retail finance. We help you buy what you need with affordable payment options and a hassle-free process.'
     );
 
-    const financingFaqs = [
-        {
-            question: "Do I need a good credit score to qualify?",
-            answer: "No. We offer no credit-check financing options. Your eligibility is based on your income and other basic information, not your credit score.",
-        },
-        {
-            question: "Is there a down payment required?",
-            answer: "It depends on your credit profile...",
-        },
-        {
-            question: "What phones are available for financing?",
-            answer: "No. We offer no credit-check financing options...",
-        },
-        {
-            question: "How long are the payment plans?",
-            answer: "It depends on your credit profile...",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/aboutfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load financing FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {

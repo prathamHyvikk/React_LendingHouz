@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -14,6 +14,7 @@ import img4 from '@assets/Images/Featured-icon-3.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 
@@ -54,28 +55,20 @@ function PowerSports() {
             bgColor: '#F0E6FA',
         },
     ];
-    const PowerFaq = [
-        {
-            question: "Which vehicles qualify?",
-            answer: " ATVs, UTVs, snowmobiles, and personal watercraft.",
-        },
-        {
-            question: "Is insurance mandatory?",
-            answer: "Yes—carry liability and comprehensive coverage for the loan term",
-        },
-        {
-            question: "Can I finance accessories?",
-            answer: "Helmets, winches, and trailers can be rolled into the loan.",
-        },
-        {
-            question: "What term lengths are offered?",
-            answer: "Choose 12-, 24-, or 36-month plans.",
-        },
-        {
-            question: "Do you accept trade-ins?",
-            answer: " Yes—apply trade-in value to reduce your financed amount.",
-        },
-    ];
+    const [powerFaqs, setPowerFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/powersportsfaq.json')
+                setPowerFaqs(data)
+            } catch (error) {
+                console.error('Failed to load power sports FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -306,7 +299,7 @@ function PowerSports() {
 
 
             <section className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={PowerFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={powerFaqs} />
             </section>
 
 

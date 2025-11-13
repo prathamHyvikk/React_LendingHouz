@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -14,6 +14,7 @@ import img4 from '@assets/Images/tool-4.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Tools() {
@@ -72,24 +73,20 @@ function Tools() {
         },
     ];
 
-    const financingFaqs = [
-        {
-            question: "Do I need a good credit score to qualify?",
-            answer: "No. We offer no credit-check financing options. Your eligibility is based on your income and other basic information, not your credit score.",
-        },
-        {
-            question: "Is there a down payment required?",
-            answer: "It depends on your credit profile...",
-        },
-        {
-            question: "What phones are available for financing?",
-            answer: "No. We offer no credit-check financing options...",
-        },
-        {
-            question: "How long are the payment plans?",
-            answer: "It depends on your credit profile...",
-        },
-    ];
+    const [toolsFaqs, setToolsFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/toolsfaq.json')
+                setToolsFaqs(data)
+            } catch (error) {
+                console.error('Failed to load tools FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -200,7 +197,7 @@ function Tools() {
 
 
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={toolsFaqs} />
             </div>
 
 

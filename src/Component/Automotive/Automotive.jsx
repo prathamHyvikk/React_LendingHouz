@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -10,6 +10,7 @@ import section1img from '@assets/Images/section1img.png'
 import section2img from '@assets/Images/Group-1171275195.png'
 import section6img from '@assets/Images/Group-1171275201.png'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Automotive() {
@@ -24,28 +25,20 @@ function Automotive() {
     { label: "Personalized Service", icon: "ri-group-line" },
   ];
 
-  const financingFaqs = [
-    {
-      question: "Which vehicles qualify?",
-      answer: "We finance passenger cars, SUVs, and light trucks that are less than 10 years old or have fewer than 120,000 miles.",
-    },
-    {
-      question: "Do you require full-coverage insurance?",
-      answer: "Yes. You must keep comprehensive and collision coverage for the life of the loan.",
-    },
-    {
-      question: "How long are loan terms?",
-      answer: "Choose 24-, 36-, or 48-month terms—whichever best fits your budget.",
-    },
-    {
-      question: "Can I make extra payments?",
-      answer: " Absolutely. Extra payments go straight to the principal and shorten your term.",
-    },
-    {
-      question: "Is there a pre-payment penalty?",
-      answer: "No. Pay off early at any time without fees.",
-    },
-  ];
+  const [financingFaqs, setFinancingFaqs] = useState([])
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const { data } = await axios.get('/data/automotivefaq.json')
+        setFinancingFaqs(data)
+      } catch (error) {
+        console.error('Failed to load automotive FAQs:', error)
+      }
+    }
+
+    fetchFaqs()
+  }, [])
 
   const testimonialsData = [
     {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -15,6 +15,7 @@ import GetStart from '../GetStart'
 import TestimonialSlider from '../TestimonialSlider'
 import FAQAccordion from '../FAQAccordion'
 import useMeta from '../useMeta'
+import axios from 'axios'
 import kioskmodl1 from '@assets/Images/kisokmodl1.svg'
 import kioskmdl2 from '@assets/Images/kisokmodl2.svg'
 import kioskmdl3 from '@assets/Images/kioskmodl3.svg'
@@ -78,57 +79,20 @@ function ScubaDiving() {
         },
     ];
 
-    const ScubaDivingFaq = [
-        {
-            question: " What scuba diving adventures do you offer?",
-            answer: "We offer reef, wreck, night, drift, and advanced dives like Nitrox and cave diving — for all experience levels.",
-        },
-        {
-            question: " Do I need certification to dive?",
-            answer: "Beginners don’t need certification. Certified instructors guide you through every step. Advanced dives require a valid certification.",
+    const [scubaDivingFaqs, setScubaDivingFaqs] = useState([])
 
-        },
-        {
-            question: "What gear do you provide?",
-            answer: " We offer high-quality wetsuits, masks, regulators, fins, and more from trusted brands, regularly inspected for safety.",
-        },
-        {
-            question: "Can I buy diving gear online?",
-            answer: " Yes! You can shop for beginner and pro-level scuba equipment at fair, competitive prices on our website.",
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/scubadivingfaq.json')
+                setScubaDivingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load scuba diving FAQs:', error)
+            }
+        }
 
-        },
-        {
-            question: "Is scuba diving safe for beginners?",
-            answer: " Yes. Certified instructors lead all dives with full safety briefings and top-standard gear.",
-
-        },
-        {
-            question: "Where can I dive with you?",
-            answer: " We operate in top destinations like the Florida Keys, Cozumel, Bonaire, Hawaii, and Belize — all handpicked for safety and beauty.",
-
-        },
-        {
-            question: "What should I bring for my dive?",
-            answer: "Just your swimsuit, towel, sunscreen, and excitement — we’ll handle the rest.",
-
-        },
-        {
-            question: "How can I book a dive?",
-            answer: "Click “Get Started” and choose your package, and our team will help you schedule your dive or gear purchase.",
-
-        },
-        {
-            question: " Do you offer group or family packages?",
-            answer: " Yes. We offer custom diving experiences for families, friends, and corporate groups.",
-
-        },
-        {
-            question: " Why choose LendingHouz Scuba Adventures?",
-            answer: "With 15+ years of experience, premium gear, and 98% happy divers, we make every dive safe, fun, and unforgettable.",
-
-        },
-
-    ];
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -306,7 +270,7 @@ function ScubaDiving() {
             </section>
 
             <section className='max-md:px-2 pt-10 px-10' >
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={ScubaDivingFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={scubaDivingFaqs} />
             </section>
 
             <section className='max-md:px-2 px-10' >

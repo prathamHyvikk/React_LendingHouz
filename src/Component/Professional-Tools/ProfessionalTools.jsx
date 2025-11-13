@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -12,6 +12,7 @@ import img3 from '@assets/Images/Featured-icon-2.png'
 import img4 from '@assets/Images/Featured-icon-3.png' 
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function ProfessionalTools() {
@@ -69,28 +70,20 @@ function ProfessionalTools() {
         },
     ];
 
-    const ProfessionalFaq = [
-        {
-            question: "Which trades do you serve?",
-            answer: " Construction, HVAC, plumbing, electrical, and auto repair.",
-        },
-        {
-            question: "Can I finance multiple tool sets at once?",
-            answer: "Yes—bundle everything under one loan for a single payment.",
-        },
-        {
-            question: "Are warranties required?",
-            answer: "We recommend manufacturer warranties but don’t require them.",
-        },
-        {
-            question: "Do you offer zero-interest promos?",
-            answer: "Yes—seasonal 0 % APR promotions are available for select brands.",
-        },
-        {
-            question: "How quickly can I upgrade?",
-            answer: " Trade in and upgrade after 18 on-time payments",
-        },
-    ];
+    const [professionalFaqs, setProfessionalFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/professionaltoolsfaq.json')
+                setProfessionalFaqs(data)
+            } catch (error) {
+                console.error('Failed to load professional tools FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -225,7 +218,7 @@ function ProfessionalTools() {
  
 
             <div className="container px-2">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={ProfessionalFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={professionalFaqs} />
             </div>
 
 

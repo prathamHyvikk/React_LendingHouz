@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -15,6 +15,7 @@ import img4 from '@assets/Images/me-Icon-3.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 
@@ -50,28 +51,20 @@ function MedicalEquipment() {
             bgColor: '#F0E6FA',
         },
     ];
-    const MedicalFaq = [
-        {
-            question: "Who can apply—clinics or individuals?",
-            answer: " Both. We finance healthcare practices and home-care users alike.",
-        },
-        {
-            question: "What documentation is needed?",
-            answer: "A valid prescription or proof-of-use letter from a licensed provider.",
-        },
-        {
-            question: "Do you offer deferred payments until insurance reimbursement?",
-            answer: "Yes—ask about our 90-day deferral plan.",
-        },
-        {
-            question: "Can I finance refurbished equipment?",
-            answer: " Yes, as long as it meets current safety standards and has a warranty.",
-        },
-        {
-            question: "How long are the terms?",
-            answer: " Terms range from 12 to 60 months, depending on equipment value.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/medicalfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load medical FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -215,7 +208,7 @@ function MedicalEquipment() {
                 <HowItWorks steps={steps} maintitle="Why Finance with Us" bgColor="bg-gray-100" />
             </section>
             <div className="container max-md:px-2 px-10">
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={MedicalFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </div>
 
 

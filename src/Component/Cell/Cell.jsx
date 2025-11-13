@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -11,6 +11,7 @@ import FAQAccordion from '../FAQAccordion'
 import TestimonialSlider from '../TestimonialSlider'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Cell() {
@@ -20,28 +21,20 @@ function Cell() {
         "Get the smartphone you want without the upfront cost. Lending Houz offers simple financing options for all major phone brands."
     )
 
-    const cellFAq = [
-        {
-            question: "Which brands can I finance?",
-            answer: "Apple, Samsung, Google, and most major unlocked Android models qualify.",
-        },
-        {
-            question: "Is a down payment required?",
-            answer: "INot for approved applicants; you can finance 100 % of the purchase price.",
-        },
-        {
-            question: "Do you offer early upgrades?",
-            answer: " Yes—after 12 on-time payments, you can trade in and upgrade.",
-        },
-        {
-            question: "What happens if I lose the phone?",
-            answer: " Add device-protection coverage at checkout, or you remain responsible for the balance.",
-        },
-        {
-            question: "How long are the payment plans?",
-            answer: " Select 6-, 12-, or 18-month plans with fixed monthly payments.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/cellfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load cell FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -197,7 +190,7 @@ function Cell() {
             {/* section 4 start  */}
 
             <section className='max-md:px-2 px-10' >
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={cellFAq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </section>
 
             {/* section 4 end  */}

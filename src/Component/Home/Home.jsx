@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import '../Utility.css'
@@ -19,6 +19,7 @@ import img4t from '@assets/Images/home-T-4.png'
 import HowItWorks from '../HowItWorks'
 import GetStart from '../GetStart'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Home() {
@@ -27,6 +28,27 @@ function Home() {
     'Shop smarter with Lending Houz. Get fast, easy financing for electronics, vehicles, tools, pets and more, all with simple terms and quick approvals.',
     '3BgjutyoDjGNnYj5r7wq5ZyQbfuG0xZ3hYbIi3_H0_w'
   );
+
+
+  // fetch faq data 
+
+  const [financingFaqs, setFinancingFaqs] = useState([])
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const { data } = await axios.get("/data/homefaq.json");
+        setFinancingFaqs(data);
+      } catch (error) {
+        console.error("Failed to load financing FAQs:", error);
+      }
+    };
+
+    fetchFaqs();
+  }, []);
+
+  // faq data end  
+
   const features = [
     { label: "Quick Online Process", icon: "ri-group-line" },
     { label: "All Credit Accepted", icon: "ri-group-line" },
@@ -59,40 +81,8 @@ function Home() {
       bgColor: '#F0E6FA',
     },
   ];
-  const financingFaqs = [
-    {
-      question: "How fast can I get funded after applying?",
-      answer: "Most approvals are processed the same day, and funding is typically available the <b> next business day.</b>",
-    },
-    {
-      question: "Do I need perfect credit to qualify?",
-      answer: "Not at all. We work with a wide range of credit profiles and review each application individually.",
-    },
-    {
-      question: "Do I need to provide any collateral?",
-      answer: "No collateral is required. Our loans are credit-based and determined by your financial credit report",
-    },
-    {
-      question: "What are the typical loan terms and interest rates?",
-      answer: "Rates and terms vary depending on your credit profile and the details of your application. Each offer is customized to fit your financial situation",
-    },
-    {
-      question: "Are there pre-payment penalties if I repay early?",
-      answer: "No, there are no prepayment penalties. You’re free to pay off your loan anytime.",
-    },
-    {
-      question: "Which documents will I need for the application?",
-      answer: "You’ll just need a valid ID and your Social Security number to get started.",
-    },
-    {
-      question: "What loan amounts do you offer?",
-      answer: "Loan amounts depend on your credit qualifications and application details.",
-    },
-    {
-      question: "How do I start the process?",
-      answer: "Getting started is easy — simply [click here to apply].",
-    },
-  ];
+
+
 
   const testimonialsData = [
     {

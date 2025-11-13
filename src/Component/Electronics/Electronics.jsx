@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -15,6 +15,7 @@ import GetStart from '../GetStart'
 import TestimonialSlider from '../TestimonialSlider'
 import FAQAccordion from '../FAQAccordion'
 import useMeta from '../useMeta'
+import axios from 'axios'
 
 
 function Electronics() {
@@ -48,28 +49,20 @@ function Electronics() {
             bgColor: '#F0E6FA',
         },
     ];
-    const ElectroFaq = [
-        {
-            question: "Which items qualify?",
-            answer: "Laptops, desktops, gaming consoles, premium TVs, and pro-audio gear over $500.",
-        },
-        {
-            question: "How fast is approval?",
-            answer: " Most applicants receive a decision within minutes.",
-        },
-        {
-            question: "Are warranties included?",
-            answer: "Manufacturer warranties apply; extended protection is optional at checkout.",
-        },
-        {
-            question: "Can I bundle multiple devices?",
-            answer: "Yes—combine eligible items into one loan and one monthly payment.",
-        },
-        {
-            question: "What term lengths are available?",
-            answer: " Choose 6-, 12-, or 24-month plans with fixed interest.",
-        },
-    ];
+    const [financingFaqs, setFinancingFaqs] = useState([])
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const { data } = await axios.get('/data/electronicsfaq.json')
+                setFinancingFaqs(data)
+            } catch (error) {
+                console.error('Failed to load electronics FAQs:', error)
+            }
+        }
+
+        fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -257,7 +250,7 @@ function Electronics() {
             {/* section 4 start  */}
 
             <section className='max-md:px-2 pt-10 px-10' >
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={ElectroFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </section>
 
             {/* section 4 end  */}

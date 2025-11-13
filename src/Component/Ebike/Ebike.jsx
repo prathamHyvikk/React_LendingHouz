@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Utility.css'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -15,6 +15,7 @@ import GetStart from '../GetStart'
 import TestimonialSlider from '../TestimonialSlider'
 import FAQAccordion from '../FAQAccordion'
 import useMeta from '../useMeta'
+import axios from 'axios'
 import kioskmodl1 from '@assets/Images/kisokmodl1.svg'
 import kioskmdl2 from '@assets/Images/kisokmodl2.svg'
 import kioskmdl3 from '@assets/Images/kioskmodl3.svg'
@@ -52,59 +53,20 @@ function Ebike() {
         },
     ];
 
-    const EbikeFaq = [
-        {
-            question: "What makes your e-bikes stand out from others?",
-            answer: "  Our e-bikes combine elegant design, high-torque motors, and long-range batteries, delivering style and performance for every ride.",
+    const [financingFaqs, setFinancingFaqs] = useState([])
 
-        },
-        {
-            question: "How far can I travel on a single charge?",
-            answer: "Our models offer 40–60 miles per charge, depending on terrain, speed, and assist level — perfect for daily commutes or weekend adventures",
-
-        },
-        {
-            question: "Are these bikes good for both city and off-road use?",
-            answer: " Yes! The City Commuter is ideal for smooth urban rides, while the Trail Blazer and Adventure X easily handle hills, gravel, and trails.",
-
-        },
-        {
-            question: "How powerful are the motors?",
-            answer: " Our high-torque motors provide instant acceleration and hill-climbing capability — offering smooth control even on steep terrain.",
-
-        },
-        {
-            question: " How long does charging take, and what’s the battery life?",
-            answer: " Charging takes about 4–6 hours. Each battery is built for 500+ full charge cycles, ensuring long-term reliability.",
-
-        },
-        {
-            question: "Are your e-bikes environmentally friendly?",
-            answer: " Absolutely. Our electric bikes produce zero emissions, helping you reduce your carbon footprint while enjoying a cleaner, greener ride.",
-        },
-        {
-            question: "Do I need a license, insurance, or registration?",
-            answer: " In most regions, standard e-bikes do not require a license or insurance. Just ride responsibly and follow local road rules.",
-        },
-        {
-            question: " What kind of maintenance do e-bikes require?",
-            answer: "  Minimal upkeep — just keep tires inflated, the chain clean, and battery charged. Our models are designed for easy care and long-term durability.",
-        },
-        {
-            question: "Which model is right for me?",
-            points: [
-                "City Commuter – daily travel and smooth roads.",
-                "Trail Blazer – off-road and adventure riding.",
-                "Adventure X – long-distance, all-terrain performance.Need help? Our experts can match you with the perfect model.",
-
-            ],
-        },
-        {
-            question: "What kind of maintenance or care do e-bikes need?",
-            answer: " Our e-bikes require minimal maintenance — just keep the tires inflated, the chain clean, and charge the battery regularly. We also provide service tips and support to keep your bike performing like new.",
+    useEffect(() => {
+      const fetchFaqs = async () => {
+        try {
+          const { data } = await axios.get('/data/ebikefaq.json')
+          setFinancingFaqs(data)
+        } catch (err) {
+          console.error('Failed to load ebike FAQs:', err)
         }
+      }
 
-    ];
+      fetchFaqs()
+    }, [])
 
     const testimonialsData = [
         {
@@ -341,7 +303,7 @@ function Ebike() {
             </section>
 
             <section className='max-md:px-2 pt-10 px-10' >
-                <FAQAccordion title={"Frequently Asked  Questions"} faqs={EbikeFaq} />
+                <FAQAccordion title={"Frequently Asked  Questions"} faqs={financingFaqs} />
             </section>
 
             <section className='max-md:px-2 px-10' >

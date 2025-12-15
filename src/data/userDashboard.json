@@ -1,0 +1,63 @@
+{
+  "clients": [
+    {
+      "appNo": "#543535",
+      "name": "John",
+      "business": "Garments",
+      "status": "Pending",
+      "amount": "$200",
+      "date": "12/10/2023"
+    },
+    {
+      "appNo": "#993421",
+      "name": "Sarah",
+      "business": "Jewellery",
+      "status": "Approved",
+      "amount": "$450",
+      "date": "08/11/2023"
+    },
+    {
+      "appNo": "#882221",
+      "name": "David",
+      "business": "Electronics",
+      "status": "Rejected",
+      "amount": "$120",
+      "date": "01/05/2024"
+    },
+    {
+      "appNo": "#554433",
+      "name": "Alex",
+      "business": "Shoes",
+      "status": "Pending",
+      "amount": "$320",
+      "date": "02/07/2024"
+    }
+  ],
+
+  "recentData": [
+    {
+      "img": "/src/assets/Images/house.jpg",
+      "name": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/src/assets/Images/jewellery.jpg",
+      "name": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/src/assets/Images/house.jpg",
+      "name": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    }
+  ]
+}

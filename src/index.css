@@ -1,1 +1,27 @@
- @import "tailwindcss";
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+:root {
+  --primary-color: #002e6d;
+  --secondary-color: #1e1e1e;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-family: "sora-regular", sans-serif;
+}
+
+@font-face {
+  font-family: "sora-regular";
+  src: url("./assets/Fonts/sora/Sora-Regular.ttf");
+}
+
+@font-face {
+  font-family: "sora-bold";
+  src: url("./assets/Fonts/sora/Sora-Bold.ttf");
+}
+
+@font-face {
+  font-family: "sora-semibold";
+  src: url("./assets/Fonts/sora/Sora-SemiBold.ttf");
+}

@@ -34,6 +34,7 @@ import ScrollToTop from "./Component/ScrollToTop";
 import Signup from "./Pages/Signup";
 import SignIn from "./Pages/SignIn";
 import DashBoardUser from "./Pages/DashBoardUser";
+import ForgotPassword from "./Pages/ForgotPassword";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
 
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<DashBoardUser />} />
           
           <Route path="*" element={<NotFound />} />

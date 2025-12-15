@@ -1,10 +1,8 @@
 import React from "react";
-import logoImg from "@assets/Images/logo.png";
 import bgImage from "@assets/Images/background-image.png";
-import { Link, useNavigate } from "react-router-dom";
+import logoImg from "@assets/Images/logo.png";
 
-const SignIn = () => {
-  const navigate = useNavigate();
+const ForgotPassword = () => {
   return (
     <>
       <div
@@ -18,19 +16,20 @@ const SignIn = () => {
               <div className="flex items-center justify-center mb-2">
                 <img src={logoImg} className="w-64" alt="" />
               </div>
-
               <h2 className="text-2xl font-bold text-center text-(--primary-color) mb-2">
-                Sign In
+                Forgot Password?
               </h2>
               <div className="h-1 bg-(--primary-color) w-full"></div>
             </div>
 
             <form
-              action="/dashboard"
+              onsubmit="handleSubmit(event)"
               className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
             >
               <div>
-                <label className="block text-gray-600 text-sm">Email Address</label>
+                <label className="block text-gray-600 text-sm">
+                  Please Enter Your Email Address
+                </label>
                 <input
                   type="text"
                   placeholder="Dosamarvís@test.com"
@@ -38,44 +37,22 @@ const SignIn = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-gray-600 text-sm">
-                  Create New Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="12345678"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
-                />
-              </div>
-
-              <div className="-mt-4">
-                <input type="checkbox" />
-                <span className="text-gray-500"> Remember for 30 Days</span>
-              </div>
-
               <button
-                type="submit"
-                className="w-full bg-(--primary-color) cursor-pointer text-white font-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
+                onclick="openPopup(event, 'reset-password-popup')"
+                className="w-full bg-(--primary-color) text-white font-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
               >
-                Sign In
+                Reset Password
               </button>
 
               <div>
-                <Link to="/forgot-password">
-                  <p className="text-red-500 font-semibold text-center">
-                    Forget Password
-                  </p>
-                </Link>
-
-                <p className="text-center text-gray-700 pt-4">
-                  Dont Have an Account?{" "}
-                  <Link
-                    to="/signup"
+                <p className="text-center text-gray-700">
+                  Already Registered?{" "}
+                  <a
+                    href="/signin"
                     className="font-bold text-gray-900 hover:text-blue-900 transition"
                   >
-                    Sign Up
-                  </Link>
+                    Sign In
+                  </a>
                 </p>
               </div>
             </form>
@@ -86,4 +63,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ForgotPassword;

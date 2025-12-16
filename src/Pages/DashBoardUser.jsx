@@ -8,9 +8,12 @@ import eyeIcon from "../assets/Images/eye-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
 import Pagination from "../Component/Pagination";
 import RecentCards from "../Component/RecentCards";
+import InvoiceModal from "../Component/InvoiceModal";
+import ViewModal from "../Component/ViewModal";
 
 import { clients } from "../data/userDashboard.json";
 import { recentData } from "../data/userDashboard.json";
+import HeaderTable from "../Component/HeaderTable";
 
 const DashBoardUser = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -18,7 +21,7 @@ const DashBoardUser = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
 
   const admin = true;
-  const marketplace = false;
+
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
@@ -27,32 +30,8 @@ const DashBoardUser = () => {
   return (
     <>
       <AdminLayout>
-        <div className="p-4 lg:p-8 w-full">
-          <div className="hidden lg:flex mx-auto flex-col items-end mb-6">
-            <div className="flex items-center space-x-4">
-              <input
-                type="text"
-                placeholder="Search User"
-                className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
-              />
-              <a
-                href="/dashboard/notifications"
-                className="relative inline-block"
-              >
-                <button
-                  id="notify"
-                  className="p-2 rounded-full hover:bg-gray-100 transition relative"
-                  aria-label="Notifications"
-                >
-                  <i className="fas fa-bell text-gray-700 text-xl"></i>
-
-                  <span className="absolute -top-1 right-0 w-5 h-5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
-                    3
-                  </span>
-                </button>
-              </a>
-            </div>
-          </div>
+        <div className="">
+     
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
             <StatCard title="Total Applications" value="230" bg="#E5ECF6" />
@@ -62,101 +41,8 @@ const DashBoardUser = () => {
           </div>
 
           {/* TABLE */}
-          <div className="bg-white rounded-lg shadow-sm p-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-3">
-              <h2 className="text-xl sora-semibold mb-4">List of Clients</h2>
-
-              <div className="flex items-center gap-3">
-                {marketplace ? (
-                  admin ? (
-                    <button className="open-popup bg-[#0080C6] text-white px-4 py-2 rounded-md hover:bg-[#006ba1] transition text-sm">
-                      + Add Product
-                    </button>
-                  ) : null
-                ) : (
-                  // <a href="/dashboard/applications/confirm-your-financing">
-                  <button
-                    onClick={() => setShowAddProduct(true)}
-                    className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
-                  >
-                    + New Application
-                  </button>
-                  // </a>
-                )}
-
-                {/* search */}
-                {!marketplace ? (
-                  <>
-                    <input
-                      type="text"
-                      placeholder="Search User"
-                      className="hidden sm:block border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
-                    />
-
-                    <button className="sm:hidden p-2 border border-gray-300 rounded-md hover:bg-gray-100">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M21 21l-4.35-4.35m2.1-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
-                        ></path>
-                      </svg>
-                    </button>
-                  </>
-                ) : (
-                  ""
-                )}
-
-                {/* filter */}
-                <button
-                  className={
-                    marketplace
-                      ? "productlistBtn flex items-center gap-1 border border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100"
-                      : "flex items-center gap-1 border border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100"
-                  }
-                >
-                  <span className="max-sm:hidden">
-                    {marketplace ? "Filter by Product & Services" : "Filter"}
-                  </span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 max-sm:hidden"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    ></path>
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 sm:hidden"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 12.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-4.586L3.293 6.707A1 1 0 013 6V4z"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
+          <div className="bg-white rounded-lg shadow-sm p-3">
+          <HeaderTable setShowAddProduct={setShowAddProduct} headingContent="List of Clients" marketplace={false}/>
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
               <table className="w-full text-sm">
                 <thead className="bg-gray-100 text-gray-700">
@@ -169,9 +55,9 @@ const DashBoardUser = () => {
                     <Th className="text-center">
                       {admin ? "Date" : "Date of Application"}
                     </Th>
-                    <Th>Shop</Th>
-                    <Th>Invoice</Th>
-                    <Th>View</Th>
+                    <Th>Shop Now! </Th>
+                    <Th>Attach Invoice</Th>
+                    <Th>View Details</Th>
                   </tr>
                 </thead>
 
@@ -187,11 +73,11 @@ const DashBoardUser = () => {
                         {item.date}
                       </Td>
 
-                      <Td center>
+                      <Td center={"yes"} className="flex justify-center">
                         <IconBtn href="/dashboard/marketplace" img={shopIcon} />
                       </Td>
 
-                      <Td center>
+                      <Td center={"yes"}>
                         <IconBtn
                           img={attachIcon}
                           onClick={() => setShowInvoice(true)}

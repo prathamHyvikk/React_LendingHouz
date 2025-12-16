@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logoImage from "@assets/Images/logo.png";
+import { Link, NavLink } from "react-router-dom";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -43,6 +44,7 @@ const Sidebar = () => {
   ];
 
   const currentPath = window.location.pathname;
+  
   const admin = true;
   return (
     <>
@@ -50,7 +52,7 @@ const Sidebar = () => {
       <button
         id="sidebarToggleBtn"
         onClick={() => setShowSidebar(true)}
-        className="lg:hidden p-3 bg-gray-200 cursor-pointer rounded-md m-3 fixed top-2 left-2 z-198"
+        className="lg:hidden p-3 bg-gray-200  cursor-pointer rounded-md m-3 fixed top-2 left-2 z-198"
       >
         <i className="fas fa-bars"></i>
       </button>
@@ -72,13 +74,13 @@ const Sidebar = () => {
       >
         <div className="lg:p-6 p-4 flex justify-between items-center relative ">
           <div>
-            <a href="/dashboard">
+            <Link to="/dashboard">
               <img
-                className="lg:w-auto md:w-36 w-30"
+                className="lg:w-[208px] lg:max-w-[208px] md:w-36 w-30"
                 src={logoImage}
                 alt="logo"
               />
-            </a>
+            </Link>
           </div>
           <button
             id="sidebarCloseBtn"
@@ -90,12 +92,12 @@ const Sidebar = () => {
         </div>
 
         <nav className="sm:mt-6 mt-3">
-          <ul className="font-semibold">
+          <ul className="sora-semibold">
             {menuItems.map((item, i) => (
               <li key={i} id={item.dataPage} className="sm:mb-2 mb-1">
-                <a
-                  href={item.href}
-                  className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-link
+                <NavLink
+                  to={item.href}
+                  className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
                 ${
                   currentPath === item.href
                     ? "active-page text-(--primary-color)"
@@ -105,7 +107,7 @@ const Sidebar = () => {
                 >
                   <i className={item.icon + " mr-3"} />
                   <span>{item.name}</span>
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -122,10 +124,10 @@ const Sidebar = () => {
                 />
               </div>
               <div className="ml-3">
-                <p className="sm:text-sm text-xs font-medium text-gray-700">
+                <p className="sm:text-sm text-xs sora-medium text-gray-700">
                   Gustavo Xavier
                 </p>
-                <button className="text-xs px-2 py-.5 bg-yellow-400 rounded-full font-semibold">
+                <button className="text-xs px-2 py-.5 bg-yellow-400 rounded-full sora-semibold">
                   {admin ? "Admin" : "User"}
                 </button>
               </div>

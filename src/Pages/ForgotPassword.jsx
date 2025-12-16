@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import bgImage from "@assets/Images/background-image.png";
 import logoImg from "@assets/Images/logo.png";
+import { Link } from "react-router-dom";
+import ConfirmEmailPopup from "../Component/ConfirmEmailPopup";
 
 const ForgotPassword = () => {
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowConfirmPopup(true);
+  };
+
   return (
     <>
       <div
@@ -16,14 +26,14 @@ const ForgotPassword = () => {
               <div className="flex items-center justify-center mb-2">
                 <img src={logoImg} className="w-64" alt="" />
               </div>
-              <h2 className="text-2xl font-bold text-center text-(--primary-color) mb-2">
+              <h2 className="text-2xl sora-bold text-center text-(--primary-color) mb-2">
                 Forgot Password?
               </h2>
               <div className="h-1 bg-(--primary-color) w-full"></div>
             </div>
 
             <form
-              onsubmit="handleSubmit(event)"
+              onSubmit={handleSubmit}
               className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
             >
               <div>
@@ -32,33 +42,37 @@ const ForgotPassword = () => {
                 </label>
                 <input
                   type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Dosamarvís@test.com"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
               </div>
 
-              <button
-                onclick="openPopup(event, 'reset-password-popup')"
-                className="w-full bg-(--primary-color) text-white font-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
-              >
+              <button className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200">
                 Reset Password
               </button>
 
               <div>
                 <p className="text-center text-gray-700">
                   Already Registered?{" "}
-                  <a
-                    href="/signin"
-                    className="font-bold text-gray-900 hover:text-blue-900 transition"
+                  <Link
+                    to="/signin"
+                    className="sora-bold text-gray-900 hover:text-blue-900 transition"
                   >
                     Sign In
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>
           </div>
         </div>
       </div>
+
+      {/* Popup */}
+      {showConfirmPopup && (
+        <ConfirmEmailPopup setShowConfirmPopup={setShowConfirmPopup} />
+      )}
     </>
   );
 };

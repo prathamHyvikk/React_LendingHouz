@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "@assets/Images/logo.png";
 import bgImage from "@assets/Images/background-image.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [dob, setDob] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +43,8 @@ const Signup = () => {
                 <label className="block text-gray-600 text-sm">Name</label>
                 <input
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Dosamarvís"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -47,6 +56,8 @@ const Signup = () => {
                 </label>
                 <input
                   type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Dosamarvís@test.com"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -56,6 +67,8 @@ const Signup = () => {
                 <label className="block text-gray-600 text-sm">Phone</label>
                 <input
                   type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder="1234124512"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -67,6 +80,8 @@ const Signup = () => {
                 </label>
                 <input
                   type="text"
+                  value={dob}
+                  onChange={(e) => setDob(e.target.value)}
                   placeholder="12/05/2025"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -78,6 +93,8 @@ const Signup = () => {
                 </label>
                 <input
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="12345678"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -89,6 +106,8 @@ const Signup = () => {
                 </label>
                 <input
                   type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="*******"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />

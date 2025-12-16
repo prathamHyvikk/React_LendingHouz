@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "@assets/Images/logo.png";
 import bgImage from "@assets/Images/background-image.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
   return (
     <>
       <div
@@ -30,9 +32,13 @@ const SignIn = () => {
               className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
             >
               <div>
-                <label className="block text-gray-600 text-sm">Email Address</label>
+                <label className="block text-gray-600 text-sm">
+                  Email Address
+                </label>
                 <input
                   type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Dosamarvís@test.com"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -44,6 +50,8 @@ const SignIn = () => {
                 </label>
                 <input
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="12345678"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />

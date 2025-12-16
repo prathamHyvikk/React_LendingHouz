@@ -9,7 +9,18 @@
 body {
   scroll-behavior: smooth;
   font-family: "sora-regular", sans-serif;
+ 
 }
+
+.active-page  {
+  background-color: #d7f4fe;
+  color: #002e6d;
+  border-right-width: 4px;
+  border-right-color: #002e6d;
+  border-right-style: solid;
+}
+
+
 
 @font-face {
   font-family: "sora-regular";
@@ -24,4 +35,8 @@ body {
 @font-face {
   font-family: "sora-semibold";
   src: url("./assets/Fonts/sora/Sora-SemiBold.ttf");
+}
+@font-face {
+  font-family: "sora-medium";
+  src: url("./assets/Fonts/sora/Sora-Medium.ttf");
 }

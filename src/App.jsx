@@ -35,6 +35,10 @@ import Signup from "./Pages/Signup";
 import SignIn from "./Pages/SignIn";
 import DashBoardUser from "./Pages/DashBoardUser";
 import ForgotPassword from "./Pages/ForgotPassword";
+import ApplicationsDashboard from "./Pages/ApplicationsDashboard";
+import MarketPlace from "./Pages/MarketPlace";
+import TearmsAndConditions from "./Pages/TearmsAndConditions";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -74,6 +78,10 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<DashBoardUser />} />
+          <Route path="/dashboard/applications" element={<ApplicationsDashboard />} />
+          <Route path="/dashboard/marketplace" element={<MarketPlace />} />
+          <Route path="/dashboard/terms&condition" element={<TearmsAndConditions />} />
+          <Route path="/dashboard/privacy&policy" element={<PrivacyPolicy />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

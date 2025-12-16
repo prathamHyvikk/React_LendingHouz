@@ -1,7 +1,7 @@
 import React from "react";
 
 const RecentCards = ({ data }) => {
- console.log(data)
+
   return (
     <>
       <div className="flex items-center gap-2 bg-[#F4F4F4] p-2 rounded-md shadow-md">

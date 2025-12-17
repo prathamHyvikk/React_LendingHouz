@@ -43,6 +43,16 @@ import Users from "./Pages/Users";
 import ViewUser from "./Pages/ViewUser";
 import Notifications from "./Pages/Notifications";
 import Profile from "./Pages/Profile";
+import AdminApplicationDashboard from "./Pages/AdminApplicationDashboard";
+import AdminForgotPassword from "./Pages/AdminForgotPassword";
+import AdminDashboard from "./Pages/AdminDashboard";
+import AdminMarketPlace from "./Pages/AdminMarketPlace";
+import AdminNotifications from "./Pages/AdminNotifications";
+import AdminPrivacyPolicy from "./Pages/AdminPrivacyPolicy";
+import AdminProfile from "./Pages/AdminProfile";
+import AdminSignIn from "./Pages/AdminSignIn";
+import AdminSignup from "./Pages/AdminSignup";
+import AdminTearmsAndConditions from "./Pages/AdminTermsAndConditions";
 
 function App() {
   return (
@@ -100,6 +110,30 @@ function App() {
           <Route path="/dashboard/users/view-user" element={<ViewUser />} />
           <Route path="/dashboard/notifications" element={<Notifications />} />
           <Route path="/dashboard/profile" element={<Profile />} />
+
+          {/* Admin */}
+          <Route path="/signup/admin" element={<AdminSignup />} />
+          <Route path="/signin/admin" element={<AdminSignIn />} />
+          <Route
+            path="/forgot-password/admin"
+            element={<AdminForgotPassword />}
+          />
+          <Route path="/dashboard/admin" element={<AdminDashboard />} />
+          <Route
+            path="/dashboard/applications/admin"
+            element={<AdminApplicationDashboard />}
+          />
+       
+          <Route path="/dashboard/marketplace/admin" element={<AdminMarketPlace />} />
+          <Route
+            path="/dashboard/terms&condition/admin"
+            element={<AdminTearmsAndConditions />}
+          />
+          <Route path="/dashboard/privacy&policy/admin" element={<AdminPrivacyPolicy />} />
+          {/* <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/dashboard/users/view-user" element={<ViewUser />} /> */}
+          <Route path="/dashboard/notifications/admin" element={<AdminNotifications />} />
+          <Route path="/dashboard/profile/admin" element={<AdminProfile />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

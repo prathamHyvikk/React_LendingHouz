@@ -3,7 +3,7 @@ import logoImg from "@assets/Images/logo.png";
 import bgImage from "@assets/Images/background-image.png";
 import { Link, useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const AdminSignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
@@ -96,4 +96,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default AdminSignIn;

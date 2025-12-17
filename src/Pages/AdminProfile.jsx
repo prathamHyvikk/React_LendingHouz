@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 
-const Profile = () => {
+const AdminProfile = () => {
   const [uploadFile, setUploadFile] = useState(null);
   const [userName, setUserName] = useState("ryan");
   const [email, setEmail] = useState("ryan@example.com");
@@ -189,4 +189,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AdminProfile;

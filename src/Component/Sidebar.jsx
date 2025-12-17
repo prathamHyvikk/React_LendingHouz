@@ -114,7 +114,7 @@ const Sidebar = () => {
         </nav>
 
         <div className="absolute bottom-0 w-64 p-6 border-t border-gray-300">
-          <Link href="/dashboard/profile">
+          <Link to="/dashboard/profile">
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
                 <img
@@ -135,8 +135,8 @@ const Sidebar = () => {
           </Link>
 
           <div className="mt-4 ml-1">
-            <Link to="/signin" className="cursor-pointer text-red-500 hover:text-red-600">
-              <button className="flex items-center gap-2 max-sm:text-sm">
+            <Link to="/signin" className=" text-red-500 hover:text-red-600">
+              <button className="cursor-pointer flex items-center gap-2 max-sm:text-sm">
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 <span>Log out</span>
               </button>

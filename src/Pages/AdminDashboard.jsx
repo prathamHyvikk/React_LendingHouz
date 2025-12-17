@@ -15,7 +15,7 @@ import { clients } from "../data/userDashboard.json";
 import { recentData } from "../data/userDashboard.json";
 import HeaderTable from "../Component/HeaderTable";
 
-const DashBoardUser = () => {
+const AdminDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
@@ -125,4 +125,4 @@ const DashBoardUser = () => {
   );
 };
 
-export default DashBoardUser;
+export default AdminDashboard;

@@ -114,7 +114,7 @@ const Sidebar = () => {
         </nav>
 
         <div className="absolute bottom-0 w-64 p-6 border-t border-gray-300">
-          <a href="/dashboard/profile">
+          <Link href="/dashboard/profile">
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
                 <img
@@ -132,15 +132,15 @@ const Sidebar = () => {
                 </button>
               </div>
             </div>
-          </a>
+          </Link>
 
           <div className="mt-4 ml-1">
-            <a href="/signin" className="text-red-500 hover:text-red-600">
+            <Link to="/signin" className="cursor-pointer text-red-500 hover:text-red-600">
               <button className="flex items-center gap-2 max-sm:text-sm">
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 <span>Log out</span>
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

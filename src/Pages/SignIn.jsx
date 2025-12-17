@@ -62,12 +62,14 @@ const SignIn = () => {
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
-              >
-                Sign In
-              </button>
+              <Link to="/dashboard">
+                <button
+                  // type="submit"
+                  className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
+                >
+                  Sign In
+                </button>
+              </Link>
 
               <div>
                 <Link to="/forgot-password">

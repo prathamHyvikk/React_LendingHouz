@@ -8,14 +8,29 @@ import AddNewProduct from "../Component/AddNewProduct";
 import Pagination from "../Component/Pagination";
 
 import { applicationData } from "../data/userDashboard.json";
+import ViewModal from "../Component/ViewModal";
+import PrintPopup from "../Component/PrintPopup";
 
 const ApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showView, setShowView] = useState(false);
+
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const admin = true;
   const marketplace = false;
+
+  const showDropdown = (e) => {
+    e.stopPropagation();
+
+    setPosition({
+      x: e.clientX - 120,
+      y: e.clientY,
+    });
+
+    setShowView(true);
+  };
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
@@ -24,8 +39,7 @@ const ApplicationsDashboard = () => {
   return (
     <>
       <AdminLayout>
-        <div className="p-4 lg:p-8 w-full">
-          
+        <div className="">
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
             <StatCard title="Total Applications" value="230" bg="#E5ECF6" />
@@ -37,9 +51,7 @@ const ApplicationsDashboard = () => {
           {/* TABLE */}
           <div className="bg-white rounded-lg shadow-sm p-4">
             <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-3">
-              <h2 className="text-xl sora-semibold mb-4">
-                List of Applications
-              </h2>
+              <h2 className="text-lg sora-semibold ">List of Applications</h2>
 
               <div className="flex items-center gap-3">
                 {marketplace ? (
@@ -168,18 +180,13 @@ const ApplicationsDashboard = () => {
                       <Td>{item.lender}</Td>
 
                       <Td center={"yes"}>{item.applicationNo}</Td>
-                      <Td center={'yes'}>
-                        {item.applicationAmount}
-                      </Td>
+                      <Td center={"yes"}>{item.applicationAmount}</Td>
                       <Td className="" center={""}>
                         {item.date}
                       </Td>
 
                       <Td center>
-                        <IconBtn
-                          img={printIcon}
-                          onClick={() => setShowView(true)}
-                        />
+                        <IconBtn img={printIcon} onClick={showDropdown} />
                       </Td>
                     </tr>
                   ))}
@@ -193,13 +200,21 @@ const ApplicationsDashboard = () => {
           {showInvoice && (
             <InvoiceModal onClose={() => setShowInvoice(false)} />
           )}
-          {showView && <ViewModal onClose={() => setShowView(false)} />}
+          {showView && (
+            <PrintPopup
+              position={position}
+              onClose={() => setShowView(false)}
+              setShowView={setShowView}
+            />
+          )}
         </div>
 
         {/* Popup */}
         {showAddProduct && (
           <AddNewProduct setShowAddProduct={setShowAddProduct} />
         )}
+
+        
       </AdminLayout>
     </>
   );

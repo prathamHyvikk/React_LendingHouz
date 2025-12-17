@@ -39,6 +39,10 @@ import ApplicationsDashboard from "./Pages/ApplicationsDashboard";
 import MarketPlace from "./Pages/MarketPlace";
 import TearmsAndConditions from "./Pages/TearmsAndConditions";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import Users from "./Pages/Users";
+import ViewUser from "./Pages/ViewUser";
+import Notifications from "./Pages/Notifications";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -78,11 +82,25 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<DashBoardUser />} />
-          <Route path="/dashboard/applications" element={<ApplicationsDashboard />} />
+          <Route
+            path="/dashboard/applications"
+            element={<ApplicationsDashboard />}
+          />
+          <Route
+            path="/dashboard/applications"
+            element={<ApplicationsDashboard />}
+          />
           <Route path="/dashboard/marketplace" element={<MarketPlace />} />
-          <Route path="/dashboard/terms&condition" element={<TearmsAndConditions />} />
+          <Route
+            path="/dashboard/terms&condition"
+            element={<TearmsAndConditions />}
+          />
           <Route path="/dashboard/privacy&policy" element={<PrivacyPolicy />} />
-          
+          <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/dashboard/users/view-user" element={<ViewUser />} />
+          <Route path="/dashboard/notifications" element={<Notifications />} />
+          <Route path="/dashboard/profile" element={<Profile />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

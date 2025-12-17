@@ -168,5 +168,48 @@
         "Leading Houz has the discretion to update this privacy policy at any time. We encourage users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect."
       ]
     }
+  ],
+
+  "users": [
+    {
+      "name": "Robert",
+      "accountId": "FN-2323",
+      "totalLoan": "$120.00",
+      "totalReturn": "10.9%",
+      "status": "Active",
+      "riskTier": "Medium",
+      "nextPayment": "$1,250(15 Nov)",
+      "id":"1234"
+    },
+    {
+      "name": "John",
+      "accountId": "FN-2324",
+      "totalLoan": "$300.00",
+      "totalReturn": "15.2%",
+      "status": "Active",
+      "riskTier": "High",
+      "nextPayment": "$2,000(20 Nov)",
+      "id":"6565"
+    },
+    {
+      "name": "Alice",
+      "accountId": "FN-2325",
+      "totalLoan": "$500.00",
+      "totalReturn": "8.9%",
+      "status": "Inactive",
+      "riskTier": "Low",
+      "nextPayment": "$0(0 Nov)",
+      "id":"4544"
+    },
+    {
+      "name": "Mike",
+      "accountId": "FN-2326",
+      "totalLoan": "$750.00",
+      "totalReturn": "12.5%",
+      "status": "Active",
+      "riskTier": "Medium",
+      "nextPayment": "$1,500(18 Nov)",
+      "id":"7776"
+    }
   ]
 }

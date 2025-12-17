@@ -7,13 +7,7 @@ const ModalWrapper = ({ children, onClose }) => {
         onClick={onClose}
         className="fixed inset-0 bg-black/40 z-200 flex items-center justify-center"
       >
-        <div
-          onClick={(e) => e.stopPropagation()}
-          
-        >
-      
-          {children}
-        </div>
+        <div onClick={(e) => e.stopPropagation()}>{children}</div>
       </div>
     </>
   );

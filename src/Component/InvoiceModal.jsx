@@ -9,7 +9,7 @@ const InvoiceModal = ({ onClose }) => {
         <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl overflow-y-auto max-h-[90vh]">
           <div className="sticky top-0 bg-linear-to-r from-blue-50 to-white border-b border-gray-100 px-8 py-6 flex items-center justify-between">
             <div>
-              <h2 className="text-lg sm:text-2xl font-bold text-(--primary-color)">
+              <h2 className="text-lg sm:text-2xl sora-bold text-(--primary-color)">
                 Invoice Details
               </h2>
               <p className="sm:text-sm text-xs text-gray-600 mt-1">
@@ -48,17 +48,17 @@ const InvoiceModal = ({ onClose }) => {
                   </div>
                   <div className="mt-4 space-y-1 text-sm text-gray-600">
                     <p>
-                      <span className="font-semibold text-black">
+                      <span className="sora-semibold text-black">
                         Invoice #:
                       </span>{" "}
                       INV-2025-001247
                     </p>
                     <p>
-                      <span className="font-semibold text-black">Date:</span>{" "}
+                      <span className="sora-semibold text-black">Date:</span>{" "}
                       December 11, 2025
                     </p>
                     <p>
-                      <span className="font-semibold text-black">
+                      <span className="sora-semibold text-black">
                         Due Date:
                       </span>{" "}
                       January 10, 2026
@@ -67,17 +67,17 @@ const InvoiceModal = ({ onClose }) => {
                 </div>
                 <div className="text-right hidden sm:block">
                   <div className="mb-3">
-                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm font-semibold inline-block">
+                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm sora-semibold inline-block">
                       Approved
                     </span>
                   </div>
                   <div className="space-y-1 text-sm text-gray-600">
                     <p>
-                      <span className="font-semibold">Approved Amount:</span>{" "}
+                      <span className="sora-semibold">Approved Amount:</span>{" "}
                       $5,000.00
                     </p>
                     <p>
-                      <span className="font-semibold">Loan Term:</span> 12
+                      <span className="sora-semibold">Loan Term:</span> 12
                       Months
                     </p>
                   </div>
@@ -87,11 +87,11 @@ const InvoiceModal = ({ onClose }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div>
-                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                <h4 className="text-xs sora-semibold text-gray-500 uppercase tracking-wide mb-3">
                   Bill To
                 </h4>
                 <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="sora-semibold text-gray-900 mb-1">
                     Jean Paul Trujillo
                   </p>
                   <p className="text-[12px] text-gray-600 mb-3">
@@ -107,31 +107,31 @@ const InvoiceModal = ({ onClose }) => {
               </div>
 
               <div>
-                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                <h4 className="text-xs sora-semibold text-gray-500 uppercase tracking-wide mb-3">
                   Application
                 </h4>
                 <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
-                  <p className="font-semibold text-gray-900 mb-3">
+                  <p className="sora-semibold text-gray-900 mb-3">
                     Loan Application
                   </p>
                   <div className="space-y-2 text-[12px] text-gray-600">
                     <div className="flex justify-between">
                       <span>App ID:</span>
-                      <span className="font-medium text-gray-900">985170</span>
+                      <span className="sora-medium text-gray-900">985170</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Status:</span>
-                      <span className="font-medium text-green-600">Active</span>
+                      <span className="sora-medium text-green-600">Active</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Submitted:</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="sora-medium text-gray-900">
                         2025-08-05
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Product:</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="sora-medium text-gray-900">
                         Electronics
                       </span>
                     </div>
@@ -140,33 +140,33 @@ const InvoiceModal = ({ onClose }) => {
               </div>
 
               <div>
-                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                <h4 className="text-xs sora-semibold text-gray-500 uppercase tracking-wide mb-3">
                   Business Info
                 </h4>
                 <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
-                  <p className="font-semibold text-gray-900 mb-3">
+                  <p className="sora-semibold text-gray-900 mb-3">
                     Quick Details
                   </p>
                   <div className="space-y-2 text-xs text-gray-600">
                     <div className="flex justify-between">
                       <span>Gross Income:</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="sora-medium text-gray-900">
                         $120,000
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Pay Frequency:</span>
-                      <span className="font-medium text-gray-900">Monthly</span>
+                      <span className="sora-medium text-gray-900">Monthly</span>
                     </div>
                     <div className="flex justify-between">
                       <span>SSN:</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="sora-medium text-gray-900">
                         628325819
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>DOB:</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="sora-medium text-gray-900">
                         1978-12-20
                       </span>
                     </div>
@@ -177,27 +177,27 @@ const InvoiceModal = ({ onClose }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-4">
+                <h4 className="text-sm sora-semibold text-gray-900 uppercase tracking-wide mb-4">
                   Payment Terms
                 </h4>
                 <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50 space-y-3 text-xs">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Monthly Payment:</span>
-                    <span className="font-semibold text-gray-900">$450.00</span>
+                    <span className="sora-semibold text-gray-900">$450.00</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Interest Rate (APR):</span>
-                    <span className="font-semibold text-gray-900">18.5%</span>
+                    <span className="sora-semibold text-gray-900">18.5%</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Remaining Balance:</span>
-                    <span className="font-semibold text-gray-900">
+                    <span className="sora-semibold text-gray-900">
                       $5,250.00
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Next Payment Due:</span>
-                    <span className="font-semibold text-gray-900">
+                    <span className="sora-semibold text-gray-900">
                       Jan 15, 2026
                     </span>
                   </div>
@@ -205,7 +205,7 @@ const InvoiceModal = ({ onClose }) => {
               </div>
 
               <div>
-                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-4">
+                <h4 className="text-sm sora-semibold text-gray-900 uppercase tracking-wide mb-4">
                   Amount Summary
                 </h4>
                 <div className="border border-gray-100 rounded-lg p-4 bg-linear-to-br from-blue-50 to-blue-50/50 space-y-3">
@@ -218,7 +218,7 @@ const InvoiceModal = ({ onClose }) => {
                     <span>$52.50</span>
                   </div>
                   <div className="h-px bg-linear-to-r from-blue-200 to-transparent my-2"></div>
-                  <div className="flex justify-between text-lg font-bold text-(--primary-color) pt-2">
+                  <div className="flex justify-between text-lg sora-bold text-(--primary-color) pt-2">
                     <span>Total Due:</span>
                     <span>$577.50</span>
                   </div>
@@ -227,10 +227,10 @@ const InvoiceModal = ({ onClose }) => {
             </div>
 
             <div className="flex gap-4 justify-center md:justify-end py-6 border-t border-gray-100">
-              <button className="md:px-6 px-3 py-2 border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-all cursor-pointer font-medium text-sm">
+              <button className="md:px-6 px-3 py-2 border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-all cursor-pointer sora-medium text-sm">
                 Download PDF
               </button>
-              <button className="md:px-6 px-3 py-2 bg-(--primary-color)  text-white rounded-lg transition-all font-medium text-sm cursor-pointer">
+              <button className="md:px-6 px-3 py-2 bg-(--primary-color)  text-white rounded-lg transition-all sora-medium text-sm cursor-pointer">
                 Print Invoice
               </button>
             </div>

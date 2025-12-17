@@ -192,7 +192,7 @@ function Vehical() {
                             key={index}
                             className={`px-4 ${index < stats.length - 1 ? 'border-r' : ''}`}
                         >
-                            <p className="text-2xl font-bold text-gray-900 mb-2">{item.value}</p>
+                            <p className="text-2xl sora-bold text-gray-900 mb-2">{item.value}</p>
                             <p className="text-sm primary-text">{item.label}</p>
                         </div>
                     ))}

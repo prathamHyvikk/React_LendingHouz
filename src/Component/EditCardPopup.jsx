@@ -14,7 +14,7 @@ const EditCardPopup = ({onClose}) => {
             <i class="fa-solid fa-xmark"></i>
           </button>
 
-          <h1 class="text-2xl font-bold mb-4">
+          <h1 class="text-2xl sora-bold mb-4">
             Add / Edit <span class="text-(--primary-color)">Card</span>
           </h1>
 

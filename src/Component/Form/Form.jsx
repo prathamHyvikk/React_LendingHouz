@@ -236,7 +236,7 @@ function Form() {
 
       <section className="flex justify-center py-6 px-4">
         <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-3xl">
-          <h2 className="sm:text-4xl text-2xl font-bold text-center mb-8 text-gray-800">
+          <h2 className="sm:text-4xl text-2xl sora-bold text-center mb-8 text-gray-800">
             Become a Partner
           </h2>
 
@@ -246,7 +246,7 @@ function Form() {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block font-medium mb-2 text-gray-700">Business Name</label>
+                <label className="block sora-medium mb-2 text-gray-700">Business Name</label>
                 <input
                   type="text"
                   name="businessName"
@@ -259,7 +259,7 @@ function Form() {
               </div>
 
               <div>
-                <label className="block font-medium mb-2 text-gray-700">Owner Name</label>
+                <label className="block sora-medium mb-2 text-gray-700">Owner Name</label>
                 <input
                   type="text"
                   name="ownerName"
@@ -272,7 +272,7 @@ function Form() {
               </div>
 
               <div>
-                <label className="block font-medium mb-2 text-gray-700">Email</label>
+                <label className="block sora-medium mb-2 text-gray-700">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -285,7 +285,7 @@ function Form() {
               </div>
 
               <div>
-                <label className="block font-medium mb-2 text-gray-700">Phone</label>
+                <label className="block sora-medium mb-2 text-gray-700">Phone</label>
                 <input
                   type="tel"
                   name="phone"
@@ -298,7 +298,7 @@ function Form() {
               </div>
 
               <div className="md:col-span-2">
-                <label className="block font-medium mb-2 text-gray-700">Address</label>
+                <label className="block sora-medium mb-2 text-gray-700">Address</label>
                 <input
                   type="text"
                   name="address"
@@ -312,7 +312,7 @@ function Form() {
 
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-6">
                 <div className="flex-1">
-                  <label className="block font-medium mb-2 text-gray-700">City</label>
+                  <label className="block sora-medium mb-2 text-gray-700">City</label>
                   <input
                     type="text"
                     name="city"
@@ -325,7 +325,7 @@ function Form() {
                 </div>
 
                 <div className="flex-1">
-                  <label className="block font-medium mb-2 text-gray-700">State</label>
+                  <label className="block sora-medium mb-2 text-gray-700">State</label>
                   <Select
                     id="state"
                     name="state"
@@ -352,7 +352,7 @@ function Form() {
                 </div>
 
                 <div className="flex-1">
-                  <label className="block font-medium mb-2 text-gray-700">ZIP</label>
+                  <label className="block sora-medium mb-2 text-gray-700">ZIP</label>
                   <input
                     type="text"
                     name="zip"
@@ -366,7 +366,7 @@ function Form() {
               </div>
 
               <div className="md:col-span-2">
-                <label className="block font-medium mb-2 text-gray-700">
+                <label className="block sora-medium mb-2 text-gray-700">
                   Business Website (Optional)
                 </label>
                 <input
@@ -393,7 +393,7 @@ function Form() {
               <button
                 type="submit"
                 disabled={loading}
-                className="primary-bg hover:bg-black text-white font-semibold px-6 py-3 rounded-lg transition disabled:opacity-50"
+                className="primary-bg hover:bg-black text-white sora-semibold px-6 py-3 rounded-lg transition disabled:opacity-50"
               >
                 {loading ? "Submitting..." : "Submit Application"}
               </button>

@@ -9,10 +9,10 @@ function Herosection2({title, subtitle, description}) {
                 <h1 className="sora-regular mb-4 leading-tight">
                     {title}
                 </h1>
-                <h6 className="sora-regular font-medium mb-6">
+                <h6 className="sora-regular sora-medium mb-6">
                     {subtitle}
                 </h6>    
-                <p className="text-sm md:text-base primary-text font-medium mb-8 max-w-3xl mx-auto">
+                <p className="text-sm md:text-base primary-text sora-medium mb-8 max-w-3xl mx-auto">
                     {description}
                 </p>
                 <div className='flex justify-center'>

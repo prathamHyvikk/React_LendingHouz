@@ -100,7 +100,7 @@ function About() {
 
             <section className='container max-md:px-2 px-10 py-10 text-center' >
                 <h1 className='sora-regular mb-2'> Our Mission</h1>
-                <h6 className='sora-regular font-light text-base max-w-[1057px]'>To make financing straightforward, fast, and fair — empowering everyday people to afford what they need, when they need it, without relying on banks or complicated credit systems.</h6>
+                <h6 className='sora-regular sora-light text-base max-w-[1057px]'>To make financing straightforward, fast, and fair — empowering everyday people to afford what they need, when they need it, without relying on banks or complicated credit systems.</h6>
             </section>
 
             <section className="flex flex-col max-md:px-2 px-10 md:py-10 container items-center justify-between py-4    ">

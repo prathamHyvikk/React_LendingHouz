@@ -32,7 +32,7 @@ const AdminLayout = ({ children }) => {
                     >
                       <i className="fas fa-bell text-gray-700 text-xl"></i>
 
-                      <span className="absolute -top-1 right-0 w-5 h-5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+                      <span className="absolute -top-1 right-0 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
                         3
                       </span>
                     </button>

@@ -193,7 +193,7 @@ function MusicEquipment() {
                                 alt={item.title}
                                 className="rounded-lg mb-4 mx-auto  w-64   h-40 object-cover"
                             />
-                            <h3 className="text-md font-medium">{item.title}</h3>
+                            <h3 className="text-md sora-medium">{item.title}</h3>
                         </div>
                     ))}
                 </div>

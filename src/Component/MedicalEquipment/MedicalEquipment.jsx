@@ -145,19 +145,19 @@ function MedicalEquipment() {
                 <div className="flex flex-col md:flex-row justify-around md:items-start text-center  mx-auto space-y-6 md:space-y-0 md:space-x-6">
                     <div className="flex flex-col gap-2 items-center">
                         <h2 className='primary-text sora-medium text-[48px]' >+1200</h2>
-                        <p className="text-2xl font-semibold leading-7 text-gray-900">Healthcare Providers Financed</p>
+                        <p className="text-2xl sora-semibold leading-7 text-gray-900">Healthcare Providers Financed</p>
                         <p className="  sora-regular  text-gray-900">Partnered with 1200+ trusted doctors for expert care.</p>
 
                     </div>
                     <div className="flex flex-col gap-2 items-center">
                         <h2 className='primary-text sora-medium text-[48px]' >$50+</h2>
-                        <p className="text-2xl font-semibold leading-7 text-gray-900">Million in Equipment Financed</p>
+                        <p className="text-2xl sora-semibold leading-7 text-gray-900">Million in Equipment Financed</p>
                         <p className="  sora-regular  text-gray-900">Access to essential tools without straining budgets.</p>
 
                     </div>
                     <div className="flex flex-col gap-2 items-center">
                         <h2 className='primary-text sora-medium text-[48px]' >98%</h2>
-                        <p className="text-2xl font-semibold leading-7 text-gray-900">Approval Rate</p>
+                        <p className="text-2xl sora-semibold leading-7 text-gray-900">Approval Rate</p>
                         <p className="  sora-regular  text-gray-900">We work hard to say "yes" — even when others don’t.</p>
 
                     </div>

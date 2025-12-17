@@ -184,7 +184,7 @@ function ProfessionalTools() {
             </section>
 
             <div className="py-16 px-2 container text-center bg-white">
-                <h1 className=" sora-regular font-bold mb-12">Trusted by Professionals Nationwide</h1>
+                <h1 className=" sora-regular sora-bold mb-12">Trusted by Professionals Nationwide</h1>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8   ">
                     {stats.map((item, index) => (

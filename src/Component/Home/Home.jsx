@@ -254,28 +254,28 @@ function Home() {
               {/* <i className="ri-home-2-line primary-text text-xl"></i> */}
               <img src={img1t} alt="" />
             </div>
-            <p className="text-2xl font-bold text-gray-900">10,000+</p>
+            <p className="text-2xl sora-bold text-gray-900">10,000+</p>
             <h6 className="primary-text">Homeowners financed</h6>
           </div>
           <div className="flex flex-col items-center">
             <div className="w-12 h-12">
               <img src={img2t} alt="" />
             </div>
-            <p className="text-2xl font-bold text-gray-900">98%</p>
+            <p className="text-2xl sora-bold text-gray-900">98%</p>
             <h6 className="primary-text">Customer satisfaction rate</h6>
           </div>
           <div className="flex flex-col items-center">
             <div className="w-12 h-12">
               <img src={img3t} alt="" />
             </div>
-            <p className="text-2xl font-bold text-gray-900">$500M+</p>
+            <p className="text-2xl sora-bold text-gray-900">$500M+</p>
             <h6 className="primary-text">In loans approved</h6>
           </div>
           <div className="flex flex-col items-center">
             <div className="w-12 h-12">
               <img src={img4t} alt="" />
             </div>
-            <p className="text-2xl font-bold text-gray-900">15+ Years</p>
+            <p className="text-2xl sora-bold text-gray-900">15+ Years</p>
             <h6 className="primary-text">Of home financing experience</h6>
           </div>
         </div>

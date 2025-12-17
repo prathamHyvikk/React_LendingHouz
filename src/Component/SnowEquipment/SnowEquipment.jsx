@@ -165,7 +165,7 @@ function SnowEquipment() {
                             <div className="w-12 h-12 rounded-full primary-bg flex items-center justify-center text-white text-xl">
                                 <i className={`ri-${item.icon}`}></i>
                             </div>
-                            <p className="text-sm font-semibold max-sm:text-start text-black">{item.title}</p>
+                            <p className="text-sm sora-semibold max-sm:text-start text-black">{item.title}</p>
                         </div>
                     ))}
                 </div>

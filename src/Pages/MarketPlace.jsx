@@ -17,7 +17,7 @@ const MarketPlace = () => {
           />
           <div className="">
             <div className="mt-8">
-              <h2 className="text-2xl font-medium">Recent</h2>
+              <h2 className="text-2xl sora-medium">Recent</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
                 <div className="flex items-center gap-2 bg-[#F4F4F4] p-2 rounded-md shadow-md">
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
@@ -73,7 +73,7 @@ const MarketPlace = () => {
             </div>
 
             <div className="mt-8">
-              <h2 className="text-2xl font-medium">New</h2>
+              <h2 className="text-2xl sora-medium">New</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
                 <div className="flex items-center gap-2 bg-[#F4F4F4] p-2 rounded-md shadow-md">
                   <div className="w-38 h-24 overflow-hidden rounded-sm">

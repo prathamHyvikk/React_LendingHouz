@@ -42,7 +42,7 @@ const Notifications = () => {
       <AdminLayout>
         <div className="bg-white rounded-lg pb-8 shadow-sm">
           <div className="flex items-center justify-between p-6">
-            <h1 className="text-2xl font-semibold text-gray-800">
+            <h1 className="text-2xl sora-semibold text-gray-800">
               Notification
             </h1>
             <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50">
@@ -77,7 +77,7 @@ const Notifications = () => {
 
                 <div className="flex-1 min-w-0">
                   <p className="text-gray-800">
-                    <span className="font-medium">{notification.name}</span>
+                    <span className="sora-medium">{notification.name}</span>
                     <span className="text-gray-600 text-sm">
                       {notification.message}
                     </span>

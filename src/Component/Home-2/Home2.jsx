@@ -144,7 +144,7 @@ function Home2() {
                             <div className="text-3xl mb-4">
                                 <i className={`ri-${item.icon} ${item.active ? 'text-white' : 'primary-text'}`}></i>
                             </div>
-                            <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                            <h3 className="text-lg sora-semibold mb-2">{item.title}</h3>
                             <p className="text-sm mb-4">{item.description}</p>
                             <BtnGetStart />
                         </div>

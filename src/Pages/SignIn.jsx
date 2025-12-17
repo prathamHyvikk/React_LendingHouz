@@ -21,7 +21,7 @@ const SignIn = () => {
                 <img src={logoImg} className="w-64" alt="" />
               </div>
 
-              <h2 className="text-2xl font-bold text-center text-(--primary-color) mb-2">
+              <h2 className="text-2xl sora-bold text-center text-(--primary-color) mb-2">
                 Sign In
               </h2>
               <div className="h-1 bg-(--primary-color) w-full"></div>
@@ -64,14 +64,14 @@ const SignIn = () => {
 
               <button
                 type="submit"
-                className="w-full bg-(--primary-color) cursor-pointer text-white font-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
+                className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200"
               >
                 Sign In
               </button>
 
               <div>
                 <Link to="/forgot-password">
-                  <p className="text-red-500 font-semibold text-center">
+                  <p className="text-red-500 sora-semibold text-center">
                     Forget Password
                   </p>
                 </Link>
@@ -80,7 +80,7 @@ const SignIn = () => {
                   Dont Have an Account?{" "}
                   <Link
                     to="/signup"
-                    className="font-bold text-gray-900 hover:text-blue-900 transition"
+                    className="sora-bold text-gray-900 hover:text-blue-900 transition"
                   >
                     Sign Up
                   </Link>

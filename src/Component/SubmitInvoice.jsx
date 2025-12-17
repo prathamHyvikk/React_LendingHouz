@@ -11,7 +11,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
     <>
       <ModalWrapper onClose={onClose}>
         <div className="bg-white rounded-3xl shadow-lg w-full max-w-md p-8">
-          <h1 className="!text-xl font-bold text-gray-900 mb-4">
+          <h1 className="!text-xl sora-bold text-gray-900 mb-4">
             Submit Your Invoice
           </h1>
 
@@ -25,7 +25,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
                 onChange={(e) => setInvoiceType(e.target.value)}
                 className="mr-1 w-3 h-3 text-blue-600"
               />
-              <span className="text-gray-700 font-medium text-sm">
+              <span className="text-gray-700 sora-medium text-sm">
                 Upload Your Invoice
               </span>
             </label>
@@ -39,7 +39,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
                 onChange={(e) => setInvoiceType(e.target.value)}
                 className="mr-1 w-3 h-3 text-blue-600"
               />
-              <span className="text-gray-700 font-medium text-sm">
+              <span className="text-gray-700 sora-medium text-sm">
                 Scan Your Invoice
               </span>
             </label>
@@ -64,7 +64,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                   ></path>
                 </svg>
-                <p className="text-gray-700 font-medium sm:text-base text-sm">
+                <p className="text-gray-700 sora-medium sm:text-base text-sm">
                   Drag & drop files or{" "}
                   <span
                     id="browseLink"
@@ -89,7 +89,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
               {file && (
                 <div id="filePreview" className=" bg-gray-50 p-0 rounded-lg">
                   <p className="text-sm text-gray-600">
-                    <span className="font-semibold">Selected file:</span>
+                    <span className="sora-semibold">Selected file:</span>
                     <span id="fileName">{file?.name}</span>
                   </p>
                 </div>
@@ -99,7 +99,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
 
           {invoiceType === "scan" && (
             <div id="scanMode" className=" space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900 text-center">
+              <h2 className="text-lg sora-semibold text-gray-900 text-center">
                 Scan Your QR Code
               </h2>
 
@@ -120,7 +120,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
                 <p className="text-xs text-gray-600">
                   Or upload a QR code image
                 </p>
-                <label className="inline-block px-2 py-1 bg-gray-200 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-200 transition text-xs font-medium">
+                <label className="inline-block px-2 py-1 bg-gray-200 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-200 transition text-xs sora-medium">
                   Choose File
                   <input
                     type="file"
@@ -142,7 +142,7 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
           <button
             id="invoiceSubmitBtn"
             onClick={() => setAddInvoice(false)}
-            className="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 text-sm px-6 rounded-full mt-4 transition"
+            className="w-full bg-blue-900 hover:bg-blue-800 text-white sora-bold py-2 text-sm px-6 rounded-full mt-4 transition"
           >
             Submit
           </button>

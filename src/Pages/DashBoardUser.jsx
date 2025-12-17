@@ -99,7 +99,7 @@ const DashBoardUser = () => {
             <Pagination />
 
             <div className="mt-8">
-              <h2 className="text-2xl font-medium">Recent</h2>
+              <h2 className="text-2xl sora-medium">Recent</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 w-full mt-8">
                 {recentData.map((item, i) => (
                   <RecentCards key={i} data={item} />

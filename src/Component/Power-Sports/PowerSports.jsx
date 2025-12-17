@@ -148,32 +148,32 @@ function PowerSports() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-28">
 
                     <div className="flex flex-col w-full lg:items-end   gap-4">
-                        <button className="flex md:max-w-[377px] w-full items-center lg:ml-auto justify-between primary-bg gap-4  text-white px-4 py-3 rounded-full text-left font-medium transition-all">
+                        <button className="flex md:max-w-[377px] w-full items-center lg:ml-auto justify-between primary-bg gap-4  text-white px-4 py-3 rounded-full text-left sora-medium transition-all">
                             <span>Street & Off-Road Motorcycles</span>
                             <i className="ri-motorbike-fill text-xl"></i>
                         </button>
 
-                        <button className="flex md:max-w-[377px] w-full  lg:mr-10 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left font-medium transition-all">
+                        <button className="flex md:max-w-[377px] w-full  lg:mr-10 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left sora-medium transition-all">
                             <span>All-Terrain Vehicles (ATVs)</span>
                             <i className="ri-roadster-fill text-xl"></i>
                         </button>
 
-                        <button className="flex  md:max-w-[377px] w-full lg:mr-16 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left font-medium transition-all">
+                        <button className="flex  md:max-w-[377px] w-full lg:mr-16 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left sora-medium transition-all">
                             <span>Utility Terrain Vehicles (UTVs)</span>
                             <i className="ri-truck-fill text-xl"></i>
                         </button>
 
-                        <button className="flex  md:max-w-[377px] w-full lg:mr-16 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left font-medium transition-all">
+                        <button className="flex  md:max-w-[377px] w-full lg:mr-16 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left sora-medium transition-all">
                             <span>Jet Skis & Watercraft</span>
                             <i className="ri-water-flash-fill text-xl"></i>
                         </button>
 
-                        <button className="flex md:max-w-[377px] w-full lg:mr-10 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left font-medium transition-all">
+                        <button className="flex md:max-w-[377px] w-full lg:mr-10 items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left sora-medium transition-all">
                             <span>Snowmobiles</span>
                             <i className="ri-snowflake-fill text-xl"></i>
                         </button>
 
-                        <button className="flex md:max-w-[377px] w-full  lg:ml-auto items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left font-medium transition-all">
+                        <button className="flex md:max-w-[377px] w-full  lg:ml-auto items-center justify-between primary-bg gap-4 text-white px-4 py-3 rounded-full text-left sora-medium transition-all">
                             <span>Scooters, E-bikes, & Trailers</span>
                             <i className="ri-bike-fill text-xl"></i>
                         </button>
@@ -223,7 +223,7 @@ function PowerSports() {
                                 <div className="primary-bg text-center flex justify-center items-center text-white p-2 rounded-full size-8">
                                     <i className="ri-car-fill"></i>
                                 </div>
-                                <p className="mt-2 primary-text font-semibold text-xl">800+</p>
+                                <p className="mt-2 primary-text sora-semibold text-xl">800+</p>
                             </div>
                         </div>
                         <h6 className="mt-4 sora-medium text-gray-700">800+ Vehicles Financed</h6>
@@ -256,7 +256,7 @@ function PowerSports() {
                                 <div className="primary-bg text-center flex justify-center items-center text-white p-2 rounded-full size-8">
                                     <i className="ri-user-star-fill"></i>
                                 </div>
-                                <p className="mt-2 primary-text font-semibold text-xl">4.9/5</p>
+                                <p className="mt-2 primary-text sora-semibold text-xl">4.9/5</p>
                             </div>
                         </div>
                         <h6 className="mt-4 sora-medium text-gray-700">4.9/5 Customer Satisfaction</h6>
@@ -289,7 +289,7 @@ function PowerSports() {
                                 <div className="primary-bg text-center flex justify-center items-center text-white p-2 rounded-full size-8">
                                     <i className="ri-flashlight-fill"></i>
                                 </div>
-                                <p className="mt-2 primary-text font-semibold text-xl">90%</p>
+                                <p className="mt-2 primary-text sora-semibold text-xl">90%</p>
                             </div>
                         </div>
                         <h6 className="mt-4 sora-medium text-gray-700">90% Same-Day Approvals</h6>

@@ -124,7 +124,7 @@ function Automotive() {
               <i
                 className={`${item.icon} text-3xl mb-3 transition-colors duration-300 group-hover:text-white text-[#0F6AE2]`}
               ></i>
-              <p className="text-base font-medium tracking-tight">{item.label}</p>
+              <p className="text-base sora-medium tracking-tight">{item.label}</p>
             </div>
           ))}
         </div>

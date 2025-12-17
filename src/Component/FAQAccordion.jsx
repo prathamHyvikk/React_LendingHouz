@@ -26,7 +26,7 @@ const FAQAccordion = ({ faqs = [], title = "Frequently Asked Questions" }) => {
               >
 
                 <div className="px-6 flex justify-between items-center min-h-[84px]">
-                  <h6 className="font-semibold text-lg">{item.question}</h6>
+                  <h6 className="sora-semibold text-lg">{item.question}</h6>
                   <i
                     className={`text-xl transition-transform duration-300 ${isOpen
                         ? "ri-subtract-line text-blue-600"

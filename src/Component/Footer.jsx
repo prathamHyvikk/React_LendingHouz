@@ -18,10 +18,10 @@ const Footer = () => {
         <div className="mb-12 rounded-2xl border border-orange-200/70 bg-white/80 backdrop-blur p-6 sm:p-8 shadow-lg">
           <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
             <div className="flex-1 text-center lg:text-left">
-              <p className="inline-flex items-center text-[11px] tracking-wider uppercase font-semibold text-[#F7941D]">
+              <p className="inline-flex items-center text-[11px] tracking-wider uppercase sora-semibold text-[#F7941D]">
                 Flexible Financing — Fast Approvals
               </p>
-              <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-900">
+              <h2 className="mt-2 text-2xl sm:text-3xl sora-bold text-gray-900">
                 Finance What Matters: Pets, Medical, Travel, Equipment & More
               </h2>
               <p className="mt-2 text-gray-600">
@@ -48,7 +48,7 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold bg-[#F7941D] text-white hover:brightness-95 active:brightness-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 transition"
+                className="inline-flex items-center justify-center rounded-xl px-5 py-3 sora-semibold bg-[#F7941D] text-white hover:brightness-95 active:brightness-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 transition"
               >
                 Subscribe
               </button>
@@ -96,7 +96,7 @@ const Footer = () => {
 
           {/* Columns */}
           {/* <nav aria-label="Product" className="flex flex-col">
-            <h3 className="text-base font-semibold text-gray-900">Solutions</h3>
+            <h3 className="text-base sora-semibold text-gray-900">Solutions</h3>
             <ul className="mt-4 space-y-3">
               {["Pet Financing", "Medical Equipment", "Travel & Lifestyle", "Business & Equipment"].map(
                 (item) => (
@@ -116,7 +116,7 @@ const Footer = () => {
           
 
           <nav aria-label="Product" className="flex flex-col">
-            <h3 className="text-base font-semibold text-gray-900">Solutions</h3>
+            <h3 className="text-base sora-semibold text-gray-900">Solutions</h3>
             <ul className="mt-4 space-y-3">
               {[
                 { name: "Pet Financing", to: "/pet" },
@@ -140,7 +140,7 @@ const Footer = () => {
 
 
           <nav aria-label="Resources" className="flex flex-col">
-            <h3 className="text-base font-semibold text-gray-900">Resources</h3>
+            <h3 className="text-base sora-semibold text-gray-900">Resources</h3>
             <ul className="mt-4 space-y-3">
               {[
                 { name: "How It Works", to: "#" },
@@ -162,7 +162,7 @@ const Footer = () => {
 
 
           {/* <nav aria-label="Company" className="flex flex-col">
-            <h3 className="text-base font-semibold text-gray-900">Company</h3>
+            <h3 className="text-base sora-semibold text-gray-900">Company</h3>
             <ul className="mt-4 space-y-3">
               {["About", "Testimonials", "Become a Partner", "Contact"].map((item) => (
                 <li key={item}>
@@ -178,7 +178,7 @@ const Footer = () => {
           </nav> */}
 
           <nav aria-label="Company" className="flex flex-col">
-            <h3 className="text-base font-semibold text-gray-900">Company</h3>
+            <h3 className="text-base sora-semibold text-gray-900">Company</h3>
             <ul className="mt-4 space-y-3">
               {[
                 { name: "About", to: "/about" },
@@ -206,7 +206,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
           <p className="text-gray-500">
-            &copy; {year} <span className="font-medium text-gray-700">Lending Houz</span>. All rights reserved.
+            &copy; {year} <span className="sora-medium text-gray-700">Lending Houz</span>. All rights reserved.
           </p>
 
           <div className="flex items-center gap-5">

@@ -123,19 +123,19 @@ function Cell() {
                         <img src={cards} alt="" className='mx-auto' />
                         <div className='flex flex-col gap-5'>
                             <div>
-                                <h4 className="text-lg font-semibold">1. Choose Your Phone</h4>
+                                <h4 className="text-lg sora-semibold">1. Choose Your Phone</h4>
                                 <p className="text-sm text-blue-600">
                                     Browse top models from brands you love — from budget to flagship.
                                 </p>
                             </div>
                             <div>
-                                <h4 className="text-lg font-semibold">2. Apply for Financing</h4>
+                                <h4 className="text-lg sora-semibold">2. Apply for Financing</h4>
                                 <p className="text-sm text-blue-600">
                                     Fill out a quick online form. No credit check required.
                                 </p>
                             </div>
                             <div>
-                                <h4 className="text-lg font-semibold">3. Get Approved & Checkout</h4>
+                                <h4 className="text-lg sora-semibold">3. Get Approved & Checkout</h4>
                                 <p className="text-sm text-blue-600">
                                     Approval in minutes. Start using your new phone while you pay over time.
                                 </p>
@@ -156,19 +156,19 @@ function Cell() {
                         <h1 className=" sora-regular text-gray-900  ">Financing Benefits</h1>
                         <div className="space-y-4">
                             <div>
-                                <h3 className="text-lg sora-semibold font-semibold">No Credit Needed</h3>
+                                <h3 className="text-lg sora-semibold sora-semibold">No Credit Needed</h3>
                                 <p className="primary-text sora-regular ">Your approval is based on income not your credit history.</p>
                             </div>
                             <div>
-                                <h3 className="text-lg sora-semibold font-semibold">Flexible Payment Plans</h3>
+                                <h3 className="text-lg sora-semibold sora-semibold">Flexible Payment Plans</h3>
                                 <p className="primary-text sora-regular ">Spread the cost over 12, 18, or 24 months.</p>
                             </div>
                             <div>
-                                <h3 className="text-lg sora-semibold font-semibold">Instant Approval Decision</h3>
+                                <h3 className="text-lg sora-semibold sora-semibold">Instant Approval Decision</h3>
                                 <p className="primary-text sora-regular ">No long waits know your status within minutes.</p>
                             </div>
                             <div>
-                                <h3 className="text-lg sora-semibold font-semibold">Secure & Transparent</h3>
+                                <h3 className="text-lg sora-semibold sora-semibold">Secure & Transparent</h3>
                                 <p className="primary-text sora-regular ">No hidden fees, no surprises. Everything is upfront.</p>
                             </div>
                         </div>

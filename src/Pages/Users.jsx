@@ -72,7 +72,7 @@ const Users = () => {
                       <Td className="px-6 py-4 text-gray-700">
                         {user.totalReturn}
                       </Td>
-                      <Td className="px-6 py-4 font-semibold text-gray-700">
+                      <Td className="px-6 py-4 sora-semibold text-gray-700">
                         {user.status}
                       </Td>
                       <Td className="px-6 py-4 text-gray-700">{user.riskTier}</Td>

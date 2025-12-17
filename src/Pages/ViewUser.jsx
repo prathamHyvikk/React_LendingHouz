@@ -37,7 +37,7 @@ const ViewUser = () => {
                   />
 
                   <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition w-full h-full cursor-pointer">
-                    <span className="text-white text-sm font-semibold">
+                    <span className="text-white text-sm sora-semibold">
                       Edit
                     </span>
                   </div>
@@ -51,7 +51,7 @@ const ViewUser = () => {
                   />
                 </div>
 
-                <h1 className="text-xl font-bold text-gray-800 mt-4">
+                <h1 className="text-xl sora-bold text-gray-800 mt-4">
                   Khusan Akhmedov
                 </h1>
                 <p className="text-sm text-gray-500">Uzbekistan, Tashkent</p>
@@ -59,31 +59,31 @@ const ViewUser = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-              <h2 className="text-lg font-bold text-gray-800 mb-4">
+              <h2 className="text-lg sora-bold text-gray-800 mb-4">
                 Account Summary
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <span className="font-semibold text-gray-700">Name:</span>
+                  <span className="sora-semibold text-gray-700">Name:</span>
                   <span className="text-gray-600 ml-1">John Doe</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Account ID:
                   </span>
                   <span className="text-gray-600 ml-1">FN-45892</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Member Since:
                   </span>
                   <span className="text-gray-600 ml-1">January 2023</span>
                 </div>
                 <div className="md:col-span-3">
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Account Status:
                   </span>
-                  <span className="text-green-600 ml-1 font-medium">
+                  <span className="text-green-600 ml-1 sora-medium">
                     Active
                   </span>
                 </div>
@@ -91,33 +91,33 @@ const ViewUser = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-              <h2 className="text-lg font-bold text-gray-800 mb-4">
+              <h2 className="text-lg sora-bold text-gray-800 mb-4">
                 Financial Snapshot
               </h2>
               <div className="space-y-3 text-sm">
                 <div className="flex flex-wrap justify-between">
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Total Financing Approved:
                   </span>
-                  <span className="text-gray-800 font-medium">$150,000</span>
+                  <span className="text-gray-800 sora-medium">$150,000</span>
                 </div>
                 <div className="flex flex-wrap justify-between">
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Active Financing Plans:
                   </span>
-                  <span className="text-gray-800 font-medium">3</span>
+                  <span className="text-gray-800 sora-medium">3</span>
                 </div>
                 <div className="flex flex-wrap justify-between">
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Pending Applications:
                   </span>
-                  <span className="text-gray-800 font-medium">1</span>
+                  <span className="text-gray-800 sora-medium">1</span>
                 </div>
                 <div className="flex flex-wrap justify-between pt-2 border-t border-gray-300">
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Next Payment Due:
                   </span>
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 sora-medium">
                     $1,250 on 15 Nov 2025
                   </span>
                 </div>
@@ -128,7 +128,7 @@ const ViewUser = () => {
               id="personalInfoSection"
               className="bg-white rounded-lg shadow-md p-6 mb-6 relative"
             >
-              <h2 className="text-lg font-bold text-gray-800 mb-4">
+              <h2 className="text-lg sora-bold text-gray-800 mb-4">
                 Personal Information
               </h2>
 
@@ -142,7 +142,7 @@ const ViewUser = () => {
 
               <div className="space-y-3 text-sm">
                 <div className="flex flex-wrap">
-                  <span className="font-semibold text-gray-700 w-full md:w-auto">
+                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
                     Email:
                   </span>
                   <span className="text-gray-600 md:ml-2" id="infoEmail">
@@ -150,7 +150,7 @@ const ViewUser = () => {
                   </span>
                 </div>
                 <div className="flex flex-wrap">
-                  <span className="font-semibold text-gray-700 w-full md:w-auto">
+                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
                     Password:
                   </span>
                   <span className="text-gray-600 md:ml-2" id="infoEmail">
@@ -158,7 +158,7 @@ const ViewUser = () => {
                   </span>
                 </div>
                 <div className="flex flex-wrap">
-                  <span className="font-semibold text-gray-700 w-full md:w-auto">
+                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
                     Phone:
                   </span>
                   <span className="text-gray-600 md:ml-2" id="infoPhone">
@@ -166,7 +166,7 @@ const ViewUser = () => {
                   </span>
                 </div>
                 <div className="flex flex-wrap">
-                  <span className="font-semibold text-gray-700 w-full md:w-auto">
+                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
                     Address:
                   </span>
                   <span className="text-gray-600 md:ml-2" id="infoAddress">
@@ -174,7 +174,7 @@ const ViewUser = () => {
                   </span>
                 </div>
                 <div className="flex flex-wrap">
-                  <span className="font-semibold text-gray-700 w-full md:w-auto">
+                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
                     Preferred Communication:
                   </span>
                   <span
@@ -188,7 +188,7 @@ const ViewUser = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6 mb-6 relative">
-              <h2 className="text-lg font-bold text-gray-800 mb-4">
+              <h2 className="text-lg sora-bold text-gray-800 mb-4">
                 Bank & Payment Details
               </h2>
 
@@ -202,45 +202,45 @@ const ViewUser = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Primary Bank:
                   </span>
                   <span className="text-gray-600 ml-1">Bank of America</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     IBAN / Account Number:
                   </span>
                   <span className="text-gray-600 ml-1">****1234</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Auto-Pay Enabled:
                   </span>
-                  <span className="text-green-600 ml-1 font-medium">Yes</span>
+                  <span className="text-green-600 ml-1 sora-medium">Yes</span>
                 </div>
               </div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-lg font-bold text-gray-800 mb-4">
+              <h2 className="text-lg sora-bold text-gray-800 mb-4">
                 Documents
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Government ID:
                   </span>
                   <span className="text-blue-600 ml-1">Uploaded</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Proof of Income:
                   </span>
                   <span className="text-green-600 ml-1">Approved</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">
+                  <span className="sora-semibold text-gray-700">
                     Address Verification:
                   </span>
                   <span className="text-yellow-600 ml-1">Pending Update</span>

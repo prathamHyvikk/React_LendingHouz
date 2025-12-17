@@ -50,7 +50,7 @@ const TestimonialSlider = ({ testimonials }) => {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="font-semibold primary-text">{t.name}</p>
+                    <p className="sora-semibold primary-text">{t.name}</p>
                     <p className="text-sm text-gray-500">{t.title}</p>
                   </div>
                 </div>

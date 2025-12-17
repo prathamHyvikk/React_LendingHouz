@@ -39,7 +39,7 @@ const Profile = () => {
             </div>
 
             <div className="flex-1">
-              <h1 className="text-3xl font-normal text-gray-800 mb-3">
+              <h1 className="text-3xl sora-normal text-gray-800 mb-3">
                 John Doe
               </h1>
               <p className="mb-3">
@@ -60,7 +60,7 @@ const Profile = () => {
                 <label className="cursor-pointer">
                   <p className="text-gray-400 text-lg">
                     Drop your files here or{" "}
-                    <span className="text-gray-500 font-medium">
+                    <span className="text-gray-500 sora-medium">
                       click in this area
                     </span>
                   </p>
@@ -78,7 +78,7 @@ const Profile = () => {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-2xl font-normal text-gray-700 mb-8">Account</h2>
+            <h2 className="text-2xl sora-normal text-gray-700 mb-8">Account</h2>
 
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">

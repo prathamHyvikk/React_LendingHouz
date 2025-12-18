@@ -111,29 +111,29 @@ function App() {
           <Route path="/dashboard/notifications" element={<Notifications />} />
           <Route path="/dashboard/profile" element={<Profile />} />
 
-          {/* Admin */}
-          <Route path="/signup/admin" element={<AdminSignup />} />
-          <Route path="/signin/admin" element={<AdminSignIn />} />
+          {/* Admin Routes */}
+          <Route path="/admin/signup" element={<AdminSignup />} />
+          <Route path="/admin/signin" element={<AdminSignIn />} />
           <Route
-            path="/forgot-password/admin"
+            path="/admin/forgot-password"
             element={<AdminForgotPassword />}
           />
-          <Route path="/dashboard/admin" element={<AdminDashboard />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route
-            path="/dashboard/applications/admin"
+            path="/admin/dashboard/applications"
             element={<AdminApplicationDashboard />}
           />
        
-          <Route path="/dashboard/marketplace/admin" element={<AdminMarketPlace />} />
+          <Route path="/admin/dashboard/marketplace" element={<AdminMarketPlace />} />
           <Route
-            path="/dashboard/terms&condition/admin"
+            path="/admin/dashboard/terms&condition"
             element={<AdminTearmsAndConditions />}
           />
-          <Route path="/dashboard/privacy&policy/admin" element={<AdminPrivacyPolicy />} />
+          <Route path="/admin/dashboard/privacy&policy" element={<AdminPrivacyPolicy />} />
           {/* <Route path="/dashboard/users" element={<Users />} />
           <Route path="/dashboard/users/view-user" element={<ViewUser />} /> */}
-          <Route path="/dashboard/notifications/admin" element={<AdminNotifications />} />
-          <Route path="/dashboard/profile/admin" element={<AdminProfile />} />
+          <Route path="/admin/dashboard/notifications" element={<AdminNotifications />} />
+          <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -44,7 +44,7 @@ const Sidebar = () => {
   ];
 
   const currentPath = window.location.pathname;
-  
+
   const admin = true;
   return (
     <>
@@ -59,9 +59,7 @@ const Sidebar = () => {
 
       <div
         className={`${
-          showSidebar
-            ? "fixed inset-0 w-full h-screen bg-black/40  z-196"
-            : " "
+          showSidebar ? "fixed inset-0 w-full h-screen bg-black/40  z-196" : " "
         }`}
       ></div>
 
@@ -99,7 +97,8 @@ const Sidebar = () => {
                   to={item.href}
                   className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
                 ${
-                  currentPath === item.href
+                  currentPath === item.href ||
+                  currentPath === `/admin${item.href}`
                     ? "active-page text-(--primary-color)"
                     : ""
                 }`}

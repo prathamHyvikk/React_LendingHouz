@@ -62,7 +62,7 @@ const SignIn = () => {
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
-              <Link to="/dashboard">
+              <Link to="/app/dashboard">
                 <button
                   // type="submit"
                   className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
@@ -72,7 +72,7 @@ const SignIn = () => {
               </Link>
 
               <div>
-                <Link to="/forgot-password">
+                <Link to="/app/forgot-password">
                   <p className="text-red-500 sora-semibold text-center">
                     Forget Password
                   </p>
@@ -81,7 +81,7 @@ const SignIn = () => {
                 <p className="text-center text-gray-700 pt-4">
                   Dont Have an Account?{" "}
                   <Link
-                    to="/signup"
+                    to="/app/signup"
                     className="sora-bold text-gray-900 hover:text-blue-900 transition"
                   >
                     Sign Up

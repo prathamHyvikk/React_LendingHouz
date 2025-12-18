@@ -123,7 +123,7 @@ const Signup = () => {
               <p className="text-center text-gray-700 ">
                 Already Registered?{" "}
                 <Link
-                  to="/signin"
+                  to="/app/signin"
                   className="sora-bold text-gray-900 hover:text-blue-900 transition"
                 >
                   Sign In

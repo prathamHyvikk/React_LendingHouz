@@ -13,7 +13,7 @@ const AdminLayout = ({ children }) => {
 
           <div className="p-4 lg:p-8 w-full overflow-auto">
             <div className=" cursor-pointer lg:flex mx-auto flex-col items-end mb-6 ">
-              {pathname !== "/dashboard/notifications" && (
+              {pathname !== "/app/dashboard/notifications" && (
                 <div className="flex items-center space-x-4">
                   <input
                     type="text"
@@ -22,7 +22,7 @@ const AdminLayout = ({ children }) => {
                   />
 
                   <Link
-                    to="/dashboard/notifications"
+                    to="/app/dashboard/notifications"
                     className="relative cursor-pointer inline-block"
                   >
                     <button

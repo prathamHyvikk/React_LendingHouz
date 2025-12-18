@@ -88,28 +88,34 @@ function App() {
           <Route path="/scuba-diving" element={<ScubaDiving />} />
           <Route path="/become-partner" element={<Form />} />
 
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/dashboard" element={<DashBoardUser />} />
+          <Route path="/app/signup" element={<Signup />} />
+          <Route path="/app/signin" element={<SignIn />} />
+          <Route path="/app/forgot-password" element={<ForgotPassword />} />
+          <Route path="/app/dashboard" element={<DashBoardUser />} />
           <Route
-            path="/dashboard/applications"
+            path="/app/dashboard/applications"
             element={<ApplicationsDashboard />}
           />
           <Route
-            path="/dashboard/applications"
+            path="/app/dashboard/applications"
             element={<ApplicationsDashboard />}
           />
-          <Route path="/dashboard/marketplace" element={<MarketPlace />} />
+          <Route path="/app/dashboard/marketplace" element={<MarketPlace />} />
           <Route
-            path="/dashboard/terms&condition"
+            path="/app/dashboard/terms&condition"
             element={<TearmsAndConditions />}
           />
-          <Route path="/dashboard/privacy&policy" element={<PrivacyPolicy />} />
-          <Route path="/dashboard/users" element={<Users />} />
-          <Route path="/dashboard/users/view-user" element={<ViewUser />} />
-          <Route path="/dashboard/notifications" element={<Notifications />} />
-          <Route path="/dashboard/profile" element={<Profile />} />
+          <Route
+            path="/app/dashboard/privacy&policy"
+            element={<PrivacyPolicy />}
+          />
+          <Route path="/app/dashboard/users" element={<Users />} />
+          <Route path="/app/dashboard/users/view-user" element={<ViewUser />} />
+          <Route
+            path="/app/dashboard/notifications"
+            element={<Notifications />}
+          />
+          <Route path="/app/dashboard/profile" element={<Profile />} />
 
           {/* Admin Routes */}
           <Route path="/admin/signup" element={<AdminSignup />} />
@@ -123,16 +129,25 @@ function App() {
             path="/admin/dashboard/applications"
             element={<AdminApplicationDashboard />}
           />
-       
-          <Route path="/admin/dashboard/marketplace" element={<AdminMarketPlace />} />
+
+          <Route
+            path="/admin/dashboard/marketplace"
+            element={<AdminMarketPlace />}
+          />
           <Route
             path="/admin/dashboard/terms&condition"
             element={<AdminTearmsAndConditions />}
           />
-          <Route path="/admin/dashboard/privacy&policy" element={<AdminPrivacyPolicy />} />
+          <Route
+            path="/admin/dashboard/privacy&policy"
+            element={<AdminPrivacyPolicy />}
+          />
           {/* <Route path="/dashboard/users" element={<Users />} />
           <Route path="/dashboard/users/view-user" element={<ViewUser />} /> */}
-          <Route path="/admin/dashboard/notifications" element={<AdminNotifications />} />
+          <Route
+            path="/admin/dashboard/notifications"
+            element={<AdminNotifications />}
+          />
           <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
 
           <Route path="*" element={<NotFound />} />

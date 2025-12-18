@@ -36,7 +36,7 @@
 
   "recentData": [
     {
-      "img": "/src/assets/Images/house.jpg",
+      "img": "@assets/Images/house.jpg",
       "name": "Home Financing",
       "day": "Monday | 12/1/1222",
       "orderID": "Order ID #232",
@@ -44,7 +44,7 @@
       "status": "Active"
     },
     {
-      "img": "/src/assets/Images/jewellery.jpg",
+      "img": "@assets/Images/jewellery.jpg",
       "name": "Home Financing",
       "day": "Monday | 12/1/1222",
       "orderID": "Order ID #232",
@@ -52,7 +52,7 @@
       "status": "Active"
     },
     {
-      "img": "/src/assets/Images/house.jpg",
+      "img": "@assets/Images/house.jpg",
       "name": "Home Financing",
       "day": "Monday | 12/1/1222",
       "orderID": "Order ID #232",
@@ -63,7 +63,7 @@
 
   "applicationData": [
     {
-      "img": "/src/assets/Images/product.png",
+      "img": "@assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -72,7 +72,7 @@
       "date": "10/12/2025"
     },
     {
-      "img": "/src/assets/Images/product.png",
+      "img": "@assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -81,7 +81,7 @@
       "date": "10/12/2025"
     },
     {
-      "img": "/src/assets/Images/product.png",
+      "img": "@assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -90,7 +90,7 @@
       "date": "10/12/2025"
     },
     {
-      "img": "/src/assets/Images/product.png",
+      "img": "@assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",

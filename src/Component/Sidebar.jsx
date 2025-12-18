@@ -7,37 +7,37 @@ const Sidebar = () => {
   const menuItems = [
     {
       name: "Dashboard",
-      href: "/dashboard",
+      href: "/app/dashboard",
       icon: "fas fa-tachometer-alt",
       dataPage: "dashboard",
     },
     {
       name: "Applications",
-      href: "/dashboard/applications",
+      href: "/app/dashboard/applications",
       icon: "fas fa-file-alt",
       dataPage: "applications",
     },
     {
       name: "User",
-      href: "/dashboard/users",
+      href: "/app/dashboard/users",
       icon: "fas fa-chart-bar",
       dataPage: "user",
     },
     {
       name: "MarketPlace",
-      href: "/dashboard/marketplace",
+      href: "/app/dashboard/marketplace",
       icon: "fas fa-shield-alt",
       dataPage: "marketplace",
     },
     {
       name: "Terms & Condition",
-      href: "/dashboard/terms&condition",
+      href: "/app/dashboard/terms&condition",
       icon: "fas fa-file-contract",
       dataPage: "terms",
     },
     {
       name: "Privacy Policy",
-      href: "/dashboard/privacy&policy",
+      href: "/app/dashboard/privacy&policy",
       icon: "fas fa-shield-alt",
       dataPage: "privacy",
     },
@@ -72,7 +72,7 @@ const Sidebar = () => {
       >
         <div className="lg:p-6 p-4 flex justify-between items-center relative ">
           <div>
-            <Link to="/dashboard">
+            <Link to="/app/dashboard">
               <img
                 className="lg:w-[208px] lg:max-w-[208px] md:w-36 w-30"
                 src={logoImage}
@@ -113,7 +113,7 @@ const Sidebar = () => {
         </nav>
 
         <div className="absolute bottom-0 w-64 p-6 border-t border-gray-300">
-          <Link to="/dashboard/profile">
+          <Link to="/app/dashboard/profile">
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
                 <img
@@ -134,7 +134,7 @@ const Sidebar = () => {
           </Link>
 
           <div className="mt-4 ml-1">
-            <Link to="/signin" className=" text-red-500 hover:text-red-600">
+            <Link to="/app/signin" className=" text-red-500 hover:text-red-600">
               <button className="cursor-pointer flex items-center gap-2 max-sm:text-sm">
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 <span>Log out</span>

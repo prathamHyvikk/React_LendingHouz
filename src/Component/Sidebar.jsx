@@ -1,43 +1,44 @@
 import React, { useState } from "react";
 import logoImage from "/assets/Images/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const menuItems = [
     {
       name: "Dashboard",
-      href: "/app/dashboard",
+      href: "dashboard",
       icon: "fas fa-tachometer-alt",
       dataPage: "dashboard",
     },
     {
       name: "Applications",
-      href: "/app/dashboard/applications",
+      href: "dashboard/applications",
       icon: "fas fa-file-alt",
       dataPage: "applications",
     },
     {
       name: "User",
-      href: "/app/dashboard/users",
+      href: "dashboard/users",
       icon: "fas fa-chart-bar",
       dataPage: "user",
     },
     {
       name: "MarketPlace",
-      href: "/app/dashboard/marketplace",
+      href: "dashboard/marketplace",
       icon: "fas fa-shield-alt",
       dataPage: "marketplace",
     },
     {
       name: "Terms & Condition",
-      href: "/app/dashboard/terms&condition",
+      href: "dashboard/terms&condition",
       icon: "fas fa-file-contract",
       dataPage: "terms",
     },
     {
       name: "Privacy Policy",
-      href: "/app/dashboard/privacy&policy",
+      href: "dashboard/privacy&policy",
       icon: "fas fa-shield-alt",
       dataPage: "privacy",
     },
@@ -46,6 +47,9 @@ const Sidebar = () => {
   const currentPath = window.location.pathname;
 
   const admin = true;
+
+  const role = useSelector((state) => state.person.value);
+
   return (
     <>
       {/* hemburger icon - Mobile view */}
@@ -72,7 +76,7 @@ const Sidebar = () => {
       >
         <div className="lg:p-6 p-4 flex justify-between items-center relative ">
           <div>
-            <Link to="/app/dashboard">
+            <Link to={`${role}/dashboard`}>
               <img
                 className="lg:w-[208px] lg:max-w-[208px] md:w-36 w-30"
                 src={logoImage}
@@ -94,11 +98,10 @@ const Sidebar = () => {
             {menuItems.map((item, i) => (
               <li key={i} id={item.dataPage} className="sm:mb-2 mb-1">
                 <NavLink
-                  to={item.href}
+                  to={`/${role}/${item.href}`}
                   className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
                 ${
-                  currentPath === item.href ||
-                  currentPath === `/admin${item.href}`
+                  currentPath == `${role}${item.href}`
                     ? "active-page text-(--primary-color)"
                     : ""
                 }`}
@@ -113,7 +116,7 @@ const Sidebar = () => {
         </nav>
 
         <div className="absolute bottom-0 w-64 p-6 border-t border-gray-300">
-          <Link to="/app/dashboard/profile">
+          <Link to={`/${role}/dashboard/profile`}>
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
                 <img

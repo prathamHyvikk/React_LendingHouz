@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPersonRole } from "../features/personRole";
 
 const AdminSignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
+  const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
+
+  if (pathname.includes("/app")) {
+    dispatch(setPersonRole("app"));
+  }
 
   return (
     <>
@@ -62,7 +72,7 @@ const AdminSignIn = () => {
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
-              <Link to="/dashboard">
+              <Link to="/admin/dashboard">
                 <button
                   // type="submit"
                   className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
@@ -72,7 +82,7 @@ const AdminSignIn = () => {
               </Link>
 
               <div>
-                <Link to="/forgot-password">
+                <Link to="/admin/forgot-password">
                   <p className="text-red-500 sora-semibold text-center">
                     Forget Password
                   </p>
@@ -81,7 +91,7 @@ const AdminSignIn = () => {
                 <p className="text-center text-gray-700 pt-4">
                   Dont Have an Account?{" "}
                   <Link
-                    to="/signup"
+                    to="/admin/signup"
                     className="sora-bold text-gray-900 hover:text-blue-900 transition"
                   >
                     Sign Up

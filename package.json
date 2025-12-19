@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.13.2",
     "install": "^0.13.0",
@@ -17,11 +19,12 @@
     "react-dom": "^19.1.0",
     "react-google-recaptcha": "^3.1.0",
     "react-hot-toast": "^2.6.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
     "react-select": "^5.10.2",
+    "redux": "^5.0.1",
     "swiper": "^11.2.10",
-    "tailwindcss": "^4.1.11",
-    "@fortawesome/fontawesome-free": "^7.1.0"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

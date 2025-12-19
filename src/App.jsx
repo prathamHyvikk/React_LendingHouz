@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Cell from "./Component/Cell/Cell";
 import Dog from "./Component/Dog/Dog";
@@ -53,106 +53,115 @@ import AdminProfile from "./Pages/AdminProfile";
 import AdminSignIn from "./Pages/AdminSignIn";
 import AdminSignup from "./Pages/AdminSignup";
 import AdminTearmsAndConditions from "./Pages/AdminTermsAndConditions";
+import { useDispatch } from "react-redux";
+import {  setPersonRole } from "./features/personRole";
 
 function App() {
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  if (pathname.includes("/admin")) {
+    dispatch(setPersonRole("admin"));
+  } else {
+    dispatch(setPersonRole("app"));
+  }
+
   return (
     <>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/automotive" element={<Automotive />} />
-          <Route path="/jewellery" element={<Jewellery />} />
-          <Route path="/medical-equipment" element={<MedicalEquipment />} />
-          <Route path="/cell" element={<Cell />} />
-          <Route path="/dog" element={<Dog />} />
-          <Route path="/electronics" element={<Electronics />} />
-          <Route path="/pet" element={<Pet />} />
-          <Route path="/music-equipment" element={<MusicEquipment />} />
-          <Route path="/power-sports" element={<PowerSports />} />
-          <Route path="/vehical" element={<Vehical />} />
-          <Route path="/tire" element={<Tire />} />
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/professional-tools" element={<ProfessionalTools />} />
-          <Route path="/recreation" element={<Recreation />} />
-          <Route path="/personal-product" element={<PersonalProduct />} />
-          <Route path="/landscap-equipment" element={<LandscapEquipment />} />
-          <Route path="/livestock-equipment" element={<LivestockEquipment />} />
-          <Route path="/home2" element={<Home2 />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/faqs" element={<Faqs />} />
-          <Route path="/testimonial" element={<Testimonial />} />
-          <Route path="/snow-equipment" element={<SnowEquipment />} />
-          <Route path="/kiosk" element={<Kiosk />} />
-          <Route path="/e-bike" element={<Ebike />} />
-          <Route path="/scuba-diving" element={<ScubaDiving />} />
-          <Route path="/become-partner" element={<Form />} />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/automotive" element={<Automotive />} />
+        <Route path="/jewellery" element={<Jewellery />} />
+        <Route path="/medical-equipment" element={<MedicalEquipment />} />
+        <Route path="/cell" element={<Cell />} />
+        <Route path="/dog" element={<Dog />} />
+        <Route path="/electronics" element={<Electronics />} />
+        <Route path="/pet" element={<Pet />} />
+        <Route path="/music-equipment" element={<MusicEquipment />} />
+        <Route path="/power-sports" element={<PowerSports />} />
+        <Route path="/vehical" element={<Vehical />} />
+        <Route path="/tire" element={<Tire />} />
+        <Route path="/tools" element={<Tools />} />
+        <Route path="/professional-tools" element={<ProfessionalTools />} />
+        <Route path="/recreation" element={<Recreation />} />
+        <Route path="/personal-product" element={<PersonalProduct />} />
+        <Route path="/landscap-equipment" element={<LandscapEquipment />} />
+        <Route path="/livestock-equipment" element={<LivestockEquipment />} />
+        <Route path="/home2" element={<Home2 />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faqs" element={<Faqs />} />
+        <Route path="/testimonial" element={<Testimonial />} />
+        <Route path="/snow-equipment" element={<SnowEquipment />} />
+        <Route path="/kiosk" element={<Kiosk />} />
+        <Route path="/e-bike" element={<Ebike />} />
+        <Route path="/scuba-diving" element={<ScubaDiving />} />
+        <Route path="/become-partner" element={<Form />} />
 
-          <Route path="/app/signup" element={<Signup />} />
-          <Route path="/app/signin" element={<SignIn />} />
-          <Route path="/app/forgot-password" element={<ForgotPassword />} />
-          <Route path="/app/dashboard" element={<DashBoardUser />} />
-          <Route
-            path="/app/dashboard/applications"
-            element={<ApplicationsDashboard />}
-          />
-          <Route
-            path="/app/dashboard/applications"
-            element={<ApplicationsDashboard />}
-          />
-          <Route path="/app/dashboard/marketplace" element={<MarketPlace />} />
-          <Route
-            path="/app/dashboard/terms&condition"
-            element={<TearmsAndConditions />}
-          />
-          <Route
-            path="/app/dashboard/privacy&policy"
-            element={<PrivacyPolicy />}
-          />
-          <Route path="/app/dashboard/users" element={<Users />} />
-          <Route path="/app/dashboard/users/view-user" element={<ViewUser />} />
-          <Route
-            path="/app/dashboard/notifications"
-            element={<Notifications />}
-          />
-          <Route path="/app/dashboard/profile" element={<Profile />} />
+        <Route path="/app/signup" element={<Signup />} />
+        <Route path="/app/signin" element={<SignIn />} />
+        <Route path="/app/forgot-password" element={<ForgotPassword />} />
+        <Route path="/app/dashboard" element={<DashBoardUser />} />
+        <Route
+          path="/app/dashboard/applications"
+          element={<ApplicationsDashboard />}
+        />
+        <Route
+          path="/app/dashboard/applications"
+          element={<ApplicationsDashboard />}
+        />
+        <Route path="/app/dashboard/marketplace" element={<MarketPlace />} />
+        <Route
+          path="/app/dashboard/terms&condition"
+          element={<TearmsAndConditions />}
+        />
+        <Route
+          path="/app/dashboard/privacy&policy"
+          element={<PrivacyPolicy />}
+        />
+        <Route path="/app/dashboard/users" element={<Users />} />
+        <Route path="/app/dashboard/users/view-user" element={<ViewUser />} />
+        <Route
+          path="/app/dashboard/notifications"
+          element={<Notifications />}
+        />
+        <Route path="/app/dashboard/profile" element={<Profile />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin/signup" element={<AdminSignup />} />
-          <Route path="/admin/signin" element={<AdminSignIn />} />
-          <Route
-            path="/admin/forgot-password"
-            element={<AdminForgotPassword />}
-          />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route
-            path="/admin/dashboard/applications"
-            element={<AdminApplicationDashboard />}
-          />
+        {/* Admin Routes */}
+        <Route path="/admin/signup" element={<AdminSignup />} />
+        <Route path="/admin/signin" element={<AdminSignIn />} />
+        <Route
+          path="/admin/forgot-password"
+          element={<AdminForgotPassword />}
+        />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route
+          path="/admin/dashboard/applications"
+          element={<AdminApplicationDashboard />}
+        />
 
-          <Route
-            path="/admin/dashboard/marketplace"
-            element={<AdminMarketPlace />}
-          />
-          <Route
-            path="/admin/dashboard/terms&condition"
-            element={<AdminTearmsAndConditions />}
-          />
-          <Route
-            path="/admin/dashboard/privacy&policy"
-            element={<AdminPrivacyPolicy />}
-          />
-          {/* <Route path="/dashboard/users" element={<Users />} />
-          <Route path="/dashboard/users/view-user" element={<ViewUser />} /> */}
-          <Route
-            path="/admin/dashboard/notifications"
-            element={<AdminNotifications />}
-          />
-          <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
+        <Route
+          path="/admin/dashboard/marketplace"
+          element={<AdminMarketPlace />}
+        />
+        <Route
+          path="/admin/dashboard/terms&condition"
+          element={<AdminTearmsAndConditions />}
+        />
+        <Route
+          path="/admin/dashboard/privacy&policy"
+          element={<AdminPrivacyPolicy />}
+        />
+        <Route path="/admin/dashboard/users" element={<Users />} />
+        <Route path="/admin/dashboard/users/view-user" element={<ViewUser />} />
+        <Route
+          path="/admin/dashboard/notifications"
+          element={<AdminNotifications />}
+        />
+        <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }

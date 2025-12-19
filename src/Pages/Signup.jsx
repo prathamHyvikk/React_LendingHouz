@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPersonRole } from "../features/personRole";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,6 +14,15 @@ const Signup = () => {
   const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
+  
+
+  if (pathname.includes("/app")) {
+    dispatch(setPersonRole("app"));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

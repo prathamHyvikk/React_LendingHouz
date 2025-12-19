@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AdminLayout = ({ children }) => {
   const { pathname } = useLocation();
- 
+
+  const role = useSelector((state) => state.person.value);
+
   return (
     <>
       <div className="bg-gray-50 sora">
@@ -13,7 +16,7 @@ const AdminLayout = ({ children }) => {
 
           <div className="p-4 lg:p-8 w-full overflow-auto">
             <div className=" cursor-pointer lg:flex mx-auto flex-col items-end mb-6 ">
-              {pathname !== "/app/dashboard/notifications" && (
+              {pathname !== `/${role}/dashboard/notifications` && (
                 <div className="flex items-center space-x-4">
                   <input
                     type="text"
@@ -22,7 +25,7 @@ const AdminLayout = ({ children }) => {
                   />
 
                   <Link
-                    to="/app/dashboard/notifications"
+                    to={`/${role}/dashboard/notifications`}
                     className="relative cursor-pointer inline-block"
                   >
                     <button

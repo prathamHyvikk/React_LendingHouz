@@ -1,48 +1,48 @@
 :root {
-    --primary-bg: #FF9201;
-    /* --primary-bg: #0061E0; */
-    --primary-text: #0061E0;
-    --gray-bg: #EDEDED;
-    --white-text: #FFFFFF;
-    --secondary-color: #34373E;
-    --text-color: #000000;
+  --primary-bg: #ff9201;
+  /* --primary-bg: #0061E0; */
+  --primary-text: #0061e0;
+  --gray-bg: #ededed;
+  --white-text: #ffffff;
+  --secondary-color: #34373e;
+  --text-color: #000000;
 }
 
 /* external font start */
 
 @font-face {
-    font-family: sora;
-    src: url(/public/assets/Fonts/sora/Sora-Bold.ttf);
-    font-weight: 700;
+  font-family: sora;
+  src: url(/assets/Fonts/sora/Sora-Bold.ttf);
+  font-weight: 700;
 }
 
 @font-face {
-    font-family: sora;
-    src: url(/public/assets/Fonts/sora/Sora-SemiBold.ttf);
-    font-weight: 600;
+  font-family: sora;
+  src: url(/assets/Fonts/sora/Sora-SemiBold.ttf);
+  font-weight: 600;
 }
 
 @font-face {
-    font-family: sora;
-    src: url(/public/assets/Fonts/sora/Sora-Medium.ttf);
-    font-weight: 500;
+  font-family: sora;
+  src: url(/assets/Fonts/sora/Sora-Medium.ttf);
+  font-weight: 500;
 }
 
 @font-face {
-    font-family: sora;
-    src: url(/public/assets/Fonts/sora/Sora-Regular.ttf);
-    font-weight: 400;
+  font-family: sora;
+  src: url(/assets/Fonts/sora/Sora-Regular.ttf);
+  font-weight: 400;
 }
 
 @font-face {
-    font-family: sora;
-    src: url(/public/assets/Fonts/sora/Sora-Thin.ttf);
-    font-weight: 300;
+  font-family: sora;
+  src: url(/assets/Fonts/sora/Sora-Thin.ttf);
+  font-weight: 300;
 }
 
 @font-face {
-    font-family: Helvetica;
-    src: url(/public/assets/Fonts/Helvetica/Helvetica-Bold.ttf);
+  font-family: Helvetica;
+  src: url(/assets/Fonts/Helvetica/Helvetica-Bold.ttf);
 }
 
 /* external font end  */
@@ -50,87 +50,85 @@
 /* utility class start */
 
 .container {
-    max-width: 1312px;
-    width: 100%;
-    margin: auto;
-
+  max-width: 1312px;
+  width: 100%;
+  margin: auto;
 }
 
 .primary-bg {
-    background-color: var(--primary-bg) !important;
+  background-color: var(--primary-bg) !important;
 }
 
 .primary-text {
-    color: var(--primary-text);
+  color: var(--primary-text);
 }
 
 .bg-gray {
-    background-color: var(--gray-bg);
+  background-color: var(--gray-bg);
 }
 
 .white-text {
-    color: var(--white-text);
+  color: var(--white-text);
 }
 
 .sora-bold {
-    font-family: sora;
-    font-weight: 700;
+  font-family: sora;
+  font-weight: 700;
 }
 
 .sora-semibold {
-    font-family: sora;
-    font-weight: 600;
+  font-family: sora;
+  font-weight: 600;
 }
 
 .sora-medium {
-    font-family: sora;
-    font-weight: 500;
+  font-family: sora;
+  font-weight: 500;
 }
 
 .sora-regular {
-    font-family: sora;
-    font-weight: 400;
+  font-family: sora;
+  font-weight: 400;
 }
 
 .sora-thin {
-    font-family: sora;
-    font-weight: 300;
+  font-family: sora;
+  font-weight: 300;
 }
 
 .Helvetica-bold {
-    font-family: Helvetica;
-    font-weight: 700;
+  font-family: Helvetica;
+  font-weight: 700;
 }
 
 h1 {
-    /* font-size: 64px; */
-    font-size: 40px;
+  /* font-size: 64px; */
+  font-size: 40px;
 }
 
 h6 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
-@media screen and (min-width:1130px) {
-    .mobile-toggle {
-        display: none;
-    }
+@media screen and (min-width: 1130px) {
+  .mobile-toggle {
+    display: none;
+  }
 }
-@media screen and (max-width:1130px) {
-    .desk-element {
-        display: none;
-    }
+@media screen and (max-width: 1130px) {
+  .desk-element {
+    display: none;
+  }
 }
 
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 35px !important;
+  }
 
-@media screen and (max-width:768px) {
-    h1 {
-        font-size: 35px !important;
-    }
-
-    h6 {
-        font-size: 18px !important;
-    }
+  h6 {
+    font-size: 18px !important;
+  }
 }
 
 /* utility class end */

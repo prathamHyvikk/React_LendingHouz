@@ -36,7 +36,7 @@
 
   "recentData": [
     {
-      "img": "@assets/Images/house.jpg",
+      "img": "/assets/Images/house.jpg",
       "name": "Home Financing",
       "day": "Monday | 12/1/1222",
       "orderID": "Order ID #232",
@@ -44,7 +44,7 @@
       "status": "Active"
     },
     {
-      "img": "@assets/Images/jewellery.jpg",
+      "img": "/assets/Images/jewellery.jpg",
       "name": "Home Financing",
       "day": "Monday | 12/1/1222",
       "orderID": "Order ID #232",
@@ -52,7 +52,7 @@
       "status": "Active"
     },
     {
-      "img": "@assets/Images/house.jpg",
+      "img": "/assets/Images/house.jpg",
       "name": "Home Financing",
       "day": "Monday | 12/1/1222",
       "orderID": "Order ID #232",
@@ -63,7 +63,7 @@
 
   "applicationData": [
     {
-      "img": "@assets/Images/product.png",
+      "img": "/assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -72,7 +72,7 @@
       "date": "10/12/2025"
     },
     {
-      "img": "@assets/Images/product.png",
+      "img": "/assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -81,7 +81,7 @@
       "date": "10/12/2025"
     },
     {
-      "img": "@assets/Images/product.png",
+      "img": "/assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -90,7 +90,7 @@
       "date": "10/12/2025"
     },
     {
-      "img": "@assets/Images/product.png",
+      "img": "/assets/Images/product.png",
       "name": "Home",
       "status": "No Provider",
       "lender": "Flex Shoper",
@@ -179,7 +179,7 @@
       "status": "Active",
       "riskTier": "Medium",
       "nextPayment": "$1,250(15 Nov)",
-      "id":"1234"
+      "id": "1234"
     },
     {
       "name": "John",
@@ -189,7 +189,7 @@
       "status": "Active",
       "riskTier": "High",
       "nextPayment": "$2,000(20 Nov)",
-      "id":"6565"
+      "id": "6565"
     },
     {
       "name": "Alice",
@@ -199,7 +199,7 @@
       "status": "Inactive",
       "riskTier": "Low",
       "nextPayment": "$0(0 Nov)",
-      "id":"4544"
+      "id": "4544"
     },
     {
       "name": "Mike",
@@ -209,7 +209,7 @@
       "status": "Active",
       "riskTier": "Medium",
       "nextPayment": "$1,500(18 Nov)",
-      "id":"7776"
+      "id": "7776"
     }
   ]
 }

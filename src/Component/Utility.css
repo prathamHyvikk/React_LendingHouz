@@ -12,37 +12,37 @@
 
 @font-face {
     font-family: sora;
-    src: url(@assets/Fonts/sora/Sora-Bold.ttf);
+    src: url(/public/assets/Fonts/sora/Sora-Bold.ttf);
     font-weight: 700;
 }
 
 @font-face {
     font-family: sora;
-    src: url(@assets/Fonts/sora/Sora-SemiBold.ttf);
+    src: url(/public/assets/Fonts/sora/Sora-SemiBold.ttf);
     font-weight: 600;
 }
 
 @font-face {
     font-family: sora;
-    src: url(@assets/Fonts/sora/Sora-Medium.ttf);
+    src: url(/public/assets/Fonts/sora/Sora-Medium.ttf);
     font-weight: 500;
 }
 
 @font-face {
     font-family: sora;
-    src: url(@assets/Fonts/sora/Sora-Regular.ttf);
+    src: url(/public/assets/Fonts/sora/Sora-Regular.ttf);
     font-weight: 400;
 }
 
 @font-face {
     font-family: sora;
-    src: url(@assets/Fonts/sora/Sora-Thin.ttf);
+    src: url(/public/assets/Fonts/sora/Sora-Thin.ttf);
     font-weight: 300;
 }
 
 @font-face {
     font-family: Helvetica;
-    src: url(@assets/Fonts/Helvetica/Helvetica-Bold.ttf);
+    src: url(/public/assets/Fonts/Helvetica/Helvetica-Bold.ttf);
 }
 
 /* external font end  */

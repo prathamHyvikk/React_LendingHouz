@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import logoImg from "@assets/Images/logo.png";
-import bgImage from "@assets/Images/background-image.png";
+import logoImg from "/assets/Images/logo.png";
+import bgImage from "/assets/Images/background-image.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -15,7 +15,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    navigate("/app/dashboard");
   };
 
   return (

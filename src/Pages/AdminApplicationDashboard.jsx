@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { IconBtn, StatCard, Td, Th } from "../Component/StatCard";
 import AdminLayout from "../Component/AdminLayout";
 
-import printIcon from "../assets/Images/print-icon.png";
+import printIcon from "/assets/Images/print-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
 import Pagination from "../Component/Pagination";
 

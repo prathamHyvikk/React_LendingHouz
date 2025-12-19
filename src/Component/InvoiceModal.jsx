@@ -1,6 +1,6 @@
 import React from "react";
 import ModalWrapper from "./ModalWrapper";
-import logoImage from "../assets/Images/logo.png";
+import logoImage from "/assets/Images/logo.png";
 
 const InvoiceModal = ({ onClose }) => {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logoImage from "@assets/Images/logo.png";
+import logoImage from "/assets/Images/logo.png";
 import { Link, NavLink } from "react-router-dom";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);

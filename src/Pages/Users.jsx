@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { IconBtn, StatCard, Td, Th } from "../Component/StatCard";
 import AdminLayout from "../Component/AdminLayout";
-import shopIcon from "../assets/Images/shop-icon.png";
-import attachIcon from "../assets/Images/attach-icon.png";
-import eyeIcon from "../assets/Images/eye-icon.png";
+import shopIcon from "/assets/Images/shop-icon.png";
+import attachIcon from "/assets/Images/attach-icon.png";
+import eyeIcon from "/assets/Images/eye-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
 import Pagination from "../Component/Pagination";
 import RecentCards from "../Component/RecentCards";
@@ -67,15 +67,21 @@ const Users = () => {
                   {users.map((user, i) => (
                     <tr key={i} className="hover:bg-gray-50">
                       <Td className="px-6 py-4 text-gray-700">{user.name}</Td>
-                      <Td className="px-6 py-4 text-gray-700">{user.accountId}</Td>
-                      <Td className="px-6 py-4 text-gray-700">{user.totalLoan}</Td>
+                      <Td className="px-6 py-4 text-gray-700">
+                        {user.accountId}
+                      </Td>
+                      <Td className="px-6 py-4 text-gray-700">
+                        {user.totalLoan}
+                      </Td>
                       <Td className="px-6 py-4 text-gray-700">
                         {user.totalReturn}
                       </Td>
                       <Td className="px-6 py-4 sora-semibold text-gray-700">
                         {user.status}
                       </Td>
-                      <Td className="px-6 py-4 text-gray-700">{user.riskTier}</Td>
+                      <Td className="px-6 py-4 text-gray-700">
+                        {user.riskTier}
+                      </Td>
                       <Td className="px-6 py-4 text-gray-700">
                         {user.nextPayment}
                       </Td>

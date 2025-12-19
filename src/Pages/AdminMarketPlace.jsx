@@ -23,7 +23,7 @@ const AdminMarketPlace = () => {
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
                     <img
                       className="w-full h-full object-cover"
-                      src="/src/assets/Images/house.jpg"
+                      src="/assets/Images/house.jpg"
                       alt=""
                     />
                   </div>
@@ -40,7 +40,7 @@ const AdminMarketPlace = () => {
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
                     <img
                       className="w-full h-full object-cover"
-                      src="/src/assets/Images//jewellery.jpg"
+                      src="/assets/Images//jewellery.jpg"
                       alt=""
                     />
                   </div>
@@ -57,7 +57,7 @@ const AdminMarketPlace = () => {
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
                     <img
                       className="w-full h-full object-cover"
-                      src="/src/assets/Images/house.jpg"
+                      src="/assets/Images/house.jpg"
                       alt=""
                     />
                   </div>
@@ -79,7 +79,7 @@ const AdminMarketPlace = () => {
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
                     <img
                       className="w-full h-full object-cover"
-                      src="/src/assets/Images/house.jpg"
+                      src="/assets/Images/house.jpg"
                       alt=""
                     />
                   </div>
@@ -96,7 +96,7 @@ const AdminMarketPlace = () => {
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
                     <img
                       className="w-full h-full object-cover"
-                      src="/src/assets/Images/jewellery.jpg"
+                      src="/assets/Images/jewellery.jpg"
                       alt=""
                     />
                   </div>
@@ -113,7 +113,7 @@ const AdminMarketPlace = () => {
                   <div className="w-38 h-24 overflow-hidden rounded-sm">
                     <img
                       className="w-full h-full object-cover"
-                      src="/src/assets/Images/house.jpg"
+                      src="/assets/Images/house.jpg"
                       alt=""
                     />
                   </div>

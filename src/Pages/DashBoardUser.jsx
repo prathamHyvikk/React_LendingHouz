@@ -14,13 +14,14 @@ import ViewModal from "../Component/ViewModal";
 import { clients } from "../data/userDashboard.json";
 import { recentData } from "../data/userDashboard.json";
 import HeaderTable from "../Component/HeaderTable";
+import { useSelector } from "react-redux";
 
 const DashBoardUser = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
 
-  const admin = true;
+  const role = useSelector((state) => state.person.value);
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
@@ -50,12 +51,12 @@ const DashBoardUser = () => {
                 <thead className="bg-gray-100 text-gray-700">
                   <tr>
                     <Th>Application Number</Th>
-                    <Th>{admin ? "Customer Name" : "Lender"}</Th>
-                    {admin && <Th>Business Name</Th>}
+                    <Th>{role == "admin" ? "Customer Name" : "Lender"}</Th>
+                    {role == "admin" && <Th>Business Name</Th>}
                     <Th>Status</Th>
                     <Th>Amount</Th>
                     <Th className="text-center">
-                      {admin ? "Date" : "Date of Application"}
+                      {role == "admin" ? "Date" : "Date of Application"}
                     </Th>
                     <Th>Shop Now! </Th>
                     <Th>Attach Invoice</Th>
@@ -68,7 +69,7 @@ const DashBoardUser = () => {
                     <tr key={i} className="hover:bg-gray-50">
                       <Td>{item.appNo}</Td>
                       <Td>{item.name}</Td>
-                      {admin && <Td>{item.business}</Td>}
+                      {role == "admin" && <Td>{item.business}</Td>}
                       <Td>{item.status}</Td>
                       <Td className="sora-semibold">{item.amount}</Td>
                       <Td className="" center={""}>
@@ -76,7 +77,10 @@ const DashBoardUser = () => {
                       </Td>
 
                       <Td center={"yes"} className="flex justify-center">
-                        <IconBtn href="/dashboard/marketplace" img={shopIcon} />
+                        <IconBtn
+                          href={`/${role}/dashboard/marketplace`}
+                          img={shopIcon}
+                        />
                       </Td>
 
                       <Td center={"yes"}>

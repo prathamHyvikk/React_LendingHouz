@@ -15,13 +15,14 @@ import { users } from "../data/userDashboard.json";
 import { recentData } from "../data/userDashboard.json";
 import HeaderTable from "../Component/HeaderTable";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Users = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
 
-  const admin = true;
+   const role = useSelector((state) => state.person.value);
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";

@@ -2,9 +2,10 @@ import React from "react";
 import AdminLayout from "../Component/AdminLayout";
 import { termsAndConditions } from "../data/userDashboard.json";
 import TitleParagraph from "../Component/TitleParagraph";
+import { useSelector } from "react-redux";
 
 const TearmsAndConditions = () => {
-  const admin = true;
+  const role = useSelector((state) => state.person.value);
   return (
     <>
       <AdminLayout>
@@ -18,7 +19,7 @@ const TearmsAndConditions = () => {
         </div>
 
         <div className="bg-white rounded-lg shadow p-4 lg:p-6">
-          {admin ? (
+          {role == "admin" ? (
             <div
               id="edit-terms&conditions"
               className="flex items-center justify-end gap-4 mb-10"

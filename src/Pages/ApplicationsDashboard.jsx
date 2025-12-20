@@ -10,6 +10,7 @@ import Pagination from "../Component/Pagination";
 import { applicationData } from "../data/userDashboard.json";
 import ViewModal from "../Component/ViewModal";
 import PrintPopup from "../Component/PrintPopup";
+import { useSelector } from "react-redux";
 
 const ApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -17,8 +18,7 @@ const ApplicationsDashboard = () => {
 
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const admin = true;
+  const role = useSelector((state) => state.person.value);
   const marketplace = false;
 
   const showDropdown = (e) => {
@@ -55,7 +55,7 @@ const ApplicationsDashboard = () => {
 
               <div className="flex items-center gap-3">
                 {marketplace ? (
-                  admin ? (
+                  role == "admin" ? (
                     <button className="open-popup bg-[#0080C6] text-white px-4 py-2 rounded-md hover:bg-[#006ba1] transition text-sm">
                       + Add Product
                     </button>
@@ -148,16 +148,20 @@ const ApplicationsDashboard = () => {
               <table className="w-full text-sm">
                 <thead className="bg-gray-100 text-gray-700">
                   <tr>
-                    <Th>{admin ? "Application" : "Product"}</Th>
+                    <Th>{role == "admin" ? "Application" : "Product"}</Th>
                     <Th>Application Status</Th>
 
-                    <Th>{admin ? "Lender" : "Payment Provider"}</Th>
+                    <Th>{role == "admin" ? "Lender" : "Payment Provider"}</Th>
                     <Th>Application Number</Th>
                     {/* <Th>Amount</Th> */}
                     {/* <Th className="text-center">
-                      {admin ? "Date" : "Date of Application"}
+                      {role == "admin" ? "Date" : "Date of Application"}
                     </Th> */}
-                    <Th>{admin ? "Application Number" : "Requested Amount"}</Th>
+                    <Th>
+                      {role == "admin"
+                        ? "Application Number"
+                        : "Requested Amount"}
+                    </Th>
                     <Th>Applied On </Th>
                     <Th> Print Invoice</Th>
                   </tr>

@@ -21,6 +21,7 @@ const Td = ({ children, center , className = ""}) => (
 );
 
 const IconBtn = ({ img, onClick, href }) => {
+  
   const content = (
     <div >
       <img className=" bg-gray-200 rounded-full flex justify-center shadow cursor-pointer hover:bg-gray-300 p-2" src={img} alt="img" />

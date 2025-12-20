@@ -46,8 +46,6 @@ const Sidebar = () => {
 
   const currentPath = window.location.pathname;
 
-  const admin = true;
-
   const role = useSelector((state) => state.person.value);
 
   return (
@@ -133,8 +131,12 @@ const Sidebar = () => {
                 <p className="sm:text-sm text-xs sora-medium text-gray-700">
                   Gustavo Xavier
                 </p>
-                <button className="text-xs px-2 py-.5 bg-yellow-400 rounded-full sora-semibold">
-                  {admin ? "Admin" : "User"}
+                <button
+                  className={`text-xs px-2 py-.5 ${
+                    role == "admin" ? "bg-yellow-400" : "bg-green-400"
+                  }  rounded-full sora-semibold`}
+                >
+                  {role == "admin" ? "Admin" : "User"}
                 </button>
               </div>
             </div>

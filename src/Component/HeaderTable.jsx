@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-
-const HeaderTable = ({ setShowAddProduct , headingContent , marketplace }) => {
-     const admin = true
+const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
+ 
+  const role = useSelector((state) => state.person.value);
+  console.log(role);
   return (
     <>
       <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-3">
@@ -10,11 +12,14 @@ const HeaderTable = ({ setShowAddProduct , headingContent , marketplace }) => {
 
         <div className="flex items-center gap-3">
           {marketplace ? (
-            admin ? (
-              <button  onClick={() => setShowAddProduct(true)} className="open-popup bg-[#0080C6] text-white cursor-pointer px-4 py-2 rounded-md hover:bg-[#006ba1] transition text-sm">
+            (role == "admin" ? (
+              <button
+                onClick={() => setShowAddProduct(true)}
+                className="open-popup bg-[#0080C6] text-white cursor-pointer px-4 py-2 rounded-md hover:bg-[#006ba1] transition text-sm"
+              >
                 + Add Product
               </button>
-            ) : null
+            ) : null)
           ) : (
             // <a href="/dashboard/applications/confirm-your-financing">
             <button

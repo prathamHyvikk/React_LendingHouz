@@ -2,9 +2,10 @@ import React from "react";
 import AdminLayout from "../Component/AdminLayout";
 import TitleParagraph from "../Component/TitleParagraph";
 import { privacyPolicy } from "../data/userDashboard.json";
+import { useSelector } from "react-redux";
 
 const PrivacyPolicy = () => {
-    const admin = true;
+     const role = useSelector((state) => state.person.value);
   return (
     <>
       <AdminLayout>
@@ -16,7 +17,7 @@ const PrivacyPolicy = () => {
         </div>
 
         <div className="bg-white rounded-lg shadow p-4 lg:p-6">
-          {admin ? (
+          {role == "admin" ? (
             <div
               id="edit-privacy&policy"
               className="flex items-center justify-end gap-4 mb-10"

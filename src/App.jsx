@@ -119,7 +119,7 @@ function App() {
           path="/app/dashboard/privacy&policy"
           element={<PrivacyPolicy />}
         />
-        <Route path="/app/dashboard/users" element={<Users />} />
+        {/* <Route path="/app/dashboard/users" element={<Users />} /> */}
         <Route path="/app/dashboard/users/view-user" element={<ViewUser />} />
         <Route
           path="/app/dashboard/notifications"

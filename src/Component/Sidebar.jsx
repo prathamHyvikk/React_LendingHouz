@@ -97,19 +97,23 @@ const Sidebar = () => {
           <ul className="sora-semibold">
             {menuItems.map((item, i) => (
               <li key={i} id={item.dataPage} className="sm:mb-2 mb-1">
-                <NavLink
-                  to={`/${role}/${item.href}`}
-                  className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
+                {role === "app" && item.name === "User" ? (
+                  ""
+                ) : (
+                  <NavLink
+                    to={`/${role}/${item.href}`}
+                    className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
                 ${
                   currentPath == `/${role}/${item.href}`
                     ? "active-page text-(--primary-color)"
                     : ""
                 }`}
-                  data-page={item.dataPage}
-                >
-                  <i className={item.icon + " mr-3"} />
-                  <span>{item.name}</span>
-                </NavLink>
+                    data-page={item.dataPage}
+                  >
+                    <i className={item.icon + " mr-3"} />
+                    <span>{item.name}</span>
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>

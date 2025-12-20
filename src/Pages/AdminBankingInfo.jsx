@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
+import { Link } from "react-router-dom";
 
 const AdminBankingInfo = () => {
   const [routing, setRouting] = useState("");
@@ -186,8 +187,8 @@ const AdminBankingInfo = () => {
                   />
                 </div>
 
-                <button
-                  type="submit"
+                <Link
+                  to="/admin/dashboard/cart/order-details"
                   className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-xl sora-semibold mt-6 flex items-center justify-center gap-2 transition-colors"
                 >
                   <span>Continue</span>
@@ -204,7 +205,7 @@ const AdminBankingInfo = () => {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     ></path>
                   </svg>
-                </button>
+                </Link>
               </form>
             </div>
           </div>

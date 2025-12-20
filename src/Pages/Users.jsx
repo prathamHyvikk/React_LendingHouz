@@ -87,7 +87,7 @@ const Users = () => {
                         {user.nextPayment}
                       </Td>
                       <Td className="px-6 py-4 text-black">
-                        <Link to={`/dashboard/users/view-user?uid=1234`}>
+                        <Link to={`/admin/dashboard/users/view-user?uid=1234`}>
                           <i className="fa-solid fa-pen-to-square" />
                         </Link>
                       </Td>

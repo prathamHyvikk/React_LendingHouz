@@ -58,6 +58,7 @@ import { setPersonRole } from "./features/personRole";
 import AdminProductDetail from "./Pages/AdminProductDetail";
 import AdminSelectOffer from "./Pages/AdminSelectOffer";
 import AdminBankingInfo from "./Pages/AdminBankingInfo";
+import AdminOrderDetail from "./Pages/AdminOrderDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -173,6 +174,10 @@ function App() {
         <Route
           path="/admin/dashboard/cart/banking-info"
           element={<AdminBankingInfo />}
+        />
+        <Route
+          path="/admin/dashboard/cart/order-details"
+          element={<AdminOrderDetail />}
         />
 
         <Route path="*" element={<NotFound />} />

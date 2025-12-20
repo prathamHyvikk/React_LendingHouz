@@ -9,10 +9,9 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { pathname } = useLocation();
-  
 
   if (pathname.includes("/app")) {
     dispatch(setPersonRole("app"));

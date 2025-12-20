@@ -9,6 +9,8 @@ const AdminProductDetail = () => {
     "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop"
   );
 
+  const [number, setNumber] = useState(1);
+
   return (
     <>
       <AdminLayout>
@@ -82,22 +84,25 @@ const AdminProductDetail = () => {
 
               <div className="flex items-center gap-4 my-6 mt-10">
                 <div className="flex items-center border border-gray-300 rounded-lg">
-                  <button className="px-3 py-1 text-gray-600 hover:bg-gray-100">
+                  <button
+                    onClick={() => number > 1 && setNumber(number - 1)}
+                    className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                  >
                     -
                   </button>
-                  <input
-                    type="text"
-                    id="quantity"
-                    value="1"
-                    readOnly
-                    className="w-14 text-center border-l border-r border-gray-300 py-1"
-                  />
-                  <button className="px-3 py-1 text-gray-600 hover:bg-gray-100">
+
+                  <button className="w-14 text-center border-l border-r border-gray-300 py-1">
+                    {number}
+                  </button>
+                  <button
+                    onClick={() => setNumber(number + 1)}
+                    className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                  >
                     +
                   </button>
                 </div>
                 <Link to="/admin/dashboard/cart/select-offer">
-                  <button className="flex-1 bg-blue-600 text-white px-6 py-2 rounded-lg sora-semibold hover:bg-blue-700 transition-colors">
+                  <button className="flex-1 cursor-pointer bg-blue-600 text-white px-6 py-2 rounded-lg sora-semibold hover:bg-blue-700 transition-colors">
                     Apply
                   </button>
                 </Link>

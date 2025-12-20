@@ -59,6 +59,7 @@ import AdminProductDetail from "./Pages/AdminProductDetail";
 import AdminSelectOffer from "./Pages/AdminSelectOffer";
 import AdminBankingInfo from "./Pages/AdminBankingInfo";
 import AdminOrderDetail from "./Pages/AdminOrderDetail";
+import AdminCheckOut from "./Pages/AdminCheckOut";
 
 function App() {
   const dispatch = useDispatch();
@@ -178,6 +179,10 @@ function App() {
         <Route
           path="/admin/dashboard/cart/order-details"
           element={<AdminOrderDetail />}
+        />
+        <Route
+          path="/admin/dashboard/cart/checkout"
+          element={<AdminCheckOut />}
         />
 
         <Route path="*" element={<NotFound />} />

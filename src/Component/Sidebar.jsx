@@ -101,7 +101,7 @@ const Sidebar = () => {
                   to={`/${role}/${item.href}`}
                   className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
                 ${
-                  currentPath == `${role}${item.href}`
+                  currentPath == `/${role}/${item.href}`
                     ? "active-page text-(--primary-color)"
                     : ""
                 }`}

@@ -211,5 +211,61 @@
       "nextPayment": "$1,500(18 Nov)",
       "id": "7776"
     }
+  ],
+
+  "recentMarketPlaceData": [
+    {
+      "img": "/assets/Images/house.jpg",
+      "financeType": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/assets/Images//jewellery.jpg",
+      "financeType": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    },
+
+    {
+      "img": "/assets/Images/house.jpg",
+      "financeType": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    }
+  ],
+
+  "newMarketPlaceData": [
+    {
+      "img": "/assets/Images/house.jpg",
+      "financeType": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/assets/Images//jewellery.jpg",
+      "financeType": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    },
+
+    {
+      "img": "/assets/Images/house.jpg",
+      "financeType": "Home Financing",
+      "day": "Monday | 12/1/1222",
+      "orderID": "Order ID #232",
+      "finance": "Financed",
+      "status": "Active"
+    }
   ]
 }

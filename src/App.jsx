@@ -54,7 +54,10 @@ import AdminSignIn from "./Pages/AdminSignIn";
 import AdminSignup from "./Pages/AdminSignup";
 import AdminTearmsAndConditions from "./Pages/AdminTermsAndConditions";
 import { useDispatch } from "react-redux";
-import {  setPersonRole } from "./features/personRole";
+import { setPersonRole } from "./features/personRole";
+import AdminProductDetail from "./Pages/AdminProductDetail";
+import AdminSelectOffer from "./Pages/AdminSelectOffer";
+import AdminBankingInfo from "./Pages/AdminBankingInfo";
 
 function App() {
   const dispatch = useDispatch();
@@ -159,6 +162,18 @@ function App() {
           element={<AdminNotifications />}
         />
         <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
+        <Route
+          path="/admin/dashboard/marketplace/product/product-detail"
+          element={<AdminProductDetail />}
+        />
+        <Route
+          path="/admin/dashboard/cart/select-offer"
+          element={<AdminSelectOffer />}
+        />
+        <Route
+          path="/admin/dashboard/cart/banking-info"
+          element={<AdminBankingInfo />}
+        />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -133,7 +133,7 @@ const Sidebar = () => {
                 </p>
                 <button
                   className={`text-xs px-2 py-.5 ${
-                    role == "admin" ? "bg-yellow-400" : "bg-green-400"
+                    role == "admin" ? "bg-yellow-400" : "bg-green-400 text-white"
                   }  rounded-full sora-semibold`}
                 >
                   {role == "admin" ? "Admin" : "User"}

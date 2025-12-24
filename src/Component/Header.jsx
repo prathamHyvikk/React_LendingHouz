@@ -3,12 +3,15 @@ import "./Utility.css";
 import logo from "/assets/Images/header-logo.png";
 import { Link } from "react-router-dom";
 import BtnGetStart from "./BtnGetStart";
+import { useSelector } from "react-redux";
 
 function Header({ btncategory }) {
   const [drop, setDrop] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobiledrop, setMobileDrop] = useState(false);
   const dropdownRef = useRef(null);
+
+  const authenticate = useSelector((state) => state.auth.value);
 
   const togglenav = () => {
     setOpen(!open);

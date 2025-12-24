@@ -102,33 +102,11 @@
 
   "termsAndConditions": [
     {
-      "heading": "1. Agreement to Terms",
+      "heading": "Use of Services",
       "info": [
-        "By accessing and using Leading Houz services, you accept and agree to be bound by the terms and provision of this agreement."
-      ]
-    },
-    {
-      "heading": "2. Use License",
-      "info": [
-        "Permission is granted to temporarily use Leading Houz services for personal, non-commercial transitory viewing only."
-      ]
-    },
-    {
-      "heading": "3. Disclaimer",
-      "info": [
-        "The materials on Leading Houz's website are provided on an 'as is' basis. Leading Houz makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights."
-      ]
-    },
-    {
-      "heading": "4. Limitations",
-      "info": [
-        "In no event shall Leading Houz or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Leading Houz's website, even if Leading Houz or a Leading Houz authorized representative has been notified orally or in writing of the possibility of such damage."
-      ]
-    },
-    {
-      "heading": "5. Accuracy of Materials",
-      "info": [
-        "The materials appearing on Leading Houz's website could include technical, typographical, or photographic errors. Leading Houz does not warrant that any of the materials on its website are accurate, complete or current."
+        "You agree to use the platform only for lawful purposes and in accordance with these Terms. You may not use our services to:",
+
+        "<ul class='list-disc pl-6'> <li class=' '>Post or distribute harmful, misleading, or offensive content </li>  <li class=' '>Violate any applicable laws or regulations</li>  <li class=' '>Infringe upon others' intellectual property rights </li> </ul>"
       ]
     }
   ],
@@ -267,5 +245,20 @@
       "finance": "Financed",
       "status": "Active"
     }
+  ],
+
+  "filterOptions": [
+    { "lable": "Electronics", "value": "electronics" },
+    { "lable": "Pets", "value": "pets" },
+    { "lable": "Jewelry", "value": "jewelry" },
+    { "lable": "Landscape Equipment", "value": "landscape-equipment" },
+    { "lable": "Livestock Equipment", "value": "livestock-equipment" },
+    { "lable": "Medical Equipment", "value": "medical-equipment" },
+    { "lable": "Music Equipment", "value": "music-equipment" },
+    { "lable": "Personal Product", "value": "personal-product" },
+    { "lable": "Power Sports", "value": "power-sports" },
+    { "lable": "Recreation", "value": "recreation" },
+    { "lable": "Snow Equipment", "value": "snow-equipment" },
+    { "lable": "Tools", "value": "tools" }
   ]
 }

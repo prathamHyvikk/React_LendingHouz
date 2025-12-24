@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
-import personRole from '../features/personRole'
+import { configureStore } from "@reduxjs/toolkit";
+import personRole from "../features/personRole";
+import authenticate from "../features/authenticate";
 
 export default configureStore({
   reducer: {
-    person: personRole
-  }
-})
+    person: personRole,
+    auth: authenticate,
+  },
+});

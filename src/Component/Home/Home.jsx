@@ -21,6 +21,7 @@ import GetStart from "../GetStart";
 import useMeta from "../useMeta";
 import axios from "axios";
 
+
 function Home() {
   useMeta(
     "Lending Houz | Flexible Financing for Everyday Products",
@@ -31,6 +32,9 @@ function Home() {
   // fetch faq data
 
   const [financingFaqs, setFinancingFaqs] = useState([]);
+
+  
+  
 
   useEffect(() => {
     const fetchFaqs = async () => {

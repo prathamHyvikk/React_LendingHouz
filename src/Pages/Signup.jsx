@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPersonRole } from "../features/personRole";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { setAuthenticate } from "../features/authenticate";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,19 +18,54 @@ const Signup = () => {
   const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
 
   const { pathname } = useLocation();
-  
 
   if (pathname.includes("/app")) {
     dispatch(setPersonRole("app"));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/app/dashboard");
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://192.168.0.23/lending_houz/public/api/register",
+        {
+          name,
+          email,
+          phone,
+          dob,
+          password,
+          c_password: confirmPassword,
+          user_type: "C",
+        }
+      );
+
+      toast.success(response.data.message);
+      navigate("/app/dashboard");
+      dispatch(setAuthenticate(true));
+    } catch (error) {
+      if (error.response) {
+        // console.log(error.response.data.message);
+        const errors = error.response.data.errors;
+
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            // toast.error(`${field}: ${msg}`);
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error("Network Error:", error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,7 +116,7 @@ const Signup = () => {
               <div>
                 <label className="block text-gray-600 text-sm">Phone</label>
                 <input
-                  type="tel"
+                  type="number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="1234124512"
@@ -90,9 +129,10 @@ const Signup = () => {
                   Date of Birth
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
+                  max={new Date().toISOString().split("T")[0]}
                   placeholder="12/05/2025"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
@@ -126,7 +166,9 @@ const Signup = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full bg-(--primary-color) text-white sora-bold py-2 rounded-lg mt-2 hover:bg-blue-800 transition duration-200 cursor-pointer"
+                className={`w-full ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                } bg-(--primary-color) text-white sora-bold py-2 rounded-lg mt-2 hover:bg-blue-800 transition duration-200 cursor-pointer`}
               >
                 Sign Up
               </button>

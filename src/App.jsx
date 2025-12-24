@@ -60,6 +60,7 @@ import AdminSelectOffer from "./Pages/AdminSelectOffer";
 import AdminBankingInfo from "./Pages/AdminBankingInfo";
 import AdminOrderDetail from "./Pages/AdminOrderDetail";
 import AdminCheckOut from "./Pages/AdminCheckOut";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function App() {
 
   return (
     <>
+      <Toaster/>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

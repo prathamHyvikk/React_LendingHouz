@@ -21,7 +21,9 @@ function BtnGetStart({ category = "default" }) {
     // window.open(urlToOpen, '_blank');
 
     if (authenticate == false) {
-      navigate("/app/signup");
+      navigate("/app/signin");
+    }else{
+      navigate("/app/dashboard");
     }
   };
 

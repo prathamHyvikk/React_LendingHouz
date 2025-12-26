@@ -1,42 +1,52 @@
 import React, { useState } from "react";
 import bgImage from "/assets/Images/background-image.png";
 import logoImg from "/assets/Images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ConfirmEmailPopup from "../Component/ConfirmEmailPopup";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const ForgotPassword = () => {
-  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
-  const [email, setEmail] = useState("");
+const ResetPassword = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const email = searchParams.get("email");
+  const token = searchParams.get("token");
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await axios.post(
-        "http://192.168.0.23/lending_houz/public/api/forgot-password",
-        { email }
+        "http://192.168.0.23/lending_houz/public/api/reset-password",
+        { email, token, password, password_confirmation: confirmPassword }
       );
 
-      if (response.data.success == true) {
-        setShowConfirmPopup(true);
+      if (response.success == true) {
+          setShowConfirmPopup(true);
+          toast.success(response.data.message);
+          navigate("/app/signin");
       }
     } catch (error) {
       if (error.response) {
-        // console.log(error.response.data.message);
-        const errors = error.response.data.errors;
-
-        Object.entries(errors).forEach(([field, messages]) => {
-          messages.forEach((msg) => {
-            // toast.error(`${field}: ${msg}`);
-            toast.error(` ${msg}`);
+        const apiErrors = error.response.data.errors;
+        if (apiErrors) {
+          Object.entries(apiErrors).forEach(([field, messages]) => {
+            messages.forEach((msg) => {
+              toast.error(` ${msg}`);
+            });
           });
-        });
-      } else {
-        toast.error("Network Error:", error.message);
+        } else {
+          console.log("elsePart");
+          toast.error(error?.response.data.message);
+        }
       }
     } finally {
       setLoading(false);
@@ -57,7 +67,7 @@ const ForgotPassword = () => {
                 <img src={logoImg} className="w-64" alt="" />
               </div>
               <h2 className="text-2xl sora-bold text-center text-(--primary-color) mb-2">
-                Forgot Password?
+                Reset Password
               </h2>
               <div className="h-1 bg-(--primary-color) w-full"></div>
             </div>
@@ -67,52 +77,42 @@ const ForgotPassword = () => {
               className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
             >
               <div>
+                <label className="block text-gray-600 text-sm">Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                />
+              </div>
+
+              <div>
                 <label className="block text-gray-600 text-sm">
-                  Please Enter Your Email Address
+                  Confirm Password
                 </label>
                 <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Dosamarvís@test.com"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
               </div>
 
               <button
-                disabled={loading}
                 className={`w-full bg-(--primary-color) ${
-                  loading ? "opacity-50  cursor-not-allowed" : ""
-                }  cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200`}
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                } cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200`}
               >
-                Reset Password
+                Submit
               </button>
-
-              <div>
-                <p className="text-center text-gray-700">
-                  Already Registered?{" "}
-                  <Link
-                    to="/app/signin"
-                    className="sora-bold text-gray-900 hover:text-blue-900 transition"
-                  >
-                    Sign In
-                  </Link>
-                </p>
-              </div>
             </form>
           </div>
         </div>
       </div>
-
-      {/* Popup */}
-      {showConfirmPopup && (
-        <ConfirmEmailPopup
-          setShowConfirmPopup={setShowConfirmPopup}
-          email={email}
-        />
-      )}
     </>
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

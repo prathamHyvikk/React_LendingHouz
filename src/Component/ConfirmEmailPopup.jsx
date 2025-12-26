@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const ConfirmEmailPopup = ({ setShowConfirmPopup }) => {
+const ConfirmEmailPopup = ({ setShowConfirmPopup, email }) => {
+  const role = useSelector((state) => state.person.value);
   return (
     <>
       <div
@@ -15,7 +18,7 @@ const ConfirmEmailPopup = ({ setShowConfirmPopup }) => {
           </div>
           <p class="text-center sm:text-[14px] text-[12px] pb-2 px-2 sm:px-6">
             We’ve sent an email with reset password instructions to
-            jane@gmail.com.
+            <span class="font-semibold"> {email}</span>
           </p>
           <div class="flex flex-col items-center gap-1">
             <span class="text-[12px] sm:text-[14px]">
@@ -27,7 +30,7 @@ const ConfirmEmailPopup = ({ setShowConfirmPopup }) => {
             </p>
           </div>
 
-          <div class="text-center mt-4">
+          <Link to={`/${role}/signin`} class="text-center mt-4">
             <button
               onClick={() => setShowConfirmPopup(false)}
               id="cancel-reset-popup"
@@ -35,7 +38,7 @@ const ConfirmEmailPopup = ({ setShowConfirmPopup }) => {
             >
               Close
             </button>
-          </div>
+          </Link>
         </div>
       </div>
     </>

@@ -61,6 +61,7 @@ import AdminBankingInfo from "./Pages/AdminBankingInfo";
 import AdminOrderDetail from "./Pages/AdminOrderDetail";
 import AdminCheckOut from "./Pages/AdminCheckOut";
 import { Toaster } from "react-hot-toast";
+import ResetPassword from "./Pages/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -74,7 +75,7 @@ function App() {
 
   return (
     <>
-      <Toaster/>
+      <Toaster />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -108,6 +109,7 @@ function App() {
         <Route path="/app/signup" element={<Signup />} />
         <Route path="/app/signin" element={<SignIn />} />
         <Route path="/app/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/app/dashboard" element={<DashBoardUser />} />
         <Route
           path="/app/dashboard/applications"

@@ -47,7 +47,7 @@ const Signup = () => {
       );
 
       toast.success(response.data.message);
-      navigate("/app/dashboard");
+      navigate("/");
       dispatch(setAuthenticate(true));
     } catch (error) {
       if (error.response) {
@@ -61,7 +61,7 @@ const Signup = () => {
           });
         });
       } else {
-        toast.error("Network Error:", error.message);
+        toast.error(error?.response.data.message);
       }
     } finally {
       setLoading(false);

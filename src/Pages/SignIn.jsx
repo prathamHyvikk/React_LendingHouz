@@ -15,7 +15,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const role = useSelector((state) => state.person.value);
-  console.log(role);
+
 
   const { pathname } = useLocation();
 

@@ -4,18 +4,57 @@ import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPersonRole } from "../features/personRole";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const AdminSignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { pathname } = useLocation();
 
-  if (pathname.includes("/app")) {
-    dispatch(setPersonRole("app"));
+  if (pathname.includes("/admin")) {
+    dispatch(setPersonRole("admin"));
   }
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    // dispatch(setPersonRole("admin"));
+
+    try {
+      console.log("hello");
+      const response = await axios.post(
+        "http://192.168.0.23/lending_houz/public/api/login",
+        {
+          email,
+          password,
+          user_type: "A",
+        }
+      );
+
+      toast.success(response.data.message);
+      navigate("/admin/dashboard");
+      dispatch(setAuthenticate(true));
+    } catch (error) {
+      if (error.response) {
+        console.log("inside");
+        const apiErrors = error.response.data.errors;
+        if (apiErrors) {
+          Object.entries(apiErrors).forEach(([field, messages]) => {
+            messages.forEach((msg) => {
+              toast.error(` ${msg}`);
+            });
+          });
+        } else {
+         
+          toast.error(error?.response.data.message);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -72,14 +111,13 @@ const AdminSignIn = () => {
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
-              <Link to="/admin/dashboard">
-                <button
-                  // type="submit"
-                  className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
-                >
-                  Sign In
-                </button>
-              </Link>
+              <button
+                // type="submit"
+                onClick={(e) => handleSignIn(e)}
+                className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
+              >
+                Sign In
+              </button>
 
               <div>
                 <Link to="/admin/forgot-password">

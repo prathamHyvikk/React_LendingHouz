@@ -1,21 +1,60 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPersonRole } from "../features/personRole";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { setAuthenticate } from "../features/authenticate";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const role = useSelector((state) => state.person.value);
+  console.log(role);
 
   const { pathname } = useLocation();
 
   if (pathname.includes("/app")) {
     dispatch(setPersonRole("app"));
   }
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://192.168.0.23/lending_houz/public/api/login",
+        {
+          email,
+          password,
+          user_type: "C",
+        }
+      );
+
+      toast.success(response.data.message);
+      navigate("/app/dashboard");
+      dispatch(setAuthenticate(true));
+    } catch (error) {
+      if (error.response) {
+        const apiErrors = error.response.data.errors;
+        if (apiErrors) {
+          Object.entries(apiErrors).forEach(([field, messages]) => {
+            messages.forEach((msg) => {
+              toast.error(` ${msg}`);
+            });
+          });
+        } else {
+          console.log("elsePart");
+          toast.error(error?.response.data.message);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -37,10 +76,7 @@ const SignIn = () => {
               <div className="h-1 bg-(--primary-color) w-full"></div>
             </div>
 
-            <form
-              action="/dashboard"
-              className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
-            >
+            <form className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden">
               <div>
                 <label className="block text-gray-600 text-sm">
                   Email Address
@@ -72,14 +108,14 @@ const SignIn = () => {
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
-              <Link to="/app/dashboard">
-                <button
-                  // type="submit"
-                  className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
-                >
-                  Sign In
-                </button>
-              </Link>
+              {/* <Link to="/app/dashboard"> */}
+              <button
+                onClick={(e) => handleSignIn(e)}
+                className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
+              >
+                Sign In
+              </button>
+              {/* </Link> */}
 
               <div>
                 <Link to="/app/forgot-password">

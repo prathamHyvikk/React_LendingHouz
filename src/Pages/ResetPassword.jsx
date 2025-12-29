@@ -29,11 +29,9 @@ const ResetPassword = () => {
         { email, token, password, password_confirmation: confirmPassword }
       );
 
-      if (response.success == true) {
-          setShowConfirmPopup(true);
-          toast.success(response.data.message);
-          navigate("/app/signin");
-      }
+      // setShowConfirmPopup(true);
+      toast.success(response.data.message || "success");
+      navigate("/app/signin");
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;
@@ -72,17 +70,13 @@ const ResetPassword = () => {
               <div className="h-1 bg-(--primary-color) w-full"></div>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
-            >
+            <form className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden">
               <div>
                 <label className="block text-gray-600 text-sm">Password</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
               </div>
@@ -95,12 +89,12 @@ const ResetPassword = () => {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
               </div>
 
               <button
+                onClick={(e) => handleSubmit(e)}
                 className={`w-full bg-(--primary-color) ${
                   loading ? "opacity-50 cursor-not-allowed" : ""
                 } cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200`}

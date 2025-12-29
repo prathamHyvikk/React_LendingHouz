@@ -82,8 +82,8 @@ const ForgotPassword = () => {
               <button
                 disabled={loading}
                 className={`w-full bg-(--primary-color) ${
-                  loading ? "opacity-50  cursor-not-allowed" : ""
-                }  cursor-pointer text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200`}
+                  loading ? "opacity-50  cursor-not-allowed" : "cursor-pointer"
+                }   text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200`}
               >
                 Reset Password
               </button>

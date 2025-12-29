@@ -11,11 +11,12 @@ import { setAuthenticate } from "../features/authenticate";
 const SignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [checkbox, setCheckbox] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const role = useSelector((state) => state.person.value);
-
 
   const { pathname } = useLocation();
 
@@ -25,6 +26,7 @@ const SignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -33,10 +35,21 @@ const SignIn = () => {
           email,
           password,
           user_type: "C",
+          checkbox,
         }
       );
 
       toast.success(response.data.message);
+
+        if (checkbox == true) {
+        localStorage.setItem("token", response.data.data.token);
+      }
+
+      const timeOut = 1000 * 60 * 60 * 24 * 30;
+      setTimeout(() => {
+        localStorage.removeItem("token");
+      }, 5000);
+
       navigate("/app/dashboard");
       dispatch(setAuthenticate(true));
     } catch (error) {
@@ -53,6 +66,7 @@ const SignIn = () => {
           toast.error(error?.response.data.message);
         }
       }
+      setLoading(false);
     }
   };
 
@@ -104,14 +118,21 @@ const SignIn = () => {
               </div>
 
               <div className="-mt-4">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  value={checkbox}
+                  onChange={() => setCheckbox(!checkbox)}
+                />
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
               {/* <Link to="/app/dashboard"> */}
               <button
                 onClick={(e) => handleSignIn(e)}
-                className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
+                disabled={loading}
+                className={`w-full bg-(--primary-color) ${
+                  loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }  text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200`}
               >
                 Sign In
               </button>

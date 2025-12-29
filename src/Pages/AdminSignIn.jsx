@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 const AdminSignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [checkbox, setCheckbox] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const AdminSignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    setLoading(true);
     // dispatch(setPersonRole("admin"));
 
     try {
@@ -32,10 +35,20 @@ const AdminSignIn = () => {
           email,
           password,
           user_type: "A",
+          checkbox,
         }
       );
 
       toast.success(response.data.message);
+      if (checkbox == true) {
+        localStorage.setItem("token", response.data.data.token);
+      }
+
+      const timeOut = 1000 * 60 * 60 * 24 * 30;
+      setTimeout(() => {
+        localStorage.removeItem("token");
+      }, timeOut);
+
       navigate("/admin/dashboard");
       dispatch(setAuthenticate(true));
     } catch (error) {
@@ -49,12 +62,19 @@ const AdminSignIn = () => {
             });
           });
         } else {
-         
           toast.error(error?.response.data.message);
         }
       }
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/admin/dashboard");
+    }
+  }, []);
 
   return (
     <>
@@ -107,25 +127,26 @@ const AdminSignIn = () => {
               </div>
 
               <div className="-mt-4">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  value={checkbox}
+                  onChange={() => setCheckbox(!checkbox)}
+                />
                 <span className="text-gray-500"> Remember for 30 Days</span>
               </div>
 
               <button
                 // type="submit"
                 onClick={(e) => handleSignIn(e)}
-                className="w-full bg-(--primary-color) cursor-pointer text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200"
+                disabled={loading}
+                className={`w-full bg-(--primary-color) ${
+                  loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }  text-white sora-bold py-2 rounded-lg mb-6 hover:bg-blue-800 transition duration-200`}
               >
                 Sign In
               </button>
 
               <div>
-                <Link to="/admin/forgot-password">
-                  <p className="text-red-500 sora-semibold text-center">
-                    Forget Password
-                  </p>
-                </Link>
-
                 <p className="text-center text-gray-700 pt-4">
                   Dont Have an Account?{" "}
                   <Link

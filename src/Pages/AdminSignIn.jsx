@@ -27,46 +27,48 @@ const AdminSignIn = () => {
     setLoading(true);
     // dispatch(setPersonRole("admin"));
 
-    try {
-      console.log("hello");
-      const response = await axios.post(
-        "http://192.168.0.23/lending_houz/public/api/login",
-        {
-          email,
-          password,
-          user_type: "A",
-          checkbox,
-        }
-      );
+    navigate("/admin/dashboard");
 
-      toast.success(response.data.message);
-      if (checkbox == true) {
-        localStorage.setItem("token", response.data.data.token);
-      }
+    // try {
+    //   console.log("hello");
+    //   const response = await axios.post(
+    //     "http://192.168.0.23/lending_houz/public/api/login",
+    //     {
+    //       email,
+    //       password,
+    //       user_type: "A",
+    //       checkbox,
+    //     }
+    //   );
 
-      const timeOut = 1000 * 60 * 60 * 24 * 30;
-      setTimeout(() => {
-        localStorage.removeItem("token");
-      }, timeOut);
+    //   toast.success(response.data.message);
+    //   if (checkbox == true) {
+    //     localStorage.setItem("token", response.data.data.token);
+    //   }
 
-      navigate("/admin/dashboard");
-      dispatch(setAuthenticate(true));
-    } catch (error) {
-      if (error.response) {
-        console.log("inside");
-        const apiErrors = error.response.data.errors;
-        if (apiErrors) {
-          Object.entries(apiErrors).forEach(([field, messages]) => {
-            messages.forEach((msg) => {
-              toast.error(` ${msg}`);
-            });
-          });
-        } else {
-          toast.error(error?.response.data.message);
-        }
-      }
-      setLoading(false);
-    }
+    //   const timeOut = 1000 * 60 * 60 * 24 * 30;
+    //   setTimeout(() => {
+    //     localStorage.removeItem("token");
+    //   }, timeOut);
+
+    //   navigate("/admin/dashboard");
+    //   dispatch(setAuthenticate(true));
+    // } catch (error) {
+    //   if (error.response) {
+    //     console.log("inside");
+    //     const apiErrors = error.response.data.errors;
+    //     if (apiErrors) {
+    //       Object.entries(apiErrors).forEach(([field, messages]) => {
+    //         messages.forEach((msg) => {
+    //           toast.error(` ${msg}`);
+    //         });
+    //       });
+    //     } else {
+    //       toast.error(error?.response.data.message);
+    //     }
+    //   }
+    //   setLoading(false);
+    // }
   };
 
   useEffect(() => {

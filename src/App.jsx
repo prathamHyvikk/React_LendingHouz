@@ -137,7 +137,7 @@ function App() {
         <Route path="/app/dashboard/profile" element={<Profile />} />
 
         {/* Admin Routes */}
-        <Route path="/admin/signup" element={<AdminSignup />} />
+        {/* <Route path="/admin/signup" element={<AdminSignup />} /> */}
         <Route path="/admin/signin" element={<AdminSignIn />} />
         <Route
           path="/admin/forgot-password"

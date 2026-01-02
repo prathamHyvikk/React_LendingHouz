@@ -146,7 +146,7 @@ const AdminSignIn = () => {
                 Sign In
               </button>
 
-              <div>
+              {/* <div>
                 <p className="text-center text-gray-700 pt-4">
                   Dont Have an Account?{" "}
                   <Link
@@ -156,7 +156,7 @@ const AdminSignIn = () => {
                     Sign Up
                   </Link>
                 </p>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

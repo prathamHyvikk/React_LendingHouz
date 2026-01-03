@@ -34,7 +34,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.0.23/lending_houz/public/api/register",
+        `${import.meta.env.VITE_BASE_URL}/register`,
         {
           name,
           email,
@@ -51,12 +51,10 @@ const Signup = () => {
       dispatch(setAuthenticate(true));
     } catch (error) {
       if (error.response) {
-        // console.log(error.response.data.message);
         const errors = error.response.data.errors;
 
         Object.entries(errors).forEach(([field, messages]) => {
           messages.forEach((msg) => {
-            // toast.error(`${field}: ${msg}`);
             toast.error(` ${msg}`);
           });
         });
@@ -95,8 +93,8 @@ const Signup = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Dosamarvís"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your name"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
@@ -108,8 +106,8 @@ const Signup = () => {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Dosamarvís@test.com"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your email address"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
@@ -119,8 +117,8 @@ const Signup = () => {
                   type="number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="1234124512"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your phone "
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
@@ -134,7 +132,7 @@ const Signup = () => {
                   onChange={(e) => setDob(e.target.value)}
                   max={new Date().toISOString().split("T")[0]}
                   placeholder="12/05/2025"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
@@ -146,8 +144,8 @@ const Signup = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="12345678"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your password"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
@@ -159,8 +157,8 @@ const Signup = () => {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="*******"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder=" Enter Confirm Password"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 

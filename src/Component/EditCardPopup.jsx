@@ -1,14 +1,14 @@
 import React from "react";
 import ModalWrapper from "./ModalWrapper";
 
-const EditCardPopup = ({onClose}) => {
+const EditCardPopup = ({setShowCardPopup}) => {
   console.log("hello");
   return (
     <>
-      <ModalWrapper onClose={onClose}>
+      <ModalWrapper >
         <div class="relative max-w-[400px] mx-auto bg-white rounded-xl shadow-2xl p-6 md:p-6">
           <button
-            onclick="closePopup(event, 'add-card')"
+            onClick={()=>setShowCardPopup(false)}
             class="absolute top-2 right-2 px-2 py-1 rounded-md cursor-pointer"
           >
             <i class="fa-solid fa-xmark"></i>

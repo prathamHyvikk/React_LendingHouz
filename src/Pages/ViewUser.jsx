@@ -195,7 +195,7 @@ const ViewUser = () => {
               <button
                 id="editBankBtn"
                 onClick={() => setShowCardPopup(true)}
-                className="absolute top-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
+                className="absolute cursor-pointer top-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
               >
                 Edit
               </button>
@@ -268,7 +268,7 @@ const ViewUser = () => {
         )}
 
         {showCardPopup && (
-          <EditCardPopup onClose={() => setShowCardPopup(false)} />
+          <EditCardPopup setShowCardPopup={setShowCardPopup} />
         )}
       </AdminLayout>
     </>

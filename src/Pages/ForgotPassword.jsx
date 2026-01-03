@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.0.23/lending_houz/public/api/forgot-password",
+       `${import.meta.env.VITE_BASE_URL}/forgot-password`,
         { email }
       );
 

@@ -30,7 +30,7 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.0.23/lending_houz/public/api/login",
+        `${import.meta.env.VITE_BASE_URL}/login`,
         {
           email,
           password,
@@ -41,7 +41,7 @@ const SignIn = () => {
 
       toast.success(response.data.message);
 
-        if (checkbox == true) {
+      if (checkbox == true) {
         localStorage.setItem("token", response.data.data.token);
       }
 
@@ -99,21 +99,19 @@ const SignIn = () => {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Dosamarvís@test.com"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your email"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-600 text-sm">
-                  Create New Password
-                </label>
+                <label className="block text-gray-600 text-sm">Password</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="12345678"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your password"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 

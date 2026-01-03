@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { filterOptions } from "../data/userDashboard.json";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
   const role = useSelector((state) => state.person.value);
@@ -8,6 +10,38 @@ const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [optionValue, setOptionValue] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  const LoginToken = localStorage.getItem("LoginToken");
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/categories`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        }
+      );
+
+      setCategories(response.data);
+    } catch (error) {
+      toast.error("Network Error:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const categoryRef = useRef();
+
+  window.addEventListener("click", (event) => {
+    if (categoryRef.current && !categoryRef.current.contains(event.target)) {
+      setShowOptions(false);
+    }
+  });
 
   const handleSelection = (item) => {
     setSelectedOption(item.lable);
@@ -71,7 +105,7 @@ const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
           )}
 
           {/* filter */}
-          <div className="relative">
+          <div ref={categoryRef} className="relative">
             <button
               onClick={() => setShowOptions(!showOptions)}
               className={
@@ -122,14 +156,14 @@ const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
 
             {showOptions && (
               <div>
-                <div className="dropdownproductlist text-gray-700 mt-2 w-45 bg-white shadow-lg rounded-md p-2 absolute z-10 right-0 top-10 text-[12px]">
-                  {filterOptions.map((item, i) => (
+                <div className="dropdownproductlist text-gray-700 mt-2 w-45 bg-white shadow-lg rounded-md p-2 absolute z-10 right-0 top-10 text-[12px] h-70 overflow-y-scroll">
+                  {categories.map((item, i) => (
                     <p
                       key={i}
                       onClick={() => handleSelection(item)}
-                      className="p-2 hover:bg-gray-100 w-full cursor-pointer block"
+                      className="p-2 hover:bg-gray-100 w-full cursor-pointer block "
                     >
-                      {item.lable}
+                      {item}
                     </p>
                   ))}
                 </div>

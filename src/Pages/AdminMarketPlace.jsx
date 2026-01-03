@@ -1,26 +1,67 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Pagination from "../Component/Pagination";
 import HeaderTable from "../Component/HeaderTable";
 import AdminLayout from "../Component/AdminLayout";
 import AddNewProduct from "../Component/AddNewProduct";
 
-import { recentMarketPlaceData } from "../data/userDashboard.json";
+import { MarketPlaceData } from "../data/userDashboard.json";
 import { newMarketPlaceData } from "../data/userDashboard.json";
 import { Link } from "react-router-dom";
 import SmallCard from "../Component/SmallCard";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const AdminMarketPlace = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 3;
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const [products, setProducts] = useState();
+  const [loading , setLoading] = useState(false);
+
+  const LoginToken = localStorage.getItem("LoginToken");
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/products`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        }
+      );
+      setProducts(response?.data);
+    } catch (error) {
+      toast.error("Network Error:", error.message);
+    }finally{
+      setLoading(false);
+    }
+  };
+
+  console.log(products);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
     <>
       <AdminLayout>
+        {
+          loading && (
+            <div className="flex justify-center items-center h-screen">
+              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+            </div>
+          )
+        }
         <div className="mx-auto bg-white rounded-lg shadow-sm p-3">
           <HeaderTable
             headingContent={"Available for Financing"}
             marketplace={true}
             setShowAddProduct={setShowAddProduct}
           />
-          <div className="">
+          {/* Cards Design */}
+          {/* <div className="">
             <div className="mt-8">
               <h2 className="text-2xl sora-medium">Recent</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
@@ -48,9 +89,24 @@ const AdminMarketPlace = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <Pagination />
+          <div>
+            <div className="mt-8">
+              {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
+                {products?.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={`/admin/dashboard/marketplace/product/product-detail`}
+                  >
+                    <SmallCard data={item} />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+          <Pagination totalData={MarketPlaceData.length} perPage={3} />
         </div>
 
         {/* Popup */}

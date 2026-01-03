@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setPersonRole } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { setAuthenticate } from "../features/authenticate";
 
 const AdminSignIn = () => {
   const [password, setPassword] = useState("");
@@ -18,57 +19,55 @@ const AdminSignIn = () => {
 
   const { pathname } = useLocation();
 
-  if (pathname.includes("/admin")) {
-    dispatch(setPersonRole("admin"));
-  }
-
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
     // dispatch(setPersonRole("admin"));
+    dispatch(setPersonRole("admin"));
 
-    navigate("/admin/dashboard");
+    // navigate("/admin/dashboard");
 
-    // try {
-    //   console.log("hello");
-    //   const response = await axios.post(
-    //     "http://192.168.0.23/lending_houz/public/api/login",
-    //     {
-    //       email,
-    //       password,
-    //       user_type: "A",
-    //       checkbox,
-    //     }
-    //   );
+    try {
+      console.log("hello");
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/login`,
+        {
+          email,
+          password,
+          user_type: "A",
+          checkbox,
+        }
+      );
 
-    //   toast.success(response.data.message);
-    //   if (checkbox == true) {
-    //     localStorage.setItem("token", response.data.data.token);
-    //   }
+      toast.success(response.data.message);
+      localStorage.setItem("LoginToken", response.data.data.token);
+      if (checkbox == true) {
+        localStorage.setItem("token", response.data.data.token);
+      }
 
-    //   const timeOut = 1000 * 60 * 60 * 24 * 30;
-    //   setTimeout(() => {
-    //     localStorage.removeItem("token");
-    //   }, timeOut);
+      const timeOut = 1000 * 60 * 60 * 24 * 30;
+      setTimeout(() => {
+        localStorage.removeItem("token");
+      }, timeOut);
 
-    //   navigate("/admin/dashboard");
-    //   dispatch(setAuthenticate(true));
-    // } catch (error) {
-    //   if (error.response) {
-    //     console.log("inside");
-    //     const apiErrors = error.response.data.errors;
-    //     if (apiErrors) {
-    //       Object.entries(apiErrors).forEach(([field, messages]) => {
-    //         messages.forEach((msg) => {
-    //           toast.error(` ${msg}`);
-    //         });
-    //       });
-    //     } else {
-    //       toast.error(error?.response.data.message);
-    //     }
-    //   }
-    //   setLoading(false);
-    // }
+      navigate("/admin/dashboard");
+      dispatch(setAuthenticate(true));
+    } catch (error) {
+      if (error.response) {
+        console.log("inside");
+        const apiErrors = error.response.data.errors;
+        if (apiErrors) {
+          Object.entries(apiErrors).forEach(([field, messages]) => {
+            messages.forEach((msg) => {
+              toast.error(` ${msg}`);
+            });
+          });
+        } else {
+          toast.error(error?.response.data.message);
+        }
+      }
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -110,8 +109,8 @@ const AdminSignIn = () => {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Dosamarvís@test.com"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your email"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 
@@ -123,8 +122,8 @@ const AdminSignIn = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="12345678"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
+                  placeholder="Enter your password"
+                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
               </div>
 

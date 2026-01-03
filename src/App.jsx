@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Cell from "./Component/Cell/Cell";
 import Dog from "./Component/Dog/Dog";
@@ -53,7 +59,7 @@ import AdminProfile from "./Pages/AdminProfile";
 import AdminSignIn from "./Pages/AdminSignIn";
 import AdminSignup from "./Pages/AdminSignup";
 import AdminTearmsAndConditions from "./Pages/AdminTermsAndConditions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPersonRole } from "./features/personRole";
 import AdminProductDetail from "./Pages/AdminProductDetail";
 import AdminSelectOffer from "./Pages/AdminSelectOffer";
@@ -65,6 +71,10 @@ import ResetPassword from "./Pages/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
+  const authenticate = useSelector((state) => state.auth.value);
+  const role = useSelector((state) => state.person.value);
+
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   if (pathname.includes("/admin")) {
@@ -72,6 +82,14 @@ function App() {
   } else {
     dispatch(setPersonRole("app"));
   }
+
+  // useEffect(() => {
+  //   if (role !== "" && authenticate == true) {
+  //     ("");
+  //   } else if (authenticate == false && !pathname.includes("/signup")) {
+  //     navigate(`${role}/signin`);
+  //   }
+  // }, [pathname]);
 
   return (
     <>

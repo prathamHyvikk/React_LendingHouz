@@ -25,7 +25,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.0.23/lending_houz/public/api/reset-password",
+       `${import.meta.env.VITE_BASE_URL}/reset-password`,
         { email, token, password, password_confirmation: confirmPassword }
       );
 

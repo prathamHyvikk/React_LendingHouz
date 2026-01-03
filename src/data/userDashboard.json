@@ -191,6 +191,52 @@
     }
   ],
 
+  "MarketPlaceData": [
+    {
+      "img": "/assets/Images/house.jpg",
+      "name": "Home Financing",
+      "date": " 12/1/1222",
+      "category": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/assets/Images//jewellery.jpg",
+      "name": "Home Financing",
+      "date": " 12/1/1222",
+      "category": "Financed",
+      "status": "Pending"
+    },
+
+    {
+      "img": "/assets/Images/house.jpg",
+      "name": "Home Financing",
+      "date": " 12/1/1222",
+      "category": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/assets/Images/house.jpg",
+      "name": "Home Financing",
+      "date": " 12/1/1222",
+      "category": "Financed",
+      "status": "Active"
+    },
+    {
+      "img": "/assets/Images//jewellery.jpg",
+      "name": "Home Financing",
+      "date": " 12/1/1222",
+      "category": "Financed",
+      "status": "Pending"
+    },
+
+    {
+      "img": "/assets/Images/house.jpg",
+      "name": "Home Financing",
+      "date": " 12/1/1222",
+      "category": "Financed",
+      "status": "Active"
+    }
+  ],
   "recentMarketPlaceData": [
     {
       "img": "/assets/Images/house.jpg",
@@ -262,3 +308,5 @@
     { "lable": "Tools", "value": "tools" }
   ]
 }
+
+

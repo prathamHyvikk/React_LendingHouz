@@ -12,11 +12,11 @@ const SmallCard = ({ data }) => {
           />
         </div>
         <div className="text-[13px]">
-          <p className=" font-bold ">{data.name}</p>
+          <p className=" font-bold capitalize ">{data.name}</p>
           <p>{data.date}</p>
           <p>{data.category}</p>
 
-          <p className={`${data.status === "Active" ? "text-green-600" : "text-red-600"} font-bold`}>{data.status}</p>
+          <p className={`${data.status === "active" ? "text-green-600" : "text-red-600"} font-bold`}>{data.status}</p>
         </div>
       </div>
     </>

@@ -18,7 +18,7 @@ const AdminMarketPlace = () => {
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const [products, setProducts] = useState();
-  const [loading , setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const LoginToken = localStorage.getItem("LoginToken");
   const fetchProducts = async () => {
@@ -35,7 +35,7 @@ const AdminMarketPlace = () => {
       setProducts(response?.data);
     } catch (error) {
       toast.error("Network Error:", error.message);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -47,13 +47,11 @@ const AdminMarketPlace = () => {
   return (
     <>
       <AdminLayout>
-        {
-          loading && (
-            <div className="flex justify-center items-center h-screen">
-              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-            </div>
-          )
-        }
+        {loading && (
+          <div className="flex justify-center items-center h-screen">
+            <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+          </div>
+        )}
         <div className="mx-auto bg-white rounded-lg shadow-sm p-3">
           <HeaderTable
             headingContent={"Available for Financing"}

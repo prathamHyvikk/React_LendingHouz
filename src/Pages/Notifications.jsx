@@ -1,5 +1,5 @@
 import React from "react";
-import Pagination from "../Component/Pagination";
+
 import AdminLayout from "../Component/AdminLayout";
 
 const Notifications = () => {
@@ -62,7 +62,6 @@ const Notifications = () => {
               </svg>
             </button>
           </div>
-
           <div id="notifications-container" className="">
             {notifications.map((notification, i) => (
               <div
@@ -105,8 +104,7 @@ const Notifications = () => {
               </div>
             ))}
           </div>
-
-          <Pagination />
+          //
         </div>
       </AdminLayout>
     </>

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const AddNewProduct = ({ setShowAddProduct }) => {
+const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -70,14 +70,19 @@ const AddNewProduct = ({ setShowAddProduct }) => {
       );
 
       toast.success(response.data.message);
+
       setShowAddProduct(false);
+
+      setAgainFetchProducts(true);
     } catch (error) {
       if (error.response) {
         const apiError = error.response.data.errors;
 
-        for (const key in apiError) {
-          toast.error(apiError[key]);
-        }
+       const firstError = Object.values(apiError)?.[0];
+
+          if (firstError) {
+            toast.error(firstError);
+          }
       }
       setLoading(false);
     }

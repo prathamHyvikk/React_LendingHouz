@@ -4,7 +4,15 @@ import { filterOptions } from "../data/userDashboard.json";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
+const HeaderTable = ({
+  setShowAddProduct,
+  headingContent,
+  marketplace,
+  setProducts,
+  setLastPage,
+  setSelectedCategory,
+  setLoading,
+}) => {
   const role = useSelector((state) => state.person.value);
 
   const [showOptions, setShowOptions] = useState(false);
@@ -15,6 +23,7 @@ const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
   const LoginToken = localStorage.getItem("LoginToken");
 
   const fetchCategories = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/categories`,
@@ -28,6 +37,8 @@ const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
       setCategories(response.data);
     } catch (error) {
       toast.error("Network Error:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,10 +54,43 @@ const HeaderTable = ({ setShowAddProduct, headingContent, marketplace }) => {
     }
   });
 
-  const handleSelection = (item) => {
-    setSelectedOption(item.lable);
-    setOptionValue(item.value);
+  const handleSelection = async (item) => {
+    console.log(item);
+    setSelectedOption(item);
+    setSelectedCategory(item);
+
     setShowOptions(false);
+    try {
+      // const response = await axios.get(
+      //   item == "ALL"
+      //     ? `${import.meta.env.VITE_BASE_URL}/products`
+      //     : `${
+      //         import.meta.env.VITE_BASE_URL
+      //       }/get-category-search?category=${item}`,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${LoginToken}`,
+      //     },
+      //   }
+      // );
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/get-category-search`,
+        {
+          params: {
+            category: item,
+          },
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        }
+      );
+
+      setProducts(response?.data?.products);
+      setLastPage(response?.data?.last_page);
+      console.log(response);
+    } catch (error) {
+      toast.error("Network Error:", error.message);
+    }
   };
   return (
     <>

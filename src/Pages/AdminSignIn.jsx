@@ -23,7 +23,6 @@ const AdminSignIn = () => {
     e.preventDefault();
     setLoading(true);
     // dispatch(setPersonRole("admin"));
-    dispatch(setPersonRole("admin"));
 
     // navigate("/admin/dashboard");
 
@@ -52,16 +51,17 @@ const AdminSignIn = () => {
 
       navigate("/admin/dashboard");
       dispatch(setAuthenticate(true));
+      dispatch(setPersonRole("admin"));
     } catch (error) {
       if (error.response) {
         console.log("inside");
         const apiErrors = error.response.data.errors;
         if (apiErrors) {
-          Object.entries(apiErrors).forEach(([field, messages]) => {
-            messages.forEach((msg) => {
-              toast.error(` ${msg}`);
-            });
-          });
+          const firstError = Object.values(apiErrors)?.[0];
+
+          if (firstError) {
+            toast.error(firstError);
+          }
         } else {
           toast.error(error?.response.data.message);
         }

@@ -6,7 +6,7 @@ import shopIcon from "/assets/Images/shop-icon.png";
 import attachIcon from "/assets/Images/attach-icon.png";
 import eyeIcon from "/assets/Images/eye-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
-import Pagination from "../Component/Pagination";
+
 import RecentCards from "../Component/RecentCards";
 import InvoiceModal from "../Component/InvoiceModal";
 import ViewModal from "../Component/ViewModal";
@@ -22,7 +22,7 @@ const Users = () => {
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
 
-   const role = useSelector((state) => state.person.value);
+  const role = useSelector((state) => state.person.value);
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
@@ -96,8 +96,7 @@ const Users = () => {
                 </tbody>
               </table>
             </div>
-
-            <Pagination />
+            //
           </div>
 
           {showInvoice && (

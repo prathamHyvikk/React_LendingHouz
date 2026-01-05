@@ -89,6 +89,11 @@ function App() {
   //   } else if (authenticate == false && !pathname.includes("/signup")) {
   //     navigate(`${role}/signin`);
   //   }
+
+  //   const token = localStorage.getItem("LoginToken");
+  //   if (!token) {
+  //     navigate(`${role}/signin`);
+  //   }
   // }, [pathname]);
 
   return (

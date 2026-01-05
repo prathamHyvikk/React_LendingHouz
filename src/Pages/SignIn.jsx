@@ -20,10 +20,6 @@ const SignIn = () => {
 
   const { pathname } = useLocation();
 
-  if (pathname.includes("/app")) {
-    dispatch(setPersonRole("app"));
-  }
-
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -41,6 +37,7 @@ const SignIn = () => {
 
       toast.success(response.data.message);
 
+      localStorage.setItem("LoginToken", response.data.data.token);
       if (checkbox == true) {
         localStorage.setItem("token", response.data.data.token);
       }
@@ -50,17 +47,18 @@ const SignIn = () => {
         localStorage.removeItem("token");
       }, 5000);
 
-      navigate("/app/dashboard");
+      navigate("/");
       dispatch(setAuthenticate(true));
+      dispatch(setPersonRole("app"));
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;
         if (apiErrors) {
-          Object.entries(apiErrors).forEach(([field, messages]) => {
-            messages.forEach((msg) => {
-              toast.error(` ${msg}`);
-            });
-          });
+          const firstError = Object.values(apiErrors)?.[0];
+
+          if (firstError) {
+            toast.error(firstError);
+          }
         } else {
           console.log("elsePart");
           toast.error(error?.response.data.message);

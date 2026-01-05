@@ -24,10 +24,6 @@ const Signup = () => {
 
   const { pathname } = useLocation();
 
-  if (pathname.includes("/app")) {
-    dispatch(setPersonRole("app"));
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -47,17 +43,20 @@ const Signup = () => {
       );
 
       toast.success(response.data.message);
+      localStorage.setItem("LoginToken", response.data.data.token);
       navigate("/");
       dispatch(setAuthenticate(true));
+      dispatch(setPersonRole("app"));
     } catch (error) {
       if (error.response) {
         const errors = error.response.data.errors;
 
-        Object.entries(errors).forEach(([field, messages]) => {
-          messages.forEach((msg) => {
-            toast.error(` ${msg}`);
-          });
-        });
+        const firstError = Object.values(errors)?.[0];
+        console.log(firstError)
+
+        if (firstError) {
+          toast.error(firstError);
+        }
       } else {
         toast.error(error?.response.data.message);
       }

@@ -5,7 +5,6 @@ import AdminLayout from "../Component/AdminLayout";
 
 import printIcon from "/assets/Images/print-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
-import Pagination from "../Component/Pagination";
 
 import { applicationData } from "../data/userDashboard.json";
 import ViewModal from "../Component/ViewModal";
@@ -197,8 +196,7 @@ const ApplicationsDashboard = () => {
                 </tbody>
               </table>
             </div>
-
-            <Pagination />
+            //
           </div>
 
           {showInvoice && (

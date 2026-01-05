@@ -5,7 +5,6 @@ import AdminLayout from "../Component/AdminLayout";
 
 import printIcon from "/assets/Images/print-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
-import Pagination from "../Component/Pagination";
 
 import { applicationData } from "../data/userDashboard.json";
 import ViewModal from "../Component/ViewModal";
@@ -157,7 +156,11 @@ const AdminApplicationDashboard = () => {
                   {/* <Th className="text-center">
                       {admin ? "Date" : "Date of Application"}
                     </Th> */}
-                  <Th>{role == "admin" ? "Application Number" : "Requested Amount"}</Th>
+                  <Th>
+                    {role == "admin"
+                      ? "Application Number"
+                      : "Requested Amount"}
+                  </Th>
                   <Th>Applied On </Th>
                   <Th> Print Invoice</Th>
                 </tr>
@@ -193,8 +196,7 @@ const AdminApplicationDashboard = () => {
               </tbody>
             </table>
           </div>
-
-          <Pagination />
+          //
         </div>
 
         {showInvoice && <InvoiceModal onClose={() => setShowInvoice(false)} />}

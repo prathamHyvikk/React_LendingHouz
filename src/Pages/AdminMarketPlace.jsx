@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from "react";
-import Pagination from "../Component/Pagination";
+
 import HeaderTable from "../Component/HeaderTable";
 import AdminLayout from "../Component/AdminLayout";
 import AddNewProduct from "../Component/AddNewProduct";
@@ -10,15 +10,15 @@ import { Link } from "react-router-dom";
 import SmallCard from "../Component/SmallCard";
 import axios from "axios";
 import toast from "react-hot-toast";
+import BasicPagination from "../Component/BasicPagination";
 
 const AdminMarketPlace = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 3;
-  const lastPostIndex = currentPage * postsPerPage;
-  const firstPostIndex = lastPostIndex - postsPerPage;
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(false);
+  const [againFetchProducts, setAgainFetchProducts] = useState(false);
+  const [lastPage, setLastPage] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const LoginToken = localStorage.getItem("LoginToken");
   const fetchProducts = async () => {
@@ -32,7 +32,8 @@ const AdminMarketPlace = () => {
           },
         }
       );
-      setProducts(response?.data);
+      setProducts(response?.data?.products);
+      setLastPage(response?.data?.last_page);
     } catch (error) {
       toast.error("Network Error:", error.message);
     } finally {
@@ -44,11 +45,18 @@ const AdminMarketPlace = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (againFetchProducts) {
+      fetchProducts();
+      setAgainFetchProducts(false);
+    }
+  }, [againFetchProducts, products]);
   return (
     <>
       <AdminLayout>
         {loading && (
-          <div className="flex justify-center items-center h-screen">
+          <div className="flex justify-center items-center ">
             <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
           </div>
         )}
@@ -57,6 +65,10 @@ const AdminMarketPlace = () => {
             headingContent={"Available for Financing"}
             marketplace={true}
             setShowAddProduct={setShowAddProduct}
+            setProducts={setProducts}
+            setLastPage={setLastPage}
+            setSelectedCategory={setSelectedCategory}
+            setLoading={setLoading}
           />
           {/* Cards Design */}
           {/* <div className="">
@@ -93,6 +105,11 @@ const AdminMarketPlace = () => {
             <div className="mt-8">
               {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
+                {products?.length === 0 && (
+                  <p className="text-xl text-center font-bold text-red-600">
+                    No Products Available{" "}
+                  </p>
+                )}
                 {products?.map((item, index) => (
                   <Link
                     key={index}
@@ -104,12 +121,22 @@ const AdminMarketPlace = () => {
               </div>
             </div>
           </div>
-          <Pagination totalData={MarketPlaceData.length} perPage={3} />
+          {/* //<Pagination totalData={products?.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} /> */}
+          <div className="mt-8 mx-auto flex justify-center w-full">
+            <BasicPagination
+              lastPage={lastPage}
+              url={`get-category-search/${selectedCategory}`}
+              setProducts={setProducts}
+            />
+          </div>
         </div>
 
         {/* Popup */}
         {showAddProduct && (
-          <AddNewProduct setShowAddProduct={setShowAddProduct} />
+          <AddNewProduct
+            setShowAddProduct={setShowAddProduct}
+            setAgainFetchProducts={setAgainFetchProducts}
+          />
         )}
       </AdminLayout>
     </>

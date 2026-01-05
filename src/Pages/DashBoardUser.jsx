@@ -6,7 +6,7 @@ import shopIcon from "/assets/Images/shop-icon.png";
 import attachIcon from "/assets/Images/attach-icon.png";
 import eyeIcon from "/assets/Images/eye-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
-import Pagination from "../Component/Pagination";
+
 import RecentCards from "../Component/RecentCards";
 import InvoiceModal from "../Component/InvoiceModal";
 import ViewModal from "../Component/ViewModal";
@@ -101,9 +101,7 @@ const DashBoardUser = () => {
                 </tbody>
               </table>
             </div>
-
-            <Pagination />
-
+            //
             <div className="mt-8">
               <h2 className="text-2xl sora-medium">Recent</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 w-full mt-8">

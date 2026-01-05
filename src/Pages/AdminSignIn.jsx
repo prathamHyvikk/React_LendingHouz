@@ -13,6 +13,7 @@ const AdminSignIn = () => {
   const [email, setEmail] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error , setError] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,8 +55,9 @@ const AdminSignIn = () => {
       dispatch(setPersonRole("admin"));
     } catch (error) {
       if (error.response) {
-        console.log("inside");
+       
         const apiErrors = error.response.data.errors;
+        setError(apiErrors);
         if (apiErrors) {
           const firstError = Object.values(apiErrors)?.[0];
 
@@ -112,6 +114,9 @@ const AdminSignIn = () => {
                   placeholder="Enter your email"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {
+                  error.email && <p className="text-red-500 text-sm">{error.email}</p>
+                }
               </div>
 
               <div>
@@ -125,6 +130,9 @@ const AdminSignIn = () => {
                   placeholder="Enter your password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {
+                  error.password && <p className="text-red-500 text-sm">{error.password}</p>
+                }
               </div>
 
               <div className="-mt-4">

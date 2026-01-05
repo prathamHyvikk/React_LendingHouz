@@ -51,8 +51,9 @@ const Signup = () => {
       if (error.response) {
         const errors = error.response.data.errors;
 
+        setErrors(errors);
         const firstError = Object.values(errors)?.[0];
-        console.log(firstError)
+        console.log(firstError);
 
         if (firstError) {
           toast.error(firstError);
@@ -95,6 +96,9 @@ const Signup = () => {
                   placeholder="Enter your name"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.name && (
+                  <span className="text-red-500 text-sm">{errors.name}</span>
+                )}
               </div>
 
               <div>
@@ -108,6 +112,9 @@ const Signup = () => {
                   placeholder="Enter your email address"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.email && (
+                  <span className="text-red-500 text-sm">{errors.email}</span>
+                )}
               </div>
 
               <div>
@@ -119,6 +126,9 @@ const Signup = () => {
                   placeholder="Enter your phone "
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.phone && (
+                  <span className="text-red-500 text-sm">{errors.phone}</span>
+                )}
               </div>
 
               <div>
@@ -133,6 +143,9 @@ const Signup = () => {
                   placeholder="12/05/2025"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.dob && (
+                  <span className="text-red-500 text-sm">{errors.dob}</span>
+                )}
               </div>
 
               <div>
@@ -146,6 +159,11 @@ const Signup = () => {
                   placeholder="Enter your password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.password && (
+                  <span className="text-red-500 text-sm">
+                    {errors.password}
+                  </span>
+                )}
               </div>
 
               <div>
@@ -159,6 +177,11 @@ const Signup = () => {
                   placeholder=" Enter Confirm Password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.c_password && (
+                  <span className="text-red-500 text-sm">
+                    {errors.c_password}
+                  </span>
+                )}
               </div>
 
               <button

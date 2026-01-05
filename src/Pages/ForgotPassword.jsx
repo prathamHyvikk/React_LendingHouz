@@ -10,6 +10,7 @@ const ForgotPassword = () => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -17,7 +18,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-       `${import.meta.env.VITE_BASE_URL}/forgot-password`,
+        `${import.meta.env.VITE_BASE_URL}/forgot-password`,
         { email }
       );
 
@@ -28,7 +29,7 @@ const ForgotPassword = () => {
       if (error.response) {
         // console.log(error.response.data.message);
         const errors = error.response.data.errors;
-
+        setErrors(errors);
         Object.entries(errors).forEach(([field, messages]) => {
           messages.forEach((msg) => {
             // toast.error(`${field}: ${msg}`);
@@ -77,6 +78,9 @@ const ForgotPassword = () => {
                   placeholder="Dosamarvís@test.com"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
+                {errors?.email && (
+                  <p className="text-red-500 text-sm">{errors?.email[0]}</p>
+                )}
               </div>
 
               <button

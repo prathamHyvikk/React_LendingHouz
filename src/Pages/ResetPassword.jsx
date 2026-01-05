@@ -35,6 +35,7 @@ const ResetPassword = () => {
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;
+        setError(apiErrors);
         if (apiErrors) {
           Object.entries(apiErrors).forEach(([field, messages]) => {
             messages.forEach((msg) => {
@@ -79,6 +80,13 @@ const ResetPassword = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
+                {
+                  error?.password && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {error?.password[0]}
+                    </p>
+                  )
+                }
               </div>
 
               <div>
@@ -91,6 +99,13 @@ const ResetPassword = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
+                {
+                  error?.password_confirmation && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {error?.password_confirmation[0]}
+                    </p>
+                  )
+                }
               </div>
 
               <button

@@ -13,6 +13,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const SignIn = () => {
       if (error.response) {
         const apiErrors = error.response.data.errors;
         if (apiErrors) {
+          setErrors(apiErrors);
           const firstError = Object.values(apiErrors)?.[0];
 
           if (firstError) {
@@ -62,6 +64,7 @@ const SignIn = () => {
         } else {
           console.log("elsePart");
           toast.error(error?.response.data.message);
+          setErrors(error?.response.data.message);
         }
       }
       setLoading(false);
@@ -100,6 +103,9 @@ const SignIn = () => {
                   placeholder="Enter your email"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.email && (
+                  <p className="text-red-500 text-sm">{errors?.email[0]}</p>
+                )}
               </div>
 
               <div>
@@ -111,6 +117,9 @@ const SignIn = () => {
                   placeholder="Enter your password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
+                {errors?.password && (
+                  <p className="text-red-500 text-sm">{errors?.password[0]}</p>
+                )}
               </div>
 
               <div className="-mt-4">

@@ -83,18 +83,19 @@ function App() {
     dispatch(setPersonRole("app"));
   }
 
-  // useEffect(() => {
-  //   if (role !== "" && authenticate == true) {
-  //     ("");
-  //   } else if (authenticate == false && !pathname.includes("/signup")) {
-  //     navigate(`${role}/signin`);
-  //   }
+  useEffect(() => {
+    const token = localStorage.getItem("LoginToken");
+    if (role !== "" && authenticate == true && token !== null) {
+      ("");
+    } else if (authenticate == false && !pathname.includes("/signup") && token == null) {
+      navigate(`${role}/signin`);
+    }
 
-  //   const token = localStorage.getItem("LoginToken");
-  //   if (!token) {
-  //     navigate(`${role}/signin`);
-  //   }
-  // }, [pathname]);
+    
+    // if (!token) {
+    //   navigate(`${role}/signin`);
+    // }
+  }, [pathname]);
 
   return (
     <>

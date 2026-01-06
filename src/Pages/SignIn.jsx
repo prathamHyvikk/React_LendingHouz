@@ -3,7 +3,7 @@ import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPersonRole } from "../features/personRole";
+import { setId, setPersonRole } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { setAuthenticate } from "../features/authenticate";
@@ -15,8 +15,8 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const role = useSelector((state) => state.person.value);
 
   const { pathname } = useLocation();
@@ -51,6 +51,7 @@ const SignIn = () => {
       navigate("/");
       dispatch(setAuthenticate(true));
       dispatch(setPersonRole("app"));
+      dispatch(setId(response.data.data.id));
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;

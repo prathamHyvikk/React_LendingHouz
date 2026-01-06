@@ -3,7 +3,7 @@ import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPersonRole } from "../features/personRole";
+import { setId, setPersonRole } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { setAuthenticate } from "../features/authenticate";
@@ -42,11 +42,13 @@ const Signup = () => {
         }
       );
 
+      console.log(response.data)
       toast.success(response.data.message);
       localStorage.setItem("LoginToken", response.data.data.token);
       navigate("/");
       dispatch(setAuthenticate(true));
       dispatch(setPersonRole("app"));
+      dispatch(setId(response.data.data.id));
     } catch (error) {
       if (error.response) {
         const errors = error.response.data.errors;
@@ -186,9 +188,10 @@ const Signup = () => {
 
               <button
                 onClick={handleSubmit}
+                disabled={loading}
                 className={`w-full ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
-                } bg-(--primary-color) text-white sora-bold py-2 rounded-lg mt-2 hover:bg-blue-800 transition duration-200 cursor-pointer`}
+                  loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                } bg-(--primary-color) text-white sora-bold py-2 rounded-lg mt-2 hover:bg-blue-800 transition duration-200 `}
               >
                 Sign Up
               </button>

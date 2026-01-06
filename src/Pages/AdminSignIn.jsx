@@ -3,7 +3,7 @@ import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setPersonRole } from "../features/personRole";
+import { setId, setPersonRole } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { setAuthenticate } from "../features/authenticate";
@@ -13,7 +13,7 @@ const AdminSignIn = () => {
   const [email, setEmail] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error , setError] = useState({});
+  const [error, setError] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,9 +53,9 @@ const AdminSignIn = () => {
       navigate("/admin/dashboard");
       dispatch(setAuthenticate(true));
       dispatch(setPersonRole("admin"));
+      dispatch(setId(response.data.data.id));
     } catch (error) {
       if (error.response) {
-       
         const apiErrors = error.response.data.errors;
         setError(apiErrors);
         if (apiErrors) {
@@ -114,9 +114,9 @@ const AdminSignIn = () => {
                   placeholder="Enter your email"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
-                {
-                  error.email && <p className="text-red-500 text-sm">{error.email}</p>
-                }
+                {error.email && (
+                  <p className="text-red-500 text-sm">{error.email}</p>
+                )}
               </div>
 
               <div>
@@ -130,9 +130,9 @@ const AdminSignIn = () => {
                   placeholder="Enter your password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
-                {
-                  error.password && <p className="text-red-500 text-sm">{error.password}</p>
-                }
+                {error.password && (
+                  <p className="text-red-500 text-sm">{error.password}</p>
+                )}
               </div>
 
               <div className="-mt-4">

@@ -10,6 +10,7 @@ import { applicationData } from "../data/userDashboard.json";
 import ViewModal from "../Component/ViewModal";
 import PrintPopup from "../Component/PrintPopup";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -20,6 +21,7 @@ const ApplicationsDashboard = () => {
   const role = useSelector((state) => state.person.value);
   const marketplace = false;
 
+  const navigate = useNavigate();
   const showDropdown = (e) => {
     e.stopPropagation();
 
@@ -62,7 +64,7 @@ const ApplicationsDashboard = () => {
                 ) : (
                   // <a href="/dashboard/applications/confirm-your-financing">
                   <button
-                    onClick={() => setShowAddProduct(true)}
+                    onClick={() => navigate("/app/dashboard/applications/new-application")}
                     className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
                   >
                     + New Application
@@ -196,7 +198,7 @@ const ApplicationsDashboard = () => {
                 </tbody>
               </table>
             </div>
-            //
+          
           </div>
 
           {showInvoice && (

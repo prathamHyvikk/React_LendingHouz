@@ -75,7 +75,7 @@ const ForgotPassword = () => {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Dosamarvís@test.com"
+                  placeholder="Enter Your Email Address"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
                 />
                 {errors?.email && (

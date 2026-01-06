@@ -68,7 +68,7 @@ const AdminMarketPlace = () => {
             setProducts={setProducts}
             setLastPage={setLastPage}
             setSelectedCategory={setSelectedCategory}
-            setLoading={setLoading}
+           
           />
           {/* Cards Design */}
           {/* <div className="">

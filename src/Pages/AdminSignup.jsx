@@ -17,8 +17,6 @@ const AdminSignup = () => {
 
   const dispatch = useDispatch();
 
-  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setPersonRole("admin"));
@@ -73,7 +71,7 @@ const AdminSignup = () => {
               <div>
                 <label className="block text-gray-600 text-sm">Phone</label>
                 <input
-                  type="tel"
+                  type="number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="1234124512"

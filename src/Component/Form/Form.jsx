@@ -127,9 +127,20 @@ function Form() {
 
   const validateForm = () => {
     const newErrors = {};
-    const { businessName, ownerName, email, phone, address, city, state, zip, website } = formData;
+    const {
+      businessName,
+      ownerName,
+      email,
+      phone,
+      address,
+      city,
+      state,
+      zip,
+      website,
+    } = formData;
 
-    if (!businessName.trim()) newErrors.businessName = "Business Name is required.";
+    if (!businessName.trim())
+      newErrors.businessName = "Business Name is required.";
     if (!ownerName.trim()) newErrors.ownerName = "Owner Name is required.";
 
     if (!email.trim()) newErrors.email = "Email is required.";
@@ -153,11 +164,13 @@ function Form() {
     if (website.trim()) {
       const urlRegex = /^(https?:\/\/)([\w-]+\.)+[\w-]{2,}(\/\S*)?$/i;
       if (!urlRegex.test(website.trim())) {
-        newErrors.website = "Enter a valid URL that starts with http:// or https://";
+        newErrors.website =
+          "Enter a valid URL that starts with http:// or https://";
       }
     }
 
-    if (!captchaToken) newErrors.captcha = "Please verify that you're not a robot.";
+    if (!captchaToken)
+      newErrors.captcha = "Please verify that you're not a robot.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -200,8 +213,12 @@ function Form() {
       const result = await response.json();
 
       if (result?.success) {
-        toast.success(result?.message || "Partner request submitted successfully!");
-        setSuccess(result?.message || "Partner request submitted successfully!");
+        toast.success(
+          result?.message || "Partner request submitted successfully!"
+        );
+        setSuccess(
+          result?.message || "Partner request submitted successfully!"
+        );
         setFormData({
           businessName: "",
           ownerName: "",
@@ -240,13 +257,17 @@ function Form() {
             Become a Partner
           </h2>
 
-          {success && <p className="text-green-600 mb-4 text-center">{success}</p>}
+          {success && (
+            <p className="text-green-600 mb-4 text-center">{success}</p>
+          )}
           {error && <p className="text-red-600 mb-4 text-center">{error}</p>}
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block sora-medium mb-2 text-gray-700">Business Name</label>
+                <label className="block sora-medium mb-2 text-gray-700">
+                  Business Name
+                </label>
                 <input
                   type="text"
                   name="businessName"
@@ -255,11 +276,17 @@ function Form() {
                   onChange={handleChange}
                   className={inputClass("businessName")}
                 />
-                {errors.businessName && <p className="text-red-500 text-sm mt-1">{errors.businessName}</p>}
+                {errors.businessName && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.businessName}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block sora-medium mb-2 text-gray-700">Owner Name</label>
+                <label className="block sora-medium mb-2 text-gray-700">
+                  Owner Name
+                </label>
                 <input
                   type="text"
                   name="ownerName"
@@ -268,11 +295,17 @@ function Form() {
                   onChange={handleChange}
                   className={inputClass("ownerName")}
                 />
-                {errors.ownerName && <p className="text-red-500 text-sm mt-1">{errors.ownerName}</p>}
+                {errors.ownerName && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.ownerName}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block sora-medium mb-2 text-gray-700">Email</label>
+                <label className="block sora-medium mb-2 text-gray-700">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -281,24 +314,32 @@ function Form() {
                   onChange={handleChange}
                   className={inputClass("email")}
                 />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div>
-                <label className="block sora-medium mb-2 text-gray-700">Phone</label>
+                <label className="block sora-medium mb-2 text-gray-700">
+                  Phone
+                </label>
                 <input
-                  type="tel"
+                  type="number"
                   name="phone"
                   placeholder="(XXX) XXX-XXXX"
                   value={formData.phone}
                   onChange={handleChange}
                   className={inputClass("phone")}
                 />
-                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                )}
               </div>
 
               <div className="md:col-span-2">
-                <label className="block sora-medium mb-2 text-gray-700">Address</label>
+                <label className="block sora-medium mb-2 text-gray-700">
+                  Address
+                </label>
                 <input
                   type="text"
                   name="address"
@@ -307,12 +348,16 @@ function Form() {
                   onChange={handleChange}
                   className={inputClass("address")}
                 />
-                {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+                {errors.address && (
+                  <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                )}
               </div>
 
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-6">
                 <div className="flex-1">
-                  <label className="block sora-medium mb-2 text-gray-700">City</label>
+                  <label className="block sora-medium mb-2 text-gray-700">
+                    City
+                  </label>
                   <input
                     type="text"
                     name="city"
@@ -321,19 +366,33 @@ function Form() {
                     onChange={handleChange}
                     className={inputClass("city")}
                   />
-                  {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
+                  {errors.city && (
+                    <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                  )}
                 </div>
 
                 <div className="flex-1">
-                  <label className="block sora-medium mb-2 text-gray-700">State</label>
+                  <label className="block sora-medium mb-2 text-gray-700">
+                    State
+                  </label>
                   <Select
                     id="state"
                     name="state"
                     options={stateOptions}
-                    value={stateOptions.find((opt) => opt.value === formData.state) || null}
+                    value={
+                      stateOptions.find(
+                        (opt) => opt.value === formData.state
+                      ) || null
+                    }
                     onChange={(selected) => {
-                      setFormData((prev) => ({ ...prev, state: selected?.value || "" }));
-                      setErrors((prev) => ({ ...prev, state: selected?.value ? "" : "State is required." }));
+                      setFormData((prev) => ({
+                        ...prev,
+                        state: selected?.value || "",
+                      }));
+                      setErrors((prev) => ({
+                        ...prev,
+                        state: selected?.value ? "" : "State is required.",
+                      }));
                     }}
                     placeholder="Select State"
                     isSearchable
@@ -348,11 +407,15 @@ function Form() {
                       }),
                     }}
                   />
-                  {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
+                  {errors.state && (
+                    <p className="text-red-500 text-sm mt-1">{errors.state}</p>
+                  )}
                 </div>
 
                 <div className="flex-1">
-                  <label className="block sora-medium mb-2 text-gray-700">ZIP</label>
+                  <label className="block sora-medium mb-2 text-gray-700">
+                    ZIP
+                  </label>
                   <input
                     type="text"
                     name="zip"
@@ -361,7 +424,9 @@ function Form() {
                     onChange={handleChange}
                     className={inputClass("zip")}
                   />
-                  {errors.zip && <p className="text-red-500 text-sm mt-1">{errors.zip}</p>}
+                  {errors.zip && (
+                    <p className="text-red-500 text-sm mt-1">{errors.zip}</p>
+                  )}
                 </div>
               </div>
 
@@ -377,7 +442,9 @@ function Form() {
                   onChange={handleChange}
                   className={inputClass("website")}
                 />
-                {errors.website && <p className="text-red-500 text-sm mt-1">{errors.website}</p>}
+                {errors.website && (
+                  <p className="text-red-500 text-sm mt-1">{errors.website}</p>
+                )}
               </div>
 
               <div className="md:col-span-2 text-start origin-left scale-[0.80] sm:scale-100">
@@ -385,7 +452,9 @@ function Form() {
                   sitekey="6Ld-HwQsAAAAAHjp-oWWUZVRqGTn8fG2W2tjjH6l"
                   onChange={handleCaptcha}
                 />
-                {errors.captcha && <p className="text-red-500 text-sm mt-1">{errors.captcha}</p>}
+                {errors.captcha && (
+                  <p className="text-red-500 text-sm mt-1">{errors.captcha}</p>
+                )}
               </div>
             </div>
 

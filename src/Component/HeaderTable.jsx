@@ -11,7 +11,7 @@ const HeaderTable = ({
   setProducts,
   setLastPage,
   setSelectedCategory,
-  setLoading,
+  
 }) => {
   const role = useSelector((state) => state.person.value);
 
@@ -23,7 +23,7 @@ const HeaderTable = ({
   const LoginToken = localStorage.getItem("LoginToken");
 
   const fetchCategories = async () => {
-    setLoading(true);
+   
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/categories`,
@@ -37,9 +37,7 @@ const HeaderTable = ({
       setCategories(response.data);
     } catch (error) {
       toast.error("Network Error:", error.message);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   useEffect(() => {

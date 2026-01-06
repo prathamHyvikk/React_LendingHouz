@@ -68,11 +68,14 @@ import AdminOrderDetail from "./Pages/AdminOrderDetail";
 import AdminCheckOut from "./Pages/AdminCheckOut";
 import { Toaster } from "react-hot-toast";
 import ResetPassword from "./Pages/ResetPassword";
+import UserApplicationForm from "./Pages/UserApplicationForm";
+
 
 function App() {
   const dispatch = useDispatch();
   const authenticate = useSelector((state) => state.auth.value);
   const role = useSelector((state) => state.person.value);
+  const personId = useSelector((state) => state.person.id);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -85,16 +88,20 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("LoginToken");
-    if (role !== "" && authenticate == true && token !== null) {
-      ("");
-    } else if (authenticate == false && !pathname.includes("/signup") && token == null) {
-      navigate(`${role}/signin`);
-    }
 
-    
+    //   if (role !== "" && authenticate == true && token !== null) {
+    //     ("");
+    //   } else if (authenticate == false && !pathname.includes("/signup") && token == null) {
+    //     navigate(`${role}/signin`);
+    //   }
+
     // if (!token) {
     //   navigate(`${role}/signin`);
     // }
+
+    if (personId == null) {
+      navigate(`${role}/signin`);
+    }
   }, [pathname]);
 
   return (
@@ -134,6 +141,7 @@ function App() {
         <Route path="/app/signin" element={<SignIn />} />
         <Route path="/app/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+
         <Route path="/app/dashboard" element={<DashBoardUser />} />
         <Route
           path="/app/dashboard/applications"
@@ -142,6 +150,10 @@ function App() {
         <Route
           path="/app/dashboard/applications"
           element={<ApplicationsDashboard />}
+        />
+        <Route
+          path="/app/dashboard/applications/new-application"
+          element={<UserApplicationForm />}
         />
         <Route path="/app/dashboard/marketplace" element={<MarketPlace />} />
         <Route
@@ -167,6 +179,7 @@ function App() {
           path="/admin/forgot-password"
           element={<AdminForgotPassword />}
         />
+
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route
           path="/admin/dashboard/applications"

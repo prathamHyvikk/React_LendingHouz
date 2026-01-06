@@ -124,7 +124,7 @@ const AdminCheckOut = () => {
                         Phone number
                       </label>
                       <input
-                        type="tel"
+                        type="number"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Enter Your Phone Number..."

@@ -65,7 +65,7 @@ const EmploymentAndIncom = ({
       );
 
       toast.success(response.data.message);
-      navigate("/app/dashboard");
+      navigate("/app/dashboard/applications");
     } catch (error) {
       setLoading(false);
       if (error.response) {
@@ -103,6 +103,7 @@ const EmploymentAndIncom = ({
                     type="number"
                     placeholder="xxxx"
                     value={grossIncome}
+                    required
                     onChange={(e) => setGrossIncome(e.target.value)}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
@@ -125,6 +126,7 @@ const EmploymentAndIncom = ({
                     type="number"
                     placeholder="xxxx"
                     value={netIncome}
+                    required
                     onChange={(e) => setNetIncome(e.target.value)}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
@@ -149,6 +151,7 @@ const EmploymentAndIncom = ({
                     type="number"
                     placeholder="xxxx"
                     value={requestedAmount}
+                    required
                     onChange={(e) => setRequestedAmount(e.target.value)}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
@@ -165,6 +168,7 @@ const EmploymentAndIncom = ({
                 </label>
                 <select
                   value={paymentFrequency}
+                  required
                   onChange={(e) => setPaymentFrequency(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-400 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-400"
                   id="frequency-select"
@@ -198,19 +202,18 @@ const EmploymentAndIncom = ({
                 <input
                   type="date"
                   value={lastPayDate}
+                  required
                   onChange={(e) => setLastPayDate(e.target.value)}
                   //   max={new Date().toISOString().split("T")[0]}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md
      focus:outline-none focus:ring-2 focus:ring-blue-500
      focus:border-transparent placeholder:text-gray-400"
                 />
-                {
-                  error?.last_pay_date && (
-                    <p className="text-red-600 text-xs mt-1">
-                      {error?.last_pay_date}
-                    </p>
-                  )
-                }
+                {error?.last_pay_date && (
+                  <p className="text-red-600 text-xs mt-1">
+                    {error?.last_pay_date}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -219,19 +222,18 @@ const EmploymentAndIncom = ({
                 <input
                   type="date"
                   value={nextPayDate}
+                  required
                   onChange={(e) => setNextPayDate(e.target.value)}
                   //   max={new Date().toISOString().split("T")[0]}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md
      focus:outline-none focus:ring-2 focus:ring-blue-500
      focus:border-transparent placeholder:text-gray-400"
                 />
-                {
-                  error?.next_pay_date && (
-                    <p className="text-red-600 text-xs mt-1">
-                      {error?.next_pay_date}
-                    </p>
-                  )
-                }
+                {error?.next_pay_date && (
+                  <p className="text-red-600 text-xs mt-1">
+                    {error?.next_pay_date}
+                  </p>
+                )}
               </div>
             </div>
             <div className="mb-6">
@@ -242,6 +244,7 @@ const EmploymentAndIncom = ({
                 <input
                   type="checkbox"
                   id="confirm"
+                  required
                   value={check}
                   onChange={() => setCheck(!check)}
                   className="w-4 h-4 text-(--primary-color) border-gray-300 rounded focus:ring-blue-500"

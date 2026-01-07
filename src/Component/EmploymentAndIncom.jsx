@@ -16,7 +16,7 @@ const EmploymentAndIncom = ({
   const [lastPayDate, setLastPayDate] = useState("");
   const [nextPayDate, setNextPayDate] = useState("");
   const [paymentFrequency, setPaymentFrequency] = useState("");
-  const [check, setCheck] = useState(null);
+  const [check, setCheck] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 

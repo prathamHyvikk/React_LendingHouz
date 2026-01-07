@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const EmploymentAndIncom = ({
   confirmFinance,
@@ -15,10 +16,13 @@ const EmploymentAndIncom = ({
   const [lastPayDate, setLastPayDate] = useState("");
   const [nextPayDate, setNextPayDate] = useState("");
   const [paymentFrequency, setPaymentFrequency] = useState("");
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   const LoginToken = localStorage.getItem("LoginToken");
   const personId = useSelector((state) => state.person.id);
+  const navigate = useNavigate();
   console.log(personId);
 
   const handleSubmit = async (e) => {
@@ -48,7 +52,7 @@ const EmploymentAndIncom = ({
         form.append(key, value);
       });
 
-      console.log(form);
+      setLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/create-application`,
         form,
@@ -60,10 +64,13 @@ const EmploymentAndIncom = ({
         }
       );
 
-      console.log(response.data);
+      toast.success(response.data.message);
+      navigate("/app/dashboard");
     } catch (error) {
+      setLoading(false);
       if (error.response) {
         const apiError = error.response.data.errors;
+        setError(apiError);
 
         const firstError = Object.values(apiError)?.[0];
 
@@ -86,7 +93,7 @@ const EmploymentAndIncom = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Gross Annual Income
+                  Gross Annual Income <span className="text-red-600">*</span>
                 </label>
                 <div className="flex items-center border border-gray-300 rounded-md bg-white">
                   <span className="px-3 py-2 text-gray-600 border-r border-gray-300 font-medium">
@@ -95,16 +102,20 @@ const EmploymentAndIncom = ({
                   <input
                     type="number"
                     placeholder="xxxx"
-                    required
                     value={grossIncome}
                     onChange={(e) => setGrossIncome(e.target.value)}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
                 </div>
+                {error?.gross_income && (
+                  <p className="text-red-600 text-xs mt-1">
+                    {error?.gross_income}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Net Annual Income
+                  Net Annual Income <span className="text-red-600">*</span>
                 </label>
                 <div className="flex items-center border border-gray-300 rounded-md bg-white">
                   <span className="px-3 py-2 text-gray-600 border-r border-gray-300 font-medium">
@@ -113,12 +124,16 @@ const EmploymentAndIncom = ({
                   <input
                     type="number"
                     placeholder="xxxx"
-                    required
                     value={netIncome}
                     onChange={(e) => setNetIncome(e.target.value)}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
                 </div>
+                {error?.net_income && (
+                  <p className="text-red-600 text-xs mt-1">
+                    {error?.net_income}
+                  </p>
+                )}
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -133,19 +148,22 @@ const EmploymentAndIncom = ({
                   <input
                     type="number"
                     placeholder="xxxx"
-                    required
                     value={requestedAmount}
                     onChange={(e) => setRequestedAmount(e.target.value)}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
                 </div>
+                {error?.requested_income && (
+                  <p className="text-red-600 text-xs mt-1">
+                    {error?.requested_income}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Payment Frequency <span className="text-red-600">*</span>
                 </label>
                 <select
-                  required
                   value={paymentFrequency}
                   onChange={(e) => setPaymentFrequency(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-400 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-400"
@@ -165,6 +183,11 @@ const EmploymentAndIncom = ({
                     Yearly
                   </option>
                 </select>
+                {error?.payment_frequency && (
+                  <p className="text-red-600 text-xs mt-1">
+                    {error?.payment_frequency}
+                  </p>
+                )}
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -174,7 +197,6 @@ const EmploymentAndIncom = ({
                 </label>
                 <input
                   type="date"
-                  required
                   value={lastPayDate}
                   onChange={(e) => setLastPayDate(e.target.value)}
                   //   max={new Date().toISOString().split("T")[0]}
@@ -182,6 +204,13 @@ const EmploymentAndIncom = ({
      focus:outline-none focus:ring-2 focus:ring-blue-500
      focus:border-transparent placeholder:text-gray-400"
                 />
+                {
+                  error?.last_pay_date && (
+                    <p className="text-red-600 text-xs mt-1">
+                      {error?.last_pay_date}
+                    </p>
+                  )
+                }
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -189,7 +218,6 @@ const EmploymentAndIncom = ({
                 </label>
                 <input
                   type="date"
-                  required
                   value={nextPayDate}
                   onChange={(e) => setNextPayDate(e.target.value)}
                   //   max={new Date().toISOString().split("T")[0]}
@@ -197,6 +225,13 @@ const EmploymentAndIncom = ({
      focus:outline-none focus:ring-2 focus:ring-blue-500
      focus:border-transparent placeholder:text-gray-400"
                 />
+                {
+                  error?.next_pay_date && (
+                    <p className="text-red-600 text-xs mt-1">
+                      {error?.next_pay_date}
+                    </p>
+                  )
+                }
               </div>
             </div>
             <div className="mb-6">
@@ -210,7 +245,6 @@ const EmploymentAndIncom = ({
                   value={check}
                   onChange={() => setCheck(!check)}
                   className="w-4 h-4 text-(--primary-color) border-gray-300 rounded focus:ring-blue-500"
-                  required
                 />
                 <span className="text-sm text-gray-700">
                   I agree to the terms and conditions and authorize the lender
@@ -218,10 +252,16 @@ const EmploymentAndIncom = ({
                   this application.
                 </span>
               </label>
+              {error?.consent && (
+                <p className="text-red-600 text-xs mt-1">{error?.consent}</p>
+              )}
             </div>
             <button
               type="submit"
-              className="w-full cursor-pointer bg-(--primary-color) hover:bg-blue-950 text-white py-2 rounded-md font-semibold transition-colors"
+              disabled={loading}
+              className={`w-full ${
+                loading ? "pointer-events-none bg-gray-400 " : "cursor-pointer"
+              }  bg-(--primary-color) hover:bg-blue-950 text-white py-2 rounded-md font-semibold transition-colors`}
             >
               Continue
             </button>

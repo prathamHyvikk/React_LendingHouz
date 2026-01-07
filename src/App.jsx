@@ -70,7 +70,6 @@ import { Toaster } from "react-hot-toast";
 import ResetPassword from "./Pages/ResetPassword";
 import UserApplicationForm from "./Pages/UserApplicationForm";
 
-
 function App() {
   const dispatch = useDispatch();
   const authenticate = useSelector((state) => state.auth.value);
@@ -86,23 +85,23 @@ function App() {
     dispatch(setPersonRole("app"));
   }
 
-  useEffect(() => {
-    const token = localStorage.getItem("LoginToken");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("LoginToken");
 
-    //   if (role !== "" && authenticate == true && token !== null) {
-    //     ("");
-    //   } else if (authenticate == false && !pathname.includes("/signup") && token == null) {
-    //     navigate(`${role}/signin`);
-    //   }
+  //   if (role !== "" && authenticate == true && token !== null) {
+  //     ("");
+  //   } else if (authenticate == false && !pathname.includes("/signup") && token == null) {
+  //     navigate(`${role}/signin`);
+  //   }
 
-    // if (!token) {
-    //   navigate(`${role}/signin`);
-    // }
+  // if (!token) {
+  //   navigate(`${role}/signin`);
+  // }
 
-    if (personId == null) {
-      navigate(`${role}/signin`);
-    }
-  }, [pathname]);
+  //   if (personId == null) {
+  //     navigate(`${role}/signin`);
+  //   }
+  // }, [pathname]);
 
   return (
     <>

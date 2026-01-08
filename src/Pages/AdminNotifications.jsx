@@ -40,12 +40,12 @@ const AdminNotifications = () => {
   return (
     <>
       <AdminLayout>
-        <div className="bg-white rounded-lg pb-8 shadow-sm">
-          <div className="flex items-center justify-between p-6">
+        <div className="bg-white  rounded-lg pb-8 shadow-sm">
+          <div className="flex flex-col lg:flex-row max-lg:gap-3 items-center justify-between p-6">
             <h1 className="text-2xl sora-semibold text-gray-800">
               Notification
             </h1>
-            <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50">
+            <button className="flex  items-center gap-2 px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50">
               <span>Filter</span>
               <svg
                 className="w-4 h-4"
@@ -62,7 +62,7 @@ const AdminNotifications = () => {
               </svg>
             </button>
           </div>
-          <div id="notifications-container" className="">
+          <div id="notifications-container" className="max-h-200  overflow-y-auto">
             {notifications.map((notification, i) => (
               <div
                 key={i}

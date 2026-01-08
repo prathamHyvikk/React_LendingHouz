@@ -41,7 +41,7 @@ const Notifications = () => {
     <>
       <AdminLayout>
         <div className="bg-white rounded-lg pb-8 shadow-sm">
-          <div className="flex items-center justify-between p-6">
+          <div className="flex flex-col sm:flex-row max-sm:gap-4 items-center justify-between p-6">
             <h1 className="text-2xl sora-semibold text-gray-800">
               Notification
             </h1>
@@ -62,7 +62,7 @@ const Notifications = () => {
               </svg>
             </button>
           </div>
-          <div id="notifications-container" className="">
+          <div id="notifications-container" className="max-h-200  overflow-y-auto">
             {notifications.map((notification, i) => (
               <div
                 key={i}

@@ -15,7 +15,7 @@ const AdminLayout = ({ children }) => {
           <Sidebar />
 
           <div className="p-4 lg:p-8 w-full overflow-auto">
-            <div className=" cursor-pointer flex mx-auto lg:flex-col justify-end items-end mb-6 ">
+            <div className=" cursor-pointer max-lg:mt-22 flex mx-auto lg:flex-col justify-end items-end lg:mb-6 ">
               {pathname !== `/${role}/dashboard/notifications` && (
                 <div className="flex items-center space-x-4">
                   <input
@@ -44,7 +44,7 @@ const AdminLayout = ({ children }) => {
               )}
             </div>
 
-            <div className="content-area  flex-1 overflow-visible lg:ml-0 pt-16 lg:pt-0">
+            <div className="content-area  flex-1 overflow-visible lg:ml-0 pt-5 lg:pt-0">
               {children}
             </div>
           </div>

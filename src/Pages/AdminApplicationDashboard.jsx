@@ -10,6 +10,7 @@ import { applicationData } from "../data/userDashboard.json";
 import ViewModal from "../Component/ViewModal";
 import PrintPopup from "../Component/PrintPopup";
 import { useSelector } from "react-redux";
+import { AiOutlinePrinter } from "react-icons/ai";
 
 const AdminApplicationDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -189,17 +190,23 @@ const AdminApplicationDashboard = () => {
                     </Td>
 
                     <Td center>
-                      <IconBtn img={printIcon} onClick={showDropdown} />
+                      <IconBtn
+                        icon={<AiOutlinePrinter />}
+                        onClick={showDropdown}
+                      />
                     </Td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          //
+          
         </div>
 
-        {showInvoice && <InvoiceModal onClose={() => setShowInvoice(false)} />}
+        {showInvoice &&
+          (
+         
+          <InvoiceModal onClose={() => setShowInvoice(false)} />)}
         {showView && (
           <PrintPopup
             position={position}

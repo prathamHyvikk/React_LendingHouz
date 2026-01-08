@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { filterOptions } from "../data/userDashboard.json";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const HeaderTable = ({
   setShowAddProduct,
@@ -11,7 +12,8 @@ const HeaderTable = ({
   setProducts,
   setLastPage,
   setSelectedCategory,
-  
+  navigationLink,
+  fetchProductFromCategory,
 }) => {
   const role = useSelector((state) => state.person.value);
 
@@ -23,7 +25,6 @@ const HeaderTable = ({
   const LoginToken = localStorage.getItem("LoginToken");
 
   const fetchCategories = async () => {
-   
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/categories`,
@@ -37,7 +38,7 @@ const HeaderTable = ({
       setCategories(response.data);
     } catch (error) {
       toast.error("Network Error:", error.message);
-    } 
+    }
   };
 
   useEffect(() => {
@@ -54,10 +55,15 @@ const HeaderTable = ({
 
   const handleSelection = async (item) => {
     console.log(item);
+
     setSelectedOption(item);
     setSelectedCategory(item);
 
     setShowOptions(false);
+
+    if (fetchProductFromCategory == "no") {
+      return;
+    }
     try {
       // const response = await axios.get(
       //   item == "ALL"
@@ -92,7 +98,7 @@ const HeaderTable = ({
   };
   return (
     <>
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-3">
+    <div className={`flex ${marketplace ? "flex-row" : "flex-col "} sm:flex-row items-center justify-between mb-6 gap-3`}>
         <h2 className="text-lg sora-semibold ">{headingContent}</h2>
 
         <div className="flex items-center gap-3">
@@ -105,15 +111,22 @@ const HeaderTable = ({
                 + Add Product
               </button>
             ) : null
+          ) : navigationLink !== null && role == "app" ? (
+            <Link to={navigationLink}>
+              <button
+                onClick={() => setShowAddProduct(true)}
+                className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
+              >
+                + New Application
+              </button>
+            </Link>
           ) : (
-            // <a href="/dashboard/applications/confirm-your-financing">
             <button
               onClick={() => setShowAddProduct(true)}
               className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
             >
               + New Application
             </button>
-            // </a>
           )}
 
           {/* search */}

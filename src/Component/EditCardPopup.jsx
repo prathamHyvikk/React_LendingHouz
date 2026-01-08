@@ -1,26 +1,26 @@
 import React from "react";
 import ModalWrapper from "./ModalWrapper";
 
-const EditCardPopup = ({setShowCardPopup}) => {
+const EditCardPopup = ({ setShowCardPopup }) => {
   console.log("hello");
   return (
     <>
-      <ModalWrapper >
-        <div class="relative max-w-[400px] mx-auto bg-white rounded-xl shadow-2xl p-6 md:p-6">
+      <ModalWrapper>
+        <div className="relative max-w-[400px] mx-auto bg-white rounded-xl shadow-2xl p-6 md:p-6">
           <button
-            onClick={()=>setShowCardPopup(false)}
-            class="absolute top-2 right-2 px-2 py-1 rounded-md cursor-pointer"
+            onClick={() => setShowCardPopup(false)}
+            className="absolute top-2 right-2 px-2 py-1 rounded-md cursor-pointer"
           >
-            <i class="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-xmark"></i>
           </button>
 
-          <h1 class="text-2xl sora-bold mb-4">
-            Add / Edit <span class="text-(--primary-color)">Card</span>
+          <h1 className="text-2xl sora-bold mb-4">
+            Add / Edit <span className="text-(--primary-color)">Card</span>
           </h1>
 
-          <div class="flex justify-between items-center space-x-2 mb-4">
-            <div class="w-12 flex justify-center items-center">
-              <svg viewBox="0 0 100 65" class="w-full h-auto">
+          <div className="flex justify-between items-center space-x-2 mb-4">
+            <div className="w-12 flex justify-center items-center">
+              <svg viewBox="0 0 100 65" className="w-full h-auto">
                 <rect
                   x="0"
                   y="0"
@@ -32,19 +32,19 @@ const EditCardPopup = ({setShowCardPopup}) => {
                 <text
                   x="50"
                   y="32"
-                  font-family="Verdana"
-                  font-size="20"
-                  font-weight="bold"
+                  fontFamily="Verdana"
+                  fontSize="20"
+                  fontWeight="bold"
                   fill="white"
-                  text-anchor="middle"
-                  alignment-baseline="middle"
+                  textAnchor="middle"
+                  alignmentBaseline="middle"
                 >
                   VISA
                 </text>
               </svg>
             </div>
-            <div class="w-12 flex justify-center items-center">
-              <svg viewBox="0 0 100 65" class="w-full h-auto">
+            <div className="w-12 flex justify-center items-center">
+              <svg viewBox="0 0 100 65" className="w-full h-auto">
                 <rect
                   x="0"
                   y="0"
@@ -57,8 +57,8 @@ const EditCardPopup = ({setShowCardPopup}) => {
                 <circle cx="65" cy="32.5" r="15" fill="#EB001B"></circle>
               </svg>
             </div>
-            <div class="w-12 flex justify-center items-center">
-              <svg viewBox="0 0 100 65" class="w-full h-auto">
+            <div className="w-12 flex justify-center items-center">
+              <svg viewBox="0 0 100 65" className="w-full h-auto">
                 <rect
                   x="0"
                   y="0"
@@ -70,19 +70,19 @@ const EditCardPopup = ({setShowCardPopup}) => {
                 <text
                   x="50"
                   y="45"
-                  font-family="Verdana"
-                  font-size="16"
-                  font-weight="bold"
+                  fontFamily="Verdana"
+                  fontSize="16"
+                  fontWeight="bold"
                   fill="white"
-                  text-anchor="middle"
-                  alignment-baseline="middle"
+                  textAnchor="middle"
+                  alignmentBaseline="middle"
                 >
                   UnionPay
                 </text>
               </svg>
             </div>
-            <div class="w-12 flex justify-center items-center">
-              <svg viewBox="0 0 100 65" class="w-full h-auto">
+            <div className="w-12 flex justify-center items-center">
+              <svg viewBox="0 0 100 65" className="w-full h-auto">
                 <rect
                   x="0"
                   y="0"
@@ -94,19 +94,19 @@ const EditCardPopup = ({setShowCardPopup}) => {
                 <text
                   x="50"
                   y="35"
-                  font-family="Verdana"
-                  font-size="12"
-                  font-weight="bold"
+                  fontFamily="Verdana"
+                  fontSize="12"
+                  fontWeight="bold"
                   fill="white"
-                  text-anchor="middle"
-                  alignment-baseline="middle"
+                  textAnchor="middle"
+                  alignmentBaseline="middle"
                 >
                   AMERICAN EXPRESS
                 </text>
               </svg>
             </div>
-            <div class="w-12 flex justify-center items-center">
-              <svg viewBox="0 0 100 65" class="w-full h-auto">
+            <div className="w-12 flex justify-center items-center">
+              <svg viewBox="0 0 100 65" className="w-full h-auto">
                 <rect
                   x="0"
                   y="0"
@@ -115,17 +115,17 @@ const EditCardPopup = ({setShowCardPopup}) => {
                   rx="10"
                   fill="#FFFFFF"
                   stroke="#CCCCCC"
-                  stroke-width="1"
+                  strokeWidth="1"
                 ></rect>
                 <text
                   x="50"
                   y="35"
-                  font-family="Verdana"
-                  font-size="20"
-                  font-weight="bold"
+                  fontFamily="Verdana"
+                  fontSize="20"
+                  fontWeight="bold"
                   fill="#00358C"
-                  text-anchor="middle"
-                  alignment-baseline="middle"
+                  textAnchor="middle"
+                  alignmentBaseline="middle"
                 >
                   JCB
                 </text>
@@ -133,34 +133,34 @@ const EditCardPopup = ({setShowCardPopup}) => {
             </div>
           </div>
 
-          <form class="space-y-2">
-            <div class="flex flex-col gap-2">
-              <label for="name" class="">
+          <form className="space-y-2">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className="">
                 Name on Card
               </label>
               <input
                 type="text"
                 name="name"
                 placeholder="Michael"
-                class="w-full px-4 py-2 bg-gray-100 rounded-lg"
+                className="w-full px-4 py-2 bg-gray-100 rounded-lg"
               />
             </div>
 
-            <div class="flex flex-col gap-2">
-              <label for="card-number" class="">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="card-number" className="">
                 Card Number
               </label>
               <input
                 type="text"
                 name="card-number"
                 placeholder="1111-1111--1111"
-                class="w-full px-4 py-2 bg-gray-100 rounded-lg"
+                className="w-full px-4 py-2 bg-gray-100 rounded-lg"
               />
             </div>
 
-            <div class="flex justify-between gap-4">
-              <div class="w-full flex flex-col gap-2">
-                <label for="exp-date" class="">
+            <div className="flex justify-between gap-4">
+              <div className="w-full flex flex-col gap-2">
+                <label htmlFor="exp-date" className="">
                   Expiration Date
                 </label>
                 <input
@@ -168,24 +168,24 @@ const EditCardPopup = ({setShowCardPopup}) => {
                   id="exp-date"
                   name="exp-date"
                   placeholder="12/5/202"
-                  class="w-full px-4 py-2 bg-gray-100 rounded-lg"
+                  className="w-full px-4 py-2 bg-gray-100 rounded-lg"
                 />
               </div>
-              <div class="w-full flex flex-col gap-3">
-                <label for="cvv" class="">
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="cvv" className="">
                   CVV
                 </label>
                 <input
                   type="text"
                   name="cvv"
                   placeholder="221"
-                  class="w-full px-4 py-2 bg-gray-100 rounded-lg"
+                  className="w-full px-4 py-2 bg-gray-100 rounded-lg"
                 />
               </div>
             </div>
 
-            <div class="text-sm text-gray-500">
-              <h3 class="font-bold text-gray-800 mb-1">
+            <div className="text-sm text-gray-500">
+              <h3 className="font-bold text-gray-800 mb-1">
                 Learn More About Security
               </h3>
               <p>
@@ -194,16 +194,16 @@ const EditCardPopup = ({setShowCardPopup}) => {
               </p>
               <button
                 type="button"
-                class="mt-4 px-4 py-2 text-red-500 border border-red-500 rounded-lg font-semibold hover:bg-[#FDEDED] transition-colors"
+                className="mt-4 px-4 py-2 text-red-500 border border-red-500 rounded-lg font-semibold hover:bg-[#FDEDED] transition-colors"
               >
                 Powered by Stripe
               </button>
             </div>
 
-            <div class="">
+            <div className="">
               <button
                 type="submit"
-                class="w-full bg-(--primary-color) text-white py-2 text-sm rounded-full shadow-lg"
+                className="w-full bg-(--primary-color) text-white py-2 text-sm rounded-full shadow-lg"
               >
                 Edit
               </button>

@@ -2,7 +2,7 @@ import React from "react";
 import ModalWrapper from "./ModalWrapper";
 import logoImage from "/assets/Images/logo.png";
 
-const InvoiceModal = ({ onClose }) => {
+const InvoiceModal = ({ onClose  }) => {
   return (
     <>
       <ModalWrapper onClose={onClose}>

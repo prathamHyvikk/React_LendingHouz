@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
   return (
     <>
       <AdminLayout>
-        <div className="mb-8 max-lg:mt-4">
+        <div className="mb-8 ">
           <h2 className="text-2xl sora-bold text-blue-900">Privacy Policy</h2>
           <p className="text-gray-600">
             How we collect, use, and protect your information

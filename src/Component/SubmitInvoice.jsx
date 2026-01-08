@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ModalWrapper from "./ModalWrapper";
-import "../App.css"
+import "../App.css";
 
 const SubmitInvoice = ({ onClose, setAddInvoice }) => {
   const [invoiceType, setInvoiceType] = useState("upload");
@@ -11,9 +11,13 @@ const SubmitInvoice = ({ onClose, setAddInvoice }) => {
     <>
       <ModalWrapper onClose={onClose}>
         <div className="bg-white rounded-3xl shadow-lg w-full max-w-md p-8">
-          <h1 className="!text-xl sora-bold text-gray-900 mb-4">
-            Submit Your Invoice
-          </h1>
+          <div className="flex justify-between items-start">
+            <h1 className="!text-xl sora-bold text-gray-900 mb-4">
+              Submit Your Invoice
+            </h1>
+
+            <p onClick={onClose} className="cursor-pointer text-xl">X</p>
+          </div>
 
           <div className="flex gap-6 mb-6">
             <label className="flex items-center cursor-pointer">

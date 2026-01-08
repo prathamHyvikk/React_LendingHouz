@@ -12,6 +12,8 @@ import PrintPopup from "../Component/PrintPopup";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import HeaderTable from "../Component/HeaderTable";
+import { AiOutlinePrinter } from "react-icons/ai";
 
 const ApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -19,6 +21,8 @@ const ApplicationsDashboard = () => {
   const [applications, setApplications] = useState();
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
@@ -40,7 +44,19 @@ const ApplicationsDashboard = () => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
 
-  console.log(userId);
+  const fetchCategories = async () => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/categories`,
+      {
+        headers: {
+          Authorization: `Bearer ${LoginToken}`,
+        },
+      }
+    );
+
+    setCategories(response?.data?.categories);
+  };
+
   const fetchApplications = async () => {
     const response = await axios.get(
       `https://cpanel.lendinghouz.com/api/show-application`,
@@ -54,12 +70,12 @@ const ApplicationsDashboard = () => {
       }
     );
 
-    console.log(response.data);
     setApplications(response?.data?.applications);
   };
 
   useEffect(() => {
     fetchApplications();
+    fetchCategories();
   }, []);
 
   return (
@@ -76,92 +92,13 @@ const ApplicationsDashboard = () => {
 
           {/* TABLE */}
           <div className="bg-white rounded-lg shadow-sm p-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-3">
-              <h2 className="text-lg sora-semibold ">List of Applications</h2>
-
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() =>
-                    navigate("/app/dashboard/applications/new-application")
-                  }
-                  className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
-                >
-                  + New Application
-                </button>
-
-                {/* search */}
-                {!marketplace ? (
-                  <>
-                    <input
-                      type="text"
-                      placeholder="Search User"
-                      className="hidden sm:block border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
-                    />
-
-                    <button className="sm:hidden p-2 border border-gray-300 rounded-md hover:bg-gray-100">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M21 21l-4.35-4.35m2.1-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
-                        ></path>
-                      </svg>
-                    </button>
-                  </>
-                ) : (
-                  ""
-                )}
-
-                {/* filter */}
-                <button
-                  className={
-                    marketplace
-                      ? "productlistBtn flex items-center gap-1 border border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100"
-                      : "flex items-center gap-1 border border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100"
-                  }
-                >
-                  <span className="max-sm:hidden">
-                    {marketplace ? "Filter by Product & Services" : "Filter"}
-                  </span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 max-sm:hidden"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    ></path>
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 sm:hidden"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 12.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-4.586L3.293 6.707A1 1 0 013 6V4z"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
+            <HeaderTable
+              setShowAddProduct={setShowAddProduct}
+              setSelectedCategory={setSelectedCategory}
+              headingContent="List of Applications"
+              navigationLink="/app/dashboard/applications/new-application"
+              fetchProductFromCategory={"no"}
+            />
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm min-h-30 max-h-90">
               <table className="w-full text-sm">
                 <thead className="bg-gray-100 text-gray-700 sticky top-0">
@@ -186,39 +123,93 @@ const ApplicationsDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {applications?.map((item, i) => (
-                    <tr key={i} className="hover:bg-gray-50">
-                      <Td>
-                        <div className="flex items-center gap-2">
-                          <img
-                            className="shrink-0 w-12 h-12 "
-                            src={item.img || "/assets/Images/product.png"}
-                            alt="image"
-                          />
-                          {item.product_type}
-                        </div>
-                      </Td>
-                      <Td center={"yes"}>{item.status}</Td>
-                      <Td>{item.lender}</Td>
+                  {selectedCategory == "" ? (
+                    <>
+                      {applications?.map((item, i) => (
+                        <tr key={i} className="hover:bg-gray-50">
+                          <Td>
+                            <div className="flex items-center gap-2">
+                              <img
+                                className="shrink-0 w-12 h-12 "
+                                src={item.img || "/assets/Images/product.png"}
+                                alt="image"
+                              />
+                              {item.product_type}
+                            </div>
+                          </Td>
+                          <Td center={"yes"}>{item.status}</Td>
+                          <Td>{item.lender}</Td>
 
-                      <Td center={"yes"}>{item.applicationNo}</Td>
-                      <Td center={"yes"}>{item.requested_income}</Td>
-                      <Td className="" center={""}>
-                        {item.created_at.split("T")[0].split("-").reverse().join("/")}
-                      </Td>
+                          <Td center={"yes"}>{item.applicationNo}</Td>
+                          <Td center={"yes"}>{item.requested_income}</Td>
+                          <Td className="" center={""}>
+                            {item.created_at
+                              .split("T")[0]
+                              .split("-")
+                              .reverse()
+                              .join("/")}
+                          </Td>
 
-                      <Td center>
-                        <IconBtn img={printIcon} onClick={showDropdown} />
-                      </Td>
-                    </tr>
-                  ))}
+                          <Td center>
+                            <IconBtn
+                              icon={<AiOutlinePrinter />}
+                              onClick={showDropdown}
+                            />
+                          </Td>
+                        </tr>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {applications
+                        ?.filter(
+                          (item) => item.product_type == selectedCategory
+                        )
+                        .map((item, i) => (
+                          <tr key={i} className="hover:bg-gray-50">
+                            <Td>
+                              <div className="flex items-center gap-2">
+                                <img
+                                  className="shrink-0 w-12 h-12 "
+                                  src={item.img || "/assets/Images/product.png"}
+                                  alt="image"
+                                />
+                                {item.product_type}
+                              </div>
+                            </Td>
+                            <Td center={"yes"}>{item.status}</Td>
+                            <Td>{item.lender}</Td>
+
+                            <Td center={"yes"}>{item.applicationNo}</Td>
+                            <Td center={"yes"}>{item.requested_income}</Td>
+                            <Td className="" center={""}>
+                              {item.created_at
+                                .split("T")[0]
+                                .split("-")
+                                .reverse()
+                                .join("/")}
+                            </Td>
+
+                            <Td center>
+                              <IconBtn
+                                icon={<AiOutlinePrinter />}
+                                onClick={showDropdown}
+                              />
+                            </Td>
+                          </tr>
+                        ))}
+                    </>
+                  )}
                 </tbody>
               </table>
             </div>
           </div>
 
           {showInvoice && (
-            <InvoiceModal onClose={() => setShowInvoice(false)} />
+            <>
+             
+              <InvoiceModal onClose={() => setShowInvoice(false)} />
+            </>
           )}
           {showView && (
             <PrintPopup

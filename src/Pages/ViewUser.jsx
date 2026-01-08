@@ -26,7 +26,7 @@ const ViewUser = () => {
       <AdminLayout>
         <div>
           <div className="">
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div className="bg-white rounded-lg shadow-md p-3 mb-6">
               <div className="flex flex-col items-center">
                 <div className="relative group overflow-hidden">
                   <img
@@ -51,10 +51,10 @@ const ViewUser = () => {
                   />
                 </div>
 
-                <h1 className="text-xl sora-bold text-gray-800 mt-4">
-                  Khusan Akhmedov
+                <h1 className=" !text-xl lg:!text-2xl sora-bold text-gray-800 mt-4">
+                 John Doe
                 </h1>
-                <p className="text-sm text-gray-500">Uzbekistan, Tashkent</p>
+                
               </div>
             </div>
 

@@ -15,6 +15,9 @@ import { clients } from "../data/userDashboard.json";
 import { recentData } from "../data/userDashboard.json";
 import HeaderTable from "../Component/HeaderTable";
 import { useSelector } from "react-redux";
+import { CiShop } from "react-icons/ci";
+import { ImAttachment } from "react-icons/im";
+import { IoEyeOutline } from "react-icons/io5";
 
 const AdminDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -79,20 +82,20 @@ const AdminDashboard = () => {
                       <Td center={"yes"} className="flex justify-center">
                         <IconBtn
                           href={`/${role}/dashboard/marketplace`}
-                          img={shopIcon}
+                          icon={<CiShop />}
                         />
                       </Td>
-                      {console.log(`/${role}/dashboard/marketplace`)}
+
                       <Td center={"yes"}>
                         <IconBtn
-                          img={attachIcon}
+                          icon={<ImAttachment />}
                           onClick={() => setShowInvoice(true)}
                         />
                       </Td>
 
                       <Td center>
                         <IconBtn
-                          img={eyeIcon}
+                          icon={<IoEyeOutline />}
                           onClick={() => setShowView(true)}
                         />
                       </Td>
@@ -101,8 +104,7 @@ const AdminDashboard = () => {
                 </tbody>
               </table>
             </div>
-            
-            
+
             <div className="mt-8">
               <h2 className="text-2xl sora-medium">Recent</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 w-full mt-8">

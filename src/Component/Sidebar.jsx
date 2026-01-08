@@ -51,19 +51,29 @@ const Sidebar = () => {
   return (
     <>
       {/* hemburger icon - Mobile view */}
-      <button
-        id="sidebarToggleBtn"
-        onClick={() => setShowSidebar(true)}
-        className="lg:hidden p-3 bg-gray-200  cursor-pointer rounded-md m-3 fixed top-2 left-2 z-198"
-      >
-        <i className="fas fa-bars"></i>
-      </button>
+      <div className="">
+        <div className="lg:hidden w-full ">
+          <button
+            id="sidebarToggleBtn"
+            onClick={() => setShowSidebar(true)}
+            className="lg:hidden p-3 bg-gray-200  cursor-pointer rounded-md m-3 fixed top-2 left-2 z-198"
+          >
+            <i className="fas fa-bars"></i>
+          </button>
 
-      <div
-        className={`${
-          showSidebar ? "fixed inset-0 w-full h-screen bg-black/40  z-196" : " "
-        }`}
-      ></div>
+          <div className="lg:hidden  w-full bg-gray-50 fixed top-0 py-2 px-2 z-1">
+            <img className="ml-auto" src={logoImage} alt="logo" />
+          </div>
+        </div>
+
+        <div
+          className={`${
+            showSidebar
+              ? "fixed inset-0 w-full h-screen bg-black/40  z-196"
+              : " "
+          }`}
+        ></div>
+      </div>
 
       {/* sidebar */}
       <div
@@ -133,7 +143,9 @@ const Sidebar = () => {
                 </p>
                 <button
                   className={`text-xs px-2 py-.5 ${
-                    role == "admin" ? "bg-yellow-400" : "bg-green-400 text-white"
+                    role == "admin"
+                      ? "bg-yellow-400"
+                      : "bg-green-400 text-white"
                   }  rounded-full sora-semibold`}
                 >
                   {role == "admin" ? "Admin" : "User"}

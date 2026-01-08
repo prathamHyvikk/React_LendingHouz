@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import {
@@ -75,33 +75,37 @@ function App() {
   const authenticate = useSelector((state) => state.auth.value);
   const role = useSelector((state) => state.person.value);
   const personId = useSelector((state) => state.person.id);
+  const token = localStorage.getItem("LoginToken");
+
+  const prevRoleRef = useRef(null);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  if (pathname.includes("/admin")) {
-    dispatch(setPersonRole("admin"));
-  } else {
-    dispatch(setPersonRole("app"));
-  }
+  useEffect(() => {
+    if (pathname.startsWith("/admin")) {
+      dispatch(setPersonRole("admin"));
+    } else if (pathname.startsWith("/app")) {
+      dispatch(setPersonRole("app"));
+    }
+  }, [pathname]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("LoginToken");
+  useEffect(() => {
+    
+    if (prevRoleRef.current === null) {
+      prevRoleRef.current = role;
+      return;
+    }
 
-  //   if (role !== "" && authenticate == true && token !== null) {
-  //     ("");
-  //   } else if (authenticate == false && !pathname.includes("/signup") && token == null) {
-  //     navigate(`${role}/signin`);
-  //   }
+   
+    if (prevRoleRef.current !== role && role) {
+      navigate(`/${role}/signin`);
+    }
 
-  // if (!token) {
-  //   navigate(`${role}/signin`);
-  // }
+    prevRoleRef.current = role;
+  }, [role]);
 
-  //   if (personId == null) {
-  //     navigate(`${role}/signin`);
-  //   }
-  // }, [pathname]);
+
 
   return (
     <>

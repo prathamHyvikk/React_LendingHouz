@@ -4,9 +4,9 @@ import { useLocation } from "react-router-dom";
 export const personRole = createSlice({
   name: "role",
   initialState: {
-    value: "app",
+    value: "",
     id: null,
-    userType: "C",
+    userType: "",
   },
   reducers: {
     setPersonRole: (state, action) => {

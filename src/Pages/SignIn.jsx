@@ -3,7 +3,7 @@ import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setId, setPersonRole } from "../features/personRole";
+import { setId, setPersonRole, setUserType } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { setAuthenticate } from "../features/authenticate";
@@ -52,6 +52,7 @@ const SignIn = () => {
       dispatch(setAuthenticate(true));
       dispatch(setPersonRole("app"));
       dispatch(setId(response.data.data.id));
+      dispatch(setUserType("C"));
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;

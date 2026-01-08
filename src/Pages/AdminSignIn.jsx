@@ -3,7 +3,7 @@ import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setId, setPersonRole } from "../features/personRole";
+import { setId, setPersonRole, setUserType } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { setAuthenticate } from "../features/authenticate";
@@ -54,6 +54,7 @@ const AdminSignIn = () => {
       dispatch(setAuthenticate(true));
       dispatch(setPersonRole("admin"));
       dispatch(setId(response.data.data.id));
+      dispatch(setUserType("A"));
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;

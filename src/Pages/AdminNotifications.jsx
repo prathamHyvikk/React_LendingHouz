@@ -104,7 +104,7 @@ const AdminNotifications = () => {
               </div>
             ))}
           </div>
-          //
+       
         </div>
       </AdminLayout>
     </>

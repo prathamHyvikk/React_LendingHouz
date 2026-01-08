@@ -11,14 +11,17 @@ import ViewModal from "../Component/ViewModal";
 import PrintPopup from "../Component/PrintPopup";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showView, setShowView] = useState(false);
-
+  const [applications, setApplications] = useState();
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const role = useSelector((state) => state.person.value);
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
   const marketplace = false;
 
   const navigate = useNavigate();
@@ -36,6 +39,28 @@ const ApplicationsDashboard = () => {
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
+
+  console.log(userId);
+  const fetchApplications = async () => {
+    const response = await axios.get(
+      `https://cpanel.lendinghouz.com/api/show-application`,
+      {
+        headers: {
+          Authorization: `Bearer ${LoginToken}`,
+        },
+        params: {
+          user_id: userId,
+        },
+      }
+    );
+
+    console.log(response.data);
+    setApplications(response?.data?.applications);
+  };
+
+  useEffect(() => {
+    fetchApplications();
+  }, []);
 
   return (
     <>
@@ -55,22 +80,14 @@ const ApplicationsDashboard = () => {
               <h2 className="text-lg sora-semibold ">List of Applications</h2>
 
               <div className="flex items-center gap-3">
-                {marketplace ? (
-                  role == "admin" ? (
-                    <button className="open-popup bg-[#0080C6] text-white px-4 py-2 rounded-md hover:bg-[#006ba1] transition text-sm">
-                      + Add Product
-                    </button>
-                  ) : null
-                ) : (
-                  // <a href="/dashboard/applications/confirm-your-financing">
-                  <button
-                    onClick={() => navigate("/app/dashboard/applications/new-application")}
-                    className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
-                  >
-                    + New Application
-                  </button>
-                  // </a>
-                )}
+                <button
+                  onClick={() =>
+                    navigate("/app/dashboard/applications/new-application")
+                  }
+                  className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
+                >
+                  + New Application
+                </button>
 
                 {/* search */}
                 {!marketplace ? (
@@ -145,9 +162,9 @@ const ApplicationsDashboard = () => {
                 </button>
               </div>
             </div>
-            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
+            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm min-h-30 max-h-90">
               <table className="w-full text-sm">
-                <thead className="bg-gray-100 text-gray-700">
+                <thead className="bg-gray-100 text-gray-700 sticky top-0">
                   <tr>
                     <Th>{role == "admin" ? "Application" : "Product"}</Th>
                     <Th>Application Status</Th>
@@ -169,25 +186,25 @@ const ApplicationsDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {applicationData.map((item, i) => (
+                  {applications?.map((item, i) => (
                     <tr key={i} className="hover:bg-gray-50">
                       <Td>
                         <div className="flex items-center gap-2">
                           <img
                             className="shrink-0 w-12 h-12 "
-                            src={item.img}
+                            src={item.img || "/assets/Images/product.png"}
                             alt="image"
                           />
-                          {item.name}
+                          {item.product_type}
                         </div>
                       </Td>
                       <Td center={"yes"}>{item.status}</Td>
                       <Td>{item.lender}</Td>
 
                       <Td center={"yes"}>{item.applicationNo}</Td>
-                      <Td center={"yes"}>{item.applicationAmount}</Td>
+                      <Td center={"yes"}>{item.requested_income}</Td>
                       <Td className="" center={""}>
-                        {item.date}
+                        {item.created_at.split("T")[0].split("-").reverse().join("/")}
                       </Td>
 
                       <Td center>
@@ -198,7 +215,6 @@ const ApplicationsDashboard = () => {
                 </tbody>
               </table>
             </div>
-          
           </div>
 
           {showInvoice && (

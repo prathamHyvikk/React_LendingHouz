@@ -73,7 +73,7 @@ const MarketPlace = () => {
               </div>
             </div>
           </div>
-          //
+       
         </div>
 
         {/* Popup */}

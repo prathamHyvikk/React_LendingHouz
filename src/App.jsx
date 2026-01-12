@@ -91,21 +91,17 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-    
     if (prevRoleRef.current === null) {
       prevRoleRef.current = role;
       return;
     }
 
-   
     if (prevRoleRef.current !== role && role) {
       navigate(`/${role}/signin`);
     }
 
     prevRoleRef.current = role;
   }, [role]);
-
-
 
   return (
     <>
@@ -187,6 +183,11 @@ function App() {
         <Route
           path="/admin/dashboard/applications"
           element={<AdminApplicationDashboard />}
+        />
+
+        <Route
+          path="/admin/dashboard/applications/new-application"
+          element={<UserApplicationForm />}
         />
 
         <Route

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -9,12 +12,15 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [check, setCheck] = useState(false);
+  const [errors, setErrors] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("email", email);
+    formData.append("first_name", first_name);
+    formData.append("last_name", last_name);
     formData.append("mobile", phone);
     formData.append("address_1", address);
     formData.append("address_2", address2);
@@ -23,8 +29,29 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
     formData.append("state", state);
     formData.append("chk_correct", check);
 
-      setVerifyContact(formData);
-       setActiveStep((s) => s + 1)
+    setVerifyContact(formData);
+
+    if (first_name == "") {
+      toast.error("First name is required");
+    } else if (last_name == "") {
+      toast.error("Last name is required");
+    } else if (email == "") {
+      toast.error("Email is required");
+    } else if (phone == "") {
+      toast.error("Phone number is required");
+    } else if (address == "") {
+      toast.error("Address is required");
+    } else if (zip == "") {
+      toast.error("Zip code is required");
+    } else if (city == "") {
+      toast.error("City is required");
+    } else if (state == "") {
+      toast.error("State is required");
+    } else if (check == false) {
+      toast.error("Please check the box");
+    } else {
+      setActiveStep((s) => s + 1);
+    }
 
     // formData.forEach((value, key) => {
     //   console.log(`${key}: ${value}`);
@@ -45,6 +72,34 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
+                  First Name <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fName"
+                  value={first_name}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Enter your first name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="lName"
+                  value={last_name}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Enter your last name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Email Address <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -52,7 +107,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
                   placeholder="Enter your email"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -64,7 +118,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
                 <input
                   type="number"
                   id="phone"
-                  required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Enter your phone "
@@ -79,7 +132,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
               <input
                 type="text"
                 id="address"
-                required
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter your address"
@@ -107,7 +159,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
                 <input
                   type="number"
                   id="dateInput"
-                  required
                   value={zip}
                   onChange={(e) => setZip(e.target.value)}
                   placeholder="Enter Zip"
@@ -123,7 +174,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
                   id="city"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  required
                   placeholder="city"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -135,7 +185,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
                 <input
                   type="text"
                   id="state"
-                  required
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   placeholder="state"
@@ -151,7 +200,6 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
                 <input
                   type="checkbox"
                   id="confirm"
-                  required
                   value={check}
                   onChange={() => setCheck(!check)}
                   className="w-4 h-4 text-(--primary-color) border-gray-300 rounded focus:ring-blue-500"
@@ -160,7 +208,7 @@ const VerifyContact = ({ setActiveStep, setVerifyContact }) => {
               </label>
             </div>
             <button
-            //   onClick={}
+              //   onClick={}
               className="w-full bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white py-2 rounded-md font-semibold transition-colors"
             >
               Continue

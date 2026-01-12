@@ -14,6 +14,9 @@ const HeaderTable = ({
   setSelectedCategory,
   navigationLink,
   fetchProductFromCategory,
+  setApplications,
+  search,
+  setSearch,
 }) => {
   const role = useSelector((state) => state.person.value);
 
@@ -21,6 +24,7 @@ const HeaderTable = ({
   const [selectedOption, setSelectedOption] = useState("");
   const [optionValue, setOptionValue] = useState("");
   const [categories, setCategories] = useState([]);
+  // const [search, setSearch] = useState("");
 
   const LoginToken = localStorage.getItem("LoginToken");
 
@@ -96,9 +100,17 @@ const HeaderTable = ({
       toast.error("Network Error:", error.message);
     }
   };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
   return (
     <>
-    <div className={`flex ${marketplace ? "flex-row" : "flex-col "} sm:flex-row items-center justify-between mb-6 gap-3`}>
+      <div
+        className={`flex ${
+          marketplace ? "flex-row" : "flex-col "
+        } sm:flex-row items-center justify-between mb-6 gap-3`}
+      >
         <h2 className="text-lg sora-semibold ">{headingContent}</h2>
 
         <div className="flex items-center gap-3">
@@ -111,10 +123,10 @@ const HeaderTable = ({
                 + Add Product
               </button>
             ) : null
-          ) : navigationLink !== null && role == "app" ? (
+          ) : navigationLink !== null ? (
             <Link to={navigationLink}>
               <button
-                onClick={() => setShowAddProduct(true)}
+                // onClick={() => setShowAddProduct(true)}
                 className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
               >
                 + New Application
@@ -135,6 +147,8 @@ const HeaderTable = ({
               <input
                 type="text"
                 placeholder="Search User"
+                value={search}
+                onChange={handleSearch}
                 className="hidden sm:block border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
               />
 

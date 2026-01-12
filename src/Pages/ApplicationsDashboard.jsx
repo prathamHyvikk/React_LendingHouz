@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HeaderTable from "../Component/HeaderTable";
 import { AiOutlinePrinter } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const ApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -23,6 +24,7 @@ const ApplicationsDashboard = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(false);
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
@@ -45,32 +47,46 @@ const ApplicationsDashboard = () => {
   }, [showInvoice, showView]);
 
   const fetchCategories = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/categories`,
-      {
-        headers: {
-          Authorization: `Bearer ${LoginToken}`,
-        },
-      }
-    );
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/categories`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        }
+      );
 
-    setCategories(response?.data?.categories);
+      setCategories(response?.data?.categories);
+    } catch (error) {
+      toast.error("Network Error:", error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchApplications = async () => {
-    const response = await axios.get(
-      `https://cpanel.lendinghouz.com/api/show-application`,
-      {
-        headers: {
-          Authorization: `Bearer ${LoginToken}`,
-        },
-        params: {
-          user_id: userId,
-        },
-      }
-    );
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `https://cpanel.lendinghouz.com/api/show-application`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+          params: {
+            user_id: userId,
+          },
+        }
+      );
 
-    setApplications(response?.data?.applications);
+      setApplications(response?.data?.applications);
+    } catch (error) {
+      toast.error("Network Error:", error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -122,92 +138,108 @@ const ApplicationsDashboard = () => {
                   </tr>
                 </thead>
 
-                <tbody>
-                  {selectedCategory == "" ? (
-                    <>
-                      {applications?.map((item, i) => (
-                        <tr key={i} className="hover:bg-gray-50">
-                          <Td>
-                            <div className="flex items-center gap-2">
-                              <img
-                                className="shrink-0 w-12 h-12 "
-                                src={item.img || "/assets/Images/product.png"}
-                                alt="image"
-                              />
-                              {item.product_type}
-                            </div>
-                          </Td>
-                          <Td center={"yes"}>{item.status}</Td>
-                          <Td>{item.lender}</Td>
-
-                          <Td center={"yes"}>{item.applicationNo}</Td>
-                          <Td center={"yes"}>{item.requested_income}</Td>
-                          <Td className="" center={""}>
-                            {item.created_at
-                              .split("T")[0]
-                              .split("-")
-                              .reverse()
-                              .join("/")}
-                          </Td>
-
-                          <Td center>
-                            <IconBtn
-                              icon={<AiOutlinePrinter />}
-                              onClick={showDropdown}
-                            />
-                          </Td>
-                        </tr>
-                      ))}
-                    </>
-                  ) : (
-                    <>
-                      {applications
-                        ?.filter(
-                          (item) => item.product_type == selectedCategory
-                        )
-                        .map((item, i) => (
-                          <tr key={i} className="hover:bg-gray-50">
-                            <Td>
-                              <div className="flex items-center gap-2">
-                                <img
-                                  className="shrink-0 w-12 h-12 "
-                                  src={item.img || "/assets/Images/product.png"}
-                                  alt="image"
-                                />
-                                {item.product_type}
-                              </div>
-                            </Td>
-                            <Td center={"yes"}>{item.status}</Td>
-                            <Td>{item.lender}</Td>
-
-                            <Td center={"yes"}>{item.applicationNo}</Td>
-                            <Td center={"yes"}>{item.requested_income}</Td>
-                            <Td className="" center={""}>
-                              {item.created_at
-                                .split("T")[0]
-                                .split("-")
-                                .reverse()
-                                .join("/")}
-                            </Td>
-
-                            <Td center>
-                              <IconBtn
-                                icon={<AiOutlinePrinter />}
-                                onClick={showDropdown}
-                              />
-                            </Td>
-                          </tr>
-                        ))}
-                    </>
-                  )}
-                </tbody>
+                 <tbody>
+                                 {loading ? (
+                                   <div className="flex justify-center items-center w-full">
+                                     <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+                                   </div>
+                                 ) : selectedCategory == "" ? (
+                                   <>
+                                     {applications?.map((item, i) => (
+                                       <tr key={i} className="hover:bg-gray-50">
+                                         <Td>
+                                           <div className="flex items-center gap-2">
+                                             <img
+                                               className="shrink-0 w-12 h-12 "
+                                               src={item.img || "/assets/Images/product.png"}
+                                               alt="image"
+                                             />
+                                             {item.product_type}
+                                           </div>
+                                         </Td>
+                                         <Td center={"yes"}>{item.status}</Td>
+                                         <Td>{item.lender}</Td>
+               
+                                         <Td center={"yes"}>{item.application_id}</Td>
+                                         <Td center={"yes"}>{item.requested_income}</Td>
+                                         <Td className="" center={""}>
+                                           {item.created_at
+                                             .split("T")[0]
+                                             .split("-")
+                                             .reverse()
+                                             .join("/")}
+                                         </Td>
+               
+                                         <Td center>
+                                           <IconBtn
+                                             icon={<AiOutlinePrinter />}
+                                             onClick={showDropdown}
+                                           />
+                                         </Td>
+                                       </tr>
+                                     ))}
+                                   </>
+                                 ) : (
+                                   <>
+                                     {applications?.filter(
+                                       (item) => item.product_type == selectedCategory
+                                     ).length == 0 ? (
+                                       <Td
+                                         center={"yes"}
+                                         className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
+                                       >
+                                         No Application Found
+                                       </Td>
+                                     ) : (
+                                       applications
+                                         ?.filter(
+                                           (item) => item.product_type == selectedCategory
+                                         )
+                                         .map((item, i) => (
+                                           <tr key={i} className="hover:bg-gray-50">
+                                             <Td>
+                                               <div className="flex items-center gap-2">
+                                                 <img
+                                                   className="shrink-0 w-12 h-12 "
+                                                   src={
+                                                     item.img || "/assets/Images/product.png"
+                                                   }
+                                                   alt="image"
+                                                 />
+                                                 {item.product_type}
+                                               </div>
+                                             </Td>
+                                             <Td center={"yes"}>{item.status}</Td>
+                                             <Td>{item.lender}</Td>
+               
+                                             <Td center={"yes"}>{item.applicationNo}</Td>
+                                             <Td center={"yes"}>{item.requested_income}</Td>
+                                             <Td className="" center={""}>
+                                               {item.created_at
+                                                 .split("T")[0]
+                                                 .split("-")
+                                                 .reverse()
+                                                 .join("/")}
+                                             </Td>
+               
+                                             <Td center>
+                                               <IconBtn
+                                                 icon={<AiOutlinePrinter />}
+                                                 onClick={showDropdown}
+                                               />
+                                             </Td>
+                                           </tr>
+                                         ))
+                                     )}
+                                   </>
+                                 )}
+                               </tbody>
               </table>
             </div>
           </div>
 
           {showInvoice && (
             <>
-             
               <InvoiceModal onClose={() => setShowInvoice(false)} />
             </>
           )}

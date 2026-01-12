@@ -16,6 +16,8 @@ const EmploymentAndIncom = ({
   const [lastPayDate, setLastPayDate] = useState("");
   const [nextPayDate, setNextPayDate] = useState("");
   const [paymentFrequency, setPaymentFrequency] = useState("");
+  const [dob, setDob] = useState("");
+  const [ssn, setSsn] = useState("");
   const [check, setCheck] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -25,12 +27,24 @@ const EmploymentAndIncom = ({
   const navigate = useNavigate();
   console.log(personId);
 
+  const formatSSN = (value) => {
+    const digits = value.replace(/\D/g, "").slice(0, 9);
+
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 5) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}`;
+  };
+
+  const finalSsn = ssn.replaceAll("-", "");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("gross_income", grossIncome);
     formData.append("net_income", netIncome);
     formData.append("requested_income", requestedAmount);
+    formData.append("dob", dob);
+    formData.append("ssn", finalSsn);
     formData.append("last_pay_date", lastPayDate);
     formData.append("next_pay_date", nextPayDate);
     formData.append("payment_frequency", paymentFrequency);
@@ -174,16 +188,16 @@ const EmploymentAndIncom = ({
                   id="frequency-select"
                 >
                   <option className="text-gray-400">Select Frequency</option>
-                  <option className="text-gray-700" value="daily">
+                  <option className="text-gray-700" value="Daily">
                     Daily
                   </option>
-                  <option className="text-gray-700" value="weekly">
+                  <option className="text-gray-700" value="Weekly">
                     Weekly
                   </option>
-                  <option className="text-gray-700" value="monthly">
+                  <option className="text-gray-700" value="Monthly">
                     Monthly
                   </option>
-                  <option className="text-gray-700" value="yearly">
+                  <option className="text-gray-700" value="Yearly">
                     Yearly
                   </option>
                 </select>
@@ -191,6 +205,49 @@ const EmploymentAndIncom = ({
                   <p className="text-red-600 text-xs mt-1">
                     {error?.payment_frequency}
                   </p>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Date of Birth (MM/DD/YYYY){" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="date"
+                  value={dob}
+                  required
+                  onChange={(e) => setDob(e.target.value)}
+                  max={new Date().toISOString().split("T")[0]}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md
+     focus:outline-none focus:ring-2 focus:ring-blue-500
+     focus:border-transparent placeholder:text-gray-400"
+                />
+                {error?.dob && (
+                  <p className="text-red-600 text-xs mt-1">{error?.dob}</p>
+                )}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  SSN/TIN (XXX-XX-XXXX) *{" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={ssn}
+                  required
+                  maxLength={11} // 555-55-5555 = 11 chars
+                  onChange={(e) => setSsn(formatSSN(e.target.value))}
+                  placeholder="xxx-xx-xxxx"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md
+    focus:outline-none focus:ring-2 focus:ring-blue-500
+    focus:border-transparent placeholder:text-gray-400"
+                />
+
+                {error?.ssn && (
+                  <p className="text-red-600 text-xs mt-1">{error?.ssn}</p>
                 )}
               </div>
             </div>

@@ -115,7 +115,7 @@ const AdminSignIn = () => {
                   placeholder="Enter your email"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
-                {error.email && (
+                {error?.email && (
                   <p className="text-red-500 text-sm">{error.email}</p>
                 )}
               </div>
@@ -131,7 +131,7 @@ const AdminSignIn = () => {
                   placeholder="Enter your password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
                 />
-                {error.password && (
+                {error?.password && (
                   <p className="text-red-500 text-sm">{error.password}</p>
                 )}
               </div>

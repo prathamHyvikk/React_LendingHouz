@@ -41,7 +41,7 @@ const HeaderTable = ({
 
       setCategories(response.data);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     }
   };
 
@@ -97,7 +97,7 @@ const HeaderTable = ({
       setLastPage(response?.data?.last_page);
       console.log(response);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     }
   };
 

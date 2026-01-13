@@ -60,7 +60,7 @@ const ApplicationsDashboard = () => {
 
       setCategories(response?.data?.categories);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -83,7 +83,7 @@ const ApplicationsDashboard = () => {
 
       setApplications(response?.data?.applications);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -138,102 +138,102 @@ const ApplicationsDashboard = () => {
                   </tr>
                 </thead>
 
-                 <tbody>
-                                 {loading ? (
-                                   <div className="flex justify-center items-center w-full">
-                                     <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
-                                   </div>
-                                 ) : selectedCategory == "" ? (
-                                   <>
-                                     {applications?.map((item, i) => (
-                                       <tr key={i} className="hover:bg-gray-50">
-                                         <Td>
-                                           <div className="flex items-center gap-2">
-                                             <img
-                                               className="shrink-0 w-12 h-12 "
-                                               src={item.img || "/assets/Images/product.png"}
-                                               alt="image"
-                                             />
-                                             {item.product_type}
-                                           </div>
-                                         </Td>
-                                         <Td center={"yes"}>{item.status}</Td>
-                                         <Td>{item.lender}</Td>
-               
-                                         <Td center={"yes"}>{item.application_id}</Td>
-                                         <Td center={"yes"}>{item.requested_income}</Td>
-                                         <Td className="" center={""}>
-                                           {item.created_at
-                                             .split("T")[0]
-                                             .split("-")
-                                             .reverse()
-                                             .join("/")}
-                                         </Td>
-               
-                                         <Td center>
-                                           <IconBtn
-                                             icon={<AiOutlinePrinter />}
-                                             onClick={showDropdown}
-                                           />
-                                         </Td>
-                                       </tr>
-                                     ))}
-                                   </>
-                                 ) : (
-                                   <>
-                                     {applications?.filter(
-                                       (item) => item.product_type == selectedCategory
-                                     ).length == 0 ? (
-                                       <Td
-                                         center={"yes"}
-                                         className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
-                                       >
-                                         No Application Found
-                                       </Td>
-                                     ) : (
-                                       applications
-                                         ?.filter(
-                                           (item) => item.product_type == selectedCategory
-                                         )
-                                         .map((item, i) => (
-                                           <tr key={i} className="hover:bg-gray-50">
-                                             <Td>
-                                               <div className="flex items-center gap-2">
-                                                 <img
-                                                   className="shrink-0 w-12 h-12 "
-                                                   src={
-                                                     item.img || "/assets/Images/product.png"
-                                                   }
-                                                   alt="image"
-                                                 />
-                                                 {item.product_type}
-                                               </div>
-                                             </Td>
-                                             <Td center={"yes"}>{item.status}</Td>
-                                             <Td>{item.lender}</Td>
-               
-                                             <Td center={"yes"}>{item.applicationNo}</Td>
-                                             <Td center={"yes"}>{item.requested_income}</Td>
-                                             <Td className="" center={""}>
-                                               {item.created_at
-                                                 .split("T")[0]
-                                                 .split("-")
-                                                 .reverse()
-                                                 .join("/")}
-                                             </Td>
-               
-                                             <Td center>
-                                               <IconBtn
-                                                 icon={<AiOutlinePrinter />}
-                                                 onClick={showDropdown}
-                                               />
-                                             </Td>
-                                           </tr>
-                                         ))
-                                     )}
-                                   </>
-                                 )}
-                               </tbody>
+                <tbody>
+                  {loading ? (
+                    <div className="flex justify-center items-center w-full">
+                      <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+                    </div>
+                  ) : selectedCategory == "" ? (
+                    <>
+                      {applications?.map((item, i) => (
+                        <tr key={i} className="hover:bg-gray-50">
+                          <Td>
+                            <div className="flex items-center gap-2">
+                              <img
+                                className="shrink-0 w-12 h-12 "
+                                src={item.img || "/assets/Images/product.png"}
+                                alt="image"
+                              />
+                              {item.product_type}
+                            </div>
+                          </Td>
+                          <Td center={"yes"}>{item.status}</Td>
+                          <Td>{item.lender}</Td>
+
+                          <Td center={"yes"}>{item.application_id}</Td>
+                          <Td center={"yes"}>{item.requested_income}</Td>
+                          <Td className="" center={""}>
+                            {item.created_at
+                              .split("T")[0]
+                              .split("-")
+                              .reverse()
+                              .join("/")}
+                          </Td>
+
+                          <Td center>
+                            <IconBtn
+                              icon={<AiOutlinePrinter />}
+                              onClick={showDropdown}
+                            />
+                          </Td>
+                        </tr>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {applications?.filter(
+                        (item) => item.product_type == selectedCategory
+                      ).length == 0 ? (
+                        <Td
+                          center={"yes"}
+                          className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
+                        >
+                          No Application Found
+                        </Td>
+                      ) : (
+                        applications
+                          ?.filter(
+                            (item) => item.product_type == selectedCategory
+                          )
+                          .map((item, i) => (
+                            <tr key={i} className="hover:bg-gray-50">
+                              <Td>
+                                <div className="flex items-center gap-2">
+                                  <img
+                                    className="shrink-0 w-12 h-12 "
+                                    src={
+                                      item.img || "/assets/Images/product.png"
+                                    }
+                                    alt="image"
+                                  />
+                                  {item.product_type}
+                                </div>
+                              </Td>
+                              <Td center={"yes"}>{item.status}</Td>
+                              <Td>{item.lender}</Td>
+
+                              <Td center={"yes"}>{item.applicationNo}</Td>
+                              <Td center={"yes"}>{item.requested_income}</Td>
+                              <Td className="" center={""}>
+                                {item.created_at
+                                  .split("T")[0]
+                                  .split("-")
+                                  .reverse()
+                                  .join("/")}
+                              </Td>
+
+                              <Td center>
+                                <IconBtn
+                                  icon={<AiOutlinePrinter />}
+                                  onClick={showDropdown}
+                                />
+                              </Td>
+                            </tr>
+                          ))
+                      )}
+                    </>
+                  )}
+                </tbody>
               </table>
             </div>
           </div>

@@ -30,7 +30,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
 
       setCategoryList(response.data);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     }
   };
 
@@ -78,11 +78,11 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
       if (error.response) {
         const apiError = error.response.data.errors;
 
-       const firstError = Object.values(apiError)?.[0];
+        const firstError = Object.values(apiError)?.[0];
 
-          if (firstError) {
-            toast.error(firstError);
-          }
+        if (firstError) {
+          toast.error(firstError);
+        }
       }
       setLoading(false);
     }

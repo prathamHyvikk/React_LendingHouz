@@ -21,7 +21,7 @@ const ConfirmFinance = ({ setActiveStep, setConfirmFinance }) => {
 
       setCategories(response.data);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     }
   };
 

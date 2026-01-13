@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import logoImage from "/assets/Images/logo.png";
-import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setId, setPersonRole, setUserType } from "../features/personRole";
+import { setAuthenticate } from "../features/authenticate";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const menuItems = [
     {
@@ -47,6 +51,15 @@ const Sidebar = () => {
   const currentPath = window.location.pathname;
 
   const role = useSelector((state) => state.person.value);
+
+  const handleLogout = () => {
+    localStorage.removeItem("LoginToken");
+    dispatch(setAuthenticate(false));
+    dispatch(setPersonRole(""));
+    dispatch(setId(null));
+    dispatch(setUserType(""));
+    navigate("/app/signin");
+  };
 
   return (
     <>
@@ -155,12 +168,15 @@ const Sidebar = () => {
           </Link>
 
           <div className="mt-4 ml-1">
-            <Link to="/app/signin" className=" text-red-500 hover:text-red-600">
-              <button className="cursor-pointer flex items-center gap-2 max-sm:text-sm">
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                <span>Log out</span>
-              </button>
-            </Link>
+            {/* <Link to="/app/signin" className=" "> */}
+            <button
+              onClick={handleLogout}
+              className="cursor-pointer text-red-500 hover:text-red-600 flex items-center gap-2 max-sm:text-sm"
+            >
+              <i className="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>Log out</span>
+            </button>
+            {/* </Link> */}
           </div>
         </div>
       </div>

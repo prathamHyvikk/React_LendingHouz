@@ -35,7 +35,7 @@ const AdminMarketPlace = () => {
       setProducts(response?.data?.products);
       setLastPage(response?.data?.last_page);
     } catch (error) {
-      toast.error("Network Error:", error.message);
+      toast.error(error?.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -68,7 +68,6 @@ const AdminMarketPlace = () => {
             setProducts={setProducts}
             setLastPage={setLastPage}
             setSelectedCategory={setSelectedCategory}
-           
           />
           {/* Cards Design */}
           {/* <div className="">

@@ -83,6 +83,13 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+  if (!token) {
+    navigate("/app/signin");
+    
+  }
+  }, [token]);
+
+  useEffect(() => {
     if (pathname.startsWith("/admin")) {
       dispatch(setPersonRole("admin"));
     } else if (pathname.startsWith("/app")) {

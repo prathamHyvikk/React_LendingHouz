@@ -1,20 +1,64 @@
 import React, { useState, useRef, useMemo } from "react";
 import JoditEditor from "jodit-react";
+// import "/joditEditor.css";
+import axios from "axios";
 
-const TextEditor = ({ placeholder, content, setContent }) => {
+const TextEditor = ({
+  placeholder,
+  content,
+  setContent,
+  setShowEditor,
+  heading,
+}) => {
   const editor = useRef(null);
   //   const [content, setContent] = useState("");
+  const LoginToken = localStorage.getItem("LoginToken");
+  console.log(LoginToken)
 
   const config = useMemo(
     () => ({
       readonly: false,
+      height: 300,
       placeholder: placeholder || "Start typings...",
     }),
     [placeholder]
   );
+
+  const postContent = async () => {
+    try {
+      console.log("call api");
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/update-setting`,
+        {
+          name: "privacy_policy",
+          value: content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        }
+      );
+
+      console.log(response);
+    } catch (error) {
+      if (error?.response) {
+        toast.error(error?.response.data.message);
+      }
+    }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    postContent();
+    setShowEditor(false);
+  };
   return (
     <>
-      <div className=" bg-white shadow-lg rounded-md p-2 text-[13px] ">
+      <div className=" bg-white shadow-lg rounded-md p-2 text-[13px]  ">
+        <div>
+          <h2 className="text-2xl font-bold pb-5 text-blue-900">{heading}</h2>
+        </div>
         <JoditEditor
           ref={editor}
           value={content}
@@ -27,6 +71,15 @@ const TextEditor = ({ placeholder, content, setContent }) => {
           reasons
           onChange={(newContent) => {}}
         />
+      </div>
+
+      <div>
+        <button
+          onClick={(e) => handleClick(e)}
+          className="bg-blue-900 sora-bold text-white py-2 px-4 rounded-md"
+        >
+          Save
+        </button>
       </div>
     </>
   );

@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import { termsAndConditions } from "../data/userDashboard.json";
 import TitleParagraph from "../Component/TitleParagraph";
 import { useSelector } from "react-redux";
 import TextEditor from "../Component/TextEditor";
+import axios from "axios";
 
 const AdminTearmsAndConditions = () => {
   const role = useSelector((state) => state.person.value);
   const [showEditor, setShowEditor] = React.useState(false);
   const [content, setContent] = React.useState("");
+  const LoginToken = localStorage.getItem("LoginToken");
+
+  console.log(content);
+
+  const getContent = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/settings`,
+        {
+          params: {
+            name: "term_condition",
+          },
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        }
+      );
+
+      console.log(response);
+      setContent(response?.data);
+    } catch (error) {
+      if (error?.response) {
+        toast.error(error?.response.data.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getContent();
+  }, []);
+
   return (
     <>
       <AdminLayout>
+        {showEditor && (
+          <div className="fixed inset-0 bg-black/50 z-200  flex  items-center justify-center p-4"></div>
+        )}
         <div className="mb-8 max-lg:mt-4 ">
           <h2 className="text-2xl sora-bold text-blue-900">
             Terms & Conditions
@@ -23,7 +58,14 @@ const AdminTearmsAndConditions = () => {
 
         <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           {showEditor ? (
-            <TextEditor content={content} setContent={setContent} />
+            <div className="w-full relative z-201 ">
+              <TextEditor
+                content={content}
+                setContent={setContent}
+                setShowEditor={setShowEditor}
+                heading={"Edit Term"}
+              />
+            </div>
           ) : (
             <>
               {role == "admin" ? (
@@ -87,8 +129,11 @@ const AdminTearmsAndConditions = () => {
                 </div>
               ) : null}
 
-              <div className="prose max-w-none ">
+              {/* <div className="prose max-w-none ">
                 <TitleParagraph data={termsAndConditions} />
+              </div> */}
+              <div className="prose max-w-none ">
+                <div dangerouslySetInnerHTML={{ __html: content }} />
               </div>
             </>
           )}

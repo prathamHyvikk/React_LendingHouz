@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import { termsAndConditions } from "../data/userDashboard.json";
 import TitleParagraph from "../Component/TitleParagraph";
@@ -10,11 +10,13 @@ const AdminPrivacyPolicy = () => {
   const role = useSelector((state) => state.person.value);
   const [showEditor, setShowEditor] = React.useState(false);
   const [content, setContent] = React.useState("");
+  const [loading , setLoading] = useState(false);
   const LoginToken = localStorage.getItem("LoginToken");
 
   console.log(content);
 
   const getContent = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/settings`,
@@ -34,10 +36,10 @@ const AdminPrivacyPolicy = () => {
       if (error?.response) {
         toast.error(error?.response.data.message);
       }
+    }finally{
+      setLoading(false);
     }
   };
-
-
 
   // useEffect(() => {
   //   postContent();
@@ -48,6 +50,9 @@ const AdminPrivacyPolicy = () => {
   }, []);
   return (
     <>
+      {showEditor && (
+        <div className="fixed inset-0 bg-black/50 z-200  flex  items-center justify-center p-4"></div>
+      )}
       <AdminLayout>
         <div className="mb-8 max-lg:mt-4 ">
           <h2 className="text-2xl sora-bold text-blue-900">Privacy Policy</h2>
@@ -58,11 +63,15 @@ const AdminPrivacyPolicy = () => {
 
         <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           {showEditor ? (
-            <TextEditor
-              content={content}
-              setContent={setContent}
-              setShowEditor={setShowEditor}
-            />
+            <div className="w-full relative z-201 ">
+              <TextEditor
+                content={content}
+                setContent={setContent}
+                setShowEditor={setShowEditor}
+                postName="privacy_policy"
+                heading={"Edit Privacy Policy"}
+              />
+            </div>
           ) : (
             <>
               {role == "admin" ? (
@@ -72,7 +81,7 @@ const AdminPrivacyPolicy = () => {
                 >
                   <div onClick={() => setShowEditor(true)}>
                     <svg
-                      className="w-5 h-5"
+                      className="w-7 h-7"
                       fill="none"
                       stroke="#155dfc"
                       viewBox="0 0 24 24"
@@ -86,7 +95,7 @@ const AdminPrivacyPolicy = () => {
                     </svg>
                   </div>
 
-                  <div>
+                  {/* <div>
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -106,9 +115,9 @@ const AdminPrivacyPolicy = () => {
                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -122,14 +131,19 @@ const AdminPrivacyPolicy = () => {
                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
               ) : null}
 
               {/* <div className="prose max-w-none ">
                 <TitleParagraph data={termsAndConditions} />
               </div> */}
-              <div className="prose max-w-none ">
+              <div className="prose max-w-none htmlText">
+                {loading && (
+                  <div className="flex justify-center items-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-3 border-gray-900"></div>
+                  </div>
+                )}
                 <div dangerouslySetInnerHTML={{ __html: content }} />
               </div>
             </>

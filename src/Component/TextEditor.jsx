@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo } from "react";
 import JoditEditor from "jodit-react";
-// import "/joditEditor.css";
+import "../joditEditor.css";
 import axios from "axios";
 
 const TextEditor = ({
@@ -9,11 +9,12 @@ const TextEditor = ({
   setContent,
   setShowEditor,
   heading,
+  postName,
 }) => {
   const editor = useRef(null);
   //   const [content, setContent] = useState("");
   const LoginToken = localStorage.getItem("LoginToken");
-  console.log(LoginToken)
+  console.log(LoginToken);
 
   const config = useMemo(
     () => ({
@@ -30,7 +31,7 @@ const TextEditor = ({
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/update-setting`,
         {
-          name: "privacy_policy",
+          name: postName,
           value: content,
         },
         {
@@ -76,7 +77,7 @@ const TextEditor = ({
       <div>
         <button
           onClick={(e) => handleClick(e)}
-          className="bg-blue-900 sora-bold text-white py-2 px-4 rounded-md"
+          className="bg-blue-900 sora-bold cursor-pointer text-white py-2 px-4 rounded-md"
         >
           Save
         </button>

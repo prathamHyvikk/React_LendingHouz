@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import { termsAndConditions } from "../data/userDashboard.json";
 import TitleParagraph from "../Component/TitleParagraph";
@@ -10,11 +10,13 @@ const AdminTearmsAndConditions = () => {
   const role = useSelector((state) => state.person.value);
   const [showEditor, setShowEditor] = React.useState(false);
   const [content, setContent] = React.useState("");
+  const [loading, setLoading] = useState(false);
   const LoginToken = localStorage.getItem("LoginToken");
 
   console.log(content);
 
   const getContent = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/settings`,
@@ -34,6 +36,8 @@ const AdminTearmsAndConditions = () => {
       if (error?.response) {
         toast.error(error?.response.data.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,6 +68,7 @@ const AdminTearmsAndConditions = () => {
                 setContent={setContent}
                 setShowEditor={setShowEditor}
                 heading={"Edit Term"}
+                postName={"term_condition"}
               />
             </div>
           ) : (
@@ -75,7 +80,7 @@ const AdminTearmsAndConditions = () => {
                 >
                   <div onClick={() => setShowEditor(true)}>
                     <svg
-                      className="w-5 h-5"
+                      className="w-7 h-7"
                       fill="none"
                       stroke="#155dfc"
                       viewBox="0 0 24 24"
@@ -89,7 +94,7 @@ const AdminTearmsAndConditions = () => {
                     </svg>
                   </div>
 
-                  <div>
+                  {/* <div>
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -125,14 +130,19 @@ const AdminTearmsAndConditions = () => {
                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
               ) : null}
 
               {/* <div className="prose max-w-none ">
                 <TitleParagraph data={termsAndConditions} />
               </div> */}
-              <div className="prose max-w-none ">
+              <div className="prose max-w-none htmlText ">
+                {loading && (
+                  <div className="flex justify-center items-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-3 border-gray-900"></div>
+                  </div>
+                )}
                 <div dangerouslySetInnerHTML={{ __html: content }} />
               </div>
             </>

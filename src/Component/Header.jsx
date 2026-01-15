@@ -202,6 +202,14 @@ function Header({ btncategory }) {
           </li>
           <li>
             <Link
+              to="/blog"
+              className="sora-bold text-black hover:text-[#FF9201]"
+            >
+              Blog
+            </Link>
+          </li>
+          <li>
+            <Link
               to="/faqs"
               className="sora-bold text-black hover:text-[#FF9201]"
             >
@@ -345,6 +353,9 @@ function Header({ btncategory }) {
           </div>
           <Link to="/testimonial" className="sora-bold text-black  ">
             Testimonial
+          </Link>
+          <Link to="/blog" className="sora-bold text-black  ">
+            Blog
           </Link>
           <Link to="/faqs" className="sora-bold text-black  ">
             FAQs

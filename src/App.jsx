@@ -70,6 +70,8 @@ import AdminCheckOut from "./Pages/AdminCheckOut";
 import { Toaster } from "react-hot-toast";
 import ResetPassword from "./Pages/ResetPassword";
 import UserApplicationForm from "./Pages/UserApplicationForm";
+import Blogs from './Component/Blogs/Blogs'
+import BlogDetails from './Component/Blogs/BlogDetails'
 
 function App() {
   const dispatch = useDispatch();
@@ -84,10 +86,10 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-  if (!token) {
-    navigate("/app/signin");
-    
-  }
+    if (!token) {
+      navigate("/app/signin");
+
+    }
   }, [token]);
 
   useEffect(() => {
@@ -142,7 +144,9 @@ function App() {
         <Route path="/kiosk" element={<Kiosk />} />
         <Route path="/e-bike" element={<Ebike />} />
         <Route path="/scuba-diving" element={<ScubaDiving />} />
-        <Route path="/become-partner" element={<Form />} />
+        <Route path="/become-partner" element={<Form />} /> 
+        <Route path='/blog' element={<Blogs />} />
+        <Route path='/blog-detail' element={<BlogDetails />} />
 
         <Route path="/app/signup" element={<Signup />} />
         <Route path="/app/signin" element={<SignIn />} />

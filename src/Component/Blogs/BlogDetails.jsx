@@ -19,7 +19,7 @@ function BlogDetails() {
                     </p>
 
                     {/* Title */}
-                    <h1 className="sora-medium leading-10  text-gray-900 mb-3">
+                    <h1 className="sora-medium  text-2xl  sm:text-[35px] md:text-[50px] leading-10  text-gray-900 mb-4">
                         How to Get Approved for a Home Loan Faster
                     </h1>
 
@@ -46,9 +46,9 @@ function BlogDetails() {
                             speed up the process.
                         </p>
 
-                        <ol className="list-decimal pl-6 space-y-4">
+                        <ol className="list-decimal pl-6 space-y-4  ">
                             <li>
-                                <h2 className="text-lg  sora-bold  text-gray-900">
+                                <h2 className="text-lg   sora-bold  text-gray-900">
                                     Check Your Credit Score
                                 </h2>
                                 <p className="sora-regular">

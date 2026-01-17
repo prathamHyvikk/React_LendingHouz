@@ -1,10 +1,31 @@
-import React from "react";
-import logo from '/assets/Images/header-logo.png';
+import React, { useState } from "react";
+import logo from "/assets/Images/header-logo.png";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const [email, setEmail] = useState("");
+  const LoginToken = localStorage.getItem("LoginToken");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/store-subscribe`,
+        {
+          email: email,
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+      toast.success(response.data.msg);
+    } catch (error) {
+      toast.error(error?.response.data.msg);
+    }
+  };
 
   return (
     <footer className="relative overflow-hidden">
@@ -12,9 +33,7 @@ const Footer = () => {
       <div className="absolute -top-16 -right-20 h-64 w-64 rounded-full bg-orange-200/30 blur-3xl" />
       <div className="absolute -bottom-20 -left-24 h-64 w-64 rounded-full bg-blue-200/30 blur-3xl" />
 
-
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16">
-
         <div className="mb-12 rounded-2xl border border-orange-200/70 bg-white/80 backdrop-blur p-6 sm:p-8 shadow-lg">
           <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
             <div className="flex-1 text-center lg:text-left">
@@ -33,7 +52,7 @@ const Footer = () => {
             {/* Newsletter */}
             <form
               className="w-full lg:w-auto flex flex-col sm:flex-row gap-3"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => handleSubmit(e)}
               aria-label="Subscribe to our newsletter"
             >
               <label htmlFor="newsletter" className="sr-only">
@@ -42,6 +61,8 @@ const Footer = () => {
               <input
                 id="newsletter"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Enter your email"
                 className="flex-1 sm:w-80 rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:ring-4 focus:ring-orange-100"
@@ -69,7 +90,8 @@ const Footer = () => {
             </a>
             <p className="mt-5 text-lg leading-relaxed text-gray-700">
               Lending Houz simplifies financing across categories—pets, medical,
-              lifestyle, equipment, and more—so you can move forward confidently.
+              lifestyle, equipment, and more—so you can move forward
+              confidently.
             </p>
 
             {/* Socials */}
@@ -90,8 +112,6 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-
-
           </div>
 
           {/* Columns */}
@@ -113,16 +133,14 @@ const Footer = () => {
             </ul>
           </nav> */}
 
-          
-
           <nav aria-label="Product" className="flex flex-col">
             <h3 className="text-base sora-semibold text-gray-900">Solutions</h3>
             <ul className="mt-4 space-y-3">
               {[
                 { name: "Pet Financing", to: "/pet" },
                 { name: "Medical Equipment", to: "/medical-equipment" },
-                { name: "Travel & Lifestyle", to: "#" },  
-                { name: "Business & Equipment", to: "#" },     
+                { name: "Travel & Lifestyle", to: "#" },
+                { name: "Business & Equipment", to: "#" },
               ].map((item) => (
                 <li key={item.name}>
                   <Link
@@ -136,16 +154,13 @@ const Footer = () => {
             </ul>
           </nav>
 
-
-
-
           <nav aria-label="Resources" className="flex flex-col">
             <h3 className="text-base sora-semibold text-gray-900">Resources</h3>
             <ul className="mt-4 space-y-3">
               {[
                 { name: "How It Works", to: "#" },
                 { name: "FAQs", to: "/faqs" },
-                { name: "Blog", to: "#" },
+                { name: "Blog", to: "/blog" },
                 { name: "Support", to: "#" },
               ].map((item) => (
                 <li key={item.name}>
@@ -159,7 +174,6 @@ const Footer = () => {
               ))}
             </ul>
           </nav>
-
 
           {/* <nav aria-label="Company" className="flex flex-col">
             <h3 className="text-base sora-semibold text-gray-900">Company</h3>
@@ -197,7 +211,6 @@ const Footer = () => {
               ))}
             </ul>
           </nav>
-
         </div>
 
         {/* Divider */}
@@ -206,17 +219,28 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
           <p className="text-gray-500">
-            &copy; {year} <span className="sora-medium text-gray-700">Lending Houz</span>. All rights reserved.
+            &copy; {year}{" "}
+            <span className="sora-medium text-gray-700">Lending Houz</span>. All
+            rights reserved.
           </p>
 
           <div className="flex items-center gap-5">
-            <a href="#" className="text-gray-600 hover:text-[#F7941D] transition">
+            <a
+              href="#"
+              className="text-gray-600 hover:text-[#F7941D] transition"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-600 hover:text-[#F7941D] transition">
+            <a
+              href="#"
+              className="text-gray-600 hover:text-[#F7941D] transition"
+            >
               Terms of Service
             </a>
-            <a href="#" className="text-gray-600 hover:text-[#F7941D] transition">
+            <a
+              href="#"
+              className="text-gray-600 hover:text-[#F7941D] transition"
+            >
               Cookies Settings
             </a>
           </div>

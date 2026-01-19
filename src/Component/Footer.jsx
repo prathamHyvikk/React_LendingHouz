@@ -7,10 +7,12 @@ import toast from "react-hot-toast";
 const Footer = () => {
   const year = new Date().getFullYear();
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const LoginToken = localStorage.getItem("LoginToken");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/store-subscribe`,
@@ -24,6 +26,8 @@ const Footer = () => {
       toast.success(response.data.msg);
     } catch (error) {
       toast.error(error?.response.data.msg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,7 +73,8 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-xl px-5 py-3 sora-semibold bg-[#F7941D] text-white hover:brightness-95 active:brightness-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 transition"
+                disabled={loading}
+                className={`inline-flex ${loading ? "pointer-events-none opacity-20" : "cursor-pointer"} items-center justify-center rounded-xl px-5 py-3 sora-semibold bg-[#F7941D] text-white hover:brightness-95 active:brightness-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 transition`}
               >
                 Subscribe
               </button>

@@ -72,6 +72,7 @@ import ResetPassword from "./Pages/ResetPassword";
 import UserApplicationForm from "./Pages/UserApplicationForm";
 import Blogs from './Component/Blogs/Blogs'
 import BlogDetails from './Component/Blogs/BlogDetails'
+import AppliancesPage from "./Pages/AppliancesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -119,6 +120,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/appliance" element={<AppliancesPage />} />
         <Route path="/automotive" element={<Automotive />} />
         <Route path="/jewellery" element={<Jewellery />} />
         <Route path="/medical-equipment" element={<MedicalEquipment />} />

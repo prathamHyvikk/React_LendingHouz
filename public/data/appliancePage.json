@@ -1,0 +1,153 @@
+{
+  "heroSection": {
+    "image": "/assets/Images/applianceHero.png",
+    "title": "Appliance financing that works when you need it most.",
+    "description": "From refrigerators and washers to ovens and HVAC systems, Lending Houz helps you spread the cost of essential appliances over time—so you can replace or upgrade without the stress of a large upfront payment.",
+    "btnText": "Check Appliance Financing Options",
+    "btnLink": ""
+  },
+
+  "applicationsType": [
+    {
+      "image": "/assets/Images/freez.jpg",
+      "title": "Refrigerators & Freezers",
+      "description": " Keep your kitchen running—even when a replacement can’t wait.  "
+    },
+    {
+      "image": "/assets/Images/wash.jpg",
+      "title": "Washers & Dryers",
+      "description": "From quick replacements to full laundry room upgrades."
+    },
+    {
+      "image": "/assets/Images/oven.jpg",
+      "title": "Ovens, Ranges & Dishwashers",
+      "description": "Upgrade your kitchen essentials and spread the cost over time."
+    },
+    {
+      "image": "/assets/Images/ac.jpg",
+      "title": "HVAC & Major Home Systems",
+      "description": "Financing options for AC units, heating systems, and major home comfort upgrades."
+    }
+  ],
+
+  "rightForYou": {
+    "image": "/assets/Images/rightForYou.jpg",
+    "title": "Is appliance financing right for you?",
+    "subLine": "If you need a working home—without draining your savings—this is for you.",
+    "points": [
+      "Replacing broken appliances quickly and affordably",
+      "Emergency replacements like a fridge, washer/dryer, or AC unit",
+      "Upgrading kitchens or laundry rooms without a high upfront cost",
+      "Financing multiple appliances at once during a remodel or move",
+      "Planning ahead to spread costs into predictable monthly payments"
+    ]
+  },
+
+  "why": [
+    {
+      "title": "Avoid high upfront costs",
+      "description": "Maintain your budget while handling essential replacements."
+    },
+    {
+      "title": "Make upgrades more accessible",
+      "description": "Replace or upgrade appliances now and pay over time."
+    },
+    {
+      "title": "Simple, clear options",
+      "description": "Compare plans designed to be easy to understand—no unnecessary complexity."
+    },
+    {
+      "title": "Built for real-life moments",
+      "description": "Especially helpful when an appliance breaks at the worst possible time."
+    },
+    {
+      "title": "A smoother experience",
+      "description": "Quick steps, clear guidance, and a process designed to keep moving."
+    }
+  ],
+
+  "howWork": [
+    {
+      "no": "01",
+      "title": "Tell us what you need",
+      "description": "Choose what you’re financing—one appliance or multiple—and share a few details."
+    },
+    {
+      "no": "02",
+      "title": "Explore financing options",
+      "description": "Review plans and compare terms to ensure they align with your budget and timeline."
+    },
+    {
+      "no": "03",
+      "title": "Choose your payment plan",
+      "description": "Select the option that best suits your monthly comfort level."
+    },
+    {
+      "no": "04",
+      "title": "Move forward with confidence",
+      "description": "Complete the last steps and finance your appliances without the upfront stress."
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "Can I finance more than one appliance at a time?",
+      "answer": "Yes. If you’re upgrading multiple appliances—like a kitchen or laundry room—you can explore options that cover more than one purchase. "
+    },
+    {
+      "question": "What types of appliances qualify? ",
+      "answer": "Common categories include refrigerators, washers/dryers, ovens, dishwashers, and HVAC or major home systems. Availability can vary by provider and location. "
+    },
+    {
+      "question": "Is appliance financing only for emergencies? ",
+      "answer": "Not at all. It’s also a great fit for planned upgrades, remodels, and replacements that you’d rather pay for over time. "
+    },
+    {
+      "question": "How fast is the process? ",
+      "answer": "Many users can explore options quickly after starting. Timing depends on the details provided and the available financing pathway. "
+    }
+  ],
+
+  "whatSay": {
+    "title": "What Our Customers Say",
+    "subLine": "Discover how nexPay is transforming the way people manage their money with real stories from satisfied users",
+    "testimonials": [
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      }
+    ]
+  }
+}

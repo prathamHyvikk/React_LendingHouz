@@ -189,6 +189,9 @@ function Header({ btncategory }) {
                 <Link className="px-4 py-2 hover:bg-gray-100" to="/tools">
                   Tools
                 </Link>
+                <Link className="px-4 py-2 hover:bg-gray-100" to="/appliance">
+                  Appliance
+                </Link>
               </div>
             )}
           </li>
@@ -236,7 +239,7 @@ function Header({ btncategory }) {
         {/* Mobile Menu Toggle */}
         <div className="mobile-toggle">
           <button onClick={togglenav}>
-            <i className="ri-bar-chart-horizontal-line text-black hover:text-[#FF9201] sora-bold"></i>
+            <i className="ri-bar-chart-horizontal-line min-[1130px]:hidden text-black hover:text-[#FF9201] sora-bold"></i>
           </button>
         </div>
       </div>
@@ -244,12 +247,12 @@ function Header({ btncategory }) {
       {/* Mobile Menu */}
       <div
         className={`
-                fixed top-0 right-0 h-full min-lg:hidden w-64 z-40 shadow-lg p-6 primary-bg transition-transform duration-300 ease-in-out
+                fixed top-0 right-0 h-full min-[1130px]:hidden w-64 z-40 shadow-lg p-6 primary-bg transition-transform duration-300 ease-in-out
                 ${open ? "translate-x-0" : "translate-x-full"}
             `}
       >
         <button onClick={togglenav} className="text-right w-full mb-6 text-xl">
-          <i className="ri-close-line text-black "></i>
+          <i className="ri-close-line  text-black "></i>
         </button>
         <nav className="flex flex-col overflow-y-auto h-full pb-10 gap-4">
           <Link to="/" className="sora-bold text-black  ">
@@ -347,6 +350,9 @@ function Header({ btncategory }) {
                 </Link>
                 <Link className="px-4 py-2 hover:text-black" to="/tools">
                   Tools
+                </Link>
+                <Link className="px-4 py-2 hover:bg-gray-100" to="/appliance">
+                  Appliance
                 </Link>
               </div>
             )}

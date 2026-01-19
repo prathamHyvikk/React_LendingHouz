@@ -12,7 +12,7 @@ const FAQAccordion = ({ faqs = [], title = "Frequently Asked Questions" }) => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-4xl sora-regular text-center mb-12">{title}</h1>
+      <h1 className="text-[50px] sora-regular text-center mb-12">{title}</h1>
 
       <div className="grid md:grid-cols-2 gap-6">
         {faqs.map((item, index) => {
@@ -22,14 +22,14 @@ const FAQAccordion = ({ faqs = [], title = "Frequently Asked Questions" }) => {
             <div key={index} className="w-full">
               <div
                 onClick={() => toggleIndex(index)}
-                className="bg-white rounded-lg shadow-md cursor-pointer transition-all duration-300"
+                className="bg-white rounded-lg shadow-2xl cursor-pointer transition-all duration-300"
               >
 
                 <div className="px-6 flex justify-between items-center min-h-[84px]">
                   <h6 className="sora-semibold text-lg">{item.question}</h6>
                   <i
                     className={`text-xl transition-transform duration-300 ${isOpen
-                        ? "ri-subtract-line text-blue-600"
+                        ? "ri-subtract-line text-[#f5bf11]"
                         : "ri-add-line text-black"
                       }`}
                   ></i>

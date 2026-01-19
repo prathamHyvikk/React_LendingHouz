@@ -21,20 +21,16 @@ import GetStart from "../GetStart";
 import useMeta from "../useMeta";
 import axios from "axios";
 
-
 function Home() {
   useMeta(
     "Lending Houz | Flexible Financing for Everyday Products",
     "Shop smarter with Lending Houz. Get fast, easy financing for electronics, vehicles, tools, pets and more, all with simple terms and quick approvals.",
-    "3BgjutyoDjGNnYj5r7wq5ZyQbfuG0xZ3hYbIi3_H0_w"
+    "3BgjutyoDjGNnYj5r7wq5ZyQbfuG0xZ3hYbIi3_H0_w",
   );
 
   // fetch faq data
 
   const [financingFaqs, setFinancingFaqs] = useState([]);
-
-  
-  
 
   useEffect(() => {
     const fetchFaqs = async () => {
@@ -144,7 +140,7 @@ function Home() {
   ];
   return (
     <>
-      <Header />
+      <Header btncategory="Home"/>
       {/* section 1 start  */}
 
       <section className="max-md:px-2 px-10 lg:pb-10 pb-2">
@@ -152,6 +148,7 @@ function Home() {
           title="Make Your Dream Home a Reality"
           subtitle="Get approved in minutes. Low rates, fast closings, and expert support every step of the way."
           imageSrc={homeimg}
+          btncategory={"Home"}
           imgealt="herosection image"
         />
       </section>
@@ -315,6 +312,7 @@ function Home() {
 
       <section className="max-md:px-2 px-10 lg:py-10">
         <GetStart
+          btncategory={"Home"}
           title="Ready to Take the First Step?"
           subtitle="Pre-Qualify Now – No Impact on Credit Score"
         />

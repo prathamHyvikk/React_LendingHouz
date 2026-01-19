@@ -9,17 +9,49 @@ import ConfirmFinance from "./ConfirmFinance";
 import { styled } from "@mui/material/styles";
 import VerifyContact from "./VerifyContact";
 import EmploymentAndIncom from "./EmploymentAndIncom";
+import { useLocation } from "react-router-dom";
 
 const steps = ["", "", ""];
 
 export default function CustomeStepper() {
+  const loacation = useLocation();
+  const arrivedCategory = loacation?.state?.category;
   const [activeStep, setActiveStep] = React.useState(0);
   const [confirmFinance, setConfirmFinance] = React.useState();
-  const [verifyContact, setVerifyContact] = React.useState();
-  const [employmentAndIncom, setEmploymentAndIncom] = React.useState();
+  const [verifyContact, setVerifyContact] = React.useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    mobile: "",
+    address_1: "",
+    address_2: "",
+    zipcode: "",
+    city: "",
+    state: "",
+    chk_correct: false,
+  });
+
+  const [employmentAndIncom, setEmploymentAndIncom] = React.useState({
+    grossIncome: "",
+    netIncome: "",
+    requestedIncome: "",
+    lastPayDate: "",
+    nextPayDate: "",
+    paymentFrequency: "",
+    dob: "",
+    ssn: "",
+    check: false,
+  });
 
   console.log([confirmFinance, verifyContact, employmentAndIncom]);
-  console.log(activeStep)
+  console.log(activeStep);
+  console.log("category ", loacation?.state?.category);
+
+  React.useEffect(() => {
+    if (arrivedCategory) {
+      setConfirmFinance(arrivedCategory);
+    }
+  }, [arrivedCategory]);
 
   const getStepContent = (step) => {
     switch (step) {
@@ -28,12 +60,14 @@ export default function CustomeStepper() {
           <ConfirmFinance
             setActiveStep={setActiveStep}
             setConfirmFinance={setConfirmFinance}
+            confirmFinance={confirmFinance}
           />
         );
       case 1:
         return (
           <VerifyContact
             setActiveStep={setActiveStep}
+            verifyContact={verifyContact}
             setVerifyContact={setVerifyContact}
           />
         );
@@ -42,6 +76,7 @@ export default function CustomeStepper() {
           <EmploymentAndIncom
             setActiveStep={setActiveStep}
             setEmploymentAndIncom={setEmploymentAndIncom}
+            employmentAndIncom={employmentAndIncom}
             confirmFinance={confirmFinance}
             verifyContact={verifyContact}
           />
@@ -76,8 +111,8 @@ export default function CustomeStepper() {
     backgroundColor: ownerState.active
       ? "#002e6d"
       : ownerState.completed
-      ? "#002e6d"
-      : "#D5D5D5",
+        ? "#002e6d"
+        : "#D5D5D5",
 
     color: "#fff",
 
@@ -85,8 +120,8 @@ export default function CustomeStepper() {
     borderColor: ownerState.active
       ? "#002e6d"
       : ownerState.completed
-      ? "#002e6d"
-      : "#D5D5D5",
+        ? "#002e6d"
+        : "#D5D5D5",
   }));
 
   return (
@@ -108,7 +143,6 @@ export default function CustomeStepper() {
           <Stepper activeStep={activeStep}>
             {steps.map((label, index) => (
               <Step key={index}>
-               
                 <StepLabel
                   StepIconComponent={(props) => (
                     <CustomStepIcon ownerState={props}>

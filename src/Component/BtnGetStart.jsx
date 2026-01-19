@@ -23,7 +23,11 @@ function BtnGetStart({ category = "default" }) {
     if (authenticate == false) {
       navigate("/app/signin");
     }else{
-      navigate("/app/dashboard");
+      navigate("/app/dashboard/applications/new-application", {
+        state: {
+          category: category,
+        },
+      });
     }
   };
 

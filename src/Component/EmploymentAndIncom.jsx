@@ -9,24 +9,34 @@ const EmploymentAndIncom = ({
   verifyContact,
   setActiveStep,
   setEmploymentAndIncom,
+  employmentAndIncom,
 }) => {
-  const [grossIncome, setGrossIncome] = useState("");
-  const [netIncome, setNetIncome] = useState("");
-  const [requestedAmount, setRequestedAmount] = useState("");
-  const [lastPayDate, setLastPayDate] = useState("");
-  const [nextPayDate, setNextPayDate] = useState("");
-  const [paymentFrequency, setPaymentFrequency] = useState("");
-  const [dob, setDob] = useState("");
-  const [ssn, setSsn] = useState("");
-  const [check, setCheck] = useState("");
+  // const [grossIncome, setGrossIncome] = useState("");
+  // const [netIncome, setNetIncome] = useState("");
+  // const [requestedAmount, setRequestedAmount] = useState("");
+  // const [lastPayDate, setLastPayDate] = useState("");
+  // const [nextPayDate, setNextPayDate] = useState("");
+  // const [paymentFrequency, setPaymentFrequency] = useState("");
+  // const [dob, setDob] = useState("");
+  // const [ssn, setSsn] = useState("");
+  // const [check, setCheck] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   const LoginToken = localStorage.getItem("LoginToken");
+
   const personId = useSelector((state) => state.person.id);
   const navigate = useNavigate();
   console.log(personId);
 
+  const handleChange = (field) => (e) => {
+    const value = field === "check" ? e.target.checked : e.target.value;
+
+    setEmploymentAndIncom((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
   const formatSSN = (value) => {
     const digits = value.replace(/\D/g, "").slice(0, 9);
 
@@ -35,22 +45,21 @@ const EmploymentAndIncom = ({
     return `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}`;
   };
 
-  const finalSsn = ssn.replaceAll("-", "");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("gross_income", grossIncome);
-    formData.append("net_income", netIncome);
-    formData.append("requested_income", requestedAmount);
-    formData.append("dob", dob);
-    formData.append("ssn", finalSsn);
-    formData.append("last_pay_date", lastPayDate);
-    formData.append("next_pay_date", nextPayDate);
-    formData.append("payment_frequency", paymentFrequency);
-    formData.append("consent", check);
 
-    setEmploymentAndIncom(formData);
+    const formData = new FormData();
+
+    formData.append("gross_income", employmentAndIncom.grossIncome);
+    formData.append("net_income", employmentAndIncom.netIncome);
+    formData.append("requested_income", employmentAndIncom.requestedAmount);
+    formData.append("dob", employmentAndIncom.dob);
+    formData.append("ssn", (employmentAndIncom.ssn || "").replaceAll("-", ""));
+
+    formData.append("last_pay_date", employmentAndIncom.lastPayDate);
+    formData.append("next_pay_date", employmentAndIncom.nextPayDate);
+    formData.append("payment_frequency", employmentAndIncom.paymentFrequency);
+    formData.append("consent", employmentAndIncom.check);
 
     try {
       const form = new FormData();
@@ -58,7 +67,12 @@ const EmploymentAndIncom = ({
       form.append("user_id", personId);
       form.append("product_type", confirmFinance);
 
-      verifyContact.forEach((value, key) => {
+      // verifyContact.forEach((value, key) => {
+      //    console.log("now")
+      //   form.append(key, value);
+      // });
+      Object.entries(verifyContact).forEach(([key, value]) => {
+       
         form.append(key, value);
       });
 
@@ -67,6 +81,11 @@ const EmploymentAndIncom = ({
       });
 
       setLoading(true);
+
+      form.forEach((value, key) => {
+        console.log(`${key}: ${value}`); // Log the key and value
+      });
+
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/create-application`,
         form,
@@ -75,9 +94,10 @@ const EmploymentAndIncom = ({
             Authorization: `Bearer ${LoginToken}`,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
 
+      console.log("called");
       toast.success(response.data.message);
       navigate("/app/dashboard/applications");
     } catch (error) {
@@ -87,12 +107,8 @@ const EmploymentAndIncom = ({
         setError(apiError);
 
         const firstError = Object.values(apiError)?.[0];
-
-        if (firstError) {
-          toast.error(firstError);
-        }
+        if (firstError) toast.error(firstError);
       }
-      //   toast.error(error.message);
     }
   };
 
@@ -116,9 +132,9 @@ const EmploymentAndIncom = ({
                   <input
                     type="number"
                     placeholder="xxxx"
-                    value={grossIncome}
+                    value={employmentAndIncom.grossIncome}
                     required
-                    onChange={(e) => setGrossIncome(e.target.value)}
+                    onChange={handleChange("grossIncome")}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
                 </div>
@@ -139,9 +155,9 @@ const EmploymentAndIncom = ({
                   <input
                     type="number"
                     placeholder="xxxx"
-                    value={netIncome}
+                    value={employmentAndIncom.netIncome}
                     required
-                    onChange={(e) => setNetIncome(e.target.value)}
+                    onChange={handleChange("netIncome")}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
                 </div>
@@ -164,9 +180,9 @@ const EmploymentAndIncom = ({
                   <input
                     type="number"
                     placeholder="xxxx"
-                    value={requestedAmount}
+                    value={employmentAndIncom.requestedAmount}
                     required
-                    onChange={(e) => setRequestedAmount(e.target.value)}
+                    onChange={handleChange("requestedAmount")}
                     className="flex-1 px-2 py-2 outline-none bg-transparent text-gray-700 placeholder-gray-400"
                   />
                 </div>
@@ -181,9 +197,9 @@ const EmploymentAndIncom = ({
                   Payment Frequency <span className="text-red-600">*</span>
                 </label>
                 <select
-                  value={paymentFrequency}
+                  value={employmentAndIncom.paymentFrequency}
                   required
-                  onChange={(e) => setPaymentFrequency(e.target.value)}
+                  onChange={handleChange("paymentFrequency")}
                   className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-400 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-400"
                   id="frequency-select"
                 >
@@ -217,9 +233,9 @@ const EmploymentAndIncom = ({
                 </label>
                 <input
                   type="date"
-                  value={dob}
+                  value={employmentAndIncom.dob}
                   required
-                  onChange={(e) => setDob(e.target.value)}
+                  onChange={handleChange("dob")}
                   max={new Date().toISOString().split("T")[0]}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md
      focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -236,10 +252,14 @@ const EmploymentAndIncom = ({
                 </label>
                 <input
                   type="text"
-                  value={ssn}
-                  required
-                  maxLength={11} // 555-55-5555 = 11 chars
-                  onChange={(e) => setSsn(formatSSN(e.target.value))}
+                  value={employmentAndIncom.ssn}
+                  maxLength={11}
+                  onChange={(e) =>
+                    setEmploymentAndIncom((prev) => ({
+                      ...prev,
+                      ssn: formatSSN(e.target.value),
+                    }))
+                  }
                   placeholder="xxx-xx-xxxx"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md
     focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -258,9 +278,9 @@ const EmploymentAndIncom = ({
                 </label>
                 <input
                   type="date"
-                  value={lastPayDate}
+                  value={employmentAndIncom.lastPayDate}
                   required
-                  onChange={(e) => setLastPayDate(e.target.value)}
+                  onChange={handleChange("lastPayDate")}
                   //   max={new Date().toISOString().split("T")[0]}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md
      focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -278,9 +298,9 @@ const EmploymentAndIncom = ({
                 </label>
                 <input
                   type="date"
-                  value={nextPayDate}
+                  value={employmentAndIncom.nextPayDate}
                   required
-                  onChange={(e) => setNextPayDate(e.target.value)}
+                  onChange={handleChange("nextPayDate")}
                   //   max={new Date().toISOString().split("T")[0]}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md
      focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -302,8 +322,8 @@ const EmploymentAndIncom = ({
                   type="checkbox"
                   id="confirm"
                   required
-                  value={check}
-                  onChange={() => setCheck(!check)}
+                  checked={employmentAndIncom.check}
+                  onChange={handleChange("check")}
                   className="w-4 h-4 text-(--primary-color) border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="text-sm text-gray-700">
@@ -326,6 +346,13 @@ const EmploymentAndIncom = ({
               Continue
             </button>
           </form>
+        </div>
+
+        <div
+          onClick={() => setActiveStep((s) => s - 1)}
+          className=" w-fit bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white px-4 py-2 rounded-md font-semibold transition-colors mt-2"
+        >
+          Back
         </div>
       </div>
     </>

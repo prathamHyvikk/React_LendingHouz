@@ -192,6 +192,9 @@ function Header({ btncategory }) {
                 <Link className="px-4 py-2 hover:bg-gray-100" to="/appliance">
                   Appliance
                 </Link>
+                <Link className="px-4 py-2 hover:bg-gray-100" to="/home-finance">
+                  Home Finance
+                </Link>
               </div>
             )}
           </li>

@@ -149,5 +149,10 @@
         "image": "/assets/Images/testimonial.png"
       }
     ]
+  },
+
+  "readySection": {
+    "title": "Need a replacement—or planning an upgrade?",
+    "description": "Explore appliance financing options that help you spread costs over time—so you can replace essentials, upgrade confidently, and keep your budget steady."
   }
 }

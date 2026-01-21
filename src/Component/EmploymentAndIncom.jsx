@@ -65,14 +65,13 @@ const EmploymentAndIncom = ({
       const form = new FormData();
 
       form.append("user_id", personId);
-      form.append("product_type", confirmFinance);
+      form.append("product_type", confirmFinance.replace("_", " "));
 
       // verifyContact.forEach((value, key) => {
       //    console.log("now")
       //   form.append(key, value);
       // });
       Object.entries(verifyContact).forEach(([key, value]) => {
-       
         form.append(key, value);
       });
 
@@ -102,12 +101,13 @@ const EmploymentAndIncom = ({
       navigate("/app/dashboard/applications");
     } catch (error) {
       setLoading(false);
-      if (error.response) {
+      if (error) {
         const apiError = error.response.data.errors;
         setError(apiError);
 
         const firstError = Object.values(apiError)?.[0];
-        if (firstError) toast.error(firstError);
+        if (typeof firstError === "array") toast.error(firstError);
+        else toast.error(apiError);
       }
     }
   };

@@ -1,0 +1,172 @@
+{
+  "heroSection": {
+    "image": "/assets/Images/homeHero.jpg",
+    "title": "Home Financing <br class='d-none d-md-block' /> Made Simple.",
+    "description": "Whether you’re buying your first home, upgrading to your next one, or refinancing, Lending Houz helps you explore home loan options that match your goals and budget—with clarity at every step.",
+    "btnText": "Get Pre-Qualified",
+    "btnLink": ""
+  },
+
+  "loanOption": {
+    "title": "Home loan options, made easy to compare.",
+    "subTitle": "Every home journey looks different. We help you evaluate financing options with clarity—so you can choose what aligns with your goals, timeline, and budget."
+  },
+
+  "optionCard": [
+    {
+      "title": "Home Purchase Loans",
+      "description": "Financing built for purchasing a primary residence or stepping into your next home."
+    },
+    {
+      "title": "Refinancing Options",
+      "description": "Optimize your rate, term, or structure to better align with your financial strategy."
+    },
+    {
+      "title": "FHA Loan Options",
+      "description": "Flexible qualification requirements with lower down payment pathways for eligible buyers."
+    },
+    {
+      "title": "VA Loan Options",
+      "description": "Exclusive financing benefits for eligible veterans, service members, and their families."
+    },
+    {
+      "title": "Conventional Loans",
+      "description": "A strong option for buyers with solid credit seeking competitive rates and flexible terms."
+    },
+    {
+      "title": "Investment & Second Homes",
+      "description": "Financing options for second homes or investment properties, subject to eligibility."
+    }
+  ],
+
+  "helpFinance": {
+    "image": "/assets/Images/roomFinance.jpg",
+    "title": "Homes we can help finance",
+    "subLine": "",
+    "points": [
+      "Single-family homes",
+      "Condos & townhouses",
+      "Multi-family units",
+      "Manufactured & mobile homes",
+      "FHA & VA-eligible properties (where applicable)"
+    ]
+  },
+
+  "whyChoose": {
+    "title": "Why choose Lending Houz for home financing?",
+    "subTitle": "A simpler, more thoughtful way to navigate home financing—built around clarity, flexibility, and trust."
+  },
+
+  "chooseList": [
+    {
+      "title": "Clarity you can feel good about",
+      "description": "Transparent steps and easy-to-understand details—so you always know what you’re choosing."
+    },
+    {
+      "title": "Options aligned to your budget",
+      "description": "Explore financing paths designed around your monthly comfort and long-term goals."
+    },
+    {
+      "title": "Support when you want it",
+      "description": "Move at your own pace with guidance available whenever you need it."
+    },
+    {
+      "title": "A streamlined experience",
+      "description": "Less back-and-forth, more progress—designed to respect your time."
+    },
+    {
+      "title": "Nationwide reach",
+      "description": "Access home financing options across many locations, based on availability."
+    }
+  ],
+
+  "rightNow": {
+    "image": "/assets/Images/rightNow.jpg",
+    "pointIcon": "/assets/Images/tickIcon.png",
+    "title": "Is home financing through Lending Houz right for you?",
+    "subLine": "If you want a clear path forward—without the overwhelm—this page is for you.",
+    "points": [
+      "First-time home buyers who want guidance and straightforward next steps",
+      "Growing families upgrading to more space",
+      "Homeowners refinancing to improve terms or simplify payments",
+      "Buyers exploring FHA or VA pathways and looking for clarity",
+      "Anyone who wants to compare options before committing to a mortgage plan"
+    ]
+  },
+
+  "howWork": {
+    "title": "How it works",
+    "subTitle": "A straightforward process designed to help you move forward with confidence."
+  },
+
+  "faqs": [
+    {
+      "question": " How long does pre-qualification take? ",
+      "answer": "Most people can complete the pre-qualification steps quickly. Timing can vary depending on the information provided and the loan pathway you choose. "
+    },
+    {
+      "question": "Will pre-qualification impact my credit score?",
+      "answer": "Pre-qualification is designed to help you explore options confidently. A full application may require additional verification depending on the provider."
+    },
+    {
+      "question": "What documents do I need?",
+      "answer": "Often you’ll need basic information such as proof of identity and income. Some loan pathways may require additional documents—we’ll tell you what’s needed as you go. "
+    },
+    {
+      "question": "Can I refinance through Lending Houz? ",
+      "answer": "Yes. If you’re considering refinancing, we’ll help you explore options that may improve your payment structure, term, or overall plan. "
+    },
+    {
+      "question": "Do you support FHA and VA loans?",
+      "answer": "We can help you explore FHA and VA-eligible options when available based on provider guidelines and eligibility. "
+    }
+  ],
+
+  "whatSay": {
+    "title": "What Our Customers Say",
+    "subLine": "Discover how nexPay is transforming the way people manage their money with real stories from satisfied users",
+    "testimonials": [
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      },
+      {
+        "text": "NexCash has transformed the way I manage my personal finances.",
+        "name": "Jane Walliam",
+        "role": "Business Owner",
+        "image": "/assets/Images/testimonial.png"
+      }
+    ]
+  },
+
+  "readySection": {
+    "title": "Ready to explore home loan options that fit your budget?",
+    "description": "Get pre-qualified and compare home financing paths with confidence—purchase or refinance, with a process designed to stay clear from start to finish."
+  }
+}

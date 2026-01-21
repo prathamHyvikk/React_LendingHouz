@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import "../Component/Utility.css";
 
@@ -12,7 +10,9 @@ const FAQAccordion = ({ faqs = [], title = "Frequently Asked Questions" }) => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-[50px] sora-regular text-center mb-12">{title}</h1>
+      <h1 className="text-3xl sm:text-[50px]  sora-regular text-center mb-12">
+        {title}
+      </h1>
 
       <div className="grid md:grid-cols-2 gap-6">
         {faqs.map((item, index) => {
@@ -24,21 +24,21 @@ const FAQAccordion = ({ faqs = [], title = "Frequently Asked Questions" }) => {
                 onClick={() => toggleIndex(index)}
                 className="bg-white rounded-lg shadow-2xl cursor-pointer transition-all duration-300"
               >
-
                 <div className="px-6 flex justify-between items-center min-h-[84px]">
                   <h6 className="sora-semibold text-lg">{item.question}</h6>
                   <i
-                    className={`text-xl transition-transform duration-300 ${isOpen
+                    className={`text-xl transition-transform duration-300 ${
+                      isOpen
                         ? "ri-subtract-line text-[#f5bf11]"
                         : "ri-add-line text-black"
-                      }`}
+                    }`}
                   ></i>
                 </div>
 
-
                 <div
-                  className={`px-6 overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[400px] pb-4" : "max-h-0"
-                    }`}
+                  className={`px-6 overflow-hidden transition-all duration-300 ${
+                    isOpen ? "max-h-[400px] pb-4" : "max-h-0"
+                  }`}
                 >
                   {/* {item.answer && (
                     <p className="text-base mb-3">{item.answer}</p>

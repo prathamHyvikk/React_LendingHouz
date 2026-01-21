@@ -15,7 +15,7 @@ const steps = ["", "", ""];
 
 export default function CustomeStepper() {
   const loacation = useLocation();
-  const arrivedCategory = loacation?.state?.category;
+  const arrivedCategory = loacation?.state?.category?.replaceAll("_", " ");
   const [activeStep, setActiveStep] = React.useState(0);
   const [confirmFinance, setConfirmFinance] = React.useState();
   const [verifyContact, setVerifyContact] = React.useState({
@@ -49,6 +49,7 @@ export default function CustomeStepper() {
 
   React.useEffect(() => {
     if (arrivedCategory) {
+      
       setConfirmFinance(arrivedCategory);
     }
   }, [arrivedCategory]);

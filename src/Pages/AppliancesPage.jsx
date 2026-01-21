@@ -12,6 +12,7 @@ import { why } from "../../public/data/appliancePage.json";
 import { howWork } from "../../public/data/appliancePage.json";
 import { faqs } from "../../public/data/appliancePage.json";
 import { whatSay } from "../../public/data/appliancePage.json";
+import { readySection } from "../../public/data/appliancePage.json";
 import WhatCustomerSay from "../Component/WhatCustomerSay";
 import ReadyToExplore from "../Component/ReadyToExplore";
 const AppliancesPage = () => {
@@ -19,12 +20,12 @@ const AppliancesPage = () => {
     <>
       <Header btncategory="Appliances" />
       <div>
-        <FinanceOptionHero data={heroSection} />
+        <FinanceOptionHero data={heroSection} category="Appliances" />
       </div>
 
       <section className="max-w-[1320px] mx-auto px-4 md:px-8 lg:px-10 pt-20">
         <div className="max-w-3xl mx-auto text-center mb-8">
-          <h2 className="primary-heading text-[50px] mb-5 leading-15">
+          <h2 className="primary-heading text-3xl sm:text-[50px]  mb-5 md:leading-15">
             What appliances can you finance?
           </h2>
           <p className="text-neutral-600 text-base">
@@ -65,7 +66,7 @@ const AppliancesPage = () => {
       <section>
         <section className="max-w-[1320px] mx-auto px-4 md:px-8 lg:px-10 pt-20">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="primary-heading text-[50px] mb-4 leading-15">
+            <h2 className="primary-heading text-3xl sm:text-[50px]  mb-4 md:leading-15">
               Why finance appliances with Lending Houz?
             </h2>
             <p className="text-neutral-600">
@@ -94,7 +95,7 @@ const AppliancesPage = () => {
 
       <section className="max-w-[1320px] mx-auto px-4 md:px-8 lg:px-10 pt-20">
         <div className="max-w-3xl mx-auto text-center mb-20">
-          <h2 className="primary-heading text-[50px] mb-4 leading-15">
+          <h2 className="primary-heading text-3xl sm:text-[50px]  mb-4 md:leading-15">
             How it works
           </h2>
           <p className="text-neutral-600">
@@ -136,9 +137,8 @@ const AppliancesPage = () => {
       </section>
 
       <section>
-        <ReadyToExplore />
+        <ReadyToExplore data={readySection} category="Appliances" />
       </section>
-
     </>
   );
 };

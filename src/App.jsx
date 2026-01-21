@@ -73,6 +73,7 @@ import UserApplicationForm from "./Pages/UserApplicationForm";
 import Blogs from './Component/Blogs/Blogs'
 import BlogDetails from './Component/Blogs/BlogDetails'
 import AppliancesPage from "./Pages/AppliancesPage";
+import HomeFinancePage from "./Pages/HomeFinancePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -86,33 +87,33 @@ function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/app/signin");
+  useEffect(() => {
+    if (!token) {
+      navigate("/app/signin");
 
-  //   }
-  // }, [token]);
+    }
+  }, [token]);
 
-  // useEffect(() => {
-  //   if (pathname.startsWith("/admin")) {
-  //     dispatch(setPersonRole("admin"));
-  //   } else if (pathname.startsWith("/app")) {
-  //     dispatch(setPersonRole("app"));
-  //   }
-  // }, [pathname]);
+  useEffect(() => {
+    if (pathname.startsWith("/admin")) {
+      dispatch(setPersonRole("admin"));
+    } else if (pathname.startsWith("/app")) {
+      dispatch(setPersonRole("app"));
+    }
+  }, [pathname]);
 
-  // useEffect(() => {
-  //   if (prevRoleRef.current === null) {
-  //     prevRoleRef.current = role;
-  //     return;
-  //   }
+  useEffect(() => {
+    if (prevRoleRef.current === null) {
+      prevRoleRef.current = role;
+      return;
+    }
 
-  //   if (prevRoleRef.current !== role && role) {
-  //     navigate(`/${role}/signin`);
-  //   }
+    if (prevRoleRef.current !== role && role) {
+      navigate(`/${role}/signin`);
+    }
 
-  //   prevRoleRef.current = role;
-  // }, [role]);
+    prevRoleRef.current = role;
+  }, [role]);
 
   return (
     <>
@@ -121,6 +122,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/appliance" element={<AppliancesPage />} />
+        <Route path="/home-finance" element={<HomeFinancePage />} />
         <Route path="/automotive" element={<Automotive />} />
         <Route path="/jewellery" element={<Jewellery />} />
         <Route path="/medical-equipment" element={<MedicalEquipment />} />

@@ -34,7 +34,7 @@ const ImagePoints = ({
             {data?.points.map((point, i) => (
               <li key={i} className="flex items-center gap-2 md:mr-5">
                 <img src={pointIcon} alt="star" />
-                <span className="md:text-lg">{point}</span>
+                <span className="md:text-lg" dangerouslySetInnerHTML={{__html:point}}></span>
               </li>
             ))}
           </ul>

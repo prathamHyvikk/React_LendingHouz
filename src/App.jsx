@@ -73,6 +73,7 @@ import Blogs from "./Component/Blogs/Blogs";
 import BlogDetails from "./Component/Blogs/BlogDetails";
 import AppliancesPage from "./Pages/AppliancesPage";
 import HomeFinancePage from "./Pages/HomeFinancePage";
+import HomeNewPage from "./Pages/HomeNewPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -119,7 +120,8 @@ function App() {
       <Toaster />
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<HomeNewPage />} />
         <Route path="/appliance" element={<AppliancesPage />} />
         <Route path="/home-finance" element={<HomeFinancePage />} />
         <Route path="/automotive" element={<Automotive />} />

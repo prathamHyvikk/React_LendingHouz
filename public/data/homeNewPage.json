@@ -1,0 +1,39 @@
+{
+  "heroSection": {
+    "image": "/assets/Images/heroHome.webp",
+    "title": "Financing for every milestone. Powering every ambition.",
+    "description": "Whether you’re closing on a new home, upgrading your business equipment, or securing the latest tech, Lending Houz connects you with flexible financing solutions tailored to your life. One platform, infinite possibilities.",
+    "btnText": "Explore Financing Options",
+    "btnLink": ""
+  },
+
+  "partner": {
+    "image": "/assets/Images/kiosks.png",
+    "pointIcon": "/assets/Images/tickIcon.png",
+    "title": "Your Financial Partner for Life",
+    "subLine": "We’ve evolved beyond the mortgage. Lending Houz is built to support your journey—from the big investments to the daily essentials.",
+    "points": [
+      "<span class='sora-semibold'>A Solution for Every Need:</span> From real estate to personal tech, we cover the full spectrum of lending.",
+      "<span class='sora-semibold'>Transparent & Modern:</span> No hidden hurdles. Just a streamlined, digital-first experience.",
+      "<span class='sora-semibold'>Tailored to You:</span> We match you with rates and terms that fit your specific financial profile."
+    ]
+  },
+
+  "financing": {
+    "image": "/assets/Images/equipment.png",
+    "pointIcon": "",
+    "title": "Financing for the Way You Live Today",
+    "subLine": "We believe that quality of life shouldn't be gated by upfront costs. That’s why we’ve expanded our reach to include the tools you use every day.",
+    "points": [
+      "<span class='sora-semibold'>Upgrade Your Tech:</span> Get the latest cell phones and devices without the sticker shock.",
+      "<span class='sora-semibold'>Equip Your Home:</span> Finance essential appliances like refrigerators, washers, and dryers with ease.",
+      "<span class='sora-semibold'>Empower Your Work:</span> Access the specialized equipment your business needs to scale."
+    ]
+  },
+
+  "furure": {
+    "title": "The future of lending is here",
+    "description": "Join thousands of users who trust Lending Houz for their homes, businesses, and personal financing.",
+    "btnText": "Find My Loan"
+  }
+}

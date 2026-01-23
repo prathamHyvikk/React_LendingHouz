@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const FinanceOptionHero = ({ data, category }) => {
+const FinanceOptionHero = ({ data, category, secondBtn }) => {
   const authenticate = useSelector((state) => state.auth.value);
   const navigate = useNavigate();
 
@@ -34,24 +34,49 @@ const FinanceOptionHero = ({ data, category }) => {
               {data?.description}
             </p>
 
-            <button
-              onClick={handleClick}
-              className="py-3 px-6 rounded-lg hidden items-center gap-2 font-semibold lg:flex bg-[#f5bf11] hover:bg-black hover:text-white transition cursor-pointer"
+            <div
+              className={`${secondBtn && "flex flex-col w-fit min-[500px]:flex-row min-[500px]:items-center gap-4 mt-4"}`}
             >
-              <span>{data?.btnText}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                className="size-6 stroke-current"
+              <button
+                onClick={handleClick}
+                className="py-3 px-6 rounded-lg  items-center gap-2 font-semibold flex primary-bg hover:bg-black text-white transition cursor-pointer"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                ></path>
-              </svg>
-            </button>
+                <span>{data?.btnText}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  className="size-6 hidden sm:block stroke-current"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                  ></path>
+                </svg>
+              </button>
+
+              {secondBtn && (
+                <button
+                  onClick={handleClick}
+                  className="py-3 px-6 rounded-lg  items-center gap-2 font-semibold flex  primary-bg hover:bg-black hover:text-white transition cursor-pointer"
+                >
+                  <span>{secondBtn}</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    className="size-6 hidden sm:block  stroke-current"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                    ></path>
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
           <div className="hero-right lg:w-[50%] ">
             <img

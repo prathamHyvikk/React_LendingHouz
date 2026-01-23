@@ -78,7 +78,7 @@ const AppliancesPage = () => {
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {why.map((data, i) => (
               <div key={i} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-1 h-12 bg-(--primary-color2) rounded-full mt-1"></div>
+                <div className="flex-shrink-0 w-1 h-12 primary-bg rounded-full mt-1"></div>
                 <div>
                   <h3 className="text-lg font-semibold text-neutral-900 mb-1">
                     {data.title}
@@ -113,7 +113,7 @@ const AppliancesPage = () => {
                 key={i}
                 className="relative bg-white border border-neutral-200 rounded-2xl p-6 pt-10"
               >
-                <span className="absolute -top-6 left-6 text-5xl font-semibold text-(--primary-color2)">
+                <span className="absolute -top-6 left-6 text-5xl font-semibold text-[#ff9201]">
                   {data.no}
                 </span>
                 <h3 className="text-lg font-semibold text-neutral-900 mb-2">

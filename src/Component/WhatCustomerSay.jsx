@@ -41,9 +41,7 @@ const WhatCustomerSay = ({ whatSay }) => {
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                  <p className="font-semibold text-[var(--primary-color2)]">
-                    {item.name}
-                  </p>
+                  <p className="font-semibold text-[#ff9201]">{item.name}</p>
                   <span className="text-sm text-gray-500">{item.role}</span>
                 </div>
               </div>

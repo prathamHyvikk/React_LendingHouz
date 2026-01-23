@@ -14,7 +14,10 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   const [status, setStatus] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState();
+  const [otherImage, setOtherImage] = useState([]);
   const [condition, setCondition] = useState("");
+
+  const max_file = 2;
 
   const LoginToken = localStorage.getItem("LoginToken");
   const fetchCategories = async () => {
@@ -25,7 +28,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setCategoryList(response.data);
@@ -37,7 +40,23 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   useEffect(() => {
     fetchCategories();
   }, []);
-  console.log(image);
+  console.log(otherImage);
+
+  const handleOtherImages = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+
+    // total after selection
+    const totalFiles = otherImage.length + selectedFiles.length;
+
+    if (totalFiles > max_file) {
+      toast.error(`You can upload a maximum of ${max_file} images.`);
+      e.target.value = "";
+      return;
+    }
+
+    setOtherImage((prev) => [...prev, ...selectedFiles]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -58,6 +77,10 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
         formData.append("image", image);
       }
 
+      for (let i = 0; i < otherImage.length; i++) {
+        formData.append(`other_images`, otherImage[i]);
+      }
+
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/products`,
         formData,
@@ -66,7 +89,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
             Authorization: `Bearer ${LoginToken}`,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
 
       toast.success(response.data.message);
@@ -270,7 +293,22 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
                 <input
                   type="file"
                   name="image"
+                  required
                   onChange={(e) => setImage(e.target.files[0])}
+                  accept="image/*"
+                  className="w-full   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-(--primary-color) focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm sora-semibold text-gray-700 mb-2">
+                  Extra Image
+                </label>
+                <input
+                  type="file"
+                  name="otherImage"
+                  multiple
+                  onChange={(e) => handleOtherImages(e)}
                   accept="image/*"
                   className="w-full   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-(--primary-color) focus:border-transparent"
                 />

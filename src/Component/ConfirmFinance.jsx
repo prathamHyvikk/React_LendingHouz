@@ -53,10 +53,10 @@ const ConfirmFinance = ({
   };
 
   return (
-    <div className="content-area flex-1 overflow-auto">
+    <div className="content-area flex-1 ">
       <div className="page p-4 lg:p-8">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg ">
             <div className="bg-(--primary-color) text-white py-4 px-6">
               <h2 className="text-xl font-bold">Form</h2>
             </div>
@@ -106,7 +106,7 @@ const ConfirmFinance = ({
 
               <button
                 onClick={handleContinue}
-                className="mt-6 w-full bg-(--primary-color) text-white py-2 rounded-md font-semibold"
+                className="mt-6 w-full cursor-pointer bg-(--primary-color) text-white py-2 rounded-md font-semibold"
               >
                 Continue
               </button>

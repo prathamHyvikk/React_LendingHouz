@@ -65,13 +65,12 @@ import { setPersonRole } from "./features/personRole";
 import AdminProductDetail from "./Pages/AdminProductDetail";
 import AdminSelectOffer from "./Pages/AdminSelectOffer";
 import AdminBankingInfo from "./Pages/AdminBankingInfo";
-import AdminOrderDetail from "./Pages/AdminOrderDetail";
 import AdminCheckOut from "./Pages/AdminCheckOut";
 import { Toaster } from "react-hot-toast";
 import ResetPassword from "./Pages/ResetPassword";
 import UserApplicationForm from "./Pages/UserApplicationForm";
-import Blogs from './Component/Blogs/Blogs'
-import BlogDetails from './Component/Blogs/BlogDetails'
+import Blogs from "./Component/Blogs/Blogs";
+import BlogDetails from "./Component/Blogs/BlogDetails";
 import AppliancesPage from "./Pages/AppliancesPage";
 import HomeFinancePage from "./Pages/HomeFinancePage";
 
@@ -148,9 +147,9 @@ function App() {
         <Route path="/kiosk" element={<Kiosk />} />
         <Route path="/e-bike" element={<Ebike />} />
         <Route path="/scuba-diving" element={<ScubaDiving />} />
-        <Route path="/become-partner" element={<Form />} /> 
-        <Route path='/blog' element={<Blogs />} />
-        <Route path='/blog-detail' element={<BlogDetails />} />
+        <Route path="/become-partner" element={<Form />} />
+        <Route path="/blog" element={<Blogs />} />
+        <Route path="/blog-detail" element={<BlogDetails />} />
 
         <Route path="/app/signup" element={<Signup />} />
         <Route path="/app/signin" element={<SignIn />} />
@@ -226,21 +225,18 @@ function App() {
         />
         <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
         <Route
-          path="/admin/dashboard/marketplace/product/product-detail"
+          path="/app/dashboard/marketplace/product/product-detail"
           element={<AdminProductDetail />}
         />
         <Route
-          path="/admin/dashboard/cart/select-offer"
+          path="/app/dashboard/cart/select-offer"
           element={<AdminSelectOffer />}
         />
         <Route
           path="/admin/dashboard/cart/banking-info"
           element={<AdminBankingInfo />}
         />
-        <Route
-          path="/admin/dashboard/cart/order-details"
-          element={<AdminOrderDetail />}
-        />
+
         <Route
           path="/admin/dashboard/cart/checkout"
           element={<AdminCheckOut />}

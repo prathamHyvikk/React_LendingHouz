@@ -53,7 +53,7 @@ const AdminApplicationsDashboard = () => {
         headers: {
           Authorization: `Bearer ${LoginToken}`,
         },
-      }
+      },
     );
 
     setCategories(response?.data?.categories);
@@ -68,7 +68,7 @@ const AdminApplicationsDashboard = () => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setApplications(response?.data?.applications);
@@ -121,11 +121,7 @@ const AdminApplicationsDashboard = () => {
                     {/* <Th className="text-center">
                       {role == "admin" ? "Date" : "Date of Application"}
                     </Th> */}
-                    <Th>
-                      {role == "admin"
-                        ? "Application Number"
-                        : "Requested Amount"}
-                    </Th>
+                    <Th>Approved Amount</Th>
                     <Th>Applied On </Th>
                     <Th> Print Invoice</Th>
                   </tr>
@@ -152,11 +148,11 @@ const AdminApplicationsDashboard = () => {
                               {item.product_type}
                             </div>
                           </Td>
-                          <Td center={"yes"}>{item.status}</Td>
+                          <Td center={"yes"}>{item.application_status}</Td>
                           <Td>{item.lender}</Td>
 
                           <Td center={"yes"}>{item.application_id}</Td>
-                          <Td center={"yes"}>{item.requested_income}</Td>
+                          <Td center={"yes"}>{item.approvalAmount == null ? "-" : item.approvalAmount}</Td>
                           <Td className="" center={""}>
                             {item.created_at
                               .split("T")[0]
@@ -177,7 +173,7 @@ const AdminApplicationsDashboard = () => {
                   ) : (
                     <>
                       {applications?.filter(
-                        (item) => item.product_type == selectedCategory
+                        (item) => item.product_type == selectedCategory,
                       ).length == 0 ? (
                         <Td
                           center={"yes"}
@@ -188,7 +184,7 @@ const AdminApplicationsDashboard = () => {
                       ) : search == "" ? (
                         applications
                           ?.filter(
-                            (item) => item.product_type == selectedCategory
+                            (item) => item.product_type == selectedCategory,
                           )
                           .map((item, i) => (
                             <tr key={i} className="hover:bg-gray-50">

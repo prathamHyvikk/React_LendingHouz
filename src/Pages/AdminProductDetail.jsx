@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const AdminProductDetail = () => {
   const [mainImage, setMainImage] = useState(
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop"
+    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
   );
 
   const [number, setNumber] = useState(1);
@@ -29,10 +29,10 @@ const AdminProductDetail = () => {
                 <img
                   src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=200"
                   alt="Thumbnail 1"
-                  className="sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-blue-500"
+                  className={`sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${mainImage === "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop" ? "border-gray-400" : "border-gray-300"}`}
                   onClick={() =>
                     setMainImage(
-                      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200"
+                      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
                     )
                   }
                 />
@@ -43,7 +43,7 @@ const AdminProductDetail = () => {
                   className="sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300"
                   onClick={() =>
                     setMainImage(
-                      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200"
+                      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
                     )
                   }
                 />
@@ -54,7 +54,7 @@ const AdminProductDetail = () => {
                   className="sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300"
                   onClick={() =>
                     setMainImage(
-                      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200"
+                      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
                     )
                   }
                 />
@@ -101,7 +101,7 @@ const AdminProductDetail = () => {
                     +
                   </button>
                 </div>
-                <Link to="/admin/dashboard/cart/select-offer">
+                <Link to="/app/dashboard/cart/select-offer">
                   <button className="flex-1 cursor-pointer bg-blue-600 text-white px-6 py-2 rounded-lg sora-semibold hover:bg-blue-700 transition-colors">
                     Apply
                   </button>

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import { Link } from "react-router-dom";
 
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import CartSteper from "../Component/CartSteper";
+
 const AdminSelectOffer = () => {
   const [offerType, setOfferType] = useState("weekly");
 
@@ -73,115 +77,8 @@ const AdminSelectOffer = () => {
               </div>
             </div>
 
-            <div className="col-span-5">
-              <div className="flex items-center justify-center mb-4">
-                <h1 className="text-2xl sora-bold text-gray-800">
-                  Select Offer
-                </h1>
-              </div>
-              <div className="flex items-center justify-center mb-6">
-                <div className="flex items-center gap-2 w-full">
-                  <div className="w-10 h-10 bg-(--primary-color) text-white rounded-full flex items-center justify-center sora-semibold">
-                    1
-                  </div>
-
-                  <div className="flex-1 h-1 bg-gray-300"></div>
-
-                  <div className="w-10 h-10 bg-gray-300 text-white rounded-full flex items-center justify-center sora-semibold">
-                    2
-                  </div>
-
-                  <div className="flex-1 h-1 bg-gray-300"></div>
-
-                  <div className="w-10 h-10 bg-gray-300 text-white rounded-full flex items-center justify-center sora-semibold">
-                    3
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-linear-to-br from-blue-600 to-blue-700 rounded-2xl shadow-lg p-6 text-white">
-                <div className="flex gap-2 mb-6">
-                  <button
-                    onClick={() => setOfferType("weekly")}
-                    id="weeklyBtn"
-                    className={`flex-1 ${
-                      offerType === "weekly"
-                        ? " bg-blue-500 hover:bg-blue-400 "
-                        : "bg-blue-700 hover:bg-blue-600"
-                    } py-2 px-4 cursor-pointer text-sm rounded-lg sora-medium transition-colors`}
-                  >
-                    Bi Weekly
-                  </button>
-                  <button
-                    onClick={() => setOfferType("monthly")}
-                    id="monthlyBtn"
-                    className={`flex-1 ${
-                      offerType === "monthly"
-                        ? " bg-blue-500 hover:bg-blue-400 "
-                        : "bg-blue-700 hover:bg-blue-600"
-                    } py-2 px-4 cursor-pointer text-sm rounded-lg sora-medium transition-colors`}
-                  >
-                    Monthly
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-blue-400">
-                    <div>
-                      <p className="text-sm text-blue-200 mb-1">Frequency</p>
-                      <p className="sora-semibold" id="frequencyText">
-                        Bi Weekly
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-blue-200 mb-1">Due today</p>
-                      <p className="text-base sora-semibold" id="dueToday">
-                        $200
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between pb-3 border-b border-blue-400">
-                    <p className="text-blue-100">Number of payments</p>
-                    <p className="sora-semibold" id="numPayments">
-                      {offerType === "weekly" ? "08" : "25"}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between pb-3 border-b border-blue-400">
-                    <p className="text-blue-100">Payment amount</p>
-                    <p className="sora-semibold" id="paymentAmount">
-                      {offerType === "weekly" ? "$3000" : "$10,000"}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2">
-                    <p className="text-blue-100">Total Payment amount</p>
-                    <p className="text-lg sora-semibold" id="totalAmount">
-                      $10,000
-                    </p>
-                  </div>
-                </div>
-
-                <Link to="/admin/dashboard/cart/banking-info">
-                  <button className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg font-semibold mt-6 flex items-center justify-center gap-2 transition-colors text-sm">
-                    <span>Select Offer</span>
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      ></path>
-                    </svg>
-                  </button>
-                </Link>
-              </div>
+            <div className="col-span-5 mt-10">
+              <CartSteper />
             </div>
           </div>
         </div>

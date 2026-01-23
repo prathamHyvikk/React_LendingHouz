@@ -112,7 +112,7 @@ const MarketPlace = () => {
                 {products?.map((item, index) => (
                   <Link
                     key={index}
-                    to={`/admin/dashboard/marketplace/product/product-detail`}
+                    to={`/app/dashboard/marketplace/product/product-detail`}
                   >
                     <SmallCard data={item} />
                   </Link>

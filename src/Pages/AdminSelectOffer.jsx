@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -8,6 +8,7 @@ import CartSteper from "../Component/CartSteper";
 
 const AdminSelectOffer = () => {
   const [offerType, setOfferType] = useState("weekly");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -16,7 +17,7 @@ const AdminSelectOffer = () => {
           <div className="w-full max-lg:max-w-xl max-lg:mx-auto max-lg:space-y-12 lg:grid lg:grid-cols-12 gap-8">
             <div className="col-span-7">
               <div className="mb-8 border-b-2 border-gray-200 pb-6">
-                <button className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+                <button onClick={()=> navigate(-1)} className="cursor-pointer flex items-center gap-2 text-gray-700 hover:text-gray-900">
                   <svg
                     className="w-5 h-5"
                     fill="none"

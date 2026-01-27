@@ -25,20 +25,22 @@ const ApplicationsDashboard = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedApplication, setSelectedApplication] = useState(null);
+
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
   const marketplace = false;
 
   const navigate = useNavigate();
-  const showDropdown = (e) => {
+  const showDropdown = (e, item) => {
     e.stopPropagation();
 
     setPosition({
       x: e.clientX - 120,
       y: e.clientY,
     });
-
+    setSelectedApplication(item);
     setShowView(true);
   };
 
@@ -55,7 +57,7 @@ const ApplicationsDashboard = () => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setCategories(response?.data?.categories);
@@ -78,7 +80,7 @@ const ApplicationsDashboard = () => {
           params: {
             user_id: userId,
           },
-        }
+        },
       );
 
       setApplications(response?.data?.applications);
@@ -145,44 +147,53 @@ const ApplicationsDashboard = () => {
                     </div>
                   ) : selectedCategory == "" ? (
                     <>
-                      {applications?.map((item, i) => (
-                        <tr key={i} className="hover:bg-gray-50">
-                          <Td>
-                            <div className="flex items-center gap-2">
-                              <img
-                                className="shrink-0 w-12 h-12 "
-                                src={item.img || "/assets/Images/product.png"}
-                                alt="image"
+                      {applications?.length > 0 ? (
+                        applications?.map((item, i) => (
+                          <tr key={i} className="hover:bg-gray-50">
+                            <Td>
+                              <div className="flex items-center gap-2">
+                                <img
+                                  className="shrink-0 w-12 h-12 "
+                                  src={item.img || "/assets/Images/product.png"}
+                                  alt="image"
+                                />
+                                {item.product_type}
+                              </div>
+                            </Td>
+                            <Td center={"yes"}>{item.status}</Td>
+                            <Td>{item.lender}</Td>
+
+                            <Td center={"yes"}>{item.application_id}</Td>
+                            <Td center={"yes"}>{item.requested_income}</Td>
+                            <Td className="" center={""}>
+                              {item.created_at
+                                .split("T")[0]
+                                .split("-")
+                                .reverse()
+                                .join("/")}
+                            </Td>
+
+                            <Td center>
+                              <IconBtn
+                                icon={<AiOutlinePrinter />}
+                                onClick={(e) => showDropdown(e, item)}
                               />
-                              {item.product_type}
-                            </div>
-                          </Td>
-                          <Td center={"yes"}>{item.status}</Td>
-                          <Td>{item.lender}</Td>
-
-                          <Td center={"yes"}>{item.application_id}</Td>
-                          <Td center={"yes"}>{item.requested_income}</Td>
-                          <Td className="" center={""}>
-                            {item.created_at
-                              .split("T")[0]
-                              .split("-")
-                              .reverse()
-                              .join("/")}
-                          </Td>
-
-                          <Td center>
-                            <IconBtn
-                              icon={<AiOutlinePrinter />}
-                              onClick={showDropdown}
-                            />
-                          </Td>
-                        </tr>
-                      ))}
+                            </Td>
+                          </tr>
+                        ))
+                      ) : (
+                        <Td
+                          center={"yes"}
+                          className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
+                        >
+                          No Application Found
+                        </Td>
+                      )}
                     </>
                   ) : (
                     <>
                       {applications?.filter(
-                        (item) => item.product_type == selectedCategory
+                        (item) => item.product_type == selectedCategory,
                       ).length == 0 ? (
                         <Td
                           center={"yes"}
@@ -193,7 +204,7 @@ const ApplicationsDashboard = () => {
                       ) : (
                         applications
                           ?.filter(
-                            (item) => item.product_type == selectedCategory
+                            (item) => item.product_type == selectedCategory,
                           )
                           .map((item, i) => (
                             <tr key={i} className="hover:bg-gray-50">
@@ -246,6 +257,7 @@ const ApplicationsDashboard = () => {
           {showView && (
             <PrintPopup
               position={position}
+              data={selectedApplication}
               onClose={() => setShowView(false)}
               setShowView={setShowView}
             />

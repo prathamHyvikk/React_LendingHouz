@@ -3,7 +3,8 @@ import ViewModal from "./ViewModal";
 import SubmitInvoice from "./SubmitInvoice";
 import ModalWrapper from "./ModalWrapper";
 
-const PrintPopup = ({ onClose, position }) => {
+const PrintPopup = ({ onClose, position, data }) => {
+ 
   const menuRef = useRef(null);
   const [showFullView, setShowFullView] = useState(false);
   const [addInvoice, setAddInvoice] = useState(false);
@@ -36,18 +37,18 @@ const PrintPopup = ({ onClose, position }) => {
           <i className="fa-regular fa-eye"></i>
         </button>
 
-        <button
+        {/* <button
           onClick={() => setAddInvoice(true)}
           className="p-2 hover:bg-gray-100 w-full flex justify-between cursor-pointer rounded"
         >
           <span>Add Invoice</span>
           <i className="fa-solid fa-plus"></i>
-        </button>
+        </button> */}
 
         {showFullView && (
           <>
             {" "}
-            <ViewModal onClose={() => setShowFullView(false)} />
+            <ViewModal onClose={() => setShowFullView(false)} data={data}/>
            
           </>
         )}

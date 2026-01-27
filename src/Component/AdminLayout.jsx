@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { FaShoppingCart } from "react-icons/fa";
+import { IoMdNotifications } from "react-icons/io";
 const AdminLayout = ({ children }) => {
   const { pathname } = useLocation();
 
@@ -24,22 +25,27 @@ const AdminLayout = ({ children }) => {
                     className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
                   />
 
-                  <Link
-                    to={`/${role}/dashboard/notifications`}
-                    className="relative cursor-pointer inline-block"
-                  >
-                    <button
-                      id="notify"
-                      className="p-2 rounded-full hover:bg-gray-100 transition relative"
-                      aria-label="Notifications"
-                    >
-                      <i className="fas fa-bell text-gray-700 text-xl"></i>
+                  <div className="flex items-center space-x-4">
+                    {role === "app" && (
+                      <Link
+                        to={`/app/dashboard/cart/select-offer`}
+                        className="relative cursor-pointer inline-block"
+                      >
+                        <FaShoppingCart className="text-2xl" />
+                      </Link>
+                    )}
 
-                      <span className="absolute -top-1 right-0 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
+                    <Link
+                      to={`/${role}/dashboard/notifications`}
+                      className="relative cursor-pointer inline-block"
+                    >
+                      <IoMdNotifications className="text-3xl" />
+
+                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
                         3
                       </span>
-                    </button>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>

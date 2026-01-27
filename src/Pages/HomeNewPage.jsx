@@ -9,6 +9,7 @@ import ImagePoints from "../Component/ImagePoints";
 import HomeService from "../Component/HomeService";
 import ReadyToMove from "../Component/ReadyToMove";
 import ReadyToExplore from "../Component/ReadyToExplore";
+import Footer from "../Component/Footer";
 
 const HomeNewPage = () => {
   return (
@@ -40,6 +41,8 @@ const HomeNewPage = () => {
       <section className="">
         <ReadyToExplore maxWidth={"max-w-[672px]"} data={furure} category="" />
       </section>
+
+      <Footer />
     </>
   );
 };

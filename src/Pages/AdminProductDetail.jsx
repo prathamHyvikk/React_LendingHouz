@@ -2,15 +2,70 @@ import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import SmallCard from "../Component/SmallCard";
 import { recentMarketPlaceData } from "../data/userDashboard.json";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 const AdminProductDetail = () => {
-  const [mainImage, setMainImage] = useState(
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-  );
+  // const [mainImage, setMainImage] = useState(
+  //   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+  // );
 
   const [number, setNumber] = useState(1);
+  const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(0);
 
+  const [product, setProduct] = useState();
+  const [recentProducts, setRecentProducts] = useState();
+  const LoginToken = localStorage.getItem("LoginToken");
+  const { id } = useParams();
+  console.log(id);
+
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/single-product`,
+        {
+          params: {
+            id: id,
+          },
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      console.log(response.data);
+      setProduct(response?.data);
+      setImages([
+        response?.data?.image_url,
+        ...response?.data?.other_images_url,
+      ]);
+    } catch (error) {}
+  };
+
+  const fetchProducts = async () => {
+   
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/products`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+    
+      setRecentProducts(response?.data?.products);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    }
+  };
+
+
+  React.useEffect(() => {
+    fetchProduct();
+    fetchProducts();
+  }, []);
   return (
     <>
       <AdminLayout>
@@ -19,53 +74,35 @@ const AdminProductDetail = () => {
             <div>
               <div className="mb-4">
                 <img
-                  src={mainImage}
+                  src={images[selectedImage]}
                   alt="House"
-                  className="w-full h-96 object-cover rounded-lg"
+                  className="w-full h-96 object-contain rounded-lg"
                 />
               </div>
 
               <div className="flex gap-4">
-                <img
-                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=200"
-                  alt="Thumbnail 1"
-                  className={`sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${mainImage === "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop" ? "border-gray-400" : "border-gray-300"}`}
-                  onClick={() =>
-                    setMainImage(
-                      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
-                    )
-                  }
-                />
-
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=200"
-                  alt="Thumbnail 2"
-                  className="sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300"
-                  onClick={() =>
-                    setMainImage(
-                      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
-                    )
-                  }
-                />
-
-                <img
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=200"
-                  alt="Thumbnail 3"
-                  className="sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300"
-                  onClick={() =>
-                    setMainImage(
-                      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
-                    )
-                  }
-                />
+                {images?.map((image, index) => (
+                  <div key={index} className="">
+                    <img
+                      src={image}
+                      alt="Thumbnail "
+                      className={`sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${
+                        index === selectedImage
+                          ? "border-blue-500"
+                          : "border-transparent"
+                      } `}
+                      onClick={() => setSelectedImage(index)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="max-sm:ps-2">
               <h1 className=" text-2xl sm:text-3xl sora-bold text-gray-800 mb-2">
-                Home Financing
+                {product?.name}
               </h1>
-              <p className="text-sm text-gray-600 mb-4">ORDER ID #123123</p>
+              {/* <p className="text-sm text-gray-600 mb-4">ORDER ID #123123</p> */}
 
               <div className="flex  items-center gap-4 mb-6">
                 <div>
@@ -176,12 +213,7 @@ const AdminProductDetail = () => {
 
           <div className="mt-12">
             <h2 className="sm:text-4xl text-2xl sora-bold mb-3">Description</h2>
-            <p className="text-sm text-gray-700">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-              sit expedita totam magnam perferendis voluptatum vel deserunt
-              officiis minus inventore, suscipit animi sunt cum, et ad. Nemo
-              culpa est perspiciatis.
-            </p>
+            <p className="text-sm text-gray-700">{product?.description}</p>
           </div>
 
           <div className="mt-8">

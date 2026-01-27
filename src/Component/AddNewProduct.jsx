@@ -77,9 +77,9 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
         formData.append("image", image);
       }
 
-      for (let i = 0; i < otherImage.length; i++) {
-        formData.append(`other_images`, otherImage[i]);
-      }
+      otherImage.forEach((file) => {
+        formData.append("other_images[]", file);
+      });
 
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/products`,

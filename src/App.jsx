@@ -227,7 +227,7 @@ function App() {
         />
         <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
         <Route
-          path="/app/dashboard/marketplace/product/product-detail"
+          path="/app/dashboard/marketplace/product/product-detail/:id"
           element={<AdminProductDetail />}
         />
         <Route

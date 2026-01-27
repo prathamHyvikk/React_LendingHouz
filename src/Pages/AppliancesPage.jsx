@@ -4,6 +4,8 @@ import Footer from "../Component/Footer";
 import FinanceOptionHero from "../Component/FinanceOptionHero";
 import ImagePoints from "../Component/ImagePoints";
 import FAQAccordion from "../Component/FAQAccordion";
+import WhatCustomerSay from "../Component/WhatCustomerSay";
+import ReadyToExplore from "../Component/ReadyToExplore";
 
 import { heroSection } from "../../public/data/appliancePage.json";
 import { applicationsType } from "../../public/data/appliancePage.json";
@@ -13,8 +15,6 @@ import { howWork } from "../../public/data/appliancePage.json";
 import { faqs } from "../../public/data/appliancePage.json";
 import { whatSay } from "../../public/data/appliancePage.json";
 import { readySection } from "../../public/data/appliancePage.json";
-import WhatCustomerSay from "../Component/WhatCustomerSay";
-import ReadyToExplore from "../Component/ReadyToExplore";
 const AppliancesPage = () => {
   return (
     <>
@@ -139,6 +139,8 @@ const AppliancesPage = () => {
       <section>
         <ReadyToExplore data={readySection} category="Appliances" />
       </section>
+
+      <Footer />
     </>
   );
 };

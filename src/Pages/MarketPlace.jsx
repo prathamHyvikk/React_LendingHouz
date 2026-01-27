@@ -30,7 +30,7 @@ const MarketPlace = () => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
       setProducts(response?.data?.products);
       setLastPage(response?.data?.last_page);
@@ -112,7 +112,7 @@ const MarketPlace = () => {
                 {products?.map((item, index) => (
                   <Link
                     key={index}
-                    to={`/app/dashboard/marketplace/product/product-detail`}
+                    to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}
                   >
                     <SmallCard data={item} />
                   </Link>

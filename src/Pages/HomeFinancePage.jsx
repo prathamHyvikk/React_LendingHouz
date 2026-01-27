@@ -21,6 +21,7 @@ import { readySection } from "../../public/data/homeFinance.json";
 import FAQAccordion from "../Component/FAQAccordion";
 import WhatCustomerSay from "../Component/WhatCustomerSay";
 import ReadyToExplore from "../Component/ReadyToExplore";
+import Footer from "../Component/Footer";
 
 const HomeFinancePage = () => {
   return (
@@ -72,6 +73,8 @@ const HomeFinancePage = () => {
       <section>
         <ReadyToExplore data={readySection} category="Home Finance" />
       </section>
+
+      <Footer />
     </>
   );
 };

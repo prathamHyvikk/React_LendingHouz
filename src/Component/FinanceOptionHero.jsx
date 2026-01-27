@@ -59,7 +59,7 @@ const FinanceOptionHero = ({ data, category, secondBtn }) => {
               {secondBtn && (
                 <button
                   onClick={handleClick}
-                  className="py-3 px-6 rounded-lg  items-center gap-2 font-semibold flex  primary-bg hover:bg-black hover:text-white transition cursor-pointer"
+                  className="py-3 px-6 rounded-lg  items-center gap-2 font-semibold flex  primary-bg hover:bg-black text-white transition cursor-pointer"
                 >
                   <span>{secondBtn}</span>
                   <svg

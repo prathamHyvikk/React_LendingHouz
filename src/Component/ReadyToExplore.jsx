@@ -47,13 +47,13 @@ const ReadyToExplore = ({ category, data, maxWidth }) => {
         </button>
       </div>
 
-      <footer className="lg:px-10 md:px-8 px-4 pb-4 max-w-[1320px] mx-auto ">
+      {/* <footer className="lg:px-10 md:px-8 px-4 pb-4 max-w-[1320px] mx-auto ">
         <div className="primary-bg text-white rounded-lg px-4 py-1">
           <p className="text-center">
             © {new Date().getFullYear()} Copyright By Lending Houz
           </p>
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 };

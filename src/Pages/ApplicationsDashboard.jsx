@@ -141,17 +141,13 @@ const ApplicationsDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {loading ? (
-                    <div className="flex justify-center items-center w-full">
-                      <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
-                    </div>
-                  ) : selectedCategory == "" ? (
+                  {selectedCategory == "" ? (
                     <>
                       {applications?.length > 0 ? (
                         applications?.map((item, i) => (
                           <tr key={i} className="hover:bg-gray-50">
                             <Td>
-                              <div className="flex items-center gap-2">
+                              <div className="flex  items-center gap-2">
                                 <img
                                   className="shrink-0 w-12 h-12 "
                                   src={item.img || "/assets/Images/product.png"}
@@ -164,7 +160,7 @@ const ApplicationsDashboard = () => {
                             <Td>{item.lender}</Td>
 
                             <Td center={"yes"}>{item.application_id}</Td>
-                            <Td center={"yes"}>{item.requested_income}</Td>
+                            <Td>${item.requested_income}</Td>
                             <Td className="" center={""}>
                               {item.created_at
                                 .split("T")[0]
@@ -246,6 +242,12 @@ const ApplicationsDashboard = () => {
                   )}
                 </tbody>
               </table>
+
+              {loading && (
+                <div className="my-10 flex justify-center items-center w-full">
+                  <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+                </div>
+              )}
             </div>
           </div>
 

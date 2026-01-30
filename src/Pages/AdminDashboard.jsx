@@ -18,14 +18,21 @@ import { CiShop } from "react-icons/ci";
 import { ImAttachment } from "react-icons/im";
 import { IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
+import SmallCard from "../Component/SmallCard";
 
 const AdminDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [recentProducts, setRecentProducts] = useState([]);
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [applications, setApplications] = useState();
+  const [loading, setLoading] = useState(false);
 
   const role = useSelector((state) => state.person.value);
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
@@ -48,9 +55,56 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/categories`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setCategories(response?.data?.categories);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchApplications = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `https://cpanel.lendinghouz.com/api/show-application`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setApplications(response?.data?.applications);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchApplications();
+    fetchCategories();
+  }, []);
+
   useEffect(() => {
     recentProduct();
   }, []);
+
+  console.log(applications, categories);
 
   return (
     <>
@@ -90,9 +144,9 @@ const AdminDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {clients.map((item, i) => (
+                  {applications?.map((item, i) => (
                     <tr key={i} className="hover:bg-gray-50">
-                      <Td>{item.appNo}</Td>
+                      <Td>#{item.application_id}</Td>
                       <Td>{item.name}</Td>
                       {role == "admin" && <Td>{item.business}</Td>}
                       <Td>{item.status}</Td>

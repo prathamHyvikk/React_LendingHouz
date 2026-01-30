@@ -82,41 +82,40 @@ function App() {
   const personId = useSelector((state) => state.person.id);
   const token = localStorage.getItem("LoginToken");
 
-  // const prevRoleRef = useRef(null);
+  const prevRoleRef = useRef(null);
 
-  // const navigate = useNavigate();
-  // const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/app/signin");
+  useEffect(() => {
+    if (!token) {
+      navigate("/app/signin");
+    }
+  }, [token]);
 
-  //   }
-  // }, [token]);
+  useEffect(() => {
+    if (pathname.startsWith("/admin")) {
+      dispatch(setPersonRole("admin"));
+    } else if (pathname.startsWith("/app")) {
+      dispatch(setPersonRole("app"));
+    }
+  }, [pathname]);
 
-  // useEffect(() => {
-  //   if (pathname.startsWith("/admin")) {
-  //     dispatch(setPersonRole("admin"));
-  //   } else if (pathname.startsWith("/app")) {
-  //     dispatch(setPersonRole("app"));
-  //   }
-  // }, [pathname]);
+  useEffect(() => {
+    if (prevRoleRef.current === null) {
+      prevRoleRef.current = role;
+      return;
+    }
 
-  // useEffect(() => {
-  //   if (prevRoleRef.current === null) {
-  //     prevRoleRef.current = role;
-  //     return;
-  //   }
+    if (prevRoleRef.current !== role && role) {
+      navigate(`/${role}/signin`);
+    }
 
-  //   if (prevRoleRef.current !== role && role) {
-  //     navigate(`/${role}/signin`);
-  //   }
-
-  //   prevRoleRef.current = role;
-  // }, [role]);
+    prevRoleRef.current = role;
+  }, [role]);
 
   return (
-    <>
+    <div className="mainContainer">
       <Toaster />
       <ScrollToTop />
       <Routes>
@@ -246,7 +245,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

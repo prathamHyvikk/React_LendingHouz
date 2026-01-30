@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { GiShoppingCart } from "react-icons/gi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 const AdminProductDetail = () => {
   // const [mainImage, setMainImage] = useState(
@@ -18,10 +20,10 @@ const AdminProductDetail = () => {
   const [recentProducts, setRecentProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
+  const [quantity, setQuantity] = useState("");
   const LoginToken = localStorage.getItem("LoginToken");
   const { id } = useParams();
   const userId = useSelector((state) => state.person.id);
-  
 
   const fetchProduct = async () => {
     setLoading(true);
@@ -78,9 +80,11 @@ const AdminProductDetail = () => {
   };
 
   const updateCart = async (type) => {
-    if (!userId || cartLoading) return;
+    if (!userId || cartLoading || !product) return;
 
     setCartLoading(true);
+
+    const currentQty = product.cart_qty || 0;
 
     try {
       if (type === "add") {
@@ -89,42 +93,41 @@ const AdminProductDetail = () => {
           {
             product_id: id,
             user_id: userId,
-            quantity: number + 1,
+            quantity: currentQty + 1,
           },
           { headers: { Authorization: `Bearer ${LoginToken}` } },
         );
 
-        setNumber((prev) => prev + 1);
+        setProduct((prev) => ({
+          ...prev,
+          cart_qty: currentQty + 1,
+        }));
+
         toast.success("Added to cart");
       }
 
       if (type === "remove") {
-        if (number === 1) {
-          await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/cart/delete`,
-            {
-              product_id: id,
-              user_id: userId,
-            },
-            { headers: { Authorization: `Bearer ${LoginToken}` } },
-          );
-
-          setNumber(0);
-          toast.success("Removed from cart");
-        } else {
-          await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
-            {
-              product_id: id,
-              user_id: userId,
-              quantity: number - 1,
-            },
-            { headers: { Authorization: `Bearer ${LoginToken}` } },
-          );
-
-          setNumber((prev) => prev - 1);
-          toast.success("Removed from cart");
+        if (currentQty === 1) {
+          await deleteCart();
+          return;
         }
+
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
+          {
+            product_id: id,
+            user_id: userId,
+            quantity: currentQty - 1,
+          },
+          { headers: { Authorization: `Bearer ${LoginToken}` } },
+        );
+
+        setProduct((prev) => ({
+          ...prev,
+          cart_qty: currentQty - 1,
+        }));
+
+        toast.success("Removed from cart");
       }
     } catch {
       toast.error("Cart update failed");
@@ -133,14 +136,42 @@ const AdminProductDetail = () => {
     }
   };
 
+  const deleteCart = async () => {
+    if (!userId || cartLoading) return;
+
+    setCartLoading(true);
+
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/cart/delete`,
+        {
+          product_id: id,
+          user_id: userId,
+        },
+        { headers: { Authorization: `Bearer ${LoginToken}` } },
+      );
+
+      setProduct((prev) => ({
+        ...prev,
+        cart_qty: 0,
+      }));
+
+      toast.success("Removed from cart");
+    } catch {
+      toast.error("Cart update failed");
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
   const addToCart = async () => {
-    if (!userId) {
+    if (!userId || cartLoading) {
       toast.error("Please login first");
       return;
     }
 
-    if (number > 0) return;
     setCartLoading(true);
+
     try {
       await axios.post(
         `${import.meta.env.VITE_BASE_URL}/cart/add`,
@@ -149,25 +180,17 @@ const AdminProductDetail = () => {
           user_id: userId,
           quantity: 1,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${LoginToken}`,
-          },
-        },
+        { headers: { Authorization: `Bearer ${LoginToken}` } },
       );
 
-      setNumber(1);
-      toast.success("Added to cart");
-    } catch (error) {
-      const errors = error?.response?.data?.errors;
+      setProduct((prev) => ({
+        ...prev,
+        cart_qty: 1,
+      }));
 
-      if (errors) {
-        Object.values(errors)
-          .flat()
-          .forEach((msg) => toast.error(msg));
-      } else {
-        toast.error(error?.response?.data?.message || "Something went wrong");
-      }
+      toast.success("Added to cart");
+    } catch {
+      toast.error("Something went wrong");
     } finally {
       setCartLoading(false);
     }
@@ -178,7 +201,13 @@ const AdminProductDetail = () => {
     recentProduct();
   }, []);
 
-  console.log(recentProducts)
+  useEffect(() => {
+    if (!id) return;
+    fetchProduct();
+    recentProduct();
+  }, [id]);
+
+  console.log(recentProducts);
 
   return (
     <>
@@ -257,31 +286,51 @@ const AdminProductDetail = () => {
               <div className="flex items-center gap-4 my-6 mt-10">
                 <div className="flex items-center border rounded-lg">
                   <button
-                    disabled={cartLoading || number === 0}
+                    disabled={cartLoading || product?.cart_qty === 0}
                     onClick={() => updateCart("remove")}
-                    className="px-3 py-1 cursor-pointer disabled:opacity-50"
+                    className={`px-3 py-1 disabled:opacity-50 ${!cartLoading && "cursor-pointer"} `}
                   >
                     -
                   </button>
 
-                  <div className="w-14 text-center border-x py-1">{number}</div>
+                  <div className="w-14 text-center border-x py-1">
+                    {product?.cart_qty || 1}
+                  </div>
 
                   <button
-                    disabled={cartLoading || number === 0}
+                    disabled={cartLoading}
                     onClick={() => updateCart("add")}
-                    className="px-3 py-1 cursor-pointer disabled:opacity-50"
+                    className={`px-3 py-1 disabled:opacity-50 ${!cartLoading && "cursor-pointer"} `}
                   >
                     +
                   </button>
                 </div>
 
-                <button
-                  disabled={cartLoading || number > 0}
-                  onClick={addToCart}
-                  className={`${cartLoading || number > 0 ? " pointer-events-none " : "cursor-pointer"} bg-blue-600 text-white px-6 py-2 rounded disabled:opacity-50`}
-                >
-                  {cartLoading ? "Adding..." : "Add To Cart"}
-                </button>
+                {product?.cart_qty === 0 ? (
+                  <button
+                    disabled={cartLoading}
+                    onClick={addToCart}
+                    className="bg-blue-600 text-white px-6 py-2 rounded disabled:opacity-50"
+                  >
+                    {cartLoading ? "Adding..." : "Add To Cart"}
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={deleteCart}
+                      className="w-10 h-10 cursor-pointer rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700"
+                    >
+                      <RiDeleteBin5Line className="text-white text-xl" />
+                    </button>
+
+                    <Link
+                      to="/app/dashboard/cart/select-offer"
+                      className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-700"
+                    >
+                      <GiShoppingCart className="text-white text-2xl" />
+                    </Link>
+                  </div>
+                )}
               </div>
 
               <div className="border-t border-gray-200 pt-6">
@@ -352,22 +401,26 @@ const AdminProductDetail = () => {
 
           <div className="mt-12">
             <h2 className="sm:text-4xl text-2xl sora-bold mb-3">Description</h2>
-            <p className="text-sm text-gray-700">{product?.description}</p>
+            <p className="text-lg text-gray-700">{product?.description}</p>
           </div>
 
           <div className="mt-8">
             <h2 className="!text-2xl sora-medium">Recent</h2>
             <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
               {recentProducts.map((item, index) => (
-                <SmallCard key={index} data={item} imageUrl={"yes"} />
+                <Link
+                  to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}
+                >
+                  <SmallCard key={index} data={item} imageUrl={"yes"} />
+                </Link>
               ))}
             </div>
           </div>
         </div>
 
         {cartLoading && (
-          <div className="w-full h-screen absolute top-[5%] left-[10%] bg-white/80  flex items-center justify-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          <div className="fixed inset-0 z-50 bg-white/70 flex items-center justify-center">
+            <div className="h-14 w-14 border-b-2 border-black rounded-full animate-spin"></div>
           </div>
         )}
       </AdminLayout>

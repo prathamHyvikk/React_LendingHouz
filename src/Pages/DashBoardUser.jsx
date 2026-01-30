@@ -19,6 +19,7 @@ import { CiShop } from "react-icons/ci";
 import { ImAttachment } from "react-icons/im";
 import SmallCard from "../Component/SmallCard";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const DashBoardUser = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -28,6 +29,7 @@ const DashBoardUser = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [applications, setApplications] = useState();
+  const [selectedApplication, setSelectedApplication] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const role = useSelector((state) => state.person.value);
@@ -98,6 +100,10 @@ const DashBoardUser = () => {
     }
   };
 
+  const handleApplicationInfo = (item) => {
+    setSelectedApplication(item);
+    setShowView(true);
+  };
   useEffect(() => {
     fetchApplications();
     fetchCategories();
@@ -126,7 +132,7 @@ const DashBoardUser = () => {
             <HeaderTable
               setShowAddProduct={setShowAddProduct}
               setSelectedCategory={setSelectedCategory}
-              headingContent="List of Clients"
+              headingContent="List of Applications"
               marketplace={false}
             />
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
@@ -148,18 +154,13 @@ const DashBoardUser = () => {
                 </thead>
 
                 <tbody>
-                  {loading && (
-                    <div className="my-15 flex justify-center items-center">
-                      <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
-                    </div>
-                  )}
                   {applications?.map((item, i) => (
                     <tr key={i} className="hover:bg-gray-50">
                       <Td>#{item.application_id}</Td>
                       <Td>{item.lender_name || "N/A"}</Td>
-                      {role == "admin" && <Td>{item.business}</Td>}
+                      {/* {role == "admin" && <Td>{item.business}</Td>} */}
                       <Td>{item.application_status}</Td>
-                      <Td className="sora-semibold">{item.requested_income}</Td>
+                      <Td className="">${item.requested_income}</Td>
                       <Td className="" center={""}>
                         {item.created_at.split("T")[0]}
                       </Td>
@@ -181,20 +182,31 @@ const DashBoardUser = () => {
                       <Td center>
                         <IconBtn
                           icon={<IoEyeOutline />}
-                          onClick={() => setShowView(true)}
+                          onClick={() => handleApplicationInfo(item)}
                         />
                       </Td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+
+              {loading && (
+                <div className="my-15 w-full mx-auto flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+                </div>
+              )}
             </div>
 
             <div className="mt-8">
-              <h2 className="!text-2xl sora-medium">Recent</h2>
+              <h2 className="!text-2xl sora-medium">Recent Orders</h2>
               <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
                 {recentProducts.map((item, index) => (
-                  <SmallCard key={index} data={item} imageUrl={"yes"} />
+                  <Link
+                    key={index}
+                    to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}
+                  >
+                    <SmallCard key={index} data={item} imageUrl={"yes"} />
+                  </Link>
                 ))}
               </div>
             </div>
@@ -203,7 +215,12 @@ const DashBoardUser = () => {
           {showInvoice && (
             <InvoiceModal onClose={() => setShowInvoice(false)} />
           )}
-          {showView && <ViewModal onClose={() => setShowView(false)} />}
+          {showView && (
+            <ViewModal
+              data={selectedApplication}
+              onClose={() => setShowView(false)}
+            />
+          )}
         </div>
 
         {/* Popup */}

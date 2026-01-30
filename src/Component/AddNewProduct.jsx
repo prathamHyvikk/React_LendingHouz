@@ -115,6 +115,11 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
 
   return (
     <>
+      {loading && (
+        <div className="my-15 w-full absolute top-0 z-50 mx-auto bg-white/80 flex justify-center items-center">
+          <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+        </div>
+      )}
       <div
         id="addProductModal"
         className="fixed inset-0 bg-black/50 z-299  flex  items-center justify-center p-4"
@@ -287,7 +292,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                   <option value="pending">Pending</option>
-                  <option value="out-of-stock">Out of Stock</option>
+                  <option value="out of stock">Out of Stock</option>
                 </select>
               </div>
 

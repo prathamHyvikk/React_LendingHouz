@@ -55,11 +55,6 @@ const MarketPlace = () => {
   return (
     <>
       <AdminLayout>
-        {loading && (
-          <div className="flex justify-center items-center ">
-            <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
-          </div>
-        )}
         <div className="mx-auto bg-white rounded-lg shadow-sm p-3">
           <HeaderTable
             headingContent={"Available for Financing"}
@@ -99,6 +94,11 @@ const MarketPlace = () => {
               </div>
             </div>
           </div> */}
+          {loading && (
+            <div className="flex justify-center items-center">
+              <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+            </div>
+          )}
 
           <div>
             <div className="mt-8">

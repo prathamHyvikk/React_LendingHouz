@@ -1,13 +1,13 @@
 import React from "react";
 
-const SmallCard = ({ data }) => {
+const SmallCard = ({ data ,imageUrl}) => {
   return (
     <>
       <div className="flex items-center gap-2 bg-[#F4F4F4] p-2 rounded-md shadow-md">
         <div className="w-38 h-24 overflow-hidden rounded-sm">
           <img
             className="w-full h-full object-cover"
-            src={data.image}
+            src={imageUrl ?data.image_url :data.image }
             alt={data.name}
           />
         </div>

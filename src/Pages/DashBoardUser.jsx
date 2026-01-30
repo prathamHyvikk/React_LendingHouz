@@ -7,7 +7,6 @@ import attachIcon from "/assets/Images/attach-icon.png";
 import eyeIcon from "/assets/Images/eye-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
 
-import RecentCards from "../Component/RecentCards";
 import InvoiceModal from "../Component/InvoiceModal";
 import ViewModal from "../Component/ViewModal";
 
@@ -18,17 +17,97 @@ import { useSelector } from "react-redux";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiShop } from "react-icons/ci";
 import { ImAttachment } from "react-icons/im";
+import SmallCard from "../Component/SmallCard";
+import axios from "axios";
 
 const DashBoardUser = () => {
   const [showInvoice, setShowInvoice] = useState(false);
+  const [recentProducts, setRecentProducts] = useState([]);
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [applications, setApplications] = useState();
+  const [loading, setLoading] = useState(false);
 
   const role = useSelector((state) => state.person.value);
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
 
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
+
+  const recentProduct = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/recent-product`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setRecentProducts(response?.data.data);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    }
+  };
+
+  const fetchCategories = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/categories`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setCategories(response?.data?.categories);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchApplications = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `https://cpanel.lendinghouz.com/api/show-application`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+          params: {
+            user_id: userId,
+          },
+        },
+      );
+
+      setApplications(response?.data?.applications);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchApplications();
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    recentProduct();
+  }, []);
+
+  console.log(applications, categories);
 
   return (
     <>
@@ -46,6 +125,7 @@ const DashBoardUser = () => {
           <div className="bg-white rounded-lg shadow-sm p-3">
             <HeaderTable
               setShowAddProduct={setShowAddProduct}
+              setSelectedCategory={setSelectedCategory}
               headingContent="List of Clients"
               marketplace={false}
             />
@@ -68,15 +148,20 @@ const DashBoardUser = () => {
                 </thead>
 
                 <tbody>
-                  {clients.map((item, i) => (
+                  {loading && (
+                    <div className="my-15 flex justify-center items-center">
+                      <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+                    </div>
+                  )}
+                  {applications?.map((item, i) => (
                     <tr key={i} className="hover:bg-gray-50">
-                      <Td>{item.appNo}</Td>
-                      <Td>{item.name}</Td>
+                      <Td>#{item.application_id}</Td>
+                      <Td>{item.lender_name || "N/A"}</Td>
                       {role == "admin" && <Td>{item.business}</Td>}
-                      <Td>{item.status}</Td>
-                      <Td className="sora-semibold">{item.amount}</Td>
+                      <Td>{item.application_status}</Td>
+                      <Td className="sora-semibold">{item.requested_income}</Td>
                       <Td className="" center={""}>
-                        {item.date}
+                        {item.created_at.split("T")[0]}
                       </Td>
 
                       <Td center={"yes"} className="flex justify-center">
@@ -106,10 +191,10 @@ const DashBoardUser = () => {
             </div>
 
             <div className="mt-8">
-              <h2 className="text-2xl sora-medium">Recent</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 w-full mt-8">
-                {recentData.map((item, i) => (
-                  <RecentCards key={i} data={item} />
+              <h2 className="!text-2xl sora-medium">Recent</h2>
+              <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
+                {recentProducts.map((item, index) => (
+                  <SmallCard key={index} data={item} imageUrl={"yes"} />
                 ))}
               </div>
             </div>

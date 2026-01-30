@@ -5,10 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import CartSteper from "../Component/CartSteper";
+import { useCart } from "react-use-cart";
 
 const AdminSelectOffer = () => {
   const [offerType, setOfferType] = useState("weekly");
   const navigate = useNavigate();
+  const {addItem , totalItems , items}= useCart();
+  
+  console.log(items)
 
   return (
     <>

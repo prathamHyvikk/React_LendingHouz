@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import SmallCard from "../Component/SmallCard";
-import { recentMarketPlaceData } from "../data/userDashboard.json";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const AdminProductDetail = () => {
   // const [mainImage, setMainImage] = useState(
   //   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
   // );
 
-  const [number, setNumber] = useState(1);
+  const [number, setNumber] = useState(0);
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
-
   const [product, setProduct] = useState();
-  const [recentProducts, setRecentProducts] = useState();
+  const [recentProducts, setRecentProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [cartLoading, setCartLoading] = useState(false);
   const LoginToken = localStorage.getItem("LoginToken");
   const { id } = useParams();
-  console.log(id);
+  const userId = useSelector((state) => state.person.id);
+  
 
   const fetchProduct = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/single-product`,
@@ -40,67 +44,196 @@ const AdminProductDetail = () => {
         response?.data?.image_url,
         ...response?.data?.other_images_url,
       ]);
-    } catch (error) {}
+    } catch (error) {
+      const errors = error.response.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const fetchProducts = async () => {
-   
+  const recentProduct = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/products`,
+        `${import.meta.env.VITE_BASE_URL}/recent-product`,
         {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
         },
       );
-    
-      setRecentProducts(response?.data?.products);
+
+      setRecentProducts(response?.data.data);
     } catch (error) {
       toast.error(error?.response.data.message);
     }
   };
 
+  const updateCart = async (type) => {
+    if (!userId || cartLoading) return;
 
-  React.useEffect(() => {
+    setCartLoading(true);
+
+    try {
+      if (type === "add") {
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
+          {
+            product_id: id,
+            user_id: userId,
+            quantity: number + 1,
+          },
+          { headers: { Authorization: `Bearer ${LoginToken}` } },
+        );
+
+        setNumber((prev) => prev + 1);
+        toast.success("Added to cart");
+      }
+
+      if (type === "remove") {
+        if (number === 1) {
+          await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/cart/delete`,
+            {
+              product_id: id,
+              user_id: userId,
+            },
+            { headers: { Authorization: `Bearer ${LoginToken}` } },
+          );
+
+          setNumber(0);
+          toast.success("Removed from cart");
+        } else {
+          await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
+            {
+              product_id: id,
+              user_id: userId,
+              quantity: number - 1,
+            },
+            { headers: { Authorization: `Bearer ${LoginToken}` } },
+          );
+
+          setNumber((prev) => prev - 1);
+          toast.success("Removed from cart");
+        }
+      }
+    } catch {
+      toast.error("Cart update failed");
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  const addToCart = async () => {
+    if (!userId) {
+      toast.error("Please login first");
+      return;
+    }
+
+    if (number > 0) return;
+    setCartLoading(true);
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/cart/add`,
+        {
+          product_id: id,
+          user_id: userId,
+          quantity: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setNumber(1);
+      toast.success("Added to cart");
+    } catch (error) {
+      const errors = error?.response?.data?.errors;
+
+      if (errors) {
+        Object.values(errors)
+          .flat()
+          .forEach((msg) => toast.error(msg));
+      } else {
+        toast.error(error?.response?.data?.message || "Something went wrong");
+      }
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchProduct();
-    fetchProducts();
+    recentProduct();
   }, []);
+
+  console.log(recentProducts)
+
   return (
     <>
       <AdminLayout>
         <div className="bg-white rounded-lg shadow-lg sm:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <div className="mb-4">
-                <img
-                  src={images[selectedImage]}
-                  alt="House"
-                  className="w-full h-96 object-contain rounded-lg"
-                />
-              </div>
+            {loading ? (
+              <div>
+                <div className="mb-4 w-full h-96 bg-gray-200 rounded-lg" />
 
-              <div className="flex gap-4">
-                {images?.map((image, index) => (
-                  <div key={index} className="">
-                    <img
-                      src={image}
-                      alt="Thumbnail "
-                      className={`sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${
-                        index === selectedImage
-                          ? "border-blue-500"
-                          : "border-transparent"
-                      } `}
-                      onClick={() => setSelectedImage(index)}
+                <div className="flex justify-center gap-4">
+                  {[1, 2, 3].map((_, i) => (
+                    <div
+                      key={i}
+                      className="sm:w-24 w-20 h-20 bg-gray-200 rounded-lg"
                     />
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                <div className="mb-4">
+                  <img
+                    src={images[selectedImage]}
+                    alt="House"
+                    className="w-full h-96 object-contain rounded-lg"
+                  />
+                </div>
+
+                <div className="flex justify-center gap-4">
+                  {images?.map((image, index) => (
+                    <div key={index} className="">
+                      <img
+                        src={image}
+                        alt="Thumbnail "
+                        className={`sm:w-24 w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${
+                          index === selectedImage
+                            ? "border-blue-500"
+                            : "border-transparent"
+                        } `}
+                        onClick={() => setSelectedImage(index)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="max-sm:ps-2">
               <h1 className=" text-2xl sm:text-3xl sora-bold text-gray-800 mb-2">
-                {product?.name}
+                {loading ? (
+                  <div className="w-1/2 h-6 bg-gray-200 rounded-lg"></div>
+                ) : (
+                  product?.name
+                )}
               </h1>
               {/* <p className="text-sm text-gray-600 mb-4">ORDER ID #123123</p> */}
 
@@ -108,11 +241,13 @@ const AdminProductDetail = () => {
                 <div>
                   <span className="text-sm text-gray-600 sora-bold">$</span>
                   <span className="sm:text-3xl text-2xl ps-1 sora-bold text-blue-600">
-                    10,000
+                    {product?.price}
                   </span>
                 </div>
                 <div className="bg-blue-50 px-3 py-1 rounded">
-                  <p className="text-blue-600 sora-semibold">Save 25%</p>
+                  <p className="text-blue-600 sora-semibold">
+                    Save {product?.discount_percent}%
+                  </p>
                   <p className="text-xs text-gray-600">
                     Inclusive deal of the day
                   </p>
@@ -120,29 +255,33 @@ const AdminProductDetail = () => {
               </div>
 
               <div className="flex items-center gap-4 my-6 mt-10">
-                <div className="flex items-center border border-gray-300 rounded-lg">
+                <div className="flex items-center border rounded-lg">
                   <button
-                    onClick={() => number > 1 && setNumber(number - 1)}
-                    className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                    disabled={cartLoading || number === 0}
+                    onClick={() => updateCart("remove")}
+                    className="px-3 py-1 cursor-pointer disabled:opacity-50"
                   >
                     -
                   </button>
 
-                  <button className="w-14 text-center border-l border-r border-gray-300 py-1">
-                    {number}
-                  </button>
+                  <div className="w-14 text-center border-x py-1">{number}</div>
+
                   <button
-                    onClick={() => setNumber(number + 1)}
-                    className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                    disabled={cartLoading || number === 0}
+                    onClick={() => updateCart("add")}
+                    className="px-3 py-1 cursor-pointer disabled:opacity-50"
                   >
                     +
                   </button>
                 </div>
-                <Link to="/app/dashboard/cart/select-offer">
-                  <button className="flex-1 cursor-pointer bg-blue-600 text-white px-6 py-2 rounded-lg sora-semibold hover:bg-blue-700 transition-colors">
-                    Apply
-                  </button>
-                </Link>
+
+                <button
+                  disabled={cartLoading || number > 0}
+                  onClick={addToCart}
+                  className={`${cartLoading || number > 0 ? " pointer-events-none " : "cursor-pointer"} bg-blue-600 text-white px-6 py-2 rounded disabled:opacity-50`}
+                >
+                  {cartLoading ? "Adding..." : "Add To Cart"}
+                </button>
               </div>
 
               <div className="border-t border-gray-200 pt-6">
@@ -219,12 +358,18 @@ const AdminProductDetail = () => {
           <div className="mt-8">
             <h2 className="!text-2xl sora-medium">Recent</h2>
             <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
-              {recentMarketPlaceData.map((item, index) => (
-                <SmallCard key={index} data={item} />
+              {recentProducts.map((item, index) => (
+                <SmallCard key={index} data={item} imageUrl={"yes"} />
               ))}
             </div>
           </div>
         </div>
+
+        {cartLoading && (
+          <div className="w-full h-screen absolute top-[5%] left-[10%] bg-white/80  flex items-center justify-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          </div>
+        )}
       </AdminLayout>
     </>
   );

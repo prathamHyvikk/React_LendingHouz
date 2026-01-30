@@ -27,6 +27,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
     "react-select": "^5.10.2",
+    "react-use-cart": "^1.14.0",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "swiper": "^11.2.10",

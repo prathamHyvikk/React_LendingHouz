@@ -4,10 +4,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
+import { useCart } from "react-use-cart";
 const AdminLayout = ({ children }) => {
   const { pathname } = useLocation();
 
   const role = useSelector((state) => state.person.value);
+  const { totalItems, items } = useCart();
+  console.log(totalItems);
 
   return (
     <>
@@ -31,7 +34,10 @@ const AdminLayout = ({ children }) => {
                         to={`/app/dashboard/cart/select-offer`}
                         className="relative cursor-pointer inline-block"
                       >
-                        <FaShoppingCart className="text-2xl" />
+                        <FaShoppingCart className="text-[24px]" />
+                        <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
+                          {totalItems}
+                        </span>
                       </Link>
                     )}
 

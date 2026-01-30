@@ -7,7 +7,6 @@ import attachIcon from "/assets/Images/attach-icon.png";
 import eyeIcon from "/assets/Images/eye-icon.png";
 import AddNewProduct from "../Component/AddNewProduct";
 
-import RecentCards from "../Component/RecentCards";
 import InvoiceModal from "../Component/InvoiceModal";
 import ViewModal from "../Component/ViewModal";
 
@@ -18,9 +17,11 @@ import { useSelector } from "react-redux";
 import { CiShop } from "react-icons/ci";
 import { ImAttachment } from "react-icons/im";
 import { IoEyeOutline } from "react-icons/io5";
+import axios from "axios";
 
 const AdminDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
+  const [recentProducts, setRecentProducts] = useState([]);
   const [showView, setShowView] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
 
@@ -29,6 +30,27 @@ const AdminDashboard = () => {
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
+
+  const recentProduct = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/recent-product`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setRecentProducts(response?.data.data);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    recentProduct();
+  }, []);
 
   return (
     <>
@@ -106,10 +128,10 @@ const AdminDashboard = () => {
             </div>
 
             <div className="mt-8">
-              <h2 className="text-2xl sora-medium">Recent</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 w-full mt-8">
-                {recentData.map((item, i) => (
-                  <RecentCards key={i} data={item} />
+              <h2 className="!text-2xl sora-medium">Recent</h2>
+              <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
+                {recentProducts.map((item, index) => (
+                  <SmallCard key={index} data={item} imageUrl={"yes"} />
                 ))}
               </div>
             </div>

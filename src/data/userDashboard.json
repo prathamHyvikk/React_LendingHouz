@@ -256,33 +256,7 @@
       "status": "Active"
     }
   ],
-  "recentMarketPlaceData": [
-    {
-      "img": "/assets/Images/house.jpg",
-      "financeType": "Home Financing",
-      "day": "Monday | 12/1/1222",
-      "orderID": "Order ID #232",
-      "finance": "Financed",
-      "status": "Active"
-    },
-    {
-      "img": "/assets/Images//jewellery.jpg",
-      "financeType": "Home Financing",
-      "day": "Monday | 12/1/1222",
-      "orderID": "Order ID #232",
-      "finance": "Financed",
-      "status": "Active"
-    },
 
-    {
-      "img": "/assets/Images/house.jpg",
-      "financeType": "Home Financing",
-      "day": "Monday | 12/1/1222",
-      "orderID": "Order ID #232",
-      "finance": "Financed",
-      "status": "Active"
-    }
-  ],
 
   "newMarketPlaceData": [
     {

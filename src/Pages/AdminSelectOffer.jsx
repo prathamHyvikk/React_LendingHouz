@@ -16,8 +16,11 @@ const AdminSelectOffer = () => {
   const { addItem, totalItems, items } = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
+
+  localStorage.setItem("totalQuantity", totalQuantity);
 
   const fetchCart = async () => {
     setLoading(true);
@@ -36,6 +39,7 @@ const AdminSelectOffer = () => {
 
       console.log(response.data);
       setProducts(response?.data?.data);
+      setTotalQuantity(response?.data?.total_quantity);
     } catch (error) {
       const errors = error.response.data.errors;
       if (errors) {
@@ -56,7 +60,7 @@ const AdminSelectOffer = () => {
     if (newQty < 1) return;
     setLoading(true);
     try {
-      await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
         {
           cart_id: cartId,
@@ -77,6 +81,8 @@ const AdminSelectOffer = () => {
           item.id === cartId ? { ...item, quantity: String(newQty) } : item,
         ),
       );
+
+      setTotalQuantity(response?.data?.total_quantity);
     } catch (error) {
       toast.error("Failed to update quantity");
     } finally {
@@ -87,7 +93,7 @@ const AdminSelectOffer = () => {
   const removeFromCart = async (cartId, productId) => {
     setLoading(true);
     try {
-      await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/cart/delete`,
         {
           cart_id: cartId,
@@ -102,6 +108,8 @@ const AdminSelectOffer = () => {
       );
 
       setProducts((prev) => prev.filter((item) => item.id !== cartId));
+
+      setTotalQuantity(response?.data?.total_quantity);
     } catch {
       toast.error("Failed to remove item");
     } finally {
@@ -150,7 +158,7 @@ const AdminSelectOffer = () => {
                   Financing cart
                 </h2>
                 <p className="text-sm text-gray-500 mt-1">
-                  You have {products.length} item{products.length > 1 && "s"} in
+                  You have {totalQuantity} item{products.length > 1 && "s"} in
                   your cart
                 </p>
               </div>

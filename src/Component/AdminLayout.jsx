@@ -12,6 +12,8 @@ const AdminLayout = ({ children }) => {
   const { totalItems, items } = useCart();
   console.log(totalItems);
 
+  const totalQuantity = localStorage.getItem("totalQuantity");
+
   return (
     <>
       <div className="bg-gray-50 sora">
@@ -36,7 +38,7 @@ const AdminLayout = ({ children }) => {
                       >
                         <FaShoppingCart className="text-[24px]" />
                         <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
-                          {totalItems}
+                          {totalQuantity}
                         </span>
                       </Link>
                     )}

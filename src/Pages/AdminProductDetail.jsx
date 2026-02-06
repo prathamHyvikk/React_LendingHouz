@@ -409,9 +409,10 @@ const AdminProductDetail = () => {
             <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
               {recentProducts.map((item, index) => (
                 <Link
+                  key={index}
                   to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}
                 >
-                  <SmallCard key={index} data={item} imageUrl={"yes"} />
+                  <SmallCard data={item} imageUrl={"yes"} />
                 </Link>
               ))}
             </div>

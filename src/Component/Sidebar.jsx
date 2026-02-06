@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoImage from "/assets/Images/logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setId, setPersonRole, setUserType } from "../features/personRole";
 import { setAuthenticate } from "../features/authenticate";
+import axios from "axios";
+import { FaRegUser } from "react-icons/fa";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [Title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const role = useSelector((state) => state.person.value);
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
 
   const menuItems = [
     {
@@ -50,8 +61,6 @@ const Sidebar = () => {
 
   const currentPath = window.location.pathname;
 
-  const role = useSelector((state) => state.person.value);
-
   const handleLogout = () => {
     localStorage.removeItem("LoginToken");
     dispatch(setAuthenticate(false));
@@ -60,6 +69,47 @@ const Sidebar = () => {
     dispatch(setUserType(""));
     navigate("/app/signin");
   };
+
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/single-user`,
+        {
+          user_id: userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      console.log(response?.data);
+      const user = response?.data?.data;
+
+      setFullName(user?.name ?? "");
+      setTitle(user?.role ?? "");
+      setImage(user?.image_url ?? "");
+    } catch (error) {
+      const errors = error.response?.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <>
@@ -144,15 +194,22 @@ const Sidebar = () => {
           <Link to={`/${role}/dashboard/profile`}>
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
-                <img
-                  className="w-full h-full object-cover"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face"
-                  alt=""
-                />
+                {image !== null ? (
+                  <img
+                    id="profilePreview"
+                    src={image}
+                    alt="Profile"
+                    className="w-full h-full rounded-full object-cover border-4 border-gray-100"
+                  />
+                ) : (
+                  <div className="sm:w-10 w-8 sm:h-10 h-8 rounded-full object-cover border-4 border-gray-100 flex items-center justify-center">
+                    <FaRegUser size={60} />
+                  </div>
+                )}
               </div>
               <div className="ml-3">
                 <p className="sm:text-sm text-xs sora-medium text-gray-700">
-                  Gustavo Xavier
+                  {fullName}
                 </p>
                 <button
                   className={`text-xs px-2 py-.5 ${
@@ -161,7 +218,7 @@ const Sidebar = () => {
                       : "bg-green-400 text-white"
                   }  rounded-full sora-semibold`}
                 >
-                  {role == "admin" ? "Admin" : "User"}
+                  {Title}
                 </button>
               </div>
             </div>

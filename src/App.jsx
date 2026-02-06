@@ -87,32 +87,32 @@ function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/app/signin");
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/app/signin");
+  //   }
+  // }, [token]);
 
-  useEffect(() => {
-    if (pathname.startsWith("/admin")) {
-      dispatch(setPersonRole("admin"));
-    } else if (pathname.startsWith("/app")) {
-      dispatch(setPersonRole("app"));
-    }
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (pathname.startsWith("/admin")) {
+  //     dispatch(setPersonRole("admin"));
+  //   } else if (pathname.startsWith("/app")) {
+  //     dispatch(setPersonRole("app"));
+  //   }
+  // }, [pathname]);
 
-  useEffect(() => {
-    if (prevRoleRef.current === null) {
-      prevRoleRef.current = role;
-      return;
-    }
+  // useEffect(() => {
+  //   if (prevRoleRef.current === null) {
+  //     prevRoleRef.current = role;
+  //     return;
+  //   }
 
-    if (prevRoleRef.current !== role && role) {
-      navigate(`/${role}/signin`);
-    }
+  //   if (prevRoleRef.current !== role && role) {
+  //     navigate(`/${role}/signin`);
+  //   }
 
-    prevRoleRef.current = role;
-  }, [role]);
+  //   prevRoleRef.current = role;
+  // }, [role]);
 
   return (
     <div className="mainContainer">

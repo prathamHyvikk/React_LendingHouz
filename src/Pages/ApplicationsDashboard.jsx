@@ -27,6 +27,11 @@ const ApplicationsDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState(null);
 
+  const [totalApplications, setTotalApplications] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalInActive, setTotalInActive] = useState(0);
+  const [totalReferral, setTotalReferral] = useState(0);
+
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
@@ -48,6 +53,29 @@ const ApplicationsDashboard = () => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
 
+  const fetchTotal = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/application-info`,
+        {
+          user_id: userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      console.log(response.data);
+      setTotalApplications(response?.data?.total_application);
+      setTotalAmount(response?.data?.loan_amount);
+      setTotalInActive(response?.data?.inactive_count);
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response.data.message);
+    }
+  };
   const fetchCategories = async () => {
     setLoading(true);
     try {
@@ -94,6 +122,7 @@ const ApplicationsDashboard = () => {
   useEffect(() => {
     fetchApplications();
     fetchCategories();
+    fetchTotal();
   }, []);
 
   return (
@@ -102,9 +131,9 @@ const ApplicationsDashboard = () => {
         <div className="">
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
-            <StatCard title="Total Applications" value="230" bg="#E5ECF6" />
-            <StatCard title="Loan Amount" value="$2,230.00" bg="#D0FFE0" />
-            <StatCard title="Inactive Applications" value="10" bg="#E6E6E6" />
+            <StatCard title="Total Applications" value={totalApplications} bg="#E5ECF6" />
+            <StatCard title="Loan Amount" value={`$ ${totalAmount}`} bg="#D0FFE0" />
+            <StatCard title="Inactive Applications" value={totalInActive} bg="#E6E6E6" />
             <StatCard title="Referrals" value="2" bg="#FFD0D1" />
           </div>
 
@@ -178,12 +207,14 @@ const ApplicationsDashboard = () => {
                           </tr>
                         ))
                       ) : (
-                        <Td
-                          center={"yes"}
-                          className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
-                        >
-                          No Application Found
-                        </Td>
+                        <tr>
+                          <Td
+                            center={"yes"}
+                            className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
+                          >
+                            No Application Found
+                          </Td>
+                        </tr>
                       )}
                     </>
                   ) : (

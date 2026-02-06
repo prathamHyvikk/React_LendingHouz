@@ -29,6 +29,10 @@ const AdminDashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [applications, setApplications] = useState();
   const [loading, setLoading] = useState(false);
+  const [totalApplications, setTotalApplications] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalInActive, setTotalInActive] = useState(0);
+  const [totalReferral, setTotalReferral] = useState(0);
 
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
@@ -37,6 +41,31 @@ const AdminDashboard = () => {
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
+
+  // const fetchTotal = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_BASE_URL}/application-info`,
+  //       {
+  //         user_id: userId,
+  //       },
+
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${LoginToken}`,
+  //         },
+  //       },
+  //     );
+
+  //     console.log(response.data);
+  //     setTotalApplications(response?.data?.total_application);
+  //     setTotalAmount(response?.data?.loan_amount);
+  //     setTotalInActive(response?.data?.inactive_count);
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error(error?.response.data.message);
+  //   }
+  // };
 
   const recentProduct = async () => {
     try {
@@ -98,10 +127,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchApplications();
     fetchCategories();
-  }, []);
-
-  useEffect(() => {
     recentProduct();
+    // fetchTotal();
   }, []);
 
   console.log(applications, categories);

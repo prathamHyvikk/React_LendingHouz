@@ -109,6 +109,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchUser();
+    console.log("first")
   }, []);
 
   return (
@@ -141,7 +142,7 @@ const Sidebar = () => {
       {/* sidebar */}
       <div
         id="sidebar"
-        className={`bg-white sm:min-w-64 min-w-50 shadow-md lg:relative fixed ${
+        className={`bg-white h-screen sm:min-w-64 min-w-50 shadow-md lg:relative fixed ${
           showSidebar ? " translate-x-0 " : " max-lg:-translate-x-full"
         } top-0 z-199 h-full transition-all duration-300 ease-in-out`}
       >

@@ -4,6 +4,7 @@ import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import {
   BrowserRouter,
+  Outlet,
   Route,
   Routes,
   useLocation,
@@ -74,6 +75,8 @@ import BlogDetails from "./Component/Blogs/BlogDetails";
 import AppliancesPage from "./Pages/AppliancesPage";
 import HomeFinancePage from "./Pages/HomeFinancePage";
 import HomeNewPage from "./Pages/HomeNewPage";
+import Sidebar from "./Component/Sidebar";
+import Layout from "./Component/Layout";
 
 function App() {
   const dispatch = useDispatch();
@@ -118,6 +121,7 @@ function App() {
     <div className="mainContainer">
       <Toaster />
       <ScrollToTop />
+
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<HomeNewPage />} />
@@ -157,93 +161,98 @@ function App() {
         <Route path="/app/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        <Route path="/app/dashboard" element={<DashBoardUser />} />
-        <Route
-          path="/app/dashboard/applications"
-          element={<ApplicationsDashboard />}
-        />
-        <Route
-          path="/app/dashboard/applications"
-          element={<ApplicationsDashboard />}
-        />
-        <Route
-          path="/app/dashboard/applications/new-application"
-          element={<UserApplicationForm />}
-        />
-        <Route path="/app/dashboard/marketplace" element={<MarketPlace />} />
-        <Route
-          path="/app/dashboard/terms&condition"
-          element={<TearmsAndConditions />}
-        />
-        <Route
-          path="/app/dashboard/privacy&policy"
-          element={<PrivacyPolicy />}
-        />
-        {/* <Route path="/app/dashboard/users" element={<Users />} /> */}
-        <Route path="/app/dashboard/users/view-user" element={<ViewUser />} />
-        <Route
-          path="/app/dashboard/notifications"
-          element={<Notifications />}
-        />
-        <Route path="/app/dashboard/profile" element={<Profile />} />
+        <Route path={`/`} element={<Layout />}>
+          <Route path="app/dashboard" element={<DashBoardUser />} />
+          <Route
+            path="app/dashboard/applications"
+            element={<ApplicationsDashboard />}
+          />
+          <Route
+            path="app/dashboard/applications"
+            element={<ApplicationsDashboard />}
+          />
+          <Route
+            path="app/dashboard/applications/new-application"
+            element={<UserApplicationForm />}
+          />
+          <Route path="app/dashboard/marketplace" element={<MarketPlace />} />
+          <Route
+            path="app/dashboard/terms&condition"
+            element={<TearmsAndConditions />}
+          />
+          <Route
+            path="app/dashboard/privacy&policy"
+            element={<PrivacyPolicy />}
+          />
+          {/* <Route path="/app/dashboard/users" element={<Users />} /> */}
+          <Route path="app/dashboard/users/view-user" element={<ViewUser />} />
+          <Route
+            path="app/dashboard/notifications"
+            element={<Notifications />}
+          />
+          <Route path="app/dashboard/profile" element={<Profile />} />
 
-        {/* Admin Routes */}
-        {/* <Route path="/admin/signup" element={<AdminSignup />} /> */}
-        <Route path="/admin/signin" element={<AdminSignIn />} />
-        <Route
-          path="/admin/forgot-password"
-          element={<AdminForgotPassword />}
-        />
+          {/* Admin Routes */}
+          {/* <Route path="/admin/signup" element={<AdminSignup />} /> */}
+          <Route path="admin/signin" element={<AdminSignIn />} />
+          <Route
+            path="admin/forgot-password"
+            element={<AdminForgotPassword />}
+          />
 
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route
-          path="/admin/dashboard/applications"
-          element={<AdminApplicationDashboard />}
-        />
+          <Route path="admin/dashboard" element={<AdminDashboard />} />
+          <Route
+            path="admin/dashboard/applications"
+            element={<AdminApplicationDashboard />}
+          />
 
-        <Route
-          path="/admin/dashboard/applications/new-application"
-          element={<UserApplicationForm />}
-        />
+          <Route
+            path="admin/dashboard/applications/new-application"
+            element={<UserApplicationForm />}
+          />
 
-        <Route
-          path="/admin/dashboard/marketplace"
-          element={<AdminMarketPlace />}
-        />
-        <Route
-          path="/admin/dashboard/terms&condition"
-          element={<AdminTearmsAndConditions />}
-        />
-        <Route
-          path="/admin/dashboard/privacy&policy"
-          element={<AdminPrivacyPolicy />}
-        />
-        <Route path="/admin/dashboard/users" element={<Users />} />
-        <Route path="/admin/dashboard/users/view-user" element={<ViewUser />} />
-        <Route
-          path="/admin/dashboard/notifications"
-          element={<AdminNotifications />}
-        />
-        <Route path="/admin/dashboard/profile" element={<AdminProfile />} />
-        <Route
-          path="/app/dashboard/marketplace/product/product-detail/:id"
-          element={<AdminProductDetail />}
-        />
-        <Route
-          path="/app/dashboard/cart/select-offer"
-          element={<AdminSelectOffer />}
-        />
-        <Route
-          path="/admin/dashboard/cart/banking-info"
-          element={<AdminBankingInfo />}
-        />
+          <Route
+            path="admin/dashboard/marketplace"
+            element={<AdminMarketPlace />}
+          />
+          <Route
+            path="admin/dashboard/terms&condition"
+            element={<AdminTearmsAndConditions />}
+          />
+          <Route
+            path="admin/dashboard/privacy&policy"
+            element={<AdminPrivacyPolicy />}
+          />
+          <Route path="admin/dashboard/users" element={<Users />} />
+          <Route
+            path="admin/dashboard/users/view-user"
+            element={<ViewUser />}
+          />
+          <Route
+            path="admin/dashboard/notifications"
+            element={<AdminNotifications />}
+          />
+          <Route path="admin/dashboard/profile" element={<AdminProfile />} />
+          <Route
+            path="/app/dashboard/marketplace/product/product-detail/:id"
+            element={<AdminProductDetail />}
+          />
+          <Route
+            path="/app/dashboard/cart/select-offer"
+            element={<AdminSelectOffer />}
+          />
+          <Route
+            path="admin/dashboard/cart/banking-info"
+            element={<AdminBankingInfo />}
+          />
 
-        <Route
-          path="/admin/dashboard/cart/checkout"
-          element={<AdminCheckOut />}
-        />
+          <Route
+            path="/app/dashboard/cart/checkout"
+            element={<AdminCheckOut />}
+          />
 
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </div>
   );

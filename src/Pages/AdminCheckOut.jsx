@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ThankyouPopup from "../Component/ThankyouPopup";
 
 const AdminCheckOut = () => {
@@ -22,6 +22,11 @@ const AdminCheckOut = () => {
     e.preventDefault();
     setThanksPopup(true);
   };
+  const location = useLocation();
+  const alignment = location.state;
+  const totalAmount = localStorage.getItem("totalAmount");
+
+  console.log(alignment);
 
   return (
     <>
@@ -67,7 +72,7 @@ const AdminCheckOut = () => {
 
                 <div className="flex justify-between items-center text-lg sora-semibold pt-6 border-t border-gray-600">
                   <span>Total bill</span>
-                  <span>$10,000</span>
+                  <span>${totalAmount}</span>
                 </div>
               </div>
             </div>
@@ -134,37 +139,39 @@ const AdminCheckOut = () => {
                   </div>
                 </div>
 
-                <div>
-                  <h2 className="text-xl sora-semibold text-blue-600 mb-6">
-                    Finance Details
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm sora-medium text-gray-700 mb-2">
-                        Amount of Financing
-                      </label>
-                      <input
-                        type="text"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        placeholder="Amount Of Financing"
-                        className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm sora-medium text-gray-700 mb-2">
-                        Lender
-                      </label>
-                      <input
-                        type="text"
-                        value={lender}
-                        onChange={(e) => setLender(e.target.value)}
-                        placeholder="Lender"
-                        className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
+                {alignment !== "cash" && (
+                  <div>
+                    <h2 className="text-xl sora-semibold text-blue-600 mb-6">
+                      Finance Details
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm sora-medium text-gray-700 mb-2">
+                          Amount of Financing
+                        </label>
+                        <input
+                          type="text"
+                          value={amount}
+                          onChange={(e) => setAmount(e.target.value)}
+                          placeholder="Amount Of Financing"
+                          className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm sora-medium text-gray-700 mb-2">
+                          Lender
+                        </label>
+                        <input
+                          type="text"
+                          value={lender}
+                          onChange={(e) => setLender(e.target.value)}
+                          placeholder="Lender"
+                          className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 <div>
                   <h2 className="text-xl sora-semibold text-blue-600 mb-6">

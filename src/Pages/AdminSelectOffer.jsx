@@ -7,8 +7,9 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import CartSteper from "../Component/CartSteper";
 import { useCart } from "react-use-cart";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
+import { setQuantity } from "../features/cart";
 
 const AdminSelectOffer = () => {
   const [offerType, setOfferType] = useState("weekly");
@@ -20,7 +21,10 @@ const AdminSelectOffer = () => {
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
 
-  localStorage.setItem("totalQuantity", totalQuantity);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setQuantity(totalQuantity));
+  }, [totalQuantity]);
 
   const fetchCart = async () => {
     setLoading(true);

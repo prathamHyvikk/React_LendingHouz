@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -7,12 +6,23 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PaymentOptionButton from "./PaymentOptionButton";
 import OrderDetailStep from "./OrderDetailStep";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const steps = ["", ""];
 
 export default function CartSteper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [alignment, setAlignment] = React.useState("cash");
+  const [user, setUser] = useState();
+  const [cart, setCart] = useState([]);
+  const [totalAmount, setTotalAmount] = useState();
+  
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
+  const [loading, setLoading] = useState(false);
   const handleNext = () => {
     setActiveStep((prev) => prev + 1);
   };
@@ -21,6 +31,47 @@ export default function CartSteper() {
     setActiveStep((prev) => prev - 1);
   };
 
+  const fetchDetails = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/order-detail-cash`,
+        {
+          user_id: userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      console.log(response.data);
+      setUser(response?.data?.user);
+      setCart(response?.data?.cart);
+      setTotalAmount(response?.data?.total_amount);
+    } catch (error) {
+      const errors = error.response.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeStep === 0) {
+      fetchDetails();
+    }
+  }, [activeStep,alignment]);
+  console.log(alignment);
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -33,8 +84,14 @@ export default function CartSteper() {
           />
         );
       case 1:
-            return (
-            <OrderDetailStep/>
+        return (
+          <OrderDetailStep
+            alignment={alignment}
+            user={user}
+            cart={cart}
+            totalAmount={totalAmount}
+             setActiveStep={setActiveStep}
+          />
         );
 
       default:

@@ -10,15 +10,15 @@ const AdminLayout = ({ children }) => {
 
   const role = useSelector((state) => state.person.value);
   const { totalItems, items } = useCart();
-  console.log(totalItems);
+  // console.log(totalItems);
 
-  const totalQuantity = localStorage.getItem("totalQuantity");
+  const totalQuantity = useSelector((state) => state.cart.quantity);
 
   return (
     <>
       <div className="bg-gray-50 sora">
         <div className="flex h-screen relative overflow-hidden ">
-          <Sidebar />
+          {/* <Sidebar /> */}
 
           <div className="p-4 lg:p-8 w-full overflow-auto">
             <div className=" cursor-pointer max-lg:mt-22 flex mx-auto lg:flex-col justify-end items-end lg:mb-6 ">

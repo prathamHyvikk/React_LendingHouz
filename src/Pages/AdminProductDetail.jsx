@@ -3,10 +3,13 @@ import AdminLayout from "../Component/AdminLayout";
 import SmallCard from "../Component/SmallCard";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { GiShoppingCart } from "react-icons/gi";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { useCart } from "react-use-cart";
+
+
 
 const AdminProductDetail = () => {
   // const [mainImage, setMainImage] = useState(
@@ -25,6 +28,13 @@ const AdminProductDetail = () => {
   const { id } = useParams();
   const userId = useSelector((state) => state.person.id);
 
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(setQuantity(product?.cart_qty));
+  // }, [product?.cart_qty]);
+  
+
   const fetchProduct = async () => {
     setLoading(true);
     try {
@@ -40,13 +50,14 @@ const AdminProductDetail = () => {
         },
       );
 
-      console.log(response.data);
       setProduct(response?.data);
+      // dispatch(setQuantity(response?.data?.cart_qty));
       setImages([
         response?.data?.image_url,
         ...response?.data?.other_images_url,
       ]);
     } catch (error) {
+      console.log(error)
       const errors = error.response.data.errors;
       if (errors) {
         Object.entries(errors).forEach(([field, messages]) => {
@@ -112,7 +123,7 @@ const AdminProductDetail = () => {
           return;
         }
 
-        await axios.post(
+        const response = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
           {
             product_id: id,
@@ -127,6 +138,7 @@ const AdminProductDetail = () => {
           cart_qty: currentQty - 1,
         }));
 
+        // dispatch(setQuantity(response?.data?.quantity));
         toast.success("Removed from cart");
       }
     } catch {
@@ -142,7 +154,7 @@ const AdminProductDetail = () => {
     setCartLoading(true);
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/cart/delete`,
         {
           product_id: id,
@@ -155,7 +167,7 @@ const AdminProductDetail = () => {
         ...prev,
         cart_qty: 0,
       }));
-
+      // dispatch(setQuantity(response?.data?.quantity));
       toast.success("Removed from cart");
     } catch {
       toast.error("Cart update failed");
@@ -207,7 +219,14 @@ const AdminProductDetail = () => {
     recentProduct();
   }, [id]);
 
-  console.log(recentProducts);
+  useEffect(() => {
+    if (images.length > 0) {
+      setSelectedImage(0);
+    }
+  }, [images]);
+
+  // console.log(recentProducts);
+
 
   return (
     <>
@@ -230,11 +249,13 @@ const AdminProductDetail = () => {
             ) : (
               <div>
                 <div className="mb-4">
-                  <img
-                    src={images[selectedImage]}
-                    alt="House"
-                    className="w-full h-96 object-contain rounded-lg"
-                  />
+                  {images?.length > 0 && (
+                    <img
+                      src={images[selectedImage]}
+                      alt="House"
+                      className="w-full h-96 object-contain rounded-lg"
+                    />
+                  )}
                 </div>
 
                 <div className="flex justify-center gap-4">

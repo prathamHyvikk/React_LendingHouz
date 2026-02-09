@@ -122,7 +122,7 @@ const AdminSignIn = () => {
 
               <div>
                 <label className="block text-gray-600 text-sm">
-                  Create New Password
+                  Enter Password
                 </label>
                 <input
                   type="password"

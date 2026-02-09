@@ -26,11 +26,11 @@ const ThankyouPopup = () => {
 
           <h2 className="text-xl sora-bold text-gray-900 mb-2">Thank You!</h2>
           <p className="text-gray-600 mb-4 text-center">
-            Your order has been successfully placed.
+            Your order has been placed successfully.
           </p>
 
           <Link
-            to={"/admin/dashboard"}
+            to={"/app/dashboard"}
             className="bg-blue-600 text-white cursor-pointer px-5 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             Continue

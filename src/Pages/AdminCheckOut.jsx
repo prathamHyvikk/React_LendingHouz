@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import { Link, useLocation } from "react-router-dom";
 import ThankyouPopup from "../Component/ThankyouPopup";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const AdminCheckOut = () => {
   const [firstName, setFirstName] = useState("");
@@ -10,23 +14,65 @@ const AdminCheckOut = () => {
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [lender, setLender] = useState("");
-  const [address1, setAddress1] = useState("");
-  const [address2, setAddress2] = useState("");
+  const [address_1, setAddress_1] = useState("");
+  const [address_2, setAddress_2] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
+  const [zipcode, setZipCode] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const [thanksPopup, setThanksPopup] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setThanksPopup(true);
-  };
   const location = useLocation();
   const alignment = location.state;
   const totalAmount = localStorage.getItem("totalAmount");
 
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
+
   console.log(alignment);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const handleFormSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/checkout`,
+        {
+          user_id: userId,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          amount: alignment !== "cash" ? amount : null,
+          lender: alignment !== "cash" ? lender : null,
+          address_1: data.address_1,
+          address_2: data.address_2,
+          city: data.city,
+          state: data.state,
+          zipcode: data.zipcode,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      console.log(response.data);
+      setThanksPopup(true);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -82,7 +128,10 @@ const AdminCheckOut = () => {
                 Complete your order
               </h1>
 
-              <form className="space-y-8">
+              <form
+                onSubmit={handleSubmit(handleFormSubmit)}
+                className="space-y-8"
+              >
                 <div>
                   <h2 className="text-xl sora-semibold text-blue-600 mb-6">
                     Personal Details
@@ -94,11 +143,17 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        {...register("firstName", {
+                          required: "First name is required",
+                        })}
                         placeholder="Enter Your First Name..."
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {errors?.firstName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.firstName.message}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm sora-medium text-gray-700 mb-2">
@@ -106,11 +161,17 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        {...register("lastName", {
+                          required: "Last name is required",
+                        })}
                         placeholder="Enter Your Last Name..."
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {errors?.lastName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.lastName.message}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm sora-medium text-gray-700 mb-2">
@@ -118,11 +179,17 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
                         placeholder="Enter Your Email..."
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {errors?.email && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm sora-medium text-gray-700 mb-2">
@@ -130,11 +197,25 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="number"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        {...register("phone", {
+                          required: "Phone number is required",
+                          minLength: {
+                            value: 10,
+                            message: "Phone number must be at least 10 digits",
+                          },
+                          maxLength: {
+                            value: 12,
+                            message: "Phone number must be at most 12 digits",
+                          },
+                        })}
                         placeholder="Enter Your Phone Number..."
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {errors?.phone && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.phone.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -184,11 +265,17 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="text"
-                        value={address1}
-                        onChange={(e) => setAddress1(e.target.value)}
+                        {...register("address_1", {
+                          required: "Address 1 is required",
+                        })}
                         placeholder="Address 1"
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {errors?.address_1 && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.address_1.message}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm sora-medium text-gray-700 mb-2">
@@ -196,8 +283,7 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="text"
-                        value={address2}
-                        onChange={(e) => setAddress2(e.target.value)}
+                        {...register("address_2")}
                         placeholder="Address 2"
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
@@ -209,11 +295,17 @@ const AdminCheckOut = () => {
                         </label>
                         <input
                           type="text"
-                          value={city}
-                          onChange={(e) => setCity(e.target.value)}
+                          {...register("city", {
+                            required: "city is required",
+                          })}
                           placeholder="Your City..."
                           className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                        {errors?.city && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.city.message}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label className="block text-sm sora-medium text-gray-700 mb-2">
@@ -221,11 +313,17 @@ const AdminCheckOut = () => {
                         </label>
                         <input
                           type="text"
-                          value={state}
-                          onChange={(e) => setState(e.target.value)}
+                          {...register("state", {
+                            required: "State is required",
+                          })}
                           placeholder="Your State..."
                           className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                        {errors?.state && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.state.message}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label className="block text-sm sora-medium text-gray-700 mb-2">
@@ -233,11 +331,17 @@ const AdminCheckOut = () => {
                         </label>
                         <input
                           type="text"
-                          value={zip}
-                          onChange={(e) => setZip(e.target.value)}
+                          {...register("zipcode", {
+                            required: "ZIP Code is required",
+                          })}
                           placeholder="ZIP Code"
                           className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                        {errors?.zipcode && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.zipcode.message}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -251,7 +355,8 @@ const AdminCheckOut = () => {
                     Cancel
                   </Link>
                   <button
-                    onClick={(e) => handleSubmit(e)}
+                    // onClick={(e) => handleSubmit(e)}
+                    type="submit"
                     className="flex-1 px-6 py-2 text-sm bg-blue-600 text-white sora-semibold rounded-lg hover:bg-blue-700 transition-colors"
                   >
                     Complete Purchase

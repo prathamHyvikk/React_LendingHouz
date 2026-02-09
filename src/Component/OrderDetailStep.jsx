@@ -97,7 +97,7 @@ const OrderDetailStep = ({
             </div>
           </div>
           <button onClick={handleCheckout}>
-            <button className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-3 text-sm rounded-xl sora-normal flex items-center justify-between px-6 transition-colors">
+            <div className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-3 text-sm rounded-xl sora-normal flex items-center justify-between px-6 transition-colors">
               <span className="">${totalAmount}</span>
               <div className="flex items-center gap-2">
                 <span>Checkout</span>
@@ -115,7 +115,7 @@ const OrderDetailStep = ({
                   ></path>
                 </svg>
               </div>
-            </button>
+            </div>
           </button>
         </div>
       </div>

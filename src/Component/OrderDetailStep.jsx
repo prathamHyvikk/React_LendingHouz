@@ -96,7 +96,8 @@ const OrderDetailStep = ({
               <span className="sora-bold">${totalAmount}</span>
             </div>
           </div>
-          <button onClick={handleCheckout}>
+
+          <button className="w-full" onClick={handleCheckout}>
             <div className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-3 text-sm rounded-xl sora-normal flex items-center justify-between px-6 transition-colors">
               <span className="">${totalAmount}</span>
               <div className="flex items-center gap-2">

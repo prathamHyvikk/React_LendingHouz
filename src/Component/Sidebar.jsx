@@ -191,7 +191,7 @@ const Sidebar = () => {
           </ul>
         </nav>
 
-        <div className="absolute bottom-0 w-64 p-6 border-t border-gray-300">
+        <div className="absolute bottom-0 sm:w-64 p-6 border-t border-gray-300">
           <Link to={`/${role}/dashboard/profile`}>
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">

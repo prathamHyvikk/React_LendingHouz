@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ThankyouPopup from "../Component/ThankyouPopup";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { MdDelete } from "react-icons/md";
+
+import InvoiceModal from "../Component/InvoiceModel";
 
 const AdminCheckOut = () => {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +23,14 @@ const AdminCheckOut = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipcode, setZipCode] = useState("");
-
+  const [products, setProducts] = useState([]);
+  const [quantity, setQuantity] = useState(0);
+  const [generateInvoice, setGenerateInvoice] = useState(false);
+  const [orderId, setOrderId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [invoiceData, setInvoiceData] = useState();
+  const [showInvoice , setShowInvoice] = useState(false);
+
 
   const [thanksPopup, setThanksPopup] = useState(false);
 
@@ -38,6 +48,40 @@ const AdminCheckOut = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const fetchCart = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/cart`,
+        {
+          params: {
+            user_id: userId,
+          },
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      console.log(response.data);
+      setProducts(response?.data?.data);
+      setQuantity(response?.data?.quantity);
+    } catch (error) {
+      const errors = error.response.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFormSubmit = async (data) => {
     setLoading(true);
@@ -66,7 +110,11 @@ const AdminCheckOut = () => {
       );
 
       console.log(response.data);
-      setThanksPopup(true);
+      toast.success(response.data.message);
+      setOrderId(response?.data?.order_id);
+      setGenerateInvoice(true);
+      // setThanksPopup(true);
+      localStorage.removeItem("totalAmount");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     } finally {
@@ -74,10 +122,50 @@ const AdminCheckOut = () => {
     }
   };
 
+  const fetchInvoice = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/invoice`,
+        { order_id: orderId },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+      console.log(response.data);
+      setInvoiceData(response?.data);
+       setShowInvoice(true);
+      // window.open(response?.data?.invoice_url);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (orderId) {
+      fetchInvoice();
+      fetchCart();
+    }
+  }, [orderId]);
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      console.log(products)
+      navigate("/app/dashboard");
+    }
+  }, []);
   return (
     <>
       <AdminLayout>
-        <div className="max-w-6xl mx-auto mt-6 lg:mt-14">
+        <div className="max-w-6xl mx-auto mt-6 lg:mt-14 no-print">
           <div className="flex flex-col lg:flex-row min-h-screen rounded-xl shadow overflow-hidden">
             <div className="w-full lg:w-2/5 bg-[#3F3F3F] text-white p-4 lg:p-8">
               <div className="mb-14">
@@ -91,38 +179,46 @@ const AdminCheckOut = () => {
               <div className="mb-12">
                 <h2 className="text-xl sora-semibold mb-6">Order summary</h2>
 
-                <div className="flex gap-4 mb-8">
-                  <img
-                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=120&h=120&fit=crop"
-                    alt="House"
-                    className="w-22 h-22 rounded-lg object-cover"
-                  />
-                  <div className="flex-1">
-                    <h3 className="sora-medium mb-2">Colorful racing shoes</h3>
-                    <div className="text-sm text-gray-300 space-y-1">
-                      <div className="flex justify-between">
-                        <span>---</span>
-                        <span>---</span>
+                <div className="h-80 mb-2 overflow-auto noScrollbar space-y-4">
+                  {products?.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex items-start sm:items-center justify-between gap-4"
+                    >
+                      {/* Left side: Image + details */}
+                      <div className="flex items-center gap-4 min-w-0">
+                        <img
+                          src={item?.product?.image_url}
+                          alt="product"
+                          className="w-20 h-16 object-cover rounded-lg bg-gray-100 shrink-0"
+                        />
+
+                        <div className="min-w-0">
+                          <h3 className="text-sm sora-semibold text-white break-words">
+                            {item?.product?.name}
+                          </h3>
+                          <p className="text-xs text-gray-400 mt-0.5">
+                            ${item?.product?.price}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span>----</span>
-                        <span>--</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>----</span>
-                        <span>---</span>
-                      </div>
+
+                      {/* Right side: Quantity */}
+                      <p className="text-sm text-gray-400 shrink-0">
+                        × {item?.quantity}
+                      </p>
                     </div>
-                  </div>
+                  ))}
                 </div>
 
-                <div className="flex justify-between items-center text-lg sora-semibold pt-6 border-t border-gray-600">
+                <div className="flex justify-between items-center text-lg sora-semibold pt-4 border-t border-gray-200">
                   <span>Total bill</span>
                   <span>${totalAmount}</span>
                 </div>
               </div>
             </div>
 
+            {/* Right side */}
             <div className="w-full lg:w-3/5 bg-white p-8 lg:p-12">
               <h1 className="text-2xl sora-semibold text-gray-900 mb-8">
                 Complete your order
@@ -368,7 +464,14 @@ const AdminCheckOut = () => {
         </div>
 
         {/* popup */}
-        {thanksPopup && <ThankyouPopup />}
+        {orderId && generateInvoice && (
+          <InvoiceModal
+            open={showInvoice}
+            onClose={() => setShowInvoice(false)}
+            data={invoiceData}
+          />
+        )}
+        {/* {thanksPopup && <ThankyouPopup />} */}
       </AdminLayout>
     </>
   );

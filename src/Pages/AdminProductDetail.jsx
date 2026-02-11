@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { GiShoppingCart } from "react-icons/gi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useCart } from "react-use-cart";
+import { setQuantity as setReduxQuantity } from "../features/cart";
 
 const AdminProductDetail = () => {
   // const [mainImage, setMainImage] = useState(
@@ -22,15 +23,16 @@ const AdminProductDetail = () => {
   const [loading, setLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
   const [quantity, setQuantity] = useState("");
+  const [cartTotalQty, setCartTotalQty] = useState(0);
+
   const LoginToken = localStorage.getItem("LoginToken");
   const { id } = useParams();
   const userId = useSelector((state) => state.person.id);
 
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(setQuantity(product?.cart_qty));
-  // }, [product?.cart_qty]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setReduxQuantity(cartTotalQty));
+  }, [cartTotalQty]);
 
   const fetchProduct = async () => {
     setLoading(true);
@@ -40,7 +42,9 @@ const AdminProductDetail = () => {
         {
           params: {
             id: id,
+            user_id: userId,
           },
+
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
@@ -48,7 +52,7 @@ const AdminProductDetail = () => {
       );
 
       setProduct(response?.data);
-      // dispatch(setQuantity(response?.data?.cart_qty));
+      setCartTotalQty(response?.data.total_cart_qty);
       setImages([
         response?.data?.image_url,
         ...response?.data?.other_images_url,
@@ -96,7 +100,7 @@ const AdminProductDetail = () => {
 
     try {
       if (type === "add") {
-        await axios.post(
+        const response = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/cart/update-quantity`,
           {
             product_id: id,
@@ -112,6 +116,8 @@ const AdminProductDetail = () => {
         }));
 
         toast.success("Added to cart");
+
+        setCartTotalQty(response?.data?.total_quantity);
       }
 
       if (type === "remove") {
@@ -135,7 +141,8 @@ const AdminProductDetail = () => {
           cart_qty: currentQty - 1,
         }));
 
-        // dispatch(setQuantity(response?.data?.quantity));
+        setCartTotalQty(response?.data?.total_quantity);
+
         toast.success("Removed from cart");
       }
     } catch {
@@ -164,7 +171,8 @@ const AdminProductDetail = () => {
         ...prev,
         cart_qty: 0,
       }));
-      // dispatch(setQuantity(response?.data?.quantity));
+      setCartTotalQty(response?.data?.total_quantity);
+
       toast.success("Removed from cart");
     } catch {
       toast.error("Cart update failed");
@@ -182,7 +190,7 @@ const AdminProductDetail = () => {
     setCartLoading(true);
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/cart/add`,
         {
           product_id: id,
@@ -198,6 +206,7 @@ const AdminProductDetail = () => {
       }));
 
       toast.success("Added to cart");
+      setCartTotalQty(response?.data?.data.total_cart_qty);
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -205,10 +214,10 @@ const AdminProductDetail = () => {
     }
   };
 
-  useEffect(() => {
-    fetchProduct();
-    recentProduct();
-  }, []);
+  // useEffect(() => {
+  //   fetchProduct();
+  //   recentProduct();
+  // }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -221,8 +230,6 @@ const AdminProductDetail = () => {
       setSelectedImage(0);
     }
   }, [images]);
-
-  // console.log(recentProducts);
 
   return (
     <>

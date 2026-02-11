@@ -109,7 +109,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchUser();
-    console.log("first")
+    console.log("first");
   }, []);
 
   return (
@@ -195,7 +195,7 @@ const Sidebar = () => {
           <Link to={`/${role}/dashboard/profile`}>
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
-                {image !== null ? (
+                {image ? (
                   <img
                     id="profilePreview"
                     src={image}
@@ -203,8 +203,8 @@ const Sidebar = () => {
                     className="w-full h-full rounded-full object-cover border-4 border-gray-100"
                   />
                 ) : (
-                  <div className="sm:w-10 w-8 sm:h-10 h-8 rounded-full object-cover border-4 border-gray-100 flex items-center justify-center">
-                    <FaRegUser size={60} />
+                  <div className="sm:w-10 w-8 sm:h-10 h-8 rounded-full border-4 border-gray-100 flex items-center justify-center">
+                    <FaRegUser size={20} />
                   </div>
                 )}
               </div>

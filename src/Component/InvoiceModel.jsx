@@ -28,7 +28,7 @@ const InvoiceModal = ({ open, onClose, data }) => {
   };
 
   return (
-    <div className="invoice-print-area">
+    <div className="invoice-print-area ">
       <div className="fixed  inset-0 z-[999] flex items-center justify-center">
         <div
           className="absolute inset-0 bg-black/60 no-print"
@@ -36,7 +36,7 @@ const InvoiceModal = ({ open, onClose, data }) => {
         />
 
         {/* Modal */}
-        <div className="relative noScrollbar z-50 w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
+        <div className="relative mx-2 noScrollbar z-50 w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-gray-400 no-print"
@@ -137,10 +137,18 @@ const InvoiceModal = ({ open, onClose, data }) => {
                 Thank you for your purchase 💙
               </p>
               <button
-                onClick={ printInvoice}
-                className="px-6 py-2 rounded-lg bg-[#002e6d] text-white no-print"
+                onClick={printInvoice}
+                className="px-6 py-2 cursor-pointer rounded-lg bg-[#002e6d] text-white no-print"
               >
                 Print Invoice
+              </button>
+            </div>
+            <div className="flex justify-center mt-5">
+              <button
+                onClick={() => navigate("/app/dashboard")}
+                className="px-6 sora-semibold cursor-pointer py-2 rounded-lg border-2 border-[#002e6d] text-[#002e6d] hover:bg-[#002e6d] hover:text-white no-print"
+              >
+                Dashboard
               </button>
             </div>
           </div>

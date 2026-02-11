@@ -9,8 +9,6 @@ import { GiShoppingCart } from "react-icons/gi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useCart } from "react-use-cart";
 
-
-
 const AdminProductDetail = () => {
   // const [mainImage, setMainImage] = useState(
   //   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
@@ -33,7 +31,6 @@ const AdminProductDetail = () => {
   // useEffect(() => {
   //   dispatch(setQuantity(product?.cart_qty));
   // }, [product?.cart_qty]);
-  
 
   const fetchProduct = async () => {
     setLoading(true);
@@ -57,7 +54,7 @@ const AdminProductDetail = () => {
         ...response?.data?.other_images_url,
       ]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       const errors = error.response.data.errors;
       if (errors) {
         Object.entries(errors).forEach(([field, messages]) => {
@@ -226,7 +223,6 @@ const AdminProductDetail = () => {
   }, [images]);
 
   // console.log(recentProducts);
-
 
   return (
     <>

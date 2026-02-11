@@ -20,6 +20,7 @@ const AdminSelectOffer = () => {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
+  const [financePopup, setFinancePopup] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -122,8 +123,10 @@ const AdminSelectOffer = () => {
   };
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (userId && LoginToken) {
+      fetchCart();
+    }
+  }, [userId]);
 
   console.log(products);
 

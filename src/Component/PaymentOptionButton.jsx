@@ -1,6 +1,7 @@
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import AllApplicationStatus from "./AllApplicationStatus";
 
 export default function PaymentOptionButton({
   setAlignment,
@@ -11,6 +12,8 @@ export default function PaymentOptionButton({
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
+
+  const [financePopup, setFinancePopup] = React.useState(false);
 
   return (
     <>
@@ -23,17 +26,25 @@ export default function PaymentOptionButton({
       >
         <ToggleButton value="cash">Cash</ToggleButton>
 
-        <ToggleButton value="finance">Finance</ToggleButton>
-          </ToggleButtonGroup>
-          
-          <div className="w-full flex justify-end mt-5">
-            <button
-              className="bg-[#002e6d] text-white cursor-pointer sora-bold py-2 px-4 rounded"
-              onClick={() => setActiveStep(activeStep + 1)}
-            >
-              Next
-            </button>
-          </div>
+        <ToggleButton value="finance" onClick={() => setFinancePopup(true)}>
+          Finance
+        </ToggleButton>
+      </ToggleButtonGroup>
+
+      <div className="w-full flex justify-end mt-5">
+        <button
+          className="bg-[#002e6d] text-white cursor-pointer sora-bold py-2 px-4 rounded"
+          onClick={() => setActiveStep(activeStep + 1)}
+        >
+          Next
+        </button>
+      </div>
+
+      <AllApplicationStatus
+        isOpen={financePopup}
+        onClose={() => setFinancePopup(false)}
+        
+      />
     </>
   );
 }

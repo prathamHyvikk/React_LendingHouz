@@ -29,8 +29,7 @@ const AdminCheckOut = () => {
   const [orderId, setOrderId] = useState("");
   const [loading, setLoading] = useState(false);
   const [invoiceData, setInvoiceData] = useState();
-  const [showInvoice , setShowInvoice] = useState(false);
-
+  const [showInvoice, setShowInvoice] = useState(false);
 
   const [thanksPopup, setThanksPopup] = useState(false);
 
@@ -136,7 +135,7 @@ const AdminCheckOut = () => {
       );
       console.log(response.data);
       setInvoiceData(response?.data);
-       setShowInvoice(true);
+      setShowInvoice(true);
       // window.open(response?.data?.invoice_url);
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -156,16 +155,21 @@ const AdminCheckOut = () => {
     fetchCart();
   }, []);
 
-  useEffect(() => {
-    if (products.length > 0) {
-      console.log(products)
-      navigate("/app/dashboard");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!totalAmount) {
+  //     console.log(products);
+  //     navigate("/app/dashboard");
+  //   }
+  // }, [totalAmount]);
   return (
     <>
       <AdminLayout>
         <div className="max-w-6xl mx-auto mt-6 lg:mt-14 no-print">
+          {loading && (
+            <div className="bg-white/10 flex justify-center items-center h-screen">
+              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+            </div>
+          )}
           <div className="flex flex-col lg:flex-row min-h-screen rounded-xl shadow overflow-hidden">
             <div className="w-full lg:w-2/5 bg-[#3F3F3F] text-white p-4 lg:p-8">
               <div className="mb-14">

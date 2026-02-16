@@ -147,7 +147,7 @@ const navigate = useNavigate()
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm pl-4">
                 <div>
                   <p className="text-gray-700">
-                    $<span className="sora-semibold">Best Estimate:</span>{" "}{data?.best_estimate || "N/A"}
+                    <span className="sora-semibold">Best Estimate:</span>{" "}{data?.best_estimate || "N/A"}
                   </p>
                 </div>
                 <div>

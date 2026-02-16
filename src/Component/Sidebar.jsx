@@ -110,8 +110,9 @@ const Sidebar = () => {
   useEffect(() => {
     fetchUser();
     console.log("first");
-  }, []);
+  }, [fetchUser, userId]);
 
+  console.log(Title)
   return (
     <>
       {/* hemburger icon - Mobile view */}
@@ -213,8 +214,8 @@ const Sidebar = () => {
                   {fullName}
                 </p>
                 <button
-                  className={`text-xs px-2 py-.5 ${
-                    role == "admin"
+                  className={`text-xs px-2 py-1 ${
+                    Title == "Administrator"
                       ? "bg-yellow-400"
                       : "bg-green-400 text-white"
                   }  rounded-full sora-semibold`}

@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setQuantity } from "../features/cart";
 
 const InvoiceModal = ({ open, onClose, data }) => {
   if (!open) return null;
-
+  
   const { order_id, user, items = [], grand_total } = data || {};
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleEsc = (e) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", handleEsc);
+    // document.addEventListener("keydown", handleEsc);
     document.body.style.overflow = "hidden";
-
+    dispatch(setQuantity(0));
     return () => {
       document.removeEventListener("keydown", handleEsc);
       document.body.style.overflow = "auto";

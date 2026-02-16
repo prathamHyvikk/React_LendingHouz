@@ -101,13 +101,26 @@ const EmploymentAndIncom = ({
       navigate("/app/dashboard/applications");
     } catch (error) {
       setLoading(false);
-      if (error) {
-        const apiError = error.response.data.errors;
-        setError(apiError);
+      if (error.response && error.response.data) {
+        const apiErrors = error.response.data.errors; 
+        setError(apiErrors);
 
-        const firstError = Object.values(apiError)?.[0];
-        if (typeof firstError === "array") toast.error(firstError);
-        else toast.error(apiError);
+      
+        if (typeof apiErrors === "object" && apiErrors !== null) {
+        
+          const firstKey = Object.keys(apiErrors)[0];
+          const message = apiErrors[firstKey];
+
+          if (Array.isArray(message)) {
+            toast.error(message[0]); 
+          } else {
+            toast.error(String(message));
+          }
+        } else {
+          toast.error(error.response.data.message || "Validation Error");
+        }
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
     }
   };

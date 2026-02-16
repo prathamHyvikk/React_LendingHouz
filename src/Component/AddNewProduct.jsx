@@ -100,14 +100,27 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
 
       setAgainFetchProducts(true);
     } catch (error) {
-      if (error.response) {
-        const apiError = error.response.data.errors;
+      setLoading(false);
+      if (error.response && error.response.data) {
+        const apiErrors = error.response.data.errors; 
+        setError(apiErrors);
 
-        const firstError = Object.values(apiError)?.[0];
+      
+        if (typeof apiErrors === "object" && apiErrors !== null) {
+          
+          const firstKey = Object.keys(apiErrors)[0];
+          const message = apiErrors[firstKey];
 
-        if (firstError) {
-          toast.error(firstError);
+          if (Array.isArray(message)) {
+            toast.error(message[0]);
+          } else {
+            toast.error(String(message));
+          }
+        } else {
+          toast.error(error.response.data.message || "Validation Error");
         }
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
       setLoading(false);
     }

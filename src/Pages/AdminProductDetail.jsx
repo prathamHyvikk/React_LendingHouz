@@ -330,7 +330,7 @@ const AdminProductDetail = () => {
                   </button>
                 </div>
 
-                {product?.cart_qty === 0 ? (
+                {!product?.cart_qty ? (
                   <button
                     disabled={cartLoading}
                     onClick={addToCart}
@@ -425,7 +425,15 @@ const AdminProductDetail = () => {
 
           <div className="mt-12">
             <h2 className="sm:text-4xl text-2xl sora-bold mb-3">Description</h2>
-            <p className="text-lg text-gray-700">{product?.description}</p>
+            {loading ? (
+              <>
+                <div className="w-full h-4 bg-gray-200 mb-1 rounded-sm"></div>
+                <div className="w-full h-4 bg-gray-200 mb-1 rounded-sm"></div>
+                
+              </>
+            ) : (
+              <p className="text-lg text-gray-700">{product?.description}</p>
+            )}
           </div>
 
           <div className="mt-8">

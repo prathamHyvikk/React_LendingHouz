@@ -41,6 +41,7 @@ const AdminCheckOut = () => {
   const userId = useSelector((state) => state.person.id);
 
   console.log(alignment);
+
   const {
     register,
     handleSubmit,
@@ -63,7 +64,6 @@ const AdminCheckOut = () => {
         },
       );
 
-      console.log(response.data);
       setProducts(response?.data?.data);
       setQuantity(response?.data?.quantity);
     } catch (error) {
@@ -108,7 +108,6 @@ const AdminCheckOut = () => {
         },
       );
 
-      console.log(response.data);
       toast.success(response.data.message);
       setOrderId(response?.data?.order_id);
       setGenerateInvoice(true);
@@ -133,7 +132,7 @@ const AdminCheckOut = () => {
           },
         },
       );
-      console.log(response.data);
+
       setInvoiceData(response?.data);
       setShowInvoice(true);
       // window.open(response?.data?.invoice_url);
@@ -164,12 +163,12 @@ const AdminCheckOut = () => {
   return (
     <>
       <AdminLayout>
+        {loading && (
+          <div className="fixed inset-0 z-50 bg-white/70 flex items-center justify-center">
+            <div className="h-14 w-14 border-b-2 border-black rounded-full animate-spin"></div>
+          </div>
+        )}
         <div className="max-w-6xl mx-auto mt-6 lg:mt-14 no-print">
-          {loading && (
-            <div className="bg-white/10 flex justify-center items-center h-screen">
-              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-            </div>
-          )}
           <div className="flex flex-col lg:flex-row min-h-screen rounded-xl shadow overflow-hidden">
             <div className="w-full lg:w-2/5 bg-[#3F3F3F] text-white p-4 lg:p-8">
               <div className="mb-14">
@@ -457,7 +456,8 @@ const AdminCheckOut = () => {
                   <button
                     // onClick={(e) => handleSubmit(e)}
                     type="submit"
-                    className="flex-1 px-6 py-2 text-sm bg-blue-600 text-white sora-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                    disabled={loading}
+                    className={`flex-1 px-6 py-2 text-sm bg-blue-600 text-white sora-semibold rounded-lg hover:bg-blue-700 transition-colors ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     Complete Purchase
                   </button>
@@ -471,7 +471,10 @@ const AdminCheckOut = () => {
         {orderId && generateInvoice && (
           <InvoiceModal
             open={showInvoice}
-            onClose={() => setShowInvoice(false)}
+            onClose={() => {
+              setShowInvoice(false);
+              navigate("/app/dashboard");
+            }}
             data={invoiceData}
           />
         )}

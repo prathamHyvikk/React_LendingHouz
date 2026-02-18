@@ -34,6 +34,8 @@ const AdminDashboard = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalInActive, setTotalInActive] = useState(0);
   const [totalReferral, setTotalReferral] = useState(0);
+  const [search, setSearch] = useState("");
+  const [selectedApplication, setSelectedApplication] = useState(null);
 
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
@@ -125,6 +127,11 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleApplicationInfo = (item) => {
+    setSelectedApplication(item);
+    setShowView(true);
+  };
+
   useEffect(() => {
     fetchApplications();
     fetchCategories();
@@ -140,9 +147,21 @@ const AdminDashboard = () => {
         <div className="">
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
-            <StatCard title="Total Applications" value={totalApplications} bg="#E5ECF6" />
-            <StatCard title="Loan Amount" value={`$${totalAmount}`} bg="#D0FFE0" />
-            <StatCard title="Inactive Applications" value={totalInActive} bg="#E6E6E6" />
+            <StatCard
+              title="Total Applications"
+              value={totalApplications}
+              bg="#E5ECF6"
+            />
+            <StatCard
+              title="Loan Amount"
+              value={`$${totalAmount}`}
+              bg="#D0FFE0"
+            />
+            <StatCard
+              title="Inactive Applications"
+              value={totalInActive}
+              bg="#E6E6E6"
+            />
             <StatCard title="Referrals" value="2" bg="#FFD0D1" />
           </div>
 
@@ -150,8 +169,12 @@ const AdminDashboard = () => {
           <div className="bg-white rounded-lg shadow-sm p-3">
             <HeaderTable
               setShowAddProduct={setShowAddProduct}
+              setSelectedCategory={setSelectedCategory}
               headingContent="List of Clients"
               marketplace={false}
+              search={search}
+              setSearch={setSearch}
+              fetchProductFromCategory={"no"}
             />
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
               <table className="w-full text-sm">
@@ -172,41 +195,61 @@ const AdminDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {applications?.map((item, i) => (
-                    <tr key={i} className="hover:bg-gray-50">
-                      <Td>#{item.application_id}</Td>
-                      <Td>{item.name}</Td>
-                      {role == "admin" && <Td>{item.business}</Td>}
-                      <Td>{item.status}</Td>
-                      <Td className="sora-semibold">{item.amount}</Td>
-                      <Td className="" center={""}>
-                        {item.date}
-                      </Td>
+                  {applications
+                    ?.filter(
+                      (item) =>
+                        item?.lender_name
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item?.application_status
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item?.requested_income
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item?.application_id?.toString().includes(search),
+                    )
+                    ?.map((item, i) => (
+                      <tr key={i} className="hover:bg-gray-50 text-nowrap">
+                        <Td>#{item.application_id}</Td>
+                        <Td>{item.name}</Td>
+                        {role == "admin" && <Td>{item.business}</Td>}
+                        <Td>{item.application_status}</Td>
+                        <Td className="">$ {item.requested_income}</Td>
+                        <Td className="" center={""}>
+                          {item.created_at.split("T")[0]}
+                        </Td>
 
-                      <Td center={"yes"} className="flex justify-center">
-                        <IconBtn
-                          href={`/${role}/dashboard/marketplace`}
-                          icon={<CiShop />}
-                        />
-                      </Td>
+                        <Td center={"yes"} className="flex justify-center">
+                          <IconBtn
+                            href={`/${role}/dashboard/marketplace`}
+                            icon={<CiShop />}
+                          />
+                        </Td>
 
-                      <Td center={"yes"}>
-                        <IconBtn
-                          icon={<ImAttachment />}
-                          onClick={() => setShowInvoice(true)}
-                        />
-                      </Td>
+                        <Td center={"yes"}>
+                          <IconBtn
+                            icon={<ImAttachment />}
+                            onClick={() => setShowInvoice(true)}
+                          />
+                        </Td>
 
-                      <Td center>
-                        <IconBtn
-                          icon={<IoEyeOutline />}
-                          onClick={() => setShowView(true)}
-                        />
-                      </Td>
-                    </tr>
-                  ))}
+                        <Td center>
+                          <IconBtn
+                            icon={<IoEyeOutline />}
+                            onClick={() => handleApplicationInfo(item)}
+                          />
+                        </Td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
+
+              {loading && (
+                <div className="my-15 w-full mx-auto flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+                </div>
+              )}
             </div>
 
             <div className="mt-8">
@@ -222,7 +265,12 @@ const AdminDashboard = () => {
           {showInvoice && (
             <InvoiceModal onClose={() => setShowInvoice(false)} />
           )}
-          {showView && <ViewModal onClose={() => setShowView(false)} />}
+          {showView && (
+            <ViewModal
+              data={selectedApplication}
+              onClose={() => setShowView(false)}
+            />
+          )}
         </div>
 
         {/* Popup */}

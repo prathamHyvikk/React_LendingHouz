@@ -31,6 +31,7 @@ const DashBoardUser = () => {
   const [applications, setApplications] = useState();
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
 
   const [totalApplications, setTotalApplications] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -40,6 +41,7 @@ const DashBoardUser = () => {
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
 
+  console.log(search);
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
@@ -141,8 +143,6 @@ const DashBoardUser = () => {
     fetchTotal();
   }, []);
 
-  console.log(applications, categories);
-
   return (
     <>
       <AdminLayout>
@@ -172,11 +172,15 @@ const DashBoardUser = () => {
             <HeaderTable
               setShowAddProduct={setShowAddProduct}
               setSelectedCategory={setSelectedCategory}
+              setApplications={setApplications}
               headingContent="List of Applications"
               marketplace={false}
+              search={search}
+              setSearch={setSearch}
+              fetchProductFromCategory={"no"}
             />
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm text-nowrap">
                 <thead className="bg-gray-100 text-gray-700">
                   <tr>
                     <Th>Application Number</Th>
@@ -194,39 +198,53 @@ const DashBoardUser = () => {
                 </thead>
 
                 <tbody>
-                  {applications?.map((item, i) => (
-                    <tr key={i} className="hover:bg-gray-50">
-                      <Td>#{item.application_id}</Td>
-                      <Td>{item.lender_name || "N/A"}</Td>
-                      {/* {role == "admin" && <Td>{item.business}</Td>} */}
-                      <Td>{item.application_status}</Td>
-                      <Td className="">${item.requested_income}</Td>
-                      <Td className="" center={""}>
-                        {item.created_at.split("T")[0]}
-                      </Td>
+                  {applications
+                    ?.filter(
+                      (item) =>
+                        item?.lender_name
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item?.application_status
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item?.requested_income
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item?.application_id?.toString().includes(search),
+                    )
+                    ?.map((item, i) => (
+                      <tr key={i} className="hover:bg-gray-50">
+                        <Td>#{item.application_id}</Td>
+                        <Td>{item.lender_name || "N/A"}</Td>
+                        {/* {role == "admin" && <Td>{item.business}</Td>} */}
+                        <Td>{item.application_status}</Td>
+                        <Td className="">${item.requested_income}</Td>
+                        <Td className="" center={""}>
+                          {item.created_at.split("T")[0]}
+                        </Td>
 
-                      <Td center={"yes"} className="flex justify-center">
-                        <IconBtn
-                          href={`/${role}/dashboard/marketplace`}
-                          icon={<CiShop />}
-                        />
-                      </Td>
+                        <Td center={"yes"} className="flex justify-center">
+                          <IconBtn
+                            href={`/${role}/dashboard/marketplace`}
+                            icon={<CiShop />}
+                          />
+                        </Td>
 
-                      <Td center={"yes"}>
-                        <IconBtn
-                          icon={<ImAttachment />}
-                          onClick={() => setShowInvoice(true)}
-                        />
-                      </Td>
+                        <Td center={"yes"}>
+                          <IconBtn
+                            icon={<ImAttachment />}
+                            onClick={() => setShowInvoice(true)}
+                          />
+                        </Td>
 
-                      <Td center>
-                        <IconBtn
-                          icon={<IoEyeOutline />}
-                          onClick={() => handleApplicationInfo(item)}
-                        />
-                      </Td>
-                    </tr>
-                  ))}
+                        <Td center>
+                          <IconBtn
+                            icon={<IoEyeOutline />}
+                            onClick={() => handleApplicationInfo(item)}
+                          />
+                        </Td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
 

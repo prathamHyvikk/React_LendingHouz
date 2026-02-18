@@ -19,14 +19,14 @@ const Layout = () => {
     <div className="flex h-screen relative overflow-hidden ">
       <Sidebar />
       <div className="w-full bg-gray-50 overflow-auto">
-        <div className=" p-4 lg:p-8  sora cursor-pointer max-lg:mt-22 flex mx-auto lg:flex-col justify-end items-end lg:mb-6 ">
+        <div className=" p-4 lg:p-8  sora cursor-pointer max-lg:mt-22 flex mx-auto lg:flex-col justify-end items-end ">
           {pathname !== `/${role}/dashboard/notifications` && (
             <div className="flex items-center space-x-4">
-              <input
+              {/* <input
                 type="text"
                 placeholder="Search User"
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
-              />
+              /> */}
 
               <div className="flex items-center space-x-4">
                 {role === "app" && (

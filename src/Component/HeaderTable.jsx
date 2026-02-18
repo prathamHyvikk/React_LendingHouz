@@ -9,7 +9,7 @@ const HeaderTable = ({
   setShowAddProduct,
   headingContent,
   marketplace,
-  setProducts,
+  setProducts=[],
   setLastPage,
   setSelectedCategory,
   navigationLink,
@@ -36,7 +36,7 @@ const HeaderTable = ({
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setCategories(response.data);
@@ -90,14 +90,23 @@ const HeaderTable = ({
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setProducts(response?.data?.products);
       setLastPage(response?.data?.last_page);
       console.log(response);
     } catch (error) {
-      toast.error(error?.response.data.message);
+      const apiError = error?.response?.data?.errors;
+      if (apiError) {
+        Object.entries(apiError).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      }else{
+        toast.error(error?.message);
+      }
     }
   };
 
@@ -189,8 +198,8 @@ const HeaderTable = ({
                     ? selectedOption
                     : "Filter by Product & Services"
                   : selectedOption
-                  ? selectedOption
-                  : "Filter"}
+                    ? selectedOption
+                    : "Filter"}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

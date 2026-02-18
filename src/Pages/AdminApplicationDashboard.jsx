@@ -33,10 +33,11 @@ const AdminApplicationsDashboard = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalInActive, setTotalInActive] = useState(0);
   const [totalReferral, setTotalReferral] = useState(0);
+  const [selectedApplication, setSelectedApplication] = useState(null);
   const marketplace = false;
 
   const navigate = useNavigate();
-  const showDropdown = (e) => {
+  const showDropdown = (e, item) => {
     e.stopPropagation();
 
     setPosition({
@@ -44,6 +45,7 @@ const AdminApplicationsDashboard = () => {
       y: e.clientY,
     });
 
+    setSelectedApplication(item);
     setShowView(true);
   };
 
@@ -151,7 +153,7 @@ const AdminApplicationsDashboard = () => {
               fetchProductFromCategory={"no"}
             />
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm min-h-30 max-h-90">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm text-nowrap">
                 <thead className="bg-gray-100 text-gray-700 sticky top-0">
                   <tr>
                     <Th>{role == "admin" ? "Application" : "Product"}</Th>
@@ -178,43 +180,65 @@ const AdminApplicationsDashboard = () => {
                     </>
                   ) : selectedCategory == "" ? (
                     <>
-                      {applications?.map((item, i) => (
-                        <tr key={i} className="hover:bg-gray-50">
-                          <Td>
-                            <div className="flex items-center gap-2">
-                              <img
-                                className="shrink-0 w-12 h-12 "
-                                src={item.img || "/assets/Images/product.png"}
-                                alt="image"
+                      {applications
+                        ?.filter(
+                          (item) =>
+                            item?.lender_name
+                              ?.toLowerCase()
+                              .includes(search.toLowerCase()) ||
+                            item?.application_status
+                              ?.toLowerCase()
+                              .includes(search.toLowerCase()) ||
+                            item?.requested_income
+                              ?.toString()
+                              ?.includes(search) ||
+                            item?.product_type
+                              ?.toString()
+                              .includes(
+                                search.charAt(0).toUpperCase() +
+                                  search.slice(1).toLowerCase(),
+                              ) ||
+                            item?.approvalAmount?.includes(search) ||
+                            item?.requested_income?.includes(search) ||
+                            item?.application_id?.includes(search),
+                        )
+                        ?.map((item, i) => (
+                          <tr key={i} className="hover:bg-gray-50">
+                            <Td>
+                              <div className="flex items-center gap-2">
+                                <img
+                                  className="shrink-0 w-12 h-12 "
+                                  src={item.img || "/assets/Images/product.png"}
+                                  alt="image"
+                                />
+                                {item.product_type}
+                              </div>
+                            </Td>
+                            <Td center={"yes"}>{item.application_status}</Td>
+                            <Td>{item.lender}</Td>
+
+                            <Td center={"yes"}>#{item.application_id}</Td>
+                            <Td center={"yes"}>
+                              {item.approvalAmount == null
+                                ? "-"
+                                : item.approvalAmount}
+                            </Td>
+                            <Td className="" center={""}>
+                              {item.created_at
+                                .split("T")[0]
+                                .split("-")
+                                .reverse()
+                                .join("/")}
+                            </Td>
+
+                            <Td center>
+                              <IconBtn
+                                icon={<AiOutlinePrinter />}
+                                onClick={(e) => showDropdown(e, item)}
                               />
-                              {item.product_type}
-                            </div>
-                          </Td>
-                          <Td center={"yes"}>{item.application_status}</Td>
-                          <Td>{item.lender}</Td>
-
-                          <Td center={"yes"}>{item.application_id}</Td>
-                          <Td center={"yes"}>
-                            {item.approvalAmount == null
-                              ? "-"
-                              : item.approvalAmount}
-                          </Td>
-                          <Td className="" center={""}>
-                            {item.created_at
-                              .split("T")[0]
-                              .split("-")
-                              .reverse()
-                              .join("/")}
-                          </Td>
-
-                          <Td center>
-                            <IconBtn
-                              icon={<AiOutlinePrinter />}
-                              onClick={showDropdown}
-                            />
-                          </Td>
-                        </tr>
-                      ))}
+                            </Td>
+                          </tr>
+                        ))}
                     </>
                   ) : (
                     <>
@@ -270,7 +294,27 @@ const AdminApplicationsDashboard = () => {
                       ) : (
                         // search functionality mate
                         applications
-                          ?.filter((item) => item.product_type == search)
+                          ?.filter(
+                            (item) =>
+                              item?.lender_name
+                                ?.toLowerCase()
+                                .includes(search.toLowerCase()) ||
+                              item?.application_status
+                                ?.toLowerCase()
+                                .includes(search.toLowerCase()) ||
+                              item?.requested_income
+                                ?.toString()
+                                ?.includes(search) ||
+                              item?.product_type
+                                ?.toString()
+                                .includes(search.toLowerCase()) ||
+                              item?.approvalAmount
+                                ?.toString()
+                                .includes(search) ||
+                              item?.requested_income
+                                ?.toString()
+                                .includes(search),
+                          )
                           .map((item, i) => (
                             <tr key={i} className="hover:bg-gray-50">
                               <Td>
@@ -288,7 +332,7 @@ const AdminApplicationsDashboard = () => {
                               <Td center={"yes"}>{item.status}</Td>
                               <Td>{item.lender}</Td>
 
-                              <Td center={"yes"}>{item.application_id}</Td>
+                              <Td center={"yes"}>#{item.application_id}</Td>
                               <Td center={"yes"}>{item.requested_income}</Td>
                               <Td className="" center={""}>
                                 {item.created_at
@@ -322,6 +366,7 @@ const AdminApplicationsDashboard = () => {
           {showView && (
             <PrintPopup
               position={position}
+              data={selectedApplication}
               onClose={() => setShowView(false)}
               setShowView={setShowView}
             />

@@ -130,9 +130,12 @@ const Sidebar = () => {
             <i className="fas fa-bars"></i>
           </button>
 
-          <div className="lg:hidden  w-full bg-gray-50 fixed top-0 py-2 px-2 z-1">
+          <Link
+            to={`/`}
+            className="lg:hidden  w-full bg-gray-50 fixed top-0 py-2 px-2 z-1"
+          >
             <img className="ml-auto" src={logoImage} alt="logo" />
-          </div>
+          </Link>
         </div>
 
         <div

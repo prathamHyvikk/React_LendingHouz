@@ -161,6 +161,8 @@ function App() {
         <Route path="/app/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
+        <Route path="admin/signin" element={<AdminSignIn />} />
+
         <Route path={`/`} element={<Layout />}>
           <Route path="app/dashboard" element={<DashBoardUser />} />
           <Route
@@ -194,7 +196,6 @@ function App() {
 
           {/* Admin Routes */}
           {/* <Route path="/admin/signup" element={<AdminSignup />} /> */}
-          <Route path="admin/signin" element={<AdminSignIn />} />
           <Route
             path="admin/forgot-password"
             element={<AdminForgotPassword />}

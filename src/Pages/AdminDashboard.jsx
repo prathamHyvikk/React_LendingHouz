@@ -60,12 +60,10 @@ const AdminDashboard = () => {
         },
       );
 
-      console.log(response.data);
       setTotalApplications(response?.data?.total_application);
       setTotalAmount(response?.data?.loan_amount);
       setTotalInActive(response?.data?.inactive_count);
     } catch (error) {
-      console.log(error);
       toast.error(error?.response.data.message);
     }
   };
@@ -139,7 +137,6 @@ const AdminDashboard = () => {
     fetchTotal();
   }, []);
 
-  console.log(applications, categories);
 
   return (
     <>

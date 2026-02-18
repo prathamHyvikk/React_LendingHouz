@@ -43,9 +43,7 @@ export default function CustomeStepper() {
     check: false,
   });
 
-  console.log([confirmFinance, verifyContact, employmentAndIncom]);
-  console.log(activeStep);
-  console.log("category ", loacation?.state?.category);
+ 
 
   React.useEffect(() => {
     if (arrivedCategory) {

@@ -19,7 +19,7 @@ export default function CartSteper() {
   const [user, setUser] = useState();
   const [cart, setCart] = useState([]);
   const [totalAmount, setTotalAmount] = useState();
-  
+
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,6 @@ export default function CartSteper() {
         },
       );
 
-      console.log(response.data);
       setUser(response?.data?.user);
       setCart(response?.data?.cart);
       setTotalAmount(response?.data?.total_amount);
@@ -70,8 +69,7 @@ export default function CartSteper() {
     if (activeStep === 0) {
       fetchDetails();
     }
-  }, [activeStep,alignment]);
-  console.log(alignment);
+  }, [activeStep, alignment]);
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -90,7 +88,7 @@ export default function CartSteper() {
             user={user}
             cart={cart}
             totalAmount={totalAmount}
-             setActiveStep={setActiveStep}
+            setActiveStep={setActiveStep}
           />
         );
 

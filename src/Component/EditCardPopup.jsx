@@ -2,7 +2,6 @@ import React from "react";
 import ModalWrapper from "./ModalWrapper";
 
 const EditCardPopup = ({ setShowCardPopup }) => {
-  console.log("hello");
   return (
     <>
       <ModalWrapper>

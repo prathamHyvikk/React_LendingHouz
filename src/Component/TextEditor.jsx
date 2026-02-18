@@ -14,7 +14,6 @@ const TextEditor = ({
   const editor = useRef(null);
   //   const [content, setContent] = useState("");
   const LoginToken = localStorage.getItem("LoginToken");
-  console.log(LoginToken);
 
   const config = useMemo(
     () => ({
@@ -27,7 +26,6 @@ const TextEditor = ({
 
   const postContent = async () => {
     try {
-      console.log("call api");
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/update-setting`,
         {
@@ -41,7 +39,6 @@ const TextEditor = ({
         }
       );
 
-      console.log(response);
     } catch (error) {
       if (error?.response) {
         toast.error(error?.response.data.message);

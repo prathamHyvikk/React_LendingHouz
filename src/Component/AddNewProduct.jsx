@@ -41,7 +41,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   useEffect(() => {
     fetchCategories();
   }, []);
-  console.log(otherImage);
+
 
   const handleOtherImages = (e) => {
     const selectedFiles = Array.from(e.target.files);

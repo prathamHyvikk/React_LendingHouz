@@ -41,7 +41,6 @@ const MarketPlace = () => {
     }
   };
 
-  console.log(products);
   useEffect(() => {
     fetchProducts();
   }, []);

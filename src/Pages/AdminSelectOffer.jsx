@@ -42,7 +42,6 @@ const AdminSelectOffer = () => {
         },
       );
 
-      console.log(response.data);
       setProducts(response?.data?.data);
       setTotalQuantity(response?.data?.total_quantity);
     } catch (error) {
@@ -128,7 +127,6 @@ const AdminSelectOffer = () => {
     }
   }, [userId]);
 
-  console.log(products);
 
   return (
     <>

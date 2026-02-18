@@ -37,7 +37,6 @@ const Profile = () => {
         },
       );
 
-      console.log(response?.data);
       const user = response?.data?.data;
 
       setUserName(user?.username ?? "");

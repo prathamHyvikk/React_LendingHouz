@@ -41,7 +41,6 @@ const DashBoardUser = () => {
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
 
-  console.log(search);
   useEffect(() => {
     document.body.style.overflow = showInvoice || showView ? "hidden" : "auto";
   }, [showInvoice, showView]);
@@ -60,12 +59,10 @@ const DashBoardUser = () => {
         },
       );
 
-      console.log(response.data);
       setTotalApplications(response?.data?.total_application);
       setTotalAmount(response?.data?.loan_amount);
       setTotalInActive(response?.data?.inactive_count);
     } catch (error) {
-      console.log(error);
       toast.error(error?.response.data.message);
     }
   };

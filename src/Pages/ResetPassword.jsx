@@ -43,7 +43,6 @@ const ResetPassword = () => {
             });
           });
         } else {
-          console.log("elsePart");
           toast.error(error?.response.data.message);
         }
       }

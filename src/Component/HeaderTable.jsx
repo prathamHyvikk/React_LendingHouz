@@ -58,7 +58,6 @@ const HeaderTable = ({
   });
 
   const handleSelection = async (item) => {
-    console.log(item);
 
     setSelectedOption(item);
     setSelectedCategory(item);
@@ -95,7 +94,6 @@ const HeaderTable = ({
 
       setProducts(response?.data?.products);
       setLastPage(response?.data?.last_page);
-      console.log(response);
     } catch (error) {
       const apiError = error?.response?.data?.errors;
       if (apiError) {

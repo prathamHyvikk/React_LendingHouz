@@ -41,7 +41,6 @@ const AdminMarketPlace = () => {
     }
   };
 
-  console.log(products);
   useEffect(() => {
     fetchProducts();
   }, []);

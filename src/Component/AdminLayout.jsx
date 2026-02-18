@@ -10,7 +10,7 @@ const AdminLayout = ({ children }) => {
 
   const role = useSelector((state) => state.person.value);
   const { totalItems, items } = useCart();
-  // console.log(totalItems);
+
 
   const totalQuantity = useSelector((state) => state.cart.quantity);
 

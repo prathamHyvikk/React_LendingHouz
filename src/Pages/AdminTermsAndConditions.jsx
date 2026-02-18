@@ -13,7 +13,6 @@ const AdminTearmsAndConditions = () => {
   const [loading, setLoading] = useState(false);
   const LoginToken = localStorage.getItem("LoginToken");
 
-  console.log(content);
 
   const getContent = async () => {
     setLoading(true);
@@ -30,7 +29,7 @@ const AdminTearmsAndConditions = () => {
         }
       );
 
-      console.log(response);
+    
       setContent(response?.data);
     } catch (error) {
       if (error?.response) {

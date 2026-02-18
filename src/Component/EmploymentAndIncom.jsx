@@ -27,7 +27,6 @@ const EmploymentAndIncom = ({
 
   const personId = useSelector((state) => state.person.id);
   const navigate = useNavigate();
-  console.log(personId);
 
   const handleChange = (field) => (e) => {
     const value = field === "check" ? e.target.checked : e.target.value;
@@ -81,9 +80,9 @@ const EmploymentAndIncom = ({
 
       setLoading(true);
 
-      form.forEach((value, key) => {
-        console.log(`${key}: ${value}`); // Log the key and value
-      });
+      // form.forEach((value, key) => {
+      //   console.log(`${key}: ${value}`); 
+      // });
 
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/create-application`,
@@ -96,7 +95,6 @@ const EmploymentAndIncom = ({
         },
       );
 
-      console.log("called");
       toast.success(response.data.message);
       navigate("/app/dashboard/applications");
     } catch (error) {

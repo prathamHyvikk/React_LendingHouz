@@ -28,7 +28,6 @@ const AdminSignIn = () => {
     // navigate("/admin/dashboard");
 
     try {
-      console.log("hello");
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/login`,
         {

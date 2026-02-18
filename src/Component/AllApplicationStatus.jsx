@@ -82,7 +82,7 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
         },
       );
 
-      console.log(response.data);
+     
       toast.success(response.data.message);
       setSignInUrl(response.data.data.SigningUrl);
       setIframeOpen(true);
@@ -104,7 +104,7 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
     }
   };
 
-  console.log(signInUrl);
+
   return (
     <div className="fixed inset-0 z-200 bg-black/40 flex justify-center items-start pt-10">
       <div className="bg-gray-100 w-[95%] max-w-5xl rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto">

@@ -64,7 +64,6 @@ const SignIn = () => {
             toast.error(firstError);
           }
         } else {
-          console.log("elsePart");
           toast.error(error?.response.data.message);
           setErrors(error?.response.data.message);
         }

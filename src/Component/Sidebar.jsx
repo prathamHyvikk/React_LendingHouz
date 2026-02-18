@@ -85,7 +85,6 @@ const Sidebar = () => {
         },
       );
 
-      console.log(response?.data);
       const user = response?.data?.data;
 
       setFullName(user?.name ?? "");
@@ -109,14 +108,11 @@ const Sidebar = () => {
 
   // useEffect(() => {
   //   fetchUser();
-  //   console.log("first");
   // }, [fetchUser, userId]);
   useEffect(() => {
     fetchUser();
-    console.log("first");
   }, []);
 
-  console.log(Title);
   return (
     <>
       {/* hemburger icon - Mobile view */}

@@ -42,7 +42,6 @@ const Signup = () => {
         }
       );
 
-      console.log(response.data)
       toast.success(response.data.message);
       localStorage.setItem("LoginToken", response.data.data.token);
       navigate("/");
@@ -56,7 +55,6 @@ const Signup = () => {
 
         setErrors(errors);
         const firstError = Object.values(errors)?.[0];
-        console.log(firstError);
 
         if (firstError) {
           toast.error(firstError);

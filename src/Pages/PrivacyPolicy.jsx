@@ -26,7 +26,6 @@ const PrivacyPolicy = () => {
         }
       );
 
-      console.log(response);
       setContent(response?.data);
     } catch (error) {
       if (error?.response) {

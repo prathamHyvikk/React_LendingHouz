@@ -58,7 +58,6 @@ const AdminProductDetail = () => {
         ...response?.data?.other_images_url,
       ]);
     } catch (error) {
-      console.log(error);
       const errors = error.response.data.errors;
       if (errors) {
         Object.entries(errors).forEach(([field, messages]) => {

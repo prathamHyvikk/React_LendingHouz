@@ -107,12 +107,16 @@ const Sidebar = () => {
     }
   };
 
+  // useEffect(() => {
+  //   fetchUser();
+  //   console.log("first");
+  // }, [fetchUser, userId]);
   useEffect(() => {
     fetchUser();
     console.log("first");
-  }, [fetchUser, userId]);
+  }, []);
 
-  console.log(Title)
+  console.log(Title);
   return (
     <>
       {/* hemburger icon - Mobile view */}

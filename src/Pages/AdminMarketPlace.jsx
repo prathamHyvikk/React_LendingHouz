@@ -41,6 +41,26 @@ const AdminMarketPlace = () => {
     }
   };
 
+  const deleteProduct = async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/products/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+      toast.success(response?.data?.message);
+      setAgainFetchProducts(true);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -55,7 +75,7 @@ const AdminMarketPlace = () => {
     <>
       <AdminLayout>
         {loading && (
-          <div className="flex justify-center items-center ">
+          <div className="absolute top-0 left-0 right-0 bottom-0 bg-white/40 flex justify-center items-center ">
             <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
           </div>
         )}
@@ -69,47 +89,18 @@ const AdminMarketPlace = () => {
             setSelectedCategory={setSelectedCategory}
           />
           {/* Cards Design */}
-          {/* <div className="">
-            <div className="mt-8">
-              <h2 className="text-2xl sora-medium">Recent</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
-                {recentMarketPlaceData.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={`/admin/dashboard/marketplace/product/product-detail`}
-                  >
-                    <SmallCard data={item} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <h2 className="text-2xl sora-medium">New</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
-                {newMarketPlaceData.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={`/admin/dashboard/marketplace/product/product-detail`}
-                  >
-                    <SmallCard data={item} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div> */}
 
           <div>
             <div className="mt-8">
               {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6 w-full mt-8">
                 {products?.length === 0 && (
                   <p className="text-xl text-center font-bold text-red-600">
                     No Products Available{" "}
                   </p>
                 )}
                 {products?.map((item, index) => (
-                  <SmallCard key={index} data={item} />
+                  <SmallCard deleteProduct={deleteProduct} key={index} data={item} updateProduct="yes" />
                 ))}
               </div>
             </div>

@@ -20,7 +20,7 @@ import axios from "axios";
 function Jewellery() {
   useMeta(
     "Jewelry Financing | Buy Gold, Diamonds & More with Ease",
-    "Add sparkle to your life without the financial stress. Finance your next jewelry purchase with Lending Houz’s flexible payment plans."
+    "Add sparkle to your life without the financial stress. Finance your next jewelry purchase with Lending Houz’s flexible payment plans.",
   );
 
   const steps = [
@@ -118,6 +118,25 @@ function Jewellery() {
     "Custom-Made Jewellery",
     "Anniversary & Gifting Collections",
   ];
+
+  const features = [
+    {
+      icon: "ri-discount-percent-line",
+      title: "0% Interest Plans Available",
+    },
+    {
+      icon: "ri-star-s-line",
+      title: "No Hidden Fees or Surprises",
+    },
+    {
+      icon: "ri-bank-card-line",
+      title: "Quick & Easy Approval",
+    },
+    {
+      icon: "ri-calendar-line",
+      title: "Flexible Terms to Fit Your Budget",
+    },
+  ];
   return (
     <>
       <Header btncategory="Jewelry" />
@@ -136,40 +155,28 @@ function Jewellery() {
         <h1 className="sora-regular text-gray-900 mb-8">
           Why Finance with CTI Financing
         </h1>
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-between items-center text-center  mx-auto   ">
-          <div className="flex flex-col w-full items-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-              <i className="ri-discount-percent-line primary-text text-xl"></i>
+        <section className=" px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className="group flex flex-col items-center text-center p-4 transition-all duration-300 hover:-translate-y-1"
+                >
+                  {/* Icon Container */}
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 transition-colors group-hover:bg-blue-200">
+                    <i className={`${feature.icon} text-blue-600 text-2xl`}></i>
+                  </div>
+
+                  {/* Text */}
+                  <h3 className="text-lg md:text-xl font-medium sora-regular text-gray-900 leading-snug">
+                    {feature.title}
+                  </h3>
+                </div>
+              ))}
             </div>
-            <p className="text-2xl sora-regular text-gray-900">
-              0% Interest Plans Available
-            </p>
           </div>
-          <div className="flex flex-col w-full items-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-              <i className="ri-star-s-line primary-text text-xl"></i>
-            </div>
-            <p className="text-2xl sora-regular text-gray-900">
-              No Hidden Fees or Surprises{" "}
-            </p>
-          </div>
-          <div className="flex flex-col w-full items-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-              <i className="ri-bank-card-line primary-text text-xl"></i>
-            </div>
-            <p className="text-2xl sora-regular text-gray-900">
-              Quick & Easy Approval
-            </p>
-          </div>
-          <div className="flex flex-col w-full items-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-              <i className="ri-calendar-line primary-text text-xl"></i>
-            </div>
-            <p className="text-2xl sora-regular text-gray-900">
-              Flexible Terms to Fit Your Budget
-            </p>
-          </div>
-        </div>
+        </section>
       </div>
 
       <section className=" container py-10  flex items-center justify-between p-4">

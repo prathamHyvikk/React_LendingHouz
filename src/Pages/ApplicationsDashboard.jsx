@@ -129,9 +129,21 @@ const ApplicationsDashboard = () => {
         <div className="">
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
-            <StatCard title="Total Applications" value={totalApplications} bg="#E5ECF6" />
-            <StatCard title="Loan Amount" value={`$ ${totalAmount}`} bg="#D0FFE0" />
-            <StatCard title="Inactive Applications" value={totalInActive} bg="#E6E6E6" />
+            <StatCard
+              title="Total Applications"
+              value={totalApplications}
+              bg="#E5ECF6"
+            />
+            <StatCard
+              title="Loan Amount"
+              value={`$ ${totalAmount}`}
+              bg="#D0FFE0"
+            />
+            <StatCard
+              title="Inactive Applications"
+              value={totalInActive}
+              bg="#E6E6E6"
+            />
             <StatCard title="Referrals" value="2" bg="#FFD0D1" />
           </div>
 
@@ -273,7 +285,7 @@ const ApplicationsDashboard = () => {
               </table>
 
               {loading && (
-                <div className="my-10 flex justify-center items-center w-full">
+                <div className="my-10 h-full flex justify-center items-center w-full">
                   <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
                 </div>
               )}

@@ -41,7 +41,7 @@ const AppliancesPage = () => {
               key={i}
               className="flex flex-col items-center text-center  bg-white rounded-2xl p-6 border border-neutral-200 hover:shadow-lg transition"
             >
-              <h3 className="text-xl font-semibold text-neutral-900 mb-4">
+              <h3 className="text-xl h-14 font-semibold text-neutral-900 mb-4">
                 {data.title}
               </h3>
               <div className="w-full h-40 mb-4 rounded-xl overflow-hidden bg-neutral-100">
@@ -51,7 +51,7 @@ const AppliancesPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-neutral-600 text-sm leading-relaxed">
+              <p className="text-neutral-600 text-sm leading-relaxed line-clamp-3">
                 {data.description}
               </p>
             </div>

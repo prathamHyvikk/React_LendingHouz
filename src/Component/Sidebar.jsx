@@ -152,7 +152,7 @@ const Sidebar = () => {
       >
         <div className="lg:p-6 p-4 flex justify-between items-center relative ">
           <div>
-            <Link to={`/${role}/dashboard`}>
+            <Link to={`/`}>
               <img
                 className="lg:w-[208px] lg:max-w-[208px] md:w-36 w-30"
                 src={logoImage}

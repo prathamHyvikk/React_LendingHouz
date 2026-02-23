@@ -11,6 +11,7 @@ import SmallCard from "../Component/SmallCard";
 import axios from "axios";
 import toast from "react-hot-toast";
 import BasicPagination from "../Component/BasicPagination";
+import EditProduct from "../Component/EditProduct";
 
 const AdminMarketPlace = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
@@ -19,6 +20,8 @@ const AdminMarketPlace = () => {
   const [againFetchProducts, setAgainFetchProducts] = useState(false);
   const [lastPage, setLastPage] = useState();
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [editProductData, setEditProductData] = useState({});
+  const [editPopup, setEditPopup] = useState(false);
 
   const LoginToken = localStorage.getItem("LoginToken");
   const fetchProducts = async () => {
@@ -54,6 +57,29 @@ const AdminMarketPlace = () => {
       );
       toast.success(response?.data?.message);
       setAgainFetchProducts(true);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const editProduct = async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/edit-product`,
+        {
+          params: {
+            id: id,
+          },
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      setEditProductData(response?.data);
+      setEditPopup(true);
     } catch (error) {
       toast.error(error?.response.data.message);
     } finally {
@@ -100,7 +126,13 @@ const AdminMarketPlace = () => {
                   </p>
                 )}
                 {products?.map((item, index) => (
-                  <SmallCard deleteProduct={deleteProduct} key={index} data={item} updateProduct="yes" />
+                  <SmallCard
+                    deleteProduct={deleteProduct}
+                    editProduct={editProduct}
+                    key={index}
+                    data={item}
+                    updateProduct="yes"
+                  />
                 ))}
               </div>
             </div>
@@ -119,6 +151,13 @@ const AdminMarketPlace = () => {
         {showAddProduct && (
           <AddNewProduct
             setShowAddProduct={setShowAddProduct}
+            setAgainFetchProducts={setAgainFetchProducts}
+          />
+        )}
+        {editPopup && (
+          <EditProduct
+            data={editProductData}
+            setShowAddProduct={setEditPopup}
             setAgainFetchProducts={setAgainFetchProducts}
           />
         )}

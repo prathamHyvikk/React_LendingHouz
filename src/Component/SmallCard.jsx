@@ -1,6 +1,12 @@
 import React from "react";
 
-const SmallCard = ({ data, imageUrl, updateProduct, deleteProduct }) => {
+const SmallCard = ({
+  data,
+  imageUrl,
+  editProduct,
+  updateProduct,
+  deleteProduct,
+}) => {
   return (
     <>
       <div className="flex items-start justify-between gap-2 bg-[#F4F4F4] p-2 rounded-md shadow-md">
@@ -26,7 +32,10 @@ const SmallCard = ({ data, imageUrl, updateProduct, deleteProduct }) => {
         </div>
 
         {updateProduct && (
-          <div className="space-y-2 flex flex-col min-[350px]:flex-row gap-2 ">
+          <div
+            onClick={() => editProduct(data.id)}
+            className="space-y-2 flex flex-col min-[350px]:flex-row gap-2 "
+          >
             <div className="cursor-pointer">
               <svg
                 className="w-5 h-5"
@@ -43,7 +52,10 @@ const SmallCard = ({ data, imageUrl, updateProduct, deleteProduct }) => {
               </svg>
             </div>
 
-            <div onClick={() => deleteProduct(data.id)} className="cursor-pointer">
+            <div
+              onClick={() => deleteProduct(data.id)}
+              className="cursor-pointer"
+            >
               <svg
                 className="w-5 h-5"
                 fill="none"

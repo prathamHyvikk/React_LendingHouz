@@ -39,11 +39,18 @@ const Sidebar = () => {
       icon: "fas fa-chart-bar",
       dataPage: "user",
     },
+
     {
       name: "MarketPlace",
       href: "dashboard/marketplace",
       icon: "fas fa-shield-alt",
       dataPage: "marketplace",
+    },
+    {
+      name: "Category", // Added Category
+      href: "dashboard/category",
+      icon: "fas fa-list", // or any icon you prefer
+      dataPage: "category",
     },
     {
       name: "Terms & Condition",
@@ -173,7 +180,7 @@ const Sidebar = () => {
           <ul className="sora-semibold">
             {menuItems.map((item, i) => (
               <li key={i} id={item.dataPage} className="sm:mb-2 mb-1">
-                {role === "app" && item.name === "User" ? (
+                {role === "app" && ["User", "Category"].includes(item.name) ? (
                   ""
                 ) : (
                   <NavLink

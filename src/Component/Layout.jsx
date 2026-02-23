@@ -7,13 +7,39 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
+import axios from "axios";
 
 const Layout = () => {
   const { pathname } = useLocation();
 
-  const totalQuantity = useSelector((state) => state.cart.quantity);
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   const role = useSelector((state) => state.person.value);
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
+
+  const fetchQuantity = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/cart-count`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+          params: {
+            user_id: userId,
+          },
+        },
+      );
+      setTotalQuantity(response.data.total_quantity);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchQuantity();
+  }, []);
 
   return (
     <div className="flex h-screen relative overflow-hidden ">

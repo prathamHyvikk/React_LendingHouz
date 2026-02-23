@@ -77,6 +77,7 @@ import HomeFinancePage from "./Pages/HomeFinancePage";
 import HomeNewPage from "./Pages/HomeNewPage";
 import Sidebar from "./Component/Sidebar";
 import Layout from "./Component/Layout";
+import AdminCategory from "./Pages/AdminCategory";
 
 function App() {
   const dispatch = useDispatch();
@@ -225,6 +226,7 @@ function App() {
             element={<AdminPrivacyPolicy />}
           />
           <Route path="admin/dashboard/users" element={<Users />} />
+          <Route path="admin/dashboard/category" element={<AdminCategory />} />
           <Route
             path="admin/dashboard/users/view-user"
             element={<ViewUser />}

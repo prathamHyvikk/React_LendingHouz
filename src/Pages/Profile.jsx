@@ -208,7 +208,9 @@ const Profile = () => {
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <label className="text-gray-600">Username</label>
-                <div className="md:col-span-3">
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
                   <input
                     type="text"
                     value={userName}
@@ -224,7 +226,9 @@ const Profile = () => {
                 <label className="text-gray-600">
                   Email <span className="text-red-500">*</span>
                 </label>
-                <div className="md:col-span-3">
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
                   <input
                     type="email"
                     value={email}
@@ -238,7 +242,9 @@ const Profile = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <label className="text-gray-600">Password</label>
-                <div className="md:col-span-3 relative">
+                <div
+                  className={`md:col-span-3 relative ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
                   <input
                     id="passwordField"
                     type="password"
@@ -268,7 +274,9 @@ const Profile = () => {
                 <label className="text-gray-600">
                   Full name <span className="text-red-500">*</span>
                 </label>
-                <div className="md:col-span-3">
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
                   <input
                     type="text"
                     value={fullName}
@@ -282,7 +290,9 @@ const Profile = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <label className="text-gray-600">Title</label>
-                <div className="md:col-span-3">
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
                   <input
                     type="text"
                     value={Title}
@@ -295,7 +305,9 @@ const Profile = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <label className="text-gray-600">Language</label>
-                <div className="md:col-span-3">
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
                   <select
                     onChange={(e) => setLanguage(e.target.value)}
                     disabled={enableEdit === false ? true : false}

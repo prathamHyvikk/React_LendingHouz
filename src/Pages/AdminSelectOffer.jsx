@@ -21,11 +21,12 @@ const AdminSelectOffer = () => {
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
   const [financePopup, setFinancePopup] = useState(false);
+  const [cartTotalQty, setCartTotalQty] = useState(0);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setQuantity(totalQuantity));
-  }, [totalQuantity]);
+    dispatch(setQuantity(cartTotalQty));
+  }, [cartTotalQty]);
 
   const fetchCart = async () => {
     setLoading(true);
@@ -44,6 +45,7 @@ const AdminSelectOffer = () => {
 
       setProducts(response?.data?.data);
       setTotalQuantity(response?.data?.total_quantity);
+      setCartTotalQty(response?.data?.total_quantity);
     } catch (error) {
       const errors = error.response.data.errors;
       if (errors) {
@@ -87,6 +89,7 @@ const AdminSelectOffer = () => {
       );
 
       setTotalQuantity(response?.data?.total_quantity);
+      setCartTotalQty(response?.data?.total_quantity);
     } catch (error) {
       toast.error("Failed to update quantity");
     } finally {
@@ -114,12 +117,17 @@ const AdminSelectOffer = () => {
       setProducts((prev) => prev.filter((item) => item.id !== cartId));
 
       setTotalQuantity(response?.data?.total_quantity);
+      setCartTotalQty(response?.data?.total_quantity);
     } catch {
       toast.error("Failed to remove item");
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("cartTotalQty", cartTotalQty);
+  }, [cartTotalQty]);
 
   useEffect(() => {
     if (userId && LoginToken) {

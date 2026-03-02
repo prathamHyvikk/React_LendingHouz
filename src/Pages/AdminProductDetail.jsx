@@ -22,10 +22,11 @@ const AdminProductDetail = () => {
   const [recentProducts, setRecentProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
-  const [quantity, setQuantity] = useState("");
+
   const [cartTotalQty, setCartTotalQty] = useState(0);
 
   const LoginToken = localStorage.getItem("LoginToken");
+
   const { id } = useParams();
   const userId = useSelector((state) => state.person.id);
 
@@ -219,6 +220,10 @@ const AdminProductDetail = () => {
   // }, []);
 
   useEffect(() => {
+    localStorage.setItem("cartTotalQty", cartTotalQty);
+  }, [cartTotalQty]);
+
+  useEffect(() => {
     if (!id) return;
     fetchProduct();
     recentProduct();
@@ -322,7 +327,9 @@ const AdminProductDetail = () => {
 
                   <button
                     disabled={cartLoading}
-                    onClick={() => updateCart("add")}
+                    onClick={() =>
+                      product?.cart_qty == 0 ? addToCart() : updateCart("add")
+                    }
                     className={`px-3 py-1 disabled:opacity-50 ${!cartLoading && "cursor-pointer"} `}
                   >
                     +

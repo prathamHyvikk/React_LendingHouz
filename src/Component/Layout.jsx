@@ -12,34 +12,10 @@ import axios from "axios";
 const Layout = () => {
   const { pathname } = useLocation();
 
-  const [totalQuantity, setTotalQuantity] = useState(0);
+  const cartQuantity = useSelector((state) => state.cart.quantity);
+  console.log(cartQuantity);
 
   const role = useSelector((state) => state.person.value);
-  const LoginToken = localStorage.getItem("LoginToken");
-  const userId = useSelector((state) => state.person.id);
-
-  const fetchQuantity = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/cart-count`,
-        {
-          headers: {
-            Authorization: `Bearer ${LoginToken}`,
-          },
-          params: {
-            user_id: userId,
-          },
-        },
-      );
-      setTotalQuantity(response.data.total_quantity);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchQuantity();
-  }, []);
 
   return (
     <div className="flex h-screen relative overflow-hidden ">
@@ -62,7 +38,7 @@ const Layout = () => {
                   >
                     <FaShoppingCart className="text-[24px]" />
                     <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
-                      {totalQuantity}
+                      {cartQuantity}
                     </span>
                   </Link>
                 )}

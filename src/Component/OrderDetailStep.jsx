@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 const OrderDetailStep = ({
   alignment,
   user,
+  financeData,
   cart,
   totalAmount,
   setActiveStep,
@@ -29,6 +30,7 @@ const OrderDetailStep = ({
 
           <div className="mb-6">
             <h2 className="text-sm sora-medium mb-1">{user?.name}</h2>
+
             <p className="text-xs">{user?.email}</p>
             <p className="text-xs mt-1">{user?.phone}</p>
           </div>
@@ -78,9 +80,28 @@ const OrderDetailStep = ({
           </div> */}
           <div className="space-y-2 mb-6">
             <div className="flex items-center justify-between text-xs">
+              <span className="">Application Number:</span>
+              <span className="sora-semibold">
+                {financeData?.application_id}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
               <span className="">Sub Totle:</span>
               <span className="sora-semibold">${totalAmount}</span>
             </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="">Finance Amount:</span>
+              <span className="sora-semibold">
+                ${financeData?.finance_amount}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="">Finance Amount:</span>
+              <span className="sora-semibold">
+                ${financeData?.finance_down_payment}
+              </span>
+            </div>
+
             <div className="flex items-center justify-between text-xs">
               <span className="">Discount</span>
               <span className="sora-medium">$0</span>

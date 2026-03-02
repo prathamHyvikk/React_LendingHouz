@@ -8,7 +8,13 @@ import ViewModal from "./ViewModal";
 import IframePopup from "./IframPopup";
 import { set } from "react-hook-form";
 
-const AllApplicationStatus = ({ isOpen, onClose }) => {
+const AllApplicationStatus = ({
+  isOpen,
+  onClose,
+  setFinancePopup,
+  setAlignment,
+  setActiveStep,
+}) => {
   const [loading, setLoading] = useState(false);
   const [applications, setApplications] = useState([]);
   const [showView, setShowView] = useState(false);
@@ -53,7 +59,14 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleSelect = (app) => {
-    setSelectedForInvoice(app);
+    if (app.application_status == "Fulfiled") {
+      setFinancePopup(false);
+      setAlignment("finance");
+      setActiveStep(1);
+      localStorage.setItem("application_id", app.id);
+    } else {
+      setSelectedForInvoice(app);
+    }
   };
 
   const handleBack = () => {
@@ -82,7 +95,6 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
         },
       );
 
-     
       toast.success(response.data.message);
       setSignInUrl(response.data.data.SigningUrl);
       setIframeOpen(true);
@@ -103,7 +115,6 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
       setLoading(false);
     }
   };
-
 
   return (
     <div className="fixed inset-0 z-200 bg-black/40 flex justify-center items-start pt-10">
@@ -142,7 +153,9 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
                         </p>
                         <p className="mt-2">
                           <span className="sora-medium">Status:</span>{" "}
-                          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm uppercase">
+                          <span
+                            className={`${app.application_status == "Approved" || app.application_status == "Fulfiled" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} px-3 py-1 rounded-full text-sm uppercase`}
+                          >
                             {app.application_status}
                           </span>
                         </p>
@@ -219,7 +232,9 @@ const AllApplicationStatus = ({ isOpen, onClose }) => {
                       </p>
                       <p className="flex items-center gap-2 font-bold text-gray-600">
                         Status:{" "}
-                        <span className="bg-green-100 text-green-700 px-3 py-0.5 rounded text-xs uppercase font-bold">
+                        <span
+                          className={`${selectedForInvoice.application_status == "Approved" || selectedForInvoice.application_status == "Fulfiled" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} px-3 py-0.5 rounded text-xs uppercase font-bold`}
+                        >
                           {selectedForInvoice.application_status}
                         </span>
                       </p>

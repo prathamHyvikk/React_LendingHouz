@@ -14,6 +14,7 @@ export default function PaymentOptionButton({
   };
 
   const [financePopup, setFinancePopup] = React.useState(false);
+  localStorage.setItem("method", alignment);
 
   return (
     <>
@@ -42,8 +43,10 @@ export default function PaymentOptionButton({
 
       <AllApplicationStatus
         isOpen={financePopup}
+        setFinancePopup={setFinancePopup}
         onClose={() => setFinancePopup(false)}
-        
+        setAlignment={setAlignment}
+        setActiveStep={setActiveStep}
       />
     </>
   );

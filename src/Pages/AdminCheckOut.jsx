@@ -36,6 +36,7 @@ const AdminCheckOut = () => {
   const location = useLocation();
   const alignment = location.state;
   const totalAmount = localStorage.getItem("totalAmount");
+  const application_id = localStorage.getItem("application_id");
 
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
@@ -93,7 +94,9 @@ const AdminCheckOut = () => {
           last_name: data.lastName,
           email: data.email,
           phone: data.phone,
-          amount: alignment !== "cash" ? amount : null,
+          method: alignment,
+          amount_financing: alignment !== "cash" ? amount : null,
+          application_id: alignment !== "cash" ? application_id : null,
           lender: alignment !== "cash" ? lender : null,
           address_1: data.address_1,
           address_2: data.address_2,

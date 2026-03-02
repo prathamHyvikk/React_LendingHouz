@@ -428,7 +428,6 @@ const AdminProductDetail = () => {
               <>
                 <div className="w-full h-4 bg-gray-200 mb-1 rounded-sm"></div>
                 <div className="w-full h-4 bg-gray-200 mb-1 rounded-sm"></div>
-                
               </>
             ) : (
               <p className="text-lg text-gray-700">{product?.description}</p>
@@ -437,7 +436,7 @@ const AdminProductDetail = () => {
 
           <div className="mt-8">
             <h2 className="!text-2xl sora-medium">Recent</h2>
-            <div className="grid md:grid-cols-3 items-center gap-6 w-full mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6 w-full mt-8">
               {recentProducts.map((item, index) => (
                 <Link
                   key={index}

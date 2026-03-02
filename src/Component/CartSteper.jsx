@@ -18,9 +18,12 @@ export default function CartSteper() {
   const [alignment, setAlignment] = React.useState("cash");
   const [user, setUser] = useState();
   const [cart, setCart] = useState([]);
+  const [financeData, setFinanceData] = useState();
   const [totalAmount, setTotalAmount] = useState();
 
   const LoginToken = localStorage.getItem("LoginToken");
+  const application_id = localStorage.getItem("application_id");
+  const method = localStorage.getItem("method");
   const userId = useSelector((state) => state.person.id);
   const [loading, setLoading] = useState(false);
   const handleNext = () => {
@@ -38,6 +41,8 @@ export default function CartSteper() {
         `${import.meta.env.VITE_BASE_URL}/order-detail-cash`,
         {
           user_id: userId,
+          method: method,
+          application_id: alignment !== "cash" ? application_id : null,
         },
         {
           headers: {
@@ -48,6 +53,7 @@ export default function CartSteper() {
 
       setUser(response?.data?.user);
       setCart(response?.data?.cart);
+      setFinanceData(response?.data.finance);
       setTotalAmount(response?.data?.total_amount);
     } catch (error) {
       const errors = error.response.data.errors;
@@ -66,7 +72,7 @@ export default function CartSteper() {
   };
 
   useEffect(() => {
-    if (activeStep === 0) {
+    if (activeStep === 1) {
       fetchDetails();
     }
   }, [activeStep, alignment]);
@@ -87,6 +93,7 @@ export default function CartSteper() {
             alignment={alignment}
             user={user}
             cart={cart}
+            financeData={financeData}
             totalAmount={totalAmount}
             setActiveStep={setActiveStep}
           />
@@ -125,7 +132,23 @@ export default function CartSteper() {
         ))}
       </Stepper>
 
-      <Box sx={{ mt: 2, mb: 1 }}>{getStepContent(activeStep)}</Box>
+      <Box sx={{ mt: 2, mb: 1 }}>
+        {" "}
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "200px",
+            }}
+          >
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#002e6d]"></div>
+          </Box>
+        ) : (
+          getStepContent(activeStep)
+        )}
+      </Box>
 
       {/* <Box sx={{ display: "flex", pt: 2 }}>
         <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>

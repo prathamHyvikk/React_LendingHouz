@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FaRegUser } from "react-icons/fa";
+import { setUser, setAdmin } from "../features/personRole";
 
 const Profile = () => {
   const [uploadFile, setUploadFile] = useState(null);
@@ -19,8 +20,12 @@ const Profile = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [enableEdit, setEnableEdit] = useState(false);
+  const [updateValue, setUpdateValue] = useState(false);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
+  const role = useSelector((state) => state.person.value);
+
+  const dispatch = useDispatch();
 
   const fetchUser = async () => {
     setLoading(true);
@@ -85,6 +90,12 @@ const Profile = () => {
         setImage(response?.data?.data?.image_url ?? "");
         setEnableEdit(false);
         setPassword("");
+        // Dispatch to appropriate reducer based on role
+        if (role === "app") {
+          dispatch(setUser(response?.data?.data));
+        } else {
+          dispatch(setAdmin(response?.data?.data));
+        }
       } catch (error) {
         const errors = error.response.data.errors;
         if (errors) {

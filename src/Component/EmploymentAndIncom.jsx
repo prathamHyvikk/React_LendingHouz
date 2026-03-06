@@ -81,7 +81,7 @@ const EmploymentAndIncom = ({
       setLoading(true);
 
       // form.forEach((value, key) => {
-      //   console.log(`${key}: ${value}`); 
+      //   console.log(`${key}: ${value}`);
       // });
 
       const response = await axios.post(
@@ -99,23 +99,25 @@ const EmploymentAndIncom = ({
       navigate("/app/dashboard/applications");
     } catch (error) {
       setLoading(false);
+
       if (error.response && error.response.data) {
-        const apiErrors = error.response.data.errors; 
-        setError(apiErrors);
+        const { errors, message } = error.response.data;
 
-      
-        if (typeof apiErrors === "object" && apiErrors !== null) {
-        
-          const firstKey = Object.keys(apiErrors)[0];
-          const message = apiErrors[firstKey];
+        setError(errors);
 
-          if (Array.isArray(message)) {
-            toast.error(message[0]); 
-          } else {
-            toast.error(String(message));
-          }
+        if (typeof errors === "string") {
+          toast.error(errors);
+        } else if (Array.isArray(errors)) {
+          toast.error(errors[0]);
+        } else if (typeof errors === "object" && errors !== null) {
+          const firstKey = Object.keys(errors)[0];
+          const firstMessage = errors[firstKey];
+
+          toast.error(
+            Array.isArray(firstMessage) ? firstMessage[0] : firstMessage,
+          );
         } else {
-          toast.error(error.response.data.message || "Validation Error");
+          toast.error(message || "Validation Error");
         }
       } else {
         toast.error("Something went wrong. Please try again.");
@@ -126,6 +128,11 @@ const EmploymentAndIncom = ({
   return (
     <>
       <div className="max-w-2xl mx-auto lg:mt-14">
+        {loading && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white/50 bg-opacity-50 z-50">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
+          </div>
+        )}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="bg-(--primary-color) text-white py-4 px-6">
             <h2 className="text-xl font-bold">Form</h2>

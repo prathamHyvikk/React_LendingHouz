@@ -158,7 +158,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  zipcode Code <span className="text-red-600">*</span>
+                  Zip Code <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="number"

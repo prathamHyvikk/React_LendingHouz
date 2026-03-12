@@ -172,8 +172,12 @@ const AdminApplicationsDashboard = () => {
                 <tbody>
                   {loading ? (
                     <>
-                      <tr className="flex justify-center items-center w-full">
-                        <td className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></td>
+                      <tr>
+                        <td colSpan="7" className="py-10 text-center">
+                          <div className="w-full bg-white/40 flex justify-center items-center ">
+                            <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+                          </div>
+                        </td>
                       </tr>
                     </>
                   ) : selectedCategory == "" ? (

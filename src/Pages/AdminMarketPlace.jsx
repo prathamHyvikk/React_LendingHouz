@@ -100,11 +100,6 @@ const AdminMarketPlace = () => {
   return (
     <>
       <AdminLayout>
-        {loading && (
-          <div className="absolute top-0 left-0 right-0 bottom-0 bg-white/40 flex justify-center items-center ">
-            <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
-          </div>
-        )}
         <div className="mx-auto bg-white rounded-lg shadow-sm p-3">
           <HeaderTable
             headingContent={"Available for Financing"}
@@ -116,27 +111,33 @@ const AdminMarketPlace = () => {
           />
           {/* Cards Design */}
 
-          <div>
-            <div className="mt-8">
-              {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6 w-full mt-8">
-                {products?.length === 0 && (
-                  <p className="text-xl text-center font-bold text-red-600">
-                    No Products Available{" "}
-                  </p>
-                )}
-                {products?.map((item, index) => (
-                  <SmallCard
-                    deleteProduct={deleteProduct}
-                    editProduct={editProduct}
-                    key={index}
-                    data={item}
-                    updateProduct="yes"
-                  />
-                ))}
+          {loading ? (
+            <div className="w-full bg-white/40 flex justify-center items-center ">
+              <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+            </div>
+          ) : (
+            <div>
+              <div className="mt-8">
+                {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6 w-full mt-8">
+                  {products?.length === 0 && (
+                    <p className="text-xl text-center font-bold text-red-600">
+                      No Products Available{" "}
+                    </p>
+                  )}
+                  {products?.map((item, index) => (
+                    <SmallCard
+                      deleteProduct={deleteProduct}
+                      editProduct={editProduct}
+                      key={index}
+                      data={item}
+                      updateProduct="yes"
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
           {/* //<Pagination totalData={products?.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} /> */}
           <div className="mt-8 mx-auto flex justify-center w-full">
             <BasicPagination

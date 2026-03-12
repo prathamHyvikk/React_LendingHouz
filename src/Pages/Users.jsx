@@ -12,6 +12,7 @@ import HeaderTable from "../Component/HeaderTable";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Users = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -54,35 +55,7 @@ const Users = () => {
     }
   };
 
-  const deleteUser = async (id) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/user/user-delete`,
-        {
-          id,
-        },
-
-        {
-          headers: {
-            Authorization: `Bearer ${LoginToken}`,
-          },
-        },
-      );
-    } catch (error) {
-      const apiError = error.response.data.errors;
-      if (apiError) {
-        Object.entries(apiError).forEach(([field, messages]) => {
-          messages.forEach((msg) => {
-            toast.error(` ${msg}`);
-          });
-        });
-      } else {
-        toast.error(error?.response.data.message);
-      }
-    }
-  };
-
-  const response = async () => {
+  const fetchUser = async () => {
     try {
       const response = await axios.get(
         "https://cpanel.lendinghouz.com/api/user/getall",
@@ -108,9 +81,43 @@ const Users = () => {
     }
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/user-delete`,
+        {
+          id,
+        },
+
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      toast.success(response?.data?.message);
+      if (response.status == true) {
+        fetchTotal();
+        fetchUser();
+      }
+    } catch (error) {
+      const apiError = error.response.data.errors;
+      if (apiError) {
+        Object.entries(apiError).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    }
+  };
+
   useEffect(() => {
     fetchTotal();
-    response();
+    fetchUser();
   }, []);
 
   return (

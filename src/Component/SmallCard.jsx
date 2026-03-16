@@ -32,11 +32,11 @@ const SmallCard = ({
         </div>
 
         {updateProduct && (
-          <div
-            onClick={() => editProduct(data.id)}
-            className="space-y-2 flex flex-col min-[350px]:flex-row gap-2 "
-          >
-            <div className="cursor-pointer">
+          <div className="space-y-2 flex flex-col min-[350px]:flex-row gap-2 ">
+            <div
+              onClick={() => editProduct(data.id)}
+              className="cursor-pointer"
+            >
               <svg
                 className="w-5 h-5"
                 fill="none"

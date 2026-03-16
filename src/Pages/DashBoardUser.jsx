@@ -28,7 +28,7 @@ const DashBoardUser = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [applications, setApplications] = useState();
+  const [applications, setApplications] = useState([]);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -195,53 +195,64 @@ const DashBoardUser = () => {
                 </thead>
 
                 <tbody>
-                  {applications
-                    ?.filter(
-                      (item) =>
-                        item?.lender_name
-                          ?.toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        item?.application_status
-                          ?.toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        item?.requested_income
-                          ?.toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        item?.application_id?.toString().includes(search),
-                    )
-                    ?.map((item, i) => (
-                      <tr key={i} className="hover:bg-gray-50">
-                        <Td>#{item.application_id}</Td>
-                        <Td>{item.lender_name || "N/A"}</Td>
-                        {/* {role == "admin" && <Td>{item.business}</Td>} */}
-                        <Td>{item.application_status}</Td>
-                        <Td className="">${item.requested_income}</Td>
-                        <Td className="" center={""}>
-                          {item.created_at.split("T")[0]}
-                        </Td>
+                  {applications.length > 0 ? (
+                    applications
+                      ?.filter(
+                        (item) =>
+                          item?.lender_name
+                            ?.toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item?.application_status
+                            ?.toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item?.requested_income
+                            ?.toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item?.application_id?.toString().includes(search),
+                      )
+                      ?.map((item, i) => (
+                        <tr key={i} className="hover:bg-gray-50">
+                          <Td>#{item.application_id}</Td>
+                          <Td>{item.lender_name || "N/A"}</Td>
+                          {/* {role == "admin" && <Td>{item.business}</Td>} */}
+                          <Td>{item.application_status}</Td>
+                          <Td className="">${item.requested_income}</Td>
+                          <Td className="" center={""}>
+                            {item.created_at.split("T")[0]}
+                          </Td>
 
-                        <Td center={"yes"} className="flex justify-center">
-                          <IconBtn
-                            href={`/${role}/dashboard/marketplace`}
-                            icon={<CiShop />}
-                          />
-                        </Td>
+                          <Td center={"yes"} className="flex justify-center">
+                            <IconBtn
+                              href={`/${role}/dashboard/marketplace`}
+                              icon={<CiShop />}
+                            />
+                          </Td>
 
-                        <Td center={"yes"}>
-                          <IconBtn
-                            icon={<ImAttachment />}
-                            onClick={() => setShowInvoice(true)}
-                          />
-                        </Td>
+                          <Td center={"yes"}>
+                            <IconBtn
+                              icon={<ImAttachment />}
+                              onClick={() => setShowInvoice(true)}
+                            />
+                          </Td>
 
-                        <Td center>
-                          <IconBtn
-                            icon={<IoEyeOutline />}
-                            onClick={() => handleApplicationInfo(item)}
-                          />
-                        </Td>
-                      </tr>
-                    ))}
+                          <Td center>
+                            <IconBtn
+                              icon={<IoEyeOutline />}
+                              onClick={() => handleApplicationInfo(item)}
+                            />
+                          </Td>
+                        </tr>
+                      ))
+                  ) : (
+                    <tr
+                      center={"yes"}
+                      className="col-span-7 text-nowrap text-[#364153] font-bold text-sm text-start"
+                    >
+                      <td colSpan="8" className="py-10 text-center">
+                        No Application Found
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
 

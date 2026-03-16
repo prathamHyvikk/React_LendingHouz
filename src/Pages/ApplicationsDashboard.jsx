@@ -157,7 +157,7 @@ const ApplicationsDashboard = () => {
               fetchProductFromCategory={"no"}
             />
             <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm min-h-30 max-h-90">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm text-nowrap">
                 <thead className="bg-gray-100 text-gray-700 sticky top-0">
                   <tr>
                     <Th>{role == "admin" ? "Application" : "Product"}</Th>
@@ -217,13 +217,13 @@ const ApplicationsDashboard = () => {
                           </tr>
                         ))
                       ) : (
-                        <tr>
-                          <Td
-                            center={"yes"}
-                            className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
-                          >
+                        <tr
+                          center={"yes"}
+                          className="col-span-7 text-nowrap text-[#364153] font-bold text-sm text-start"
+                        >
+                          <td colSpan="7" className="py-10 text-center">
                             No Application Found
-                          </Td>
+                          </td>
                         </tr>
                       )}
                     </>

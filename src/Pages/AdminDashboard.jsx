@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [applications, setApplications] = useState();
+  const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalApplications, setTotalApplications] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {applications
+                  {applications.length >0 ? applications
                     ?.filter(
                       (item) =>
                         item?.lender_name
@@ -237,7 +237,16 @@ const AdminDashboard = () => {
                           />
                         </Td>
                       </tr>
-                    ))}
+                    )) : (
+                       <tr
+                          center={"yes"}
+                          className="col-span-7 text-nowrap text-[#364153] font-bold text-sm text-start"
+                        >
+                          <td colSpan="8" className="py-10 text-center">
+                            No Application Found
+                          </td>
+                        </tr>
+                    )}
                 </tbody>
               </table>
 

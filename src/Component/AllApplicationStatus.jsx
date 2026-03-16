@@ -6,7 +6,8 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import ViewModal from "./ViewModal";
 import IframePopup from "./IframPopup";
-import { set } from "react-hook-form";
+
+import { useNavigate } from "react-router-dom";
 
 const AllApplicationStatus = ({
   isOpen,
@@ -55,6 +56,8 @@ const AllApplicationStatus = ({
       setLoading(false);
     }
   };
+
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -130,7 +133,19 @@ const AllApplicationStatus = ({
         </div>
 
         <div className="p-5">
-          {!selectedForInvoice ? (
+          {!applications.length ? (
+            <div className="flex justify-center py-10">
+              <p className="text-gray-600">No applications found</p>
+              <button
+                onClick={() =>
+                  navigate("/app/dashboard/applications/new-application")
+                }
+                className="text-blue-500 hover:underline ml-2"
+              >
+                create a new application{" "}
+              </button>
+            </div>
+          ) : !selectedForInvoice ? (
             <>
               {/* List View */}
               <h3 className="text-lg sora-semibold text-gray-600 mb-5">

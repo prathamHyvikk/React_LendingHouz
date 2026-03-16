@@ -148,7 +148,7 @@ const Profile = () => {
 
           <div className="flex flex-col md:flex-row items-start gap-8 mb-12">
             <div className="shrink-0">
-              {image !== null ? (
+              {image ? (
                 <img
                   id="profilePreview"
                   src={image}
@@ -156,7 +156,7 @@ const Profile = () => {
                   className="w-44 h-44 rounded-full object-cover border-4 border-gray-100"
                 />
               ) : (
-                <div className="w-44 h-44 rounded-full object-cover border-4 border-gray-100 flex items-center justify-center">
+                <div className="w-44 h-44 rounded-full object-cover border-4 border-gray-100 flex items-center justify-center bg-gray-50">
                   <FaRegUser size={60} />
                 </div>
               )}

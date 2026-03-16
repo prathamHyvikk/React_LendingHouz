@@ -247,12 +247,14 @@ const AdminApplicationsDashboard = () => {
                       {applications?.filter(
                         (item) => item.product_type == selectedCategory,
                       ).length == 0 ? (
-                        <Td
+                        <tr
                           center={"yes"}
-                          className="col-span-7 text-nowrap text-red-500 font-bold text-sm text-start"
+                          className="col-span-7 text-nowrap text-[#364153] font-bold text-sm text-start"
                         >
-                          No Application Found
-                        </Td>
+                          <td colSpan="7" className="py-10 text-center">
+                            No Application Found
+                          </td>
+                        </tr>
                       ) : search == "" ? (
                         applications
                           ?.filter(

@@ -247,7 +247,7 @@ const AdminCategory = () => {
         </div>
 
         {/* Data Table */}
-        <div className="bg-white shadow-sm rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white max-h-[70vh] shadow-sm rounded-2xl border border-gray-100 overflow-auto">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>

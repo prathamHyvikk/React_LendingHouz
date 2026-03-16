@@ -16,9 +16,13 @@ const Sidebar = () => {
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
-  const userProfile = useSelector((state) => state.person.user);
-  const adminProfile = useSelector((state) => state.person.admin);
-  console.log(userProfile);
+  // const userProfile = useSelector((state) => state.person.user);
+  // const adminProfile = useSelector((state) => state.person.admin);
+  const [fullName, setFullName] = useState("");
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+
+  
 
   const menuItems = [
     {
@@ -77,48 +81,45 @@ const Sidebar = () => {
     navigate("/app/signin");
   };
 
-  // const fetchUser = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.post(
-  //       `${import.meta.env.VITE_BASE_URL}/single-user`,
-  //       {
-  //         user_id: userId,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${LoginToken}`,
-  //         },
-  //       },
-  //     );
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/single-user`,
+        {
+          user_id: userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
 
-  //     const user = response?.data?.data;
+      const user = response?.data?.data;
 
-  //     setFullName(user?.name ?? "");
-  //     setTitle(user?.role ?? "");
-  //     setImage(user?.image_url ?? "");
-  //   } catch (error) {
-  //     const errors = error.response?.data.errors;
-  //     if (errors) {
-  //       Object.entries(errors).forEach(([field, messages]) => {
-  //         messages.forEach((msg) => {
-  //           toast.error(` ${msg}`);
-  //         });
-  //       });
-  //     } else {
-  //       toast.error(error?.response.data.message);
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      setFullName(user?.name ?? "");
+      setTitle(user?.role ?? "");
+      setImage(user?.image_url ?? "");
+    } catch (error) {
+      const errors = error.response?.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchUser();
-  // }, [fetchUser, userId]);
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
+  useEffect(() => {
+    fetchUser();
+  }, [userId]);
 
   return (
     <>
@@ -206,18 +207,9 @@ const Sidebar = () => {
           <Link to={`/${role}/dashboard/profile`}>
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
-                {(
-                  role === "app"
-                    ? userProfile?.image_url
-                    : adminProfile?.image_url
-                ) ? (
+                {image ? (
                   <img
-                    id="profilePreview"
-                    src={
-                      role === "app"
-                        ? userProfile.image_url
-                        : adminProfile.image_url
-                    }
+                    src={image}
                     alt="Profile"
                     className="w-full h-full rounded-full object-cover border-4 border-gray-100"
                   />
@@ -229,7 +221,7 @@ const Sidebar = () => {
               </div>
               <div className="ml-3">
                 <p className="sm:text-sm text-xs sora-medium text-gray-700">
-                  {role === "app" ? userProfile?.name : adminProfile?.name}
+                  {fullName}
                 </p>
                 <button
                   className={`text-xs px-2 py-1 ${
@@ -238,7 +230,7 @@ const Sidebar = () => {
                       : "bg-green-400 text-white"
                   }  rounded-full sora-semibold`}
                 >
-                  {role === "app" ? userProfile?.title : adminProfile?.title}
+                  {title}
                 </button>
               </div>
             </div>

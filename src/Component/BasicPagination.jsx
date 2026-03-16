@@ -22,7 +22,7 @@ const BasicPagination = ({ lastPage, url, setProducts }) => {
         }
       );
 
-      setProducts(response.data.products);
+      setProducts(response.data.products || response.data.data);
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

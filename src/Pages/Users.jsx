@@ -13,6 +13,8 @@ import InvoiceModal from "../Component/InvoiceModal";
 import ViewModal from "../Component/ViewModal";
 import HeaderTable from "../Component/HeaderTable";
 import BasicPagination from "../Component/BasicPagination";
+import { Activity } from "react";
+import AddUserPopup from "../Component/AddUserPopup";
 
 const Users = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -26,6 +28,8 @@ const Users = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalInActive, setTotalInActive] = useState(0);
   const [lastPage, setLastPage] = useState();
+
+  const [addUserPopup, setAddUserPopup] = useState(false);
 
   const LoginToken = localStorage.getItem("LoginToken");
 
@@ -134,11 +138,14 @@ const Users = () => {
 
         {/* TABLE */}
         <div className="bg-white rounded-lg shadow-sm p-4">
-          {/* <HeaderTable
-            setShowAddProduct={setShowAddProduct}
-            headingContent="List of Clients"
-            marketplace={false}
-          /> */}
+          <div className="flex justify-end">
+            <button
+              onClick={() => setAddUserPopup(true)}
+              className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
+            >
+              + Add User
+            </button>
+          </div>
 
           <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm mt-4">
             <table className="w-full text-sm text-left text-nowrap">
@@ -164,7 +171,7 @@ const Users = () => {
                     </td>
                   </tr>
                 ) : users.length > 0 ? (
-                  users.map((user) => (
+                  users?.map((user) => (
                     <tr
                       key={user.id}
                       className="hover:bg-gray-50 transition-colors"
@@ -176,7 +183,7 @@ const Users = () => {
                       <Td className="px-6 py-4 font-semibold">{user.title}</Td>
                       <Td className="px-6 py-4">
                         <Link
-                          to={`/admin/dashboard/users/view-user?uid=${user.id}`}
+                          to={`/admin/dashboard/users/view-user/${user.id}`}
                           className="text-blue-600 hover:text-blue-800"
                         >
                           <i className="fa-solid fa-pen-to-square text-lg" />
@@ -209,6 +216,16 @@ const Users = () => {
             />
           </div>
         </div>
+
+        {/* Add user  */}
+        {addUserPopup && (
+          <div className="">
+            <AddUserPopup
+              onClose={() => setAddUserPopup(false)}
+              refreshUsers={fetchUser}
+            />
+          </div>
+        )}
 
         {/* Modals */}
         {showInvoice && <InvoiceModal onClose={() => setShowInvoice(false)} />}

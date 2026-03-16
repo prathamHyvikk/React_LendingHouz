@@ -188,7 +188,7 @@ function App() {
             element={<PrivacyPolicy />}
           />
           {/* <Route path="/app/dashboard/users" element={<Users />} /> */}
-          <Route path="app/dashboard/users/view-user" element={<ViewUser />} />
+          <Route path="admin/dashboard/users/view-user/:uid" element={<ViewUser />} />
           <Route
             path="app/dashboard/notifications"
             element={<Notifications />}

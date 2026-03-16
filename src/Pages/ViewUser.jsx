@@ -1,275 +1,339 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../Component/AdminLayout";
-import PersonalInfoPopup from "../Component/PersonalInfoPopup";
-import EditCardPopup from "../Component/EditCardPopup";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { FaRegUser } from "react-icons/fa";
+import { setUser, setAdmin } from "../features/personRole";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ViewUser = () => {
-  const [showpersonal, setShowPersonal] = useState(false);
-  const [showCardPopup, setShowCardPopup] = useState(false);
+  const [uploadFile, setUploadFile] = useState(null);
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [Title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [fileName, setFileName] = useState("");
 
-  const [profileImage, setProfileImage] = useState();
-  const [email, setEmail] = useState(" johndoe@email.com");
-  const [password, setPassword] = useState("34646464");
-  const [phone, setPhone] = useState("+1 202-555-0147");
-  const [address, setAddress] = useState(
-    "1234 Financial Avenue, New York, USA"
-  );
-  const [communication, setCommunication] = useState("Email / SMS Alerts");
+  const [language, setLanguage] = useState("English");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [enableEdit, setEnableEdit] = useState(false);
+  const [updateValue, setUpdateValue] = useState(false);
+  const LoginToken = localStorage.getItem("LoginToken");
+  const { uid } = useParams();
+  console.log(uid);
+  const role = useSelector((state) => state.person.value);
 
-  const [nameOnCard, setNameOnCard] = useState("John Doe");
-  const [cardNumber, setCardNumber] = useState("1234 5678 9012 3456");
-  const [expiryDate, setExpiryDate] = useState("12/25");
-  const [cvv, setCVV] = useState("123");
+  const dispatch = useDispatch();
+
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/single-user`,
+        {
+          user_id: uid,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      const user = response?.data?.data;
+
+      setUserName(user?.username ?? "");
+      setEmail(user?.email ?? "");
+      setFullName(user?.name ?? "");
+      setTitle(user?.role ?? "");
+      setImage(user?.image_url ?? "");
+      setLanguage(user?.language ?? "English");
+    } catch (error) {
+      const errors = error.response?.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleEditToggle = async () => {
+    setLoading(true);
+    if (enableEdit) {
+      try {
+        const formData = new FormData();
+        formData.append("id", uid);
+        formData.append("username", userName);
+        formData.append("email", email);
+        formData.append("name", fullName);
+        formData.append("title", Title);
+        formData.append("language", language);
+        if (password) formData.append("password", password);
+        if (uploadFile) formData.append("image", uploadFile);
+
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/user/update`,
+          formData,
+          { headers: { Authorization: `Bearer ${LoginToken}` } },
+        );
+
+        toast.success(response.data.message);
+        setImage(response?.data?.data?.image_url ?? "");
+        setEnableEdit(false);
+        setPassword("");
+        navigate("/admin/dashboard/users");
+       
+      } catch (error) {
+        const errors = error.response.data.errors;
+        if (errors) {
+          Object.entries(errors).forEach(([field, messages]) => {
+            messages.forEach((msg) => {
+              toast.error(` ${msg}`);
+            });
+          });
+        } else {
+          toast.error(error?.response.data.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setEnableEdit(true);
+    }
+  };
+
+  const handleSaveBtn = () => {
+    setEnableEdit(true);
+    if (enableEdit === true) {
+      handleEditToggle();
+    }
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <>
       <AdminLayout>
-        <div>
-          <div className="">
-            <div className="bg-white rounded-lg shadow-md p-3 mb-6">
-              <div className="flex flex-col items-center">
-                <div className="relative group overflow-hidden">
-                  <img
-                    id="profileImage"
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                    alt="Profile"
-                    className="w-24 h-24 rounded-full object-cover"
-                  />
+        {loading && (
+          <div className="fixed inset-0 z-50 bg-white/70 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-14 w-14 border-b-2 border-gray-900"></div>
+          </div>
+        )}
 
-                  <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition w-full h-full cursor-pointer">
-                    <span className="text-white text-sm sora-semibold">
-                      Edit
+        <div className="bg-white rounded-lg shadow-sm p-8">
+          <div className="flex justify-end mb-4">
+            <button
+              id="editBtn"
+              type="button"
+              onClick={() => handleSaveBtn()}
+              className="px-4 py-2 bg-blue-500 cursor-pointer text-white rounded-md"
+            >
+              {enableEdit === true ? "Save" : "Edit"}
+            </button>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-start gap-8 mb-12">
+            <div className="shrink-0">
+              {image !== null ? (
+                <img
+                  id="profilePreview"
+                  src={image}
+                  alt="Profile"
+                  className="w-44 h-44 rounded-full object-cover border-4 border-gray-100"
+                />
+              ) : (
+                <div className="w-44 h-44 rounded-full object-cover border-4 border-gray-100 flex items-center justify-center">
+                  <FaRegUser size={60} />
+                </div>
+              )}
+            </div>
+
+            <div className="flex-1">
+              <h1 className="text-3xl sora-normal text-gray-800 mb-3">
+                {fullName}
+              </h1>
+              <p className="mb-3">
+                <a
+                  href={`mailto:${email}`}
+                  className="text-blue-500 hover:text-blue-600"
+                >
+                  {email}
+                </a>
+                <span className="text-gray-500"> - {Title}</span>
+              </p>
+              <p className="text-sm text-gray-400 mb-6">
+                Avatar by <span className="text-gray-600">gravatar.com</span>.
+                Or upload your own...
+              </p>
+
+              <div className="border-2 relative border-dashed border-gray-300 rounded-lg p-6 text-center">
+                <label className="cursor-pointer block">
+                  <p className="text-gray-400 text-lg">
+                    Change Your Profile Picture{" "}
+                    <span className="text-gray-500 font-medium">
+                      click in this area
                     </span>
-                  </div>
+                  </p>
+
+                  {fileName && enableEdit && (
+                    <p className="mt-3 text-sm text-green-600 font-medium">
+                      Selected: {fileName}
+                    </p>
+                  )}
 
                   <input
                     type="file"
-                    id="imageUploader"
                     accept="image/*"
-                    onChange={(e) => setProfileImage(e.target.files[0])}
-                    className=" absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    disabled={!enableEdit}
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setUploadFile(file);
+                        setFileName(file.name);
+                      }
+                    }}
+                    className="absolute top-0 left-0 opacity-0 cursor-pointer w-full h-full"
                   />
-                </div>
-
-                <h1 className=" !text-xl lg:!text-2xl sora-bold text-gray-800 mt-4">
-                 John Doe
-                </h1>
-                
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-              <h2 className="text-lg sora-bold text-gray-800 mb-4">
-                Account Summary
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="sora-semibold text-gray-700">Name:</span>
-                  <span className="text-gray-600 ml-1">John Doe</span>
-                </div>
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Account ID:
-                  </span>
-                  <span className="text-gray-600 ml-1">FN-45892</span>
-                </div>
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Member Since:
-                  </span>
-                  <span className="text-gray-600 ml-1">January 2023</span>
-                </div>
-                <div className="md:col-span-3">
-                  <span className="sora-semibold text-gray-700">
-                    Account Status:
-                  </span>
-                  <span className="text-green-600 ml-1 sora-medium">
-                    Active
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-              <h2 className="text-lg sora-bold text-gray-800 mb-4">
-                Financial Snapshot
-              </h2>
-              <div className="space-y-3 text-sm">
-                <div className="flex flex-wrap justify-between">
-                  <span className="sora-semibold text-gray-700">
-                    Total Financing Approved:
-                  </span>
-                  <span className="text-gray-800 sora-medium">$150,000</span>
-                </div>
-                <div className="flex flex-wrap justify-between">
-                  <span className="sora-semibold text-gray-700">
-                    Active Financing Plans:
-                  </span>
-                  <span className="text-gray-800 sora-medium">3</span>
-                </div>
-                <div className="flex flex-wrap justify-between">
-                  <span className="sora-semibold text-gray-700">
-                    Pending Applications:
-                  </span>
-                  <span className="text-gray-800 sora-medium">1</span>
-                </div>
-                <div className="flex flex-wrap justify-between pt-2 border-t border-gray-300">
-                  <span className="sora-semibold text-gray-700">
-                    Next Payment Due:
-                  </span>
-                  <span className="text-gray-800 sora-medium">
-                    $1,250 on 15 Nov 2025
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              id="personalInfoSection"
-              className="bg-white rounded-lg shadow-md p-6 mb-6 relative"
-            >
-              <h2 className="text-lg sora-bold text-gray-800 mb-4">
-                Personal Information
-              </h2>
-
-              <button
-                id="editPersonalBtn"
-                onClick={() => setShowPersonal(true)}
-                className="absolute cursor-pointer top-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
-              >
-                Edit
-              </button>
-
-              <div className="space-y-3 text-sm">
-                <div className="flex flex-wrap">
-                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
-                    Email:
-                  </span>
-                  <span className="text-gray-600 md:ml-2" id="infoEmail">
-                    {email}
-                  </span>
-                </div>
-                <div className="flex flex-wrap">
-                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
-                    Password:
-                  </span>
-                  <span className="text-gray-600 md:ml-2" id="infoEmail">
-                    ********
-                  </span>
-                </div>
-                <div className="flex flex-wrap">
-                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
-                    Phone:
-                  </span>
-                  <span className="text-gray-600 md:ml-2" id="infoPhone">
-                    {phone}
-                  </span>
-                </div>
-                <div className="flex flex-wrap">
-                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
-                    Address:
-                  </span>
-                  <span className="text-gray-600 md:ml-2" id="infoAddress">
-                    {address}
-                  </span>
-                </div>
-                <div className="flex flex-wrap">
-                  <span className="sora-semibold text-gray-700 w-full md:w-auto">
-                    Preferred Communication:
-                  </span>
-                  <span
-                    className="text-gray-600 md:ml-2"
-                    id="infoCommunication"
-                  >
-                    {communication}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6 relative">
-              <h2 className="text-lg sora-bold text-gray-800 mb-4">
-                Bank & Payment Details
-              </h2>
-
-              <button
-                id="editBankBtn"
-                onClick={() => setShowCardPopup(true)}
-                className="absolute cursor-pointer top-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
-              >
-                Edit
-              </button>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Primary Bank:
-                  </span>
-                  <span className="text-gray-600 ml-1">Bank of America</span>
-                </div>
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    IBAN / Account Number:
-                  </span>
-                  <span className="text-gray-600 ml-1">****1234</span>
-                </div>
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Auto-Pay Enabled:
-                  </span>
-                  <span className="text-green-600 ml-1 sora-medium">Yes</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-lg sora-bold text-gray-800 mb-4">
-                Documents
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Government ID:
-                  </span>
-                  <span className="text-blue-600 ml-1">Uploaded</span>
-                </div>
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Proof of Income:
-                  </span>
-                  <span className="text-green-600 ml-1">Approved</span>
-                </div>
-                <div>
-                  <span className="sora-semibold text-gray-700">
-                    Address Verification:
-                  </span>
-                  <span className="text-yellow-600 ml-1">Pending Update</span>
-                </div>
+                </label>
               </div>
             </div>
           </div>
+
+          <div className="mb-8">
+            <h2 className="text-2xl sora-normal text-gray-700 mb-8">Account</h2>
+
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">Username</label>
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <input
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">Password</label>
+                <div
+                  className={`md:col-span-3 relative ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <input
+                    id="passwordField"
+                    type="password"
+                    value={password}
+                    placeholder="Enter New Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
+                  />
+
+                  {/* <span
+                    id="togglePassword"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+                  >
+                    <i
+                      className={`fa-solid ${
+                        showPassword ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                      onClick={() => setShowPassword(!showPassword)}
+                      disabled={enableEdit === false ? true : false}
+                    ></i>
+                  </span> */}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">
+                  Full name <span className="text-red-500">*</span>
+                </label>
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <input
+                    type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">Title</label>
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <input
+                    type="text"
+                    value={Title}
+                    // onChange={(e) => setTitle(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">Language</label>
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <select
+                    onChange={(e) => setLanguage(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700 bg-white cursor-pointer"
+                  >
+                    <option defaultValue={"english"}>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                    <option>German</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-
-        {/* popups */}
-        {showpersonal && (
-          <PersonalInfoPopup
-            setShowPersonal={setShowPersonal}
-            email={email}
-            password={password}
-            phone={phone}
-            address={address}
-            communication={communication}
-            setEmail={setEmail}
-            setPassword={setPassword}
-            setPhone={setPhone}
-            setAddress={setAddress}
-            setCommunication={setCommunication}
-          />
-        )}
-
-        {showCardPopup && (
-          <EditCardPopup setShowCardPopup={setShowCardPopup} />
-        )}
       </AdminLayout>
     </>
   );

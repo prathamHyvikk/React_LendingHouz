@@ -121,7 +121,7 @@ const AdminMarketPlace = () => {
                 {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6 w-full mt-8">
                   {products?.length === 0 && (
-                    <p className="text-xl text-center font-bold text-red-600">
+                    <p className="text-lg md:col-span-2 xl:col-span-3 text-center font-bold text-red-600">
                       No Products Available{" "}
                     </p>
                   )}

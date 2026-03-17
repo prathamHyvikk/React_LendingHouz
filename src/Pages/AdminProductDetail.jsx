@@ -239,7 +239,7 @@ const AdminProductDetail = () => {
     <>
       <AdminLayout>
         <div className="bg-white rounded-lg shadow-lg sm:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2  gap-8">
             {loading ? (
               <div>
                 <div className="mb-4 w-full h-96 bg-gray-200 rounded-lg" />
@@ -284,7 +284,7 @@ const AdminProductDetail = () => {
               </div>
             )}
 
-            <div className="max-sm:ps-2">
+            <div className="max-sm:ps-2 lg:mt-10">
               <h1 className=" text-2xl sm:text-3xl sora-bold text-gray-800 mb-2">
                 {loading ? (
                   <div className="w-1/2 h-6 bg-gray-200 rounded-lg"></div>
@@ -363,7 +363,9 @@ const AdminProductDetail = () => {
                 )}
               </div>
 
-              <div className="border-t border-gray-200 pt-6">
+                 {/* Rating */}
+
+              {/* <div className="border-t border-gray-200 pt-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center shrink-0">
                     <svg
@@ -378,6 +380,7 @@ const AdminProductDetail = () => {
                       ></path>
                     </svg>
                   </div>
+               
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="sora-semibold text-gray-800">
@@ -425,7 +428,7 @@ const AdminProductDetail = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

@@ -43,7 +43,7 @@ const Layout = () => {
                   </Link>
                 )}
 
-                <Link
+                {/* <Link
                   to={`/${role}/dashboard/notifications`}
                   className="relative cursor-pointer inline-block"
                 >
@@ -52,7 +52,7 @@ const Layout = () => {
                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
                     3
                   </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           )}

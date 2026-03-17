@@ -10,6 +10,7 @@ export const personRole = createSlice({
     userType: "",
     user: {},
     admin: {},
+    refreshKey: 0,
   },
   reducers: {
     setPersonRole: (state, action) => {
@@ -30,10 +31,20 @@ export const personRole = createSlice({
     setAdmin: (state, action) => {
       state.admin = action.payload;
     },
+    setRefreshKey: (state, action) => {
+      state.refreshKey = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setPersonRole, setId, setUserType,setUser ,setAdmin} = personRole.actions;
+export const {
+  setPersonRole,
+  setId,
+  setUserType,
+  setUser,
+  setAdmin,
+  setRefreshKey,
+} = personRole.actions;
 
 export default personRole.reducer;

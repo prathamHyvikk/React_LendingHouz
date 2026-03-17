@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setId, setPersonRole, setUserType } from "../features/personRole";
 import { setAuthenticate } from "../features/authenticate";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { FaRegUser } from "react-icons/fa";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -16,13 +17,12 @@ const Sidebar = () => {
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
-  // const userProfile = useSelector((state) => state.person.user);
-  // const adminProfile = useSelector((state) => state.person.admin);
+  const userProfile = useSelector((state) => state.person.user);
+  const adminProfile = useSelector((state) => state.person.admin);
+  const refreshKey = useSelector((state) => state.person.refreshKey);
   const [fullName, setFullName] = useState("");
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
-
-  
 
   const menuItems = [
     {
@@ -118,8 +118,23 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    fetchUser();
-  }, [userId]);
+    const currentProfile = role === "app" ? userProfile : adminProfile;
+
+    if (currentProfile && Object.keys(currentProfile).length > 0) {
+      
+      setFullName(currentProfile.name || "");
+      setTitle(currentProfile.title || "");
+      setImage(currentProfile.image_url || "");
+    } else if (userId) {
+      fetchUser();
+    }
+  }, [userId, role, userProfile, adminProfile]);
+
+  // useEffect(() => {
+  //   if (refreshKey && userId) {
+  //     fetchUser();
+  //   }
+  // }, [refreshKey, userId]);
 
   return (
     <>

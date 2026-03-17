@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FaRegUser } from "react-icons/fa";
-import { setUser, setAdmin } from "../features/personRole";
+import { setUser, setAdmin, setRefreshKey } from "../features/personRole";
 
 const Profile = () => {
   const [uploadFile, setUploadFile] = useState(null);
@@ -96,6 +96,8 @@ const Profile = () => {
         } else {
           dispatch(setAdmin(response?.data?.data));
         }
+        
+        dispatch(setRefreshKey(Date.now()));
       } catch (error) {
         const errors = error.response.data.errors;
         if (errors) {

@@ -261,19 +261,19 @@ const DashBoardUser = () => {
                 </tbody>
               </table>
 
+              <div className="mt-8 mx-auto flex justify-center w-full">
+                <BasicPagination
+                  lastPage={lastPage}
+                  url="show-application"
+                  setProducts={setApplications}
+                />
+              </div>
+
               {loading && (
                 <div className="my-15 w-full mx-auto flex justify-center items-center">
                   <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
                 </div>
               )}
-            </div>
-
-            <div className="mt-8 mx-auto flex justify-center w-full">
-              <BasicPagination
-                lastPage={lastPage}
-                url="show-application"
-                setProducts={setApplications}
-              />
             </div>
 
             <div className="mt-8">

@@ -19,10 +19,14 @@ const BasicPagination = ({ lastPage, url, setProducts }) => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
-      setProducts(response.data.products || response.data.data);
+      setProducts(
+        response.data.products ||
+          response.data.data ||
+          response.data.applications,
+      );
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

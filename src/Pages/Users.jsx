@@ -150,7 +150,7 @@ const Users = () => {
             value={loading ? "..." : totalInActive}
             bg="#E6E6E6"
           />
-          <StatCard title="Referrals" value="2" bg="#FFD0D1" />
+          {/* <StatCard title="Referrals" value="2" bg="#FFD0D1" /> */}
         </div>
 
         {/* TABLE */}

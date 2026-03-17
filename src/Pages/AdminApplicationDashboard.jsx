@@ -15,6 +15,7 @@ import axios from "axios";
 import HeaderTable from "../Component/HeaderTable";
 import { AiOutlinePrinter } from "react-icons/ai";
 import toast from "react-hot-toast";
+import BasicPagination from "../Component/BasicPagination";
 
 const AdminApplicationsDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -34,6 +35,8 @@ const AdminApplicationsDashboard = () => {
   const [totalInActive, setTotalInActive] = useState(0);
   const [totalReferral, setTotalReferral] = useState(0);
   const [selectedApplication, setSelectedApplication] = useState(null);
+  const [lastPage, setLastPage] = useState();
+
   const marketplace = false;
 
   const navigate = useNavigate();
@@ -101,6 +104,7 @@ const AdminApplicationsDashboard = () => {
       );
 
       setApplications(response?.data?.applications);
+      setLastPage(response?.data?.last_page);
     } catch (error) {
       toast.error(error?.response.data.message);
     } finally {
@@ -121,21 +125,21 @@ const AdminApplicationsDashboard = () => {
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
             <StatCard
-              title="Total Applications"
-              value={totalApplications}
-              bg="#E5ECF6"
-            />
-            <StatCard
-              title="Loan Amount"
-              value={`$${totalAmount}`}
-              bg="#D0FFE0"
-            />
-            <StatCard
-              title="Inactive Applications"
-              value={totalInActive}
-              bg="#E6E6E6"
-            />
-            <StatCard title="Referrals" value="2" bg="#FFD0D1" />
+                       title="Total Applications"
+                       value={loading ? "..." : totalApplications}
+                       bg="#E5ECF6"
+                     />
+                     <StatCard
+                       title="Loan Amount"
+                       value={loading ? "..." : `$${totalAmount}`}
+                       bg="#D0FFE0"
+                     />
+                     <StatCard
+                       title="Inactive Applications"
+                       value={loading ? "..." : totalInActive}
+                       bg="#E6E6E6"
+                     />
+            {/* <StatCard title="Referrals" value="2" bg="#FFD0D1" /> */}
           </div>
 
           {/* TABLE */}
@@ -151,7 +155,7 @@ const AdminApplicationsDashboard = () => {
               navigationLink="/admin/dashboard/applications/new-application"
               fetchProductFromCategory={"no"}
             />
-            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm min-h-30 max-h-90">
+            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm min-h-30 ">
               <table className="w-full text-sm text-nowrap">
                 <thead className="bg-gray-100 text-gray-700 sticky top-0">
                   <tr>
@@ -228,10 +232,10 @@ const AdminApplicationsDashboard = () => {
                             </Td>
                             <Td className="" center={""}>
                               {item.created_at
-                                .split("T")[0]
-                                .split("-")
-                                .reverse()
-                                .join("/")}
+                                ?.split("T")[0]
+                                ?.split("-")
+                                ?.reverse()
+                                ?.join("/")}
                             </Td>
 
                             <Td center>
@@ -282,10 +286,10 @@ const AdminApplicationsDashboard = () => {
                               <Td center={"yes"}>{item.requested_income}</Td>
                               <Td className="" center={""}>
                                 {item.created_at
-                                  .split("T")[0]
-                                  .split("-")
-                                  .reverse()
-                                  .join("/")}
+                                  ?.split("T")[0]
+                                  ?.split("-")
+                                  ?.reverse()
+                                  ?.join("/")}
                               </Td>
 
                               <Td center>
@@ -341,10 +345,10 @@ const AdminApplicationsDashboard = () => {
                               <Td center={"yes"}>{item.requested_income}</Td>
                               <Td className="" center={""}>
                                 {item.created_at
-                                  .split("T")[0]
-                                  .split("-")
-                                  .reverse()
-                                  .join("/")}
+                                  ?.split("T")[0]
+                                  ?.split("-")
+                                  ?.reverse()
+                                  ?.join("/")}
                               </Td>
 
                               <Td center>
@@ -360,6 +364,14 @@ const AdminApplicationsDashboard = () => {
                   )}
                 </tbody>
               </table>
+
+              <div className="my-8 mx-auto flex justify-center w-full">
+                <BasicPagination
+                  lastPage={lastPage}
+                  url="show-application"
+                  setProducts={setApplications}
+                />
+              </div>
             </div>
           </div>
 

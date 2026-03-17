@@ -20,6 +20,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
 import SmallCard from "../Component/SmallCard";
 import toast from "react-hot-toast";
+import BasicPagination from "../Component/BasicPagination";
 
 const AdminDashboard = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -36,6 +37,7 @@ const AdminDashboard = () => {
   const [totalReferral, setTotalReferral] = useState(0);
   const [search, setSearch] = useState("");
   const [selectedApplication, setSelectedApplication] = useState(null);
+  const [lastPage, setLastPage] = useState();
 
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
@@ -118,6 +120,7 @@ const AdminDashboard = () => {
       );
 
       setApplications(response?.data?.applications);
+      setLastPage(response?.data?.last_page);
     } catch (error) {
       toast.error(error?.response.data.message);
     } finally {
@@ -145,20 +148,20 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
             <StatCard
               title="Total Applications"
-              value={totalApplications}
+              value={loading ? "..." : totalApplications}
               bg="#E5ECF6"
             />
             <StatCard
               title="Loan Amount"
-              value={`$${totalAmount}`}
+              value={loading ? "..." : `$${totalAmount}`}
               bg="#D0FFE0"
             />
             <StatCard
               title="Inactive Applications"
-              value={totalInActive}
+              value={loading ? "..." : totalInActive}
               bg="#E6E6E6"
             />
-            <StatCard title="Referrals" value="2" bg="#FFD0D1" />
+            {/* <StatCard title="Referrals" value="2" bg="#FFD0D1" /> */}
           </div>
 
           {/* TABLE */}
@@ -175,7 +178,7 @@ const AdminDashboard = () => {
               searchFilter={true}
               fetchProductFromCategory={"no"}
             />
-            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm max-h-90">
+            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm ">
               <table className="w-full text-sm">
                 <thead className="bg-gray-100 text-gray-700">
                   <tr>
@@ -217,7 +220,7 @@ const AdminDashboard = () => {
                           <Td>{item.application_status}</Td>
                           <Td className="">$ {item.requested_income}</Td>
                           <Td className="" center={""}>
-                            {item.created_at.split("T")[0]}
+                            {item.created_at?.split("T")[0]}
                           </Td>
 
                           <Td center={"yes"} className="flex justify-center">
@@ -254,6 +257,14 @@ const AdminDashboard = () => {
                   )}
                 </tbody>
               </table>
+
+              <div className="my-8 mx-auto flex justify-center w-full">
+                <BasicPagination
+                  lastPage={lastPage}
+                  url="show-application"
+                  setProducts={setApplications}
+                />
+              </div>
 
               {loading && (
                 <div className="my-15 w-full mx-auto flex justify-center items-center">

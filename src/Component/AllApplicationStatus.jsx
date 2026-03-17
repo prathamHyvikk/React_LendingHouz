@@ -133,7 +133,7 @@ const AllApplicationStatus = ({
         </div>
 
         <div className="p-5">
-          {!applications.length ? (
+          {!applications ? (
             <div className="flex justify-center py-10">
               <p className="text-gray-600">No applications found</p>
               <button

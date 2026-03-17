@@ -20,6 +20,7 @@ import { ImAttachment } from "react-icons/im";
 import SmallCard from "../Component/SmallCard";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import BasicPagination from "../Component/BasicPagination";
 
 const DashBoardUser = () => {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -32,6 +33,7 @@ const DashBoardUser = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [lastPage, setLastPage] = useState();
 
   const [totalApplications, setTotalApplications] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -119,6 +121,7 @@ const DashBoardUser = () => {
       );
 
       setApplications(response?.data?.applications);
+      setLastPage(response?.data?.last_page);
     } catch (error) {
       toast.error(error?.response.data.message);
     } finally {
@@ -148,20 +151,20 @@ const DashBoardUser = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
             <StatCard
               title="Total Applications"
-              value={totalApplications}
+              value={loading ? "..." : totalApplications}
               bg="#E5ECF6"
             />
             <StatCard
               title="Loan Amount"
-              value={`$ ${totalAmount}`}
+              value={loading ? "..." : `$${totalAmount}`}
               bg="#D0FFE0"
             />
             <StatCard
               title="Inactive Applications"
-              value={totalInActive}
+              value={loading ? "..." : totalInActive}
               bg="#E6E6E6"
             />
-            <StatCard title="Referrals" value="2" bg="#FFD0D1" />
+            {/* <StatCard title="Referrals" value="2" bg="#FFD0D1" /> */}
           </div>
 
           {/* TABLE */}
@@ -178,7 +181,7 @@ const DashBoardUser = () => {
               setSearch={setSearch}
               fetchProductFromCategory={"no"}
             />
-            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm max-h-90">
+            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm ">
               <table className="w-full text-sm text-nowrap">
                 <thead className="bg-gray-100 text-gray-700">
                   <tr>
@@ -220,7 +223,7 @@ const DashBoardUser = () => {
                           <Td>{item.application_status}</Td>
                           <Td className="">${item.requested_income}</Td>
                           <Td className="" center={""}>
-                            {item.created_at.split("T")[0]}
+                            {item.created_at?.split("T")[0]}
                           </Td>
 
                           <Td center={"yes"} className="flex justify-center">
@@ -263,6 +266,14 @@ const DashBoardUser = () => {
                   <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
                 </div>
               )}
+            </div>
+
+            <div className="mt-8 mx-auto flex justify-center w-full">
+              <BasicPagination
+                lastPage={lastPage}
+                url="show-application"
+                setProducts={setApplications}
+              />
             </div>
 
             <div className="mt-8">

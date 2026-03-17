@@ -152,6 +152,8 @@ const ApplicationsDashboard = () => {
             <HeaderTable
               setShowAddProduct={setShowAddProduct}
               setSelectedCategory={setSelectedCategory}
+              filter={true}
+              searchFilter={false}
               headingContent="List of Applications"
               navigationLink="/app/dashboard/applications/new-application"
               fetchProductFromCategory={"no"}

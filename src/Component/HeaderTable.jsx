@@ -9,7 +9,7 @@ const HeaderTable = ({
   setShowAddProduct,
   headingContent,
   marketplace,
-  setProducts=[],
+  setProducts = [],
   setLastPage,
   setSelectedCategory,
   navigationLink,
@@ -17,6 +17,8 @@ const HeaderTable = ({
   setApplications,
   search,
   setSearch,
+  filter,
+  searchFilter,
 }) => {
   const role = useSelector((state) => state.person.value);
 
@@ -58,7 +60,6 @@ const HeaderTable = ({
   });
 
   const handleSelection = async (item) => {
-
     setSelectedOption(item);
     setSelectedCategory(item);
 
@@ -102,7 +103,7 @@ const HeaderTable = ({
             toast.error(` ${msg}`);
           });
         });
-      }else{
+      } else {
         toast.error(error?.message);
       }
     }
@@ -149,20 +150,58 @@ const HeaderTable = ({
           )}
 
           {/* search */}
-          {!marketplace ? (
-            <>
-              <input
-                type="text"
-                placeholder="Search User"
-                value={search}
-                onChange={handleSearch}
-                className="hidden sm:block border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
-              />
+          {searchFilter &&
+            (!marketplace ? (
+              <>
+                <input
+                  type="text"
+                  placeholder="Search User"
+                  value={search}
+                  onChange={handleSearch}
+                  className="hidden sm:block border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
+                />
 
-              <button className="sm:hidden p-2 border border-gray-300 rounded-md hover:bg-gray-100">
+                <button className="sm:hidden p-2 border border-gray-300 rounded-md hover:bg-gray-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-4.35-4.35m2.1-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+                    ></path>
+                  </svg>
+                </button>
+              </>
+            ) : (
+              ""
+            ))}
+
+          {/* filter */}
+          {filter && (
+            <div ref={categoryRef} className="relative">
+              <button
+                onClick={() => setShowOptions(!showOptions)}
+                className={`flex items-center gap-1 cursor-pointer border border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100 ${
+                  marketplace ? "productlistBtn" : ""
+                }`}
+              >
+                <span className="max-sm:hidden">
+                  {selectedOption
+                    ? selectedOption
+                    : marketplace
+                      ? "Filter by Product & Services"
+                      : "Filter"}
+                </span>
+
+                {/* Desktop Icon */}
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-4 w-4 max-sm:hidden"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -171,81 +210,41 @@ const HeaderTable = ({
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M21 21l-4.35-4.35m2.1-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
-                  ></path>
+                    d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                  />
+                </svg>
+
+                {/* Mobile Icon */}
+                <svg
+                  className="h-5 w-5 sm:hidden"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 12.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-4.586L3.293 6.707A1 1 0 013 6V4z"
+                  />
                 </svg>
               </button>
-            </>
-          ) : (
-            ""
-          )}
 
-          {/* filter */}
-          <div ref={categoryRef} className="relative">
-            <button
-              onClick={() => setShowOptions(!showOptions)}
-              className={
-                marketplace
-                  ? "productlistBtn flex items-center gap-1 cursor-pointer border border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100"
-                  : "flex items-center gap-1 border cursor-pointer border-gray-300 px-3 py-2 rounded-md text-sm hover:bg-gray-100"
-              }
-            >
-              <span className="max-sm:hidden">
-                {marketplace
-                  ? selectedOption
-                    ? selectedOption
-                    : "Filter by Product & Services"
-                  : selectedOption
-                    ? selectedOption
-                    : "Filter"}
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 max-sm:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                ></path>
-              </svg>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 sm:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 12.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-4.586L3.293 6.707A1 1 0 013 6V4z"
-                ></path>
-              </svg>
-            </button>
-
-            {showOptions && (
-              <div>
+              {showOptions && (
                 <div className="dropdownproductlist text-gray-700 mt-2 w-45 bg-white shadow-lg rounded-md p-2 absolute z-10 right-0 top-10 text-[12px] h-70 overflow-y-scroll">
                   {categories.map((item, i) => (
                     <p
                       key={i}
                       onClick={() => handleSelection(item)}
-                      className="p-2 hover:bg-gray-100 w-full cursor-pointer block "
+                      className="p-2 hover:bg-gray-100 w-full cursor-pointer"
                     >
                       {item}
                     </p>
                   ))}
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

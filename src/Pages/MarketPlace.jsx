@@ -61,6 +61,7 @@ const MarketPlace = () => {
             setShowAddProduct={setShowAddProduct}
             setProducts={setProducts}
             setLastPage={setLastPage}
+            filter={true}
             setSelectedCategory={setSelectedCategory}
           />
           {/* Cards Design */}

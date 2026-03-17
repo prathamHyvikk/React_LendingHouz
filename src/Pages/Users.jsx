@@ -28,7 +28,7 @@ const Users = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalInActive, setTotalInActive] = useState(0);
   const [lastPage, setLastPage] = useState();
-
+  const [search, setSearch] = useState("");
   const [addUserPopup, setAddUserPopup] = useState(false);
 
   const LoginToken = localStorage.getItem("LoginToken");
@@ -109,6 +109,23 @@ const Users = () => {
     }
   };
 
+  const filteredUsers = users.filter((user) => {
+    const query = search.toLowerCase().trim();
+    if (!query) return true;
+
+    const name = user.name?.toLowerCase() || "";
+    const phone = user.phone?.toLowerCase() || "";
+    const email = user.email?.toLowerCase() || "";
+    const title = user.title?.toLowerCase() || "";
+
+    return (
+      name.includes(query) ||
+      phone.includes(query) ||
+      email.includes(query) ||
+      title.includes(query)
+    );
+  });
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -138,7 +155,23 @@ const Users = () => {
 
         {/* TABLE */}
         <div className="bg-white rounded-lg shadow-sm p-4">
-          <div className="flex justify-end">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search users..."
+                className="w-full sm:w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
+              <button
+                onClick={() => setSearch("")}
+                className="px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-600 hover:bg-gray-100"
+              >
+                Clear
+              </button>
+            </div>
+
             <button
               onClick={() => setAddUserPopup(true)}
               className="open-popup cursor-pointer bg-[#0080C6] lg:text-base text-sm text-white lg:px-4 px-3 py-2 rounded-md hover:bg-[#006ba1] transition"
@@ -170,8 +203,8 @@ const Users = () => {
                       </div>
                     </td>
                   </tr>
-                ) : users.length > 0 ? (
-                  users?.map((user) => (
+                ) : filteredUsers.length > 0 ? (
+                  filteredUsers?.map((user) => (
                     <tr
                       key={user.id}
                       className="hover:bg-gray-50 transition-colors"

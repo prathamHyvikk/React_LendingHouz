@@ -171,12 +171,14 @@ const DashBoardUser = () => {
               setSelectedCategory={setSelectedCategory}
               setApplications={setApplications}
               headingContent="List of Applications"
+              navigationLink="/app/dashboard/applications/new-application"
               marketplace={false}
               search={search}
+              searchFilter={true}
               setSearch={setSearch}
               fetchProductFromCategory={"no"}
             />
-            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
+            <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm max-h-90">
               <table className="w-full text-sm text-nowrap">
                 <thead className="bg-gray-100 text-gray-700">
                   <tr>

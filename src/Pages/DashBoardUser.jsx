@@ -261,7 +261,7 @@ const DashBoardUser = () => {
                 </tbody>
               </table>
 
-              <div className="mt-8 mx-auto flex justify-center w-full">
+              <div className="my-8 mx-auto flex justify-center w-full">
                 <BasicPagination
                   lastPage={lastPage}
                   url="show-application"

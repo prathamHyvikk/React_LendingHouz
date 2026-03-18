@@ -151,6 +151,7 @@ const AdminApplicationsDashboard = () => {
               search={search}
               setSearch={setSearch}
               filter={true}
+              searchFilter={false}
               headingContent="List of Applications"
               navigationLink="/admin/dashboard/applications/new-application"
               fetchProductFromCategory={"no"}

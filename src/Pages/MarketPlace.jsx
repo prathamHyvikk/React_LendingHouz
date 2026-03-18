@@ -24,18 +24,18 @@ const MarketPlace = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/products`,
-        {
-          headers: {
-            Authorization: `Bearer ${LoginToken}`,
-          },
-        },
-      );
+      const url = selectedCategory
+        ? `${import.meta.env.VITE_BASE_URL}/get-category-search?category=${selectedCategory}`
+        : `${import.meta.env.VITE_BASE_URL}/products`;
+
+      const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${LoginToken}` },
+      });
+
       setProducts(response?.data?.products);
       setLastPage(response?.data?.last_page);
     } catch (error) {
-      toast.error(error?.response.data.message);
+      toast.error("Failed to load products");
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ const MarketPlace = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
   useEffect(() => {
     if (againFetchProducts) {
@@ -62,38 +62,11 @@ const MarketPlace = () => {
             setProducts={setProducts}
             setLastPage={setLastPage}
             filter={true}
+            resetbtn={true}
             setSelectedCategory={setSelectedCategory}
           />
           {/* Cards Design */}
-          {/* <div className="">
-            <div className="mt-8">
-              <h2 className="text-2xl sora-medium">Recent</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
-                {recentMarketPlaceData.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={`/admin/dashboard/marketplace/product/product-detail`}
-                  >
-                    <SmallCard data={item} />
-                  </Link>
-                ))}
-              </div>
-            </div>
 
-            <div className="mt-8">
-              <h2 className="text-2xl sora-medium">New</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-6 w-full mt-8">
-                {newMarketPlaceData.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={`/admin/dashboard/marketplace/product/product-detail`}
-                  >
-                    <SmallCard data={item} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div> */}
           {loading && (
             <div className="flex justify-center items-center">
               <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
@@ -104,12 +77,12 @@ const MarketPlace = () => {
             <div className="mt-8">
               {/* <h2 className="text-2xl sora-medium">Recent</h2> */}
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6 w-full mt-8">
-                  {products?.length === 0 && (
-                    <p className="text-lg md:col-span-2 xl:col-span-3 text-center font-bold text-red-600">
-                      No Products Available{" "}
-                    </p>
-                  )}
-                {products?.map((item, index) => (
+                {products?.length === 0 && (
+                  <p className="text-lg md:col-span-2 xl:col-span-3 text-center font-bold text-red-600">
+                    No Products Available{" "}
+                  </p>
+                )}
+                {!loading && products?.map((item, index) => (
                   <Link
                     key={index}
                     to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}

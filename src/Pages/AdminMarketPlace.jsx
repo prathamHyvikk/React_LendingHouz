@@ -108,6 +108,8 @@ const AdminMarketPlace = () => {
             setProducts={setProducts}
             setLastPage={setLastPage}
             filter={true}
+            resetbtn={true}
+            setLoading={setLoading}
             setSelectedCategory={setSelectedCategory}
           />
           {/* Cards Design */}
@@ -126,15 +128,16 @@ const AdminMarketPlace = () => {
                       No Products Available{" "}
                     </p>
                   )}
-                  {products?.map((item, index) => (
-                    <SmallCard
-                      deleteProduct={deleteProduct}
-                      editProduct={editProduct}
-                      key={index}
-                      data={item}
-                      updateProduct="yes"
-                    />
-                  ))}
+                  {!loading &&
+                    products?.map((item, index) => (
+                      <SmallCard
+                        deleteProduct={deleteProduct}
+                        editProduct={editProduct}
+                        key={index}
+                        data={item}
+                        updateProduct="yes"
+                      />
+                    ))}
                 </div>
               </div>
             </div>

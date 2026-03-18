@@ -58,7 +58,7 @@ const ConfirmFinance = ({
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg ">
             <div className="bg-(--primary-color) text-white py-4 px-6">
-              <h2 className="text-xl font-bold">Form</h2>
+              <h2 className="text-xl font-bold">Application Form</h2>
             </div>
 
             <form className="p-4 sm:p-6">

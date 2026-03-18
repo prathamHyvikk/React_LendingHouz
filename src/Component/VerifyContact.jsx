@@ -53,7 +53,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
     if (!zipcode) return toast.error("zipcode code is required");
     if (!city) return toast.error("City is required");
     if (!state) return toast.error("State is required");
-    if (!chk_correct) return toast.error("Please chk_correct the box");
+    if (!chk_correct) return toast.error("Please check the box");
 
     setActiveStep((s) => s + 1);
 
@@ -67,7 +67,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
       <div className="max-w-2xl mx-auto lg:mt-14">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="bg-(--primary-color) text-white py-4 px-6">
-            <h2 className="text-xl font-bold">Form</h2>
+            <h2 className="text-xl font-bold">Application Form</h2>
           </div>
           <form
             onSubmit={handleSubmit} // Attach the submit handler here
@@ -81,10 +81,11 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="text"
                   id="fName"
+                  readOnly
                   value={verifyContact.first_name}
                   onChange={handleChange("first_name")}
                   placeholder="Enter your first name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 bg-[#F2F2F2] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -94,10 +95,11 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="text"
                   id="lName"
+                  readOnly
                   value={verifyContact.last_name}
                   onChange={handleChange("last_name")}
                   placeholder="Enter your last name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 bg-[#F2F2F2] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -109,10 +111,11 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="email"
                   id="email"
+                  readOnly
                   value={verifyContact.email}
                   onChange={handleChange("email")}
                   placeholder="Enter your email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 bg-[#F2F2F2] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -122,10 +125,11 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="number"
                   id="mobile"
+                  readOnly
                   value={verifyContact.mobile}
                   onChange={handleChange("mobile")}
                   placeholder="Enter your mobile "
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 bg-[#F2F2F2] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -136,6 +140,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
               <input
                 type="text"
                 id="address_1"
+                autoComplete="address_1"
                 value={verifyContact.address_1}
                 onChange={handleChange("address_1")}
                 placeholder="Enter your address"
@@ -149,6 +154,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
               <input
                 type="text"
                 id="address2"
+                autoComplete="address2"
                 value={verifyContact.address_2}
                 onChange={handleChange("address_2")}
                 placeholder="Enter your address2"
@@ -163,6 +169,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="number"
                   id="dateInput"
+                  autoComplete="zipcode"
                   value={verifyContact.zipcode}
                   onChange={handleChange("zipcode")}
                   placeholder="Enter zipcode"
@@ -176,6 +183,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="text"
                   id="city"
+                  autoComplete="city"
                   value={verifyContact.city}
                   onChange={handleChange("city")}
                   placeholder="city"
@@ -189,6 +197,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <input
                   type="text"
                   id="state"
+                  autoComplete="state"
                   value={verifyContact.state}
                   onChange={handleChange("state")}
                   placeholder="state"
@@ -211,20 +220,22 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
                 <span className="text-sm text-gray-700">Looks good!</span>
               </label>
             </div>
-            <button
-              //   onClick={}
-              className="w-full bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white py-2 rounded-md font-semibold transition-colors"
-            >
-              Continue
-            </button>
-          </form>
-        </div>
+            <div className="flex justify-between">
+              <div
+                onClick={() => setActiveStep((s) => s - 1)}
+                className=" w-fit bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white px-4 py-2 rounded-md font-semibold transition-colors "
+              >
+                Back
+              </div>
 
-        <div
-          onClick={() => setActiveStep((s) => s - 1)}
-          className=" w-fit bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white px-4 py-2 rounded-md font-semibold transition-colors mt-2"
-        >
-          Back
+              <button
+                //   onClick={}
+                className="w-fit bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white px-4  rounded-md font-semibold transition-colors"
+              >
+                Continue
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>

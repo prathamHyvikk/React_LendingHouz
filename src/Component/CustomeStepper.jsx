@@ -10,6 +10,8 @@ import { styled } from "@mui/material/styles";
 import VerifyContact from "./VerifyContact";
 import EmploymentAndIncom from "./EmploymentAndIncom";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const steps = ["", "", ""];
 
@@ -43,14 +45,54 @@ export default function CustomeStepper() {
     check: false,
   });
 
- 
-
   React.useEffect(() => {
     if (arrivedCategory) {
-      
       setConfirmFinance(arrivedCategory);
     }
   }, [arrivedCategory]);
+
+
+  const LoginToken = localStorage.getItem("LoginToken");
+  const userId = useSelector((state) => state.person.id);
+  const fetchUser = async () => {
+   
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/single-user`,
+        {
+          user_id: userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      const user = response?.data?.data;
+      setVerifyContact({
+        first_name: user?.first_name ?? "",
+        last_name: user?.last_name ?? "",
+        email: user?.email ?? "",
+        mobile: user?.phone ?? "",
+      });
+    } catch (error) {
+      const errors = error.response?.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    fetchUser();
+  }, []);
 
   const getStepContent = (step) => {
     switch (step) {

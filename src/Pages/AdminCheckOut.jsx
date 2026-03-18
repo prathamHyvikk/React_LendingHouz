@@ -83,6 +83,40 @@ const AdminCheckOut = () => {
     }
   };
 
+  const fetchUser = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/single-user`,
+        {
+          user_id: userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+        },
+      );
+
+      const user = response?.data?.data;
+
+      setFirstName(user?.first_name ?? "");
+      setLastName(user?.last_name ?? "");
+      setEmail(user?.email ?? "");
+      setPhone(user?.phone ?? "");
+    } catch (error) {
+      const errors = error.response?.data.errors;
+      if (errors) {
+        Object.entries(errors).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
+    }
+  };
+
   const handleFormSubmit = async (data) => {
     setLoading(true);
     try {
@@ -155,6 +189,7 @@ const AdminCheckOut = () => {
 
   useEffect(() => {
     fetchCart();
+    fetchUser();
   }, []);
 
   // useEffect(() => {
@@ -245,11 +280,13 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="text"
+                        readOnly
+                        value={firstName}
                         {...register("firstName", {
                           required: "First name is required",
                         })}
                         placeholder="Enter Your First Name..."
-                        className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 text-sm bg-[#f2f2f2] border  border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                       {errors?.firstName && (
                         <p className="text-red-500 text-xs mt-1">
@@ -263,11 +300,13 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="text"
+                        readOnly
+                        value={lastName}
                         {...register("lastName", {
                           required: "Last name is required",
                         })}
                         placeholder="Enter Your Last Name..."
-                        className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 text-sm bg-[#f2f2f2] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                       {errors?.lastName && (
                         <p className="text-red-500 text-xs mt-1">
@@ -281,11 +320,13 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="email"
+                        readOnly
+                        value={email}
                         {...register("email", {
                           required: "Email is required",
                         })}
                         placeholder="Enter Your Email..."
-                        className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 text-sm bg-[#f2f2f2] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                       {errors?.email && (
                         <p className="text-red-500 text-xs mt-1">
@@ -299,6 +340,8 @@ const AdminCheckOut = () => {
                       </label>
                       <input
                         type="number"
+                        readOnly
+                        value={phone}
                         {...register("phone", {
                           required: "Phone number is required",
                           minLength: {
@@ -311,7 +354,7 @@ const AdminCheckOut = () => {
                           },
                         })}
                         placeholder="Enter Your Phone Number..."
-                        className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 text-sm bg-[#f2f2f2] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                       {errors?.phone && (
                         <p className="text-red-500 text-xs mt-1">

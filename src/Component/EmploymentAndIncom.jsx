@@ -135,7 +135,7 @@ const EmploymentAndIncom = ({
         )}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="bg-(--primary-color) text-white py-4 px-6">
-            <h2 className="text-xl font-bold">Form</h2>
+            <h2 className="text-xl font-bold">Application Form</h2>
           </div>
           <form onSubmit={handleSubmit} className="sm:p-6 p-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -354,23 +354,27 @@ const EmploymentAndIncom = ({
                 <p className="text-red-600 text-xs mt-1">{error?.consent}</p>
               )}
             </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className={`w-full ${
-                loading ? "pointer-events-none bg-gray-400 " : "cursor-pointer"
-              }  bg-(--primary-color) hover:bg-blue-950 text-white py-2 rounded-md font-semibold transition-colors`}
-            >
-              Continue
-            </button>
-          </form>
-        </div>
 
-        <div
-          onClick={() => setActiveStep((s) => s - 1)}
-          className=" w-fit bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white px-4 py-2 rounded-md font-semibold transition-colors mt-2"
-        >
-          Back
+            <div className="flex justify-between">
+              <div
+                onClick={() => setActiveStep((s) => s - 1)}
+                className=" w-fit bg-(--primary-color) cursor-pointer hover:bg-blue-950 text-white px-4 py-2 rounded-md font-semibold transition-colors "
+              >
+                Back
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-fit px-4 ${
+                  loading
+                    ? "pointer-events-none bg-gray-400 "
+                    : "cursor-pointer"
+                }  bg-(--primary-color) hover:bg-blue-950 text-white py-2 rounded-md font-semibold transition-colors`}
+              >
+                Continue
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>

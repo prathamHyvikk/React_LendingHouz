@@ -140,6 +140,21 @@ const AdminDashboard = () => {
     fetchTotal();
   }, []);
 
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case "Approved":
+        return "text-green-600  ";
+      case "Fulfiled":
+        return "text-blue-600 ";
+      case "Pending":
+        return "text-red-600  ";
+      case "Used":
+        return "text-pink-600 ";
+      default:
+        return "text-gray-500  ";
+    }
+  };
+
   return (
     <>
       <AdminLayout>
@@ -217,7 +232,11 @@ const AdminDashboard = () => {
                           <Td>#{item.application_id}</Td>
                           <Td>{item.name}</Td>
                           {role == "admin" && <Td>{item.business}</Td>}
-                          <Td>{item.application_status}</Td>
+                          <Td
+                            className={`${getStatusStyle(item.application_status)}`}
+                          >
+                            {item.application_status}
+                          </Td>
                           <Td className="">$ {item.requested_income}</Td>
                           <Td className="" center={""}>
                             {item.created_at?.split("T")[0]}

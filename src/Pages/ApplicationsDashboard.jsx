@@ -126,6 +126,21 @@ const ApplicationsDashboard = () => {
     fetchTotal();
   }, []);
 
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case "Approved":
+        return "text-green-600  ";
+      case "Fulfiled":
+        return "text-blue-600 ";
+      case "Pending":
+        return "text-red-600  ";
+      case "Used":
+        return "text-pink-600 ";
+      default:
+        return "text-gray-500  ";
+    }
+  };
+
   return (
     <>
       <AdminLayout>
@@ -133,21 +148,21 @@ const ApplicationsDashboard = () => {
           {/* STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
             <StatCard
-                       title="Total Applications"
-                       value={loading ? "..." : totalApplications}
-                       bg="#E5ECF6"
-                     />
-                     <StatCard
-                       title="Loan Amount"
-                       value={loading ? "..." : `$${totalAmount}`}
-                       bg="#D0FFE0"
-                     />
-                     <StatCard
-                       title="Inactive Applications"
-                       value={loading ? "..." : totalInActive}
-                       bg="#E6E6E6"
-                     />
-           {/* <StatCard title="Referrals" value="2" bg="#FFD0D1" /> */}
+              title="Total Applications"
+              value={loading ? "..." : totalApplications}
+              bg="#E5ECF6"
+            />
+            <StatCard
+              title="Loan Amount"
+              value={loading ? "..." : `$${totalAmount}`}
+              bg="#D0FFE0"
+            />
+            <StatCard
+              title="Inactive Applications"
+              value={loading ? "..." : totalInActive}
+              bg="#E6E6E6"
+            />
+            {/* <StatCard title="Referrals" value="2" bg="#FFD0D1" /> */}
           </div>
 
           {/* TABLE */}
@@ -200,7 +215,11 @@ const ApplicationsDashboard = () => {
                                 {item.product_type}
                               </div>
                             </Td>
-                            <Td center={"yes"}>{item.status}</Td>
+                            <Td
+                              className={`${getStatusStyle(item.application_status)}`}
+                            >
+                              {item.application_status}
+                            </Td>
                             <Td>{item.lender}</Td>
 
                             <Td center={"yes"}>{item.application_id}</Td>

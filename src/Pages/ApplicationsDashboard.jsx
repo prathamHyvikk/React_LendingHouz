@@ -100,13 +100,13 @@ const ApplicationsDashboard = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://cpanel.lendinghouz.com/api/show-application`,
+        `${import.meta.env.VITE_BASE_URL}/show-application`,
         {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
           params: {
-            user_id: userId,
+            page_no: 1,
           },
         },
       );

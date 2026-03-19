@@ -111,10 +111,13 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://cpanel.lendinghouz.com/api/show-application`,
+        `${import.meta.env.VITE_BASE_URL}/show-application`,
         {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
+          },
+          params: {
+            page_no: 1,
           },
         },
       );

@@ -192,12 +192,12 @@ const HeaderTable = ({
               )}
             </div>
 
-            {/* --- RESET BUTTON --- */}
+            {/*  Reset button  */}
             {filter && (
               <button
                 onClick={handleReset}
                 title="Reset Filters"
-                className="p-2.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all duration-300"
+                className="sm:p-2.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all duration-300"
               >
                 <IoReloadOutline
                   size={20}

@@ -43,7 +43,7 @@ const InvoiceModal = ({ onClose, invoice }) => {
     }
   }, [invoice]);
 
-  const { order, user, items, grand_total, application } = data || {};
+  const { order, user, items, grand_total, application,tfc_invoice } = data || {};
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -155,8 +155,8 @@ const InvoiceModal = ({ onClose, invoice }) => {
               </div>
 
               <div className="text-left sm:text-right space-y-2 w-full sm:w-auto">
-                <p className="text-lg sm:text-2xl sora-bold text-gray-900">
-                  #INV-{order?.id}
+                <p className="text-xs sm:text-sm   sora-bold text-gray-900">
+                  Invoice #-{tfc_invoice?.InvoiceNumber}
                 </p>
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] sora-bold uppercase tracking-wider bg-blue-50 text-(--primary-color) border border-blue-100">
                   {order?.method} Payment

@@ -157,7 +157,7 @@ const DashBoardUser = () => {
       case "Pending":
         return "text-red-600  ";
       case "Used":
-        return "text-pink-600 ";
+        return "text-[#0080c6] ";
       default:
         return "text-gray-500  ";
     }

@@ -130,29 +130,10 @@ const DashBoardUser = () => {
     }
   };
 
-  const fetchInvoice = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `https://cpanel.lendinghouz.com/api/get-invoice-product`,
-        {
-          headers: {
-            Authorization: `Bearer ${LoginToken}`,
-          },
-          params: {
-            user_id: userId,
-          },
-        },
-      );
-
-      setInvoiceDetail(response?.data);
-    } catch (error) {
-      toast.error(error?.response.data.message);
-    } finally {
-      setLoading(false);
-    }
+  const handleInvoice = (item) => {
+    setShowInvoice(true);
+    setInvoiceDetail(item);
   };
-
   const handleApplicationInfo = (item) => {
     setSelectedApplication(item);
     setShowView(true);
@@ -161,7 +142,7 @@ const DashBoardUser = () => {
   useEffect(() => {
     recentProduct();
     fetchApplications();
-    fetchInvoice();
+
     fetchCategories();
     fetchTotal();
   }, []);
@@ -276,12 +257,18 @@ const DashBoardUser = () => {
                             />
                           </Td>
 
-                          <Td center={"yes"}>
-                            <IconBtn
-                              icon={<ImAttachment />}
-                              onClick={() => setShowInvoice(true)}
-                            />
-                          </Td>
+                          {item.application_status == "Used" ? (
+                            <Td center={"yes"}>
+                              <IconBtn
+                                icon={<ImAttachment />}
+                                onClick={() => handleInvoice(item)}
+                              />
+                            </Td>
+                          ) : (
+                            <Td center={"yes"}>
+                             
+                            </Td>
+                          )}
 
                           <Td center>
                             <IconBtn
@@ -335,7 +322,10 @@ const DashBoardUser = () => {
           </div>
 
           {showInvoice && (
-            <InvoiceModal data={invoiceDetail} onClose={() => setShowInvoice(false)} />
+            <InvoiceModal
+              invoice={invoiceDetail}
+              onClose={() => setShowInvoice(false)}
+            />
           )}
           {showView && (
             <ViewModal

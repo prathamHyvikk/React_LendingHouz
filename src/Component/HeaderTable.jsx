@@ -65,7 +65,6 @@ const HeaderTable = ({
     setShowOptions(false);
 
     if (fetchProductFromCategory === "no") return;
-    setLoading(true);
 
     try {
       const response = await axios.get(
@@ -79,8 +78,6 @@ const HeaderTable = ({
       setLastPage(response?.data?.last_page);
     } catch (error) {
       toast.error("Error filtering products");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -114,11 +111,11 @@ const HeaderTable = ({
 
   return (
     <div
-      className={`flex ${marketplace ? "flex-row" : "flex-col "} sm:flex-row items-center justify-between mb-6 gap-3`}
+      className={`flex ${marketplace ? "flex-col" : "flex-col "} sm:flex-row  justify-between flex-wrap mb-6 gap-3`}
     >
       <h2 className="text-lg sora-semibold ">{headingContent}</h2>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center  flex-wrap gap-3">
         {/* Add Product / New Application Button Logic */}
         {marketplace ? (
           role === "admin" && (

@@ -34,6 +34,7 @@ const DashBoardUser = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [lastPage, setLastPage] = useState();
+  const [invoiceDetail, setInvoiceDetail] = useState();
 
   const [totalApplications, setTotalApplications] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -129,20 +130,43 @@ const DashBoardUser = () => {
     }
   };
 
+  const fetchInvoice = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `https://cpanel.lendinghouz.com/api/get-invoice-product`,
+        {
+          headers: {
+            Authorization: `Bearer ${LoginToken}`,
+          },
+          params: {
+            user_id: userId,
+          },
+        },
+      );
+
+      setInvoiceDetail(response?.data);
+    } catch (error) {
+      toast.error(error?.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleApplicationInfo = (item) => {
     setSelectedApplication(item);
     setShowView(true);
   };
-  useEffect(() => {
-    fetchApplications();
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     recentProduct();
+    fetchApplications();
+    fetchInvoice();
+    fetchCategories();
     fetchTotal();
   }, []);
 
+  console.log(invoiceDetail);
   const getStatusStyle = (status) => {
     switch (status) {
       case "Approved":
@@ -311,7 +335,7 @@ const DashBoardUser = () => {
           </div>
 
           {showInvoice && (
-            <InvoiceModal onClose={() => setShowInvoice(false)} />
+            <InvoiceModal data={invoiceDetail} onClose={() => setShowInvoice(false)} />
           )}
           {showView && (
             <ViewModal

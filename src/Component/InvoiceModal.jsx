@@ -1,28 +1,226 @@
-import React from "react";
+import React, { useRef } from "react";
 import ModalWrapper from "./ModalWrapper";
 import logoImage from "/assets/Images/logo.png";
 
-const InvoiceModal = ({ onClose  }) => {
+const InvoiceModal = ({ onClose, data }) => {
+  const { order, user, items, grand_total } = data || {};
+  const printRef = useRef();
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount || 0);
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  if (!data) return null;
+
   return (
-    <>
-      <ModalWrapper onClose={onClose}>
-        <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl overflow-y-auto max-h-[90vh]">
-          <div className="sticky top-0 bg-linear-to-r from-blue-50 to-white border-b border-gray-100 px-8 py-6 flex items-center justify-between">
-            <div>
-              <h2 className="text-lg sm:text-2xl sora-bold text-(--primary-color)">
-                Invoice Details
-              </h2>
-              <p className="sm:text-sm text-xs text-gray-600 mt-1">
-                Loan Application & Service Invoice
-              </p>
+    <ModalWrapper onClose={onClose}>
+      {/* Tailwind Note: Added 'print-content' style logic.
+        The @media print CSS below handles hiding everything except this modal.
+      */}
+      <style>
+        {`
+          @media print {
+            body * {
+              visibility: hidden;
+            }
+            #printable-invoice, #printable-invoice * {
+              visibility: visible;
+            }
+            #printable-invoice {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              margin: 0;
+              padding: 20px;
+              box-shadow: none;
+            }
+            .no-print {
+              display: none !important;
+            }
+          }
+        `}
+      </style>
+
+      <div
+        id="printable-invoice"
+        className="bg-white rounded-2xl shadow-2xl w-[95vw] max-w-4xl overflow-y-auto max-h-[95vh] border border-gray-100 mx-auto"
+      >
+        {/* Header Section */}
+        <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-100 px-4 sm:px-6 py-4 flex items-center justify-between no-print">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-1 bg-(--primary-color) rounded-full"></div>
+            <h2 className="text-lg sm:text-xl sora-bold text-gray-900">
+              Invoice Detail
+            </h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all p-2 rounded-full cursor-pointer"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div className="p-4 sm:p-10">
+          {/* Brand & Meta Info */}
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-6 pb-8 border-b border-gray-100">
+            <div className="space-y-4">
+              <img
+                src={logoImage}
+                className="h-10 sm:h-12 w-auto object-contain"
+                alt="Logo"
+              />
+              <div className="space-y-1">
+                <p className="text-xs sm:text-sm text-gray-500">Date Issued</p>
+                <p className="sora-semibold text-gray-900 text-sm sm:text-base">
+                  {formatDate(order?.created_at)}
+                </p>
+              </div>
             </div>
+
+            <div className="text-left sm:text-right space-y-2 w-full sm:w-auto">
+              <p className="text-lg sm:text-2xl sora-bold text-gray-900">
+                #INV-{order?.id}
+              </p>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] sora-bold uppercase tracking-wider bg-blue-50 text-(--primary-color) border border-blue-100">
+                {order?.method} Payment
+              </span>
+            </div>
+          </div>
+
+          {/* Details Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-8">
+            <div className="p-5 rounded-xl bg-gray-50 border border-gray-100">
+              <h4 className="text-[10px] sora-bold text-gray-400 uppercase tracking-widest mb-3">
+               Bill To
+              </h4>
+              <p className="sora-bold text-gray-900">{user?.name}</p>
+              <p className="text-xs sm:text-sm text-gray-600">Customer ID: {user?.id}</p>
+              <div className="mt-3 space-y-1 text-xs sm:text-sm text-gray-600">
+                <p className="flex items-center gap-2">
+                  <span>📩</span> {user?.email}
+                </p>
+                <p className="flex items-center gap-2">
+                  <span>📞</span> {user?.phone}
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-xl bg-gray-50 border border-gray-100">
+              <h4 className="text-[10px] sora-bold text-gray-400 uppercase tracking-widest mb-3">
+                Order Details
+              </h4>
+              <div className="space-y-2 text-xs sm:text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-500">App ID:</span>
+                  <span className="sora-medium text-gray-900">
+                    {order?.application_id || "N/A"}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Status:</span>
+                  <span className="text-green-600 sora-bold">Paid</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Items Table - Responsive Scroll for mobile */}
+          <div className="mb-8 overflow-x-auto rounded-xl border border-gray-100">
+            <table className="w-full text-left min-w-[500px]">
+              <thead>
+                <tr className="bg-gray-900 text-white">
+                  <th className="px-4 py-3 text-[10px] sora-bold uppercase tracking-wider">
+                    Product
+                  </th>
+                  <th className="px-4 py-3 text-[10px] sora-bold uppercase tracking-wider text-center">
+                    Qty
+                  </th>
+                  <th className="px-4 py-3 text-[10px] sora-bold uppercase tracking-wider text-right">
+                    Price
+                  </th>
+                  <th className="px-4 py-3 text-[10px] sora-bold uppercase tracking-wider text-right">
+                    Total
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {items?.map((item, index) => (
+                  <tr key={index} className="text-sm">
+                    <td className="px-4 py-4 sora-medium text-gray-900">
+                      {item.product_name}
+                    </td>
+                    <td className="px-4 py-4 text-center text-gray-600">
+                      {item.quantity}
+                    </td>
+                    <td className="px-4 py-4 text-right text-gray-600">
+                      {formatCurrency(item.price)}
+                    </td>
+                    <td className="px-4 py-4 text-right sora-bold text-gray-900">
+                      {formatCurrency(item.total)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Calculation */}
+          <div className="flex justify-end mb-8">
+            <div className="w-full sm:w-64 space-y-2">
+              <div className="flex justify-between text-xs text-gray-500">
+                <span>Subtotal</span>
+                <span>{formatCurrency(grand_total)}</span>
+              </div>
+              <div className="h-px bg-gray-100 my-2"></div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm sora-bold text-gray-900">
+                  Grand Total
+                </span>
+                <span className="text-xl sora-bold text-(--primary-color)">
+                  {formatCurrency(grand_total)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center no-print">
             <button
-              id="closeModal"
-              onClick={onClose}
-              className="text-gray-500 cursor-pointer transition-colors p-2 -mt-10 -mr-7  rounded-lg"
+              onClick={handlePrint}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-3 bg-(--primary-color) text-white rounded-xl hover:opacity-90 transition-all sora-bold text-sm cursor-pointer shadow-lg shadow-blue-100"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -31,213 +229,15 @@ const InvoiceModal = ({ onClose  }) => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
+                  d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
                 />
               </svg>
+              Print & Save as PDF
             </button>
           </div>
-
-          <div className="md:px-8 px-4 md:py-0">
-            <div className="mb-4 pb-8 border-b border-gray-200">
-              <div className="flex justify-center sm:justify-between items-center">
-                <div>
-                  <div className="flex  items-center gap-3 mb-4">
-                    <div>
-                      <img src={logoImage} className="md:w-44" alt="" />
-                    </div>
-                  </div>
-                  <div className="mt-4 space-y-1 text-sm text-gray-600">
-                    <p>
-                      <span className="sora-semibold text-black">
-                        Invoice #:
-                      </span>{" "}
-                      INV-2025-001247
-                    </p>
-                    <p>
-                      <span className="sora-semibold text-black">Date:</span>{" "}
-                      December 11, 2025
-                    </p>
-                    <p>
-                      <span className="sora-semibold text-black">
-                        Due Date:
-                      </span>{" "}
-                      January 10, 2026
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right hidden sm:block">
-                  <div className="mb-3">
-                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm sora-semibold inline-block">
-                      Approved
-                    </span>
-                  </div>
-                  <div className="space-y-1 text-sm text-gray-600">
-                    <p>
-                      <span className="sora-semibold">Approved Amount:</span>{" "}
-                      $5,000.00
-                    </p>
-                    <p>
-                      <span className="sora-semibold">Loan Term:</span> 12
-                      Months
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div>
-                <h4 className="text-xs sora-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Bill To
-                </h4>
-                <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
-                  <p className="sora-semibold text-gray-900 mb-1">
-                    Jean Paul Trujillo
-                  </p>
-                  <p className="text-[12px] text-gray-600 mb-3">
-                    Customer ID: CUST-45829
-                  </p>
-                  <div className="space-y-1 text-[12px] text-gray-600">
-                    <p>3778 SW 127th AVE</p>
-                    <p>Miami, FL 33175</p>
-                    <p className="mt-2">📞 3055053389</p>
-                    <p>📧 jeanpaultru@gmail.com</p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xs sora-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Application
-                </h4>
-                <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
-                  <p className="sora-semibold text-gray-900 mb-3">
-                    Loan Application
-                  </p>
-                  <div className="space-y-2 text-[12px] text-gray-600">
-                    <div className="flex justify-between">
-                      <span>App ID:</span>
-                      <span className="sora-medium text-gray-900">985170</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Status:</span>
-                      <span className="sora-medium text-green-600">Active</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Submitted:</span>
-                      <span className="sora-medium text-gray-900">
-                        2025-08-05
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Product:</span>
-                      <span className="sora-medium text-gray-900">
-                        Electronics
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xs sora-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Business Info
-                </h4>
-                <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
-                  <p className="sora-semibold text-gray-900 mb-3">
-                    Quick Details
-                  </p>
-                  <div className="space-y-2 text-xs text-gray-600">
-                    <div className="flex justify-between">
-                      <span>Gross Income:</span>
-                      <span className="sora-medium text-gray-900">
-                        $120,000
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Pay Frequency:</span>
-                      <span className="sora-medium text-gray-900">Monthly</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>SSN:</span>
-                      <span className="sora-medium text-gray-900">
-                        628325819
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>DOB:</span>
-                      <span className="sora-medium text-gray-900">
-                        1978-12-20
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-              <div>
-                <h4 className="text-sm sora-semibold text-gray-900 uppercase tracking-wide mb-4">
-                  Payment Terms
-                </h4>
-                <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50 space-y-3 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Monthly Payment:</span>
-                    <span className="sora-semibold text-gray-900">$450.00</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Interest Rate (APR):</span>
-                    <span className="sora-semibold text-gray-900">18.5%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Remaining Balance:</span>
-                    <span className="sora-semibold text-gray-900">
-                      $5,250.00
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Next Payment Due:</span>
-                    <span className="sora-semibold text-gray-900">
-                      Jan 15, 2026
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm sora-semibold text-gray-900 uppercase tracking-wide mb-4">
-                  Amount Summary
-                </h4>
-                <div className="border border-gray-100 rounded-lg p-4 bg-linear-to-br from-blue-50 to-blue-50/50 space-y-3">
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>Subtotal:</span>
-                    <span>$525.00</span>
-                  </div>
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>Tax (10%):</span>
-                    <span>$52.50</span>
-                  </div>
-                  <div className="h-px bg-linear-to-r from-blue-200 to-transparent my-2"></div>
-                  <div className="flex justify-between text-lg sora-bold text-(--primary-color) pt-2">
-                    <span>Total Due:</span>
-                    <span>$577.50</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-4 justify-center md:justify-end py-6 border-t border-gray-100">
-              <button className="md:px-6 px-3 py-2 border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-all cursor-pointer sora-medium text-sm">
-                Download PDF
-              </button>
-              <button className="md:px-6 px-3 py-2 bg-(--primary-color)  text-white rounded-lg transition-all sora-medium text-sm cursor-pointer">
-                Print Invoice
-              </button>
-            </div>
-          </div>
         </div>
-      </ModalWrapper>
-    </>
+      </div>
+    </ModalWrapper>
   );
 };
 

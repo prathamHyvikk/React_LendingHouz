@@ -38,6 +38,7 @@ const AdminDashboard = () => {
   const [search, setSearch] = useState("");
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [lastPage, setLastPage] = useState();
+  const [invoiceDetail, setInvoiceDetail] = useState();
 
   const role = useSelector((state) => state.person.value);
   const LoginToken = localStorage.getItem("LoginToken");
@@ -131,6 +132,11 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleInvoice = (item) => {
+    console.log(item);
+    setShowInvoice(true);
+    setInvoiceDetail(item);
+  };
   const handleApplicationInfo = (item) => {
     setSelectedApplication(item);
     setShowView(true);
@@ -252,12 +258,16 @@ const AdminDashboard = () => {
                             />
                           </Td>
 
-                          <Td center={"yes"}>
-                            <IconBtn
-                              icon={<ImAttachment />}
-                              onClick={() => setShowInvoice(true)}
-                            />
-                          </Td>
+                          {item.application_status == "Used" ? (
+                            <Td center={"yes"}>
+                              <IconBtn
+                                icon={<ImAttachment />}
+                                onClick={() => handleInvoice(item)}
+                              />
+                            </Td>
+                          ) : (
+                            <Td center={"yes"}></Td>
+                          )}
 
                           <Td center>
                             <IconBtn
@@ -306,7 +316,10 @@ const AdminDashboard = () => {
           </div>
 
           {showInvoice && (
-            <InvoiceModal onClose={() => setShowInvoice(false)} />
+            <InvoiceModal
+              invoice={invoiceDetail}
+              onClose={() => setShowInvoice(false)}
+            />
           )}
           {showView && (
             <ViewModal

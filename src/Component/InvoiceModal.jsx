@@ -11,9 +11,6 @@ const InvoiceModal = ({ onClose, invoice }) => {
 
   const LoginToken = localStorage.getItem("LoginToken");
 
-  // if (!invoice) return null;
-
-  console.log(invoice);
   const fetchInvoice = async () => {
     setLoading(true);
     try {
@@ -333,3 +330,4 @@ const InvoiceModal = ({ onClose, invoice }) => {
 };
 
 export default InvoiceModal;
+

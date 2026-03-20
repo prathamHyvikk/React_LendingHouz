@@ -252,7 +252,7 @@ const AdminCategory = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#002E6D] text-white">
-                  <th className="p-4 font-semibold">ID</th>
+                  <th className="p-4 font-semibold">No</th>
                   <th className="p-4 font-semibold">Category Name</th>
                   <th className="p-4 font-semibold text-center">Actions</th>
                 </tr>
@@ -265,12 +265,12 @@ const AdminCategory = () => {
                     </td>
                   </tr>
                 ) : categories.length > 0 ? (
-                  categories.map((cat) => (
+                  categories.map((cat,i) => (
                     <tr
                       key={cat.id}
                       className="hover:bg-gray-50 transition-colors"
                     >
-                      <td className="p-4 text-gray-600">#{cat.id}</td>
+                      <td className="p-4 text-gray-600">{i+1}</td>
                       <td className="p-4 font-medium text-gray-800">
                         {cat.name}
                       </td>

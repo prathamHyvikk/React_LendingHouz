@@ -231,7 +231,7 @@ const InvoiceModal = ({ onClose, invoice }) => {
                 </h4>
                 <div className="space-y-2 text-xs sm:text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-500">App ID:</span>
+                    <span className="text-gray-500">Application ID:</span>
                     <span className="sora-medium text-gray-900">
                       {application?.application_id || "N/A"}
                     </span>

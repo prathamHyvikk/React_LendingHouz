@@ -91,32 +91,41 @@ function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/app/signin");
-  //   }
-  // }, [token]);
+  useEffect(() => {
+    setTimeout(
+      () => {
+        localStorage.removeItem("LoginToken");
+      },
+      1000 * 60 * 60 * 24,
+    );
+  });
 
-  // useEffect(() => {
-  //   if (pathname.startsWith("/admin")) {
-  //     dispatch(setPersonRole("admin"));
-  //   } else if (pathname.startsWith("/app")) {
-  //     dispatch(setPersonRole("app"));
-  //   }
-  // }, [pathname]);
+  useEffect(() => {
+    if (!token) {
+      navigate("/app/signin");
+    }
+  }, [token]);
 
-  // useEffect(() => {
-  //   if (prevRoleRef.current === null) {
-  //     prevRoleRef.current = role;
-  //     return;
-  //   }
+  useEffect(() => {
+    if (pathname.startsWith("/admin")) {
+      dispatch(setPersonRole("admin"));
+    } else if (pathname.startsWith("/app")) {
+      dispatch(setPersonRole("app"));
+    }
+  }, [pathname]);
 
-  //   if (prevRoleRef.current !== role && role) {
-  //     navigate(`/${role}/signin`);
-  //   }
+  useEffect(() => {
+    if (prevRoleRef.current === null) {
+      prevRoleRef.current = role;
+      return;
+    }
 
-  //   prevRoleRef.current = role;
-  // }, [role]);
+    if (prevRoleRef.current !== role && role) {
+      navigate(`/${role}/signin`);
+    }
+
+    prevRoleRef.current = role;
+  }, [role]);
 
   return (
     <div className="mainContainer">
@@ -188,7 +197,10 @@ function App() {
             element={<PrivacyPolicy />}
           />
           {/* <Route path="/app/dashboard/users" element={<Users />} /> */}
-          <Route path="admin/dashboard/users/view-user/:uid" element={<ViewUser />} />
+          <Route
+            path="admin/dashboard/users/view-user/:uid"
+            element={<ViewUser />}
+          />
           <Route
             path="app/dashboard/notifications"
             element={<Notifications />}

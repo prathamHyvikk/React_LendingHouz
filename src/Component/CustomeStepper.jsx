@@ -51,11 +51,9 @@ export default function CustomeStepper() {
     }
   }, [arrivedCategory]);
 
-
   const LoginToken = localStorage.getItem("LoginToken");
   const userId = useSelector((state) => state.person.id);
   const fetchUser = async () => {
-   
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/single-user`,
@@ -180,7 +178,14 @@ export default function CustomeStepper() {
       </Box>
 
       <Box sx={{ width: "100%" }}>
-        <Box sx={{ width: "40%", mx: "auto" }}>
+        <Box
+          sx={{
+            width: {
+              sm: "40%",
+            },
+            mx: "auto",
+          }}
+        >
           <Stepper activeStep={activeStep}>
             {steps.map((label, index) => (
               <Step key={index}>

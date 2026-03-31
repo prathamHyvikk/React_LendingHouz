@@ -15,8 +15,8 @@ const Th = ({ children, className = "" }) => (
 );
 
 const Td = ({ children, center, className = "" }) => (
-  <td className={`px-6 py-4 ${center ? "text-center" : ""} ${className}`}>
-    {children}
+  <td className={`px-6 py-4 ${center ? "text-center" : ""} `}>
+    <div className={`p-1 rounded-lg text-center ${className}`}>{children}</div>
   </td>
 );
 

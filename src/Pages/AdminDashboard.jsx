@@ -152,13 +152,13 @@ const AdminDashboard = () => {
   const getStatusStyle = (status) => {
     switch (status) {
       case "Approved":
-        return "text-green-600  ";
+        return "text-green-600 bg-green-600/10 shadow";
       case "Fulfiled":
-        return "text-blue-600 ";
+        return "text-blue-600  bg-blue-600/10 shadow";
       case "Pending":
-        return "text-red-600  ";
+        return "text-red-600  bg-red-600/10 shadow";
       case "Used":
-        return "text-[#0080c6] ";
+        return "text-[#0080c6] bg-[#0080c6]/10 shadow ";
       default:
         return "text-gray-500  ";
     }

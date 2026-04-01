@@ -1,66 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setId, setPersonRole, setUserType } from "../features/personRole";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { setAuthenticate } from "../features/authenticate";
+import { setId, setPersonRole, setUserType } from "../features/personRole";
+import Input from "../Component/Input";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [dob, setDob] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    dob: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const { pathname } = useLocation();
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axios.post(
+      const res = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/register`,
         {
-          name,
-          email,
-          phone,
-          dob,
-          password,
-          c_password: confirmPassword,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          dob: form.dob,
+          password: form.password,
+          c_password: form.confirmPassword,
           user_type: "C",
         },
       );
 
-      toast.success(response.data.message);
-      localStorage.setItem("LoginToken", response.data.data.token);
-      navigate("/");
+      toast.success(res.data.message);
+      localStorage.setItem("LoginToken", res.data.data.token);
+
       dispatch(setAuthenticate(true));
       dispatch(setPersonRole("app"));
-      dispatch(setId(response.data.data.id));
+      dispatch(setId(res.data.data.id));
       dispatch(setUserType("C"));
-    } catch (error) {
-      if (error.response) {
-        const errors = error.response.data.errors;
 
-        setErrors(errors);
-        const firstError = Object.values(errors)?.[0];
-
-        // if (firstError) {
-        //   toast.error(firstError);
-        // }
+      navigate("/");
+    } catch (err) {
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
       } else {
-        toast.error(error?.response.data.message);
+        toast.error("Something went wrong");
       }
     } finally {
       setLoading(false);
@@ -68,153 +68,100 @@ const Signup = () => {
   };
 
   return (
-    <>
-      <div
-        className="bg-no-repeat bg-cover bg-center h-screen flex items-center justify-center p-4"
-        style={{ backgroundImage: `url(${bgImage})` }}
-      >
-        <div className="absolute w-full h-full bg-white/90 top-0 left-0 z-1"></div>
-        <div className="w-full max-w-md relative z-10">
-          <div className=" rounded-3xl shadow-2xl  bg-[#F2F2F2]">
-            <div className="text-center bg-white pt-2 px-6 rounded-3xl overflow-hidden shadow-2xl">
-              <div className="flex items-center justify-center mb-2">
-                <img src={logoImg} className="w-64" alt="logo" />
-              </div>
-              {/* Sign Up Heading  */}
-              <h2 className="text-2xl sora-bold text-center text-(--primary-color) mb-2">
-                Sign Up
-              </h2>
-              <div className="h-1 bg-(--primary-color) w-full "></div>
+    <div
+      className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
+
+      <div className="relative w-full max-w-lg">
+        <div className="bg-[#F2F2F2] rounded-3xl shadow-2xl overflow-hidden">
+          {/* Header */}
+          <div className="text-center px-8 pt-6 pb-4 border-b">
+            <img src={logoImg} alt="logo" className="w-40 mx-auto mb-2" />
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Create Account
+            </h2>
+            <p className="text-sm text-gray-500">Join us and get started</p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="p-6 space-y-5">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <Input
+                name="name"
+                placeholder="Full Name"
+                value={form.name}
+                onChange={handleChange}
+                error={errors.name}
+              />
+              <Input
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                error={errors.email}
+              />
             </div>
 
-            <form className="space-y-4 bg-[#F2F2F2] px-4 sm:px-6 pt-12 pb-8 overflow-hidden">
-              <div className=" grid sm:grid-cols-2 gap-5 ">
-                <div>
-                  {/* <label className="block text-gray-600 text-sm">Name</label> */}
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your name"
-                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm   transition"
-                  />
-                  {errors?.name && (
-                    <span className="text-red-500 text-xs">{errors.name}</span>
-                  )}
-                </div>
+            <Input
+              name="phone"
+              placeholder="Phone Number"
+              value={form.phone}
+              onChange={handleChange}
+              error={errors.phone}
+            />
 
-                <div>
-                  {/* <label className="block text-gray-600 text-sm">
-                  Email Address
-                </label> */}
-                  <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
-                  />
-                  {errors?.email && (
-                    <span className="text-red-500 text-xs">{errors.email}</span>
-                  )}
-                </div>
-              </div>
+            <p className="text-xs my-2 text-gray-500">Date of Birth</p>
+            <Input
+              type="date"
+              name="dob"
+              max={new Date().toISOString().split("T")[0]}
+              value={form.dob}
+              onChange={handleChange}
+              error={errors.dob}
+            />
 
-              {/* <div className=" grid grid-cols-2 gap-5 "> */}
-                <div>
-                  {/* <label className="block text-gray-600 text-sm">Phone</label> */}
-                  <input
-                    type="number"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="Enter your phone "
-                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
-                  />
-                  {errors?.phone && (
-                    <span className="text-red-500 text-xs">{errors.phone}</span>
-                  )}
-                </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                error={errors.password}
+              />
+              <Input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                error={errors.c_password}
+              />
+            </div>
 
-                <div>
-                  <label className="block text-gray-600 text-sm">
-                    Date of Birth
-                  </label>
-                  <input
-                    type="date"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
-                    max={new Date().toISOString().split("T")[0]}
-                    placeholder="12/05/2025"
-                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
-                  />
-                  {errors?.dob && (
-                    <span className="text-red-500 text-xs">{errors.dob}</span>
-                  )}
-                </div>
-              {/* </div> */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-(--primary-color) text-white font-semibold tracking-wide hover:opacity-90 transition"
+            >
+              {loading ? "Creating..." : "Sign Up"}
+            </button>
 
-              <div className=" grid sm:grid-cols-2 gap-5 ">
-                <div>
-                  {/* <label className="block text-gray-600 text-sm">
-                  Create New Password
-                </label> */}
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
-                  />
-                  {errors?.password && (
-                    <span className="text-red-500 text-xs">
-                      {errors.password}
-                    </span>
-                  )}
-                </div>
-
-                <div>
-                  {/* <label className="block text-gray-600 text-sm">
-                    Confirm Your Password
-                  </label> */}
-                  <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder=" Enter Confirm Password"
-                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
-                  />
-                  {errors?.c_password && (
-                    <span className="text-red-500 text-xs">
-                      {errors.c_password}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <button
-                onClick={handleSubmit}
-                disabled={loading}
-                className={`w-full ${
-                  loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-                } bg-(--primary-color) text-white sora-bold py-2 rounded-lg mt-2 hover:bg-blue-800 transition duration-200 `}
+            <p className="text-center text-gray-700 pt-4">
+              Already have an account? <br />
+              <Link
+                to="/app/signin"
+                className="sora-bold text-gray-900 hover:text-blue-900 transition"
               >
-                Sign Up
-              </button>
-
-              <p className="text-center text-gray-700 ">
-                Already Registered?{" "}
-                <Link
-                  to="/app/signin"
-                  className="sora-bold text-gray-900 hover:text-blue-900 transition"
-                >
-                  Sign In
-                </Link>
-              </p>
-            </form>
-          </div>
+                Sign In
+              </Link>
+            </p>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

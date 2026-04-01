@@ -39,7 +39,7 @@ const Signup = () => {
           password,
           c_password: confirmPassword,
           user_type: "C",
-        }
+        },
       );
 
       toast.success(response.data.message);
@@ -56,9 +56,9 @@ const Signup = () => {
         setErrors(errors);
         const firstError = Object.values(errors)?.[0];
 
-        if (firstError) {
-          toast.error(firstError);
-        }
+        // if (firstError) {
+        //   toast.error(firstError);
+        // }
       } else {
         toast.error(error?.response.data.message);
       }
@@ -70,13 +70,13 @@ const Signup = () => {
   return (
     <>
       <div
-        className="bg-no-repeat bg-cover bg-center h-[1000px] flex items-center justify-center p-4"
+        className="bg-no-repeat bg-cover bg-center h-screen flex items-center justify-center p-4"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <div className="absolute w-full h-[1000px] bg-white/90 top-0 left-0 z-1"></div>
+        <div className="absolute w-full h-full bg-white/90 top-0 left-0 z-1"></div>
         <div className="w-full max-w-md relative z-10">
           <div className=" rounded-3xl shadow-2xl  bg-[#F2F2F2]">
-            <div className="text-center bg-white pt-10 px-6 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="text-center bg-white pt-2 px-6 rounded-3xl overflow-hidden shadow-2xl">
               <div className="flex items-center justify-center mb-2">
                 <img src={logoImg} className="w-64" alt="logo" />
               </div>
@@ -87,102 +87,108 @@ const Signup = () => {
               <div className="h-1 bg-(--primary-color) w-full "></div>
             </div>
 
-            <form className="space-y-6 bg-[#F2F2F2] px-4 sm:px-6 pt-12 pb-8 overflow-hidden">
-              <div>
-                <label className="block text-gray-600 text-sm">Name</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your name"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
-                />
-                {errors?.name && (
-                  <span className="text-red-500 text-sm">{errors.name}</span>
-                )}
-              </div>
+            <form className="space-y-4 bg-[#F2F2F2] px-4 sm:px-6 pt-12 pb-8 overflow-hidden">
+              <div className=" grid grid-cols-2 gap-5 ">
+                <div>
+                  {/* <label className="block text-gray-600 text-sm">Name</label> */}
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm   transition"
+                  />
+                  {errors?.name && (
+                    <span className="text-red-500 text-xs">{errors.name}</span>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-gray-600 text-sm">
+                <div>
+                  {/* <label className="block text-gray-600 text-sm">
                   Email Address
-                </label>
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
-                />
-                {errors?.email && (
-                  <span className="text-red-500 text-sm">{errors.email}</span>
-                )}
+                </label> */}
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
+                  />
+                  {errors?.email && (
+                    <span className="text-red-500 text-xs">{errors.email}</span>
+                  )}
+                </div>
               </div>
 
-              <div>
-                <label className="block text-gray-600 text-sm">Phone</label>
-                <input
-                  type="number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Enter your phone "
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
-                />
-                {errors?.phone && (
-                  <span className="text-red-500 text-sm">{errors.phone}</span>
-                )}
-              </div>
+              {/* <div className=" grid grid-cols-2 gap-5 "> */}
+                <div>
+                  {/* <label className="block text-gray-600 text-sm">Phone</label> */}
+                  <input
+                    type="number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Enter your phone "
+                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
+                  />
+                  {errors?.phone && (
+                    <span className="text-red-500 text-xs">{errors.phone}</span>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-gray-600 text-sm">
-                  Date of Birth
-                </label>
-                <input
-                  type="date"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
-                  max={new Date().toISOString().split("T")[0]}
-                  placeholder="12/05/2025"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
-                />
-                {errors?.dob && (
-                  <span className="text-red-500 text-sm">{errors.dob}</span>
-                )}
-              </div>
+                <div>
+                  <label className="block text-gray-600 text-sm">
+                    Date of Birth
+                  </label>
+                  <input
+                    type="date"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                    max={new Date().toISOString().split("T")[0]}
+                    placeholder="12/05/2025"
+                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
+                  />
+                  {errors?.dob && (
+                    <span className="text-red-500 text-xs">{errors.dob}</span>
+                  )}
+                </div>
+              {/* </div> */}
 
-              <div>
-                <label className="block text-gray-600 text-sm">
+              <div className=" grid grid-cols-2 gap-5 ">
+                <div>
+                  {/* <label className="block text-gray-600 text-sm">
                   Create New Password
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
-                />
-                {errors?.password && (
-                  <span className="text-red-500 text-sm">
-                    {errors.password}
-                  </span>
-                )}
-              </div>
+                </label> */}
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
+                  />
+                  {errors?.password && (
+                    <span className="text-red-500 text-xs">
+                      {errors.password}
+                    </span>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-gray-600 text-sm">
-                  Confirm Your Password
-                </label>
-                <input
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder=" Enter Confirm Password"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-400 transition"
-                />
-                {errors?.c_password && (
-                  <span className="text-red-500 text-sm">
-                    {errors.c_password}
-                  </span>
-                )}
+                <div>
+                  {/* <label className="block text-gray-600 text-sm">
+                    Confirm Your Password
+                  </label> */}
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder=" Enter Confirm Password"
+                    className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black  placeholder-gray-400 placeholder:text-sm  transition"
+                  />
+                  {errors?.c_password && (
+                    <span className="text-red-500 text-xs">
+                      {errors.c_password}
+                    </span>
+                  )}
+                </div>
               </div>
 
               <button

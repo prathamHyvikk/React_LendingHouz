@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ConfirmEmailPopup from "../Component/ConfirmEmailPopup";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Input from "../Component/Input";
 
 const ForgotPassword = () => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
@@ -19,7 +20,7 @@ const ForgotPassword = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/forgot-password`,
-        { email }
+        { email },
       );
 
       if (response.data.success == true) {
@@ -33,7 +34,7 @@ const ForgotPassword = () => {
         Object.entries(errors).forEach(([field, messages]) => {
           messages.forEach((msg) => {
             // toast.error(`${field}: ${msg}`);
-            toast.error(` ${msg}`);
+            // toast.error(` ${msg}`);
           });
         });
       } else {
@@ -53,35 +54,26 @@ const ForgotPassword = () => {
         <div className="absolute w-full h-full bg-white/90 top-0 left-0 z-1"></div>
         <div className="w-full max-w-md relative z-10">
           <div className="rounded-3xl overflow-hidden shadow-2xl bg-[#F2F2F2]">
-            <div className="text-center bg-white pt-10 px-6 rounded-3xl overflow-hidden shadow-xl">
-              <div className="flex items-center justify-center mb-2">
-                <img src={logoImg} className="w-64" alt="" />
-              </div>
-              <h2 className="text-2xl sora-bold text-center text-(--primary-color) mb-2">
-                Forgot Password?
+            <div className="text-center px-8 pt-6 pb-4 border-b">
+              <img src={logoImg} alt="logo" className="w-40 mx-auto mb-2" />
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Forgot Password
               </h2>
-              <div className="h-1 bg-(--primary-color) w-full"></div>
+              <p className="text-sm text-gray-500"> change your password </p>
             </div>
 
             <form
               onSubmit={handleSubmit}
               className="space-y-6 px-4 sm:px-6 pt-12 pb-8 overflow-hidden"
             >
-              <div>
-                <label className="block text-gray-600 text-sm">
-                  Please Enter Your Email Address
-                </label>
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter Your Email Address"
-                  className="w-full bg-transparent border-b border-gray-600 focus:border-(--primary-color) focus:outline-none py-2 text-black placeholder-gray-700 transition"
-                />
-                {errors?.email && (
-                  <p className="text-red-500 text-sm">{errors?.email[0]}</p>
-                )}
-              </div>
+              <Input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={errors.email}
+              />
 
               <button
                 disabled={loading}
@@ -89,7 +81,7 @@ const ForgotPassword = () => {
                   loading ? "opacity-50  cursor-not-allowed" : "cursor-pointer"
                 }   text-white sora-bold py-2 rounded-lg hover:bg-blue-800 transition duration-200`}
               >
-                Reset Password
+                {loading ? "Processing..." : "Reset Password"}
               </button>
 
               <div>

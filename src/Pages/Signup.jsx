@@ -88,7 +88,7 @@ const Signup = () => {
             </div>
 
             <form className="space-y-4 bg-[#F2F2F2] px-4 sm:px-6 pt-12 pb-8 overflow-hidden">
-              <div className=" grid grid-cols-2 gap-5 ">
+              <div className=" grid sm:grid-cols-2 gap-5 ">
                 <div>
                   {/* <label className="block text-gray-600 text-sm">Name</label> */}
                   <input
@@ -153,7 +153,7 @@ const Signup = () => {
                 </div>
               {/* </div> */}
 
-              <div className=" grid grid-cols-2 gap-5 ">
+              <div className=" grid sm:grid-cols-2 gap-5 ">
                 <div>
                   {/* <label className="block text-gray-600 text-sm">
                   Create New Password

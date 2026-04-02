@@ -101,11 +101,13 @@ const ApplicationsDashboard = () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/show-application`,
+
         {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
           params: {
+            user_id: userId,
             page_no: 1,
           },
         },

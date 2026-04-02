@@ -116,6 +116,8 @@ const DashBoardUser = () => {
             Authorization: `Bearer ${LoginToken}`,
           },
           params: {
+            user_id: userId,
+
             page_no: 1,
           },
         },

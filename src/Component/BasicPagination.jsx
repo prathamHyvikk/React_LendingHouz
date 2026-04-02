@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const BasicPagination = ({ lastPage, url, setProducts }) => {
+const BasicPagination = ({ lastPage, url, setProducts, userId = "" }) => {
   const LoginToken = localStorage.getItem("LoginToken");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,6 +16,7 @@ const BasicPagination = ({ lastPage, url, setProducts }) => {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/${url}?page_no=${page}`,
         {
+          params: { user_id: userId },
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },

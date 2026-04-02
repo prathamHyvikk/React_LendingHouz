@@ -314,6 +314,7 @@ const ApplicationsDashboard = () => {
                 <BasicPagination
                   lastPage={lastPage}
                   url="show-application"
+                  userId={userId}
                   setProducts={setApplications}
                 />
               </div>

@@ -40,21 +40,31 @@ const AdminSignIn = () => {
       );
 
       toast.success(response.data.message);
-      localStorage.setItem("LoginToken", response.data.data.token);
-      if (checkbox == true) {
-        localStorage.setItem("token", response.data.data.token);
-      }
+      // localStorage.setItem("LoginToken", response.data.data.token);
+      // if (checkbox == true) {
+      //   localStorage.setItem("token", response.data.data.token);
+      // }
 
-      const timeOut = 1000 * 60 * 60 * 24 * 30;
-      setTimeout(() => {
-        localStorage.removeItem("token");
-      }, timeOut);
+      // const timeOut = 1000 * 60 * 60 * 24 * 30;
+      // setTimeout(() => {
+      //   localStorage.removeItem("token");
+      // }, timeOut);
 
-      navigate("/admin/dashboard");
-      dispatch(setAuthenticate(true));
+    
+      const expiryTime = checkbox
+        ? Date.now() + 1000 * 60 * 60 * 24 * 30
+        : Date.now() + 1000 * 60 * 60 * 24; // 24 hours
+
+      dispatch(
+        setAuthenticate({
+          value: true,
+          expiry: expiryTime,
+        }),
+      );
       dispatch(setPersonRole("admin"));
       dispatch(setId(response.data.data.id));
       dispatch(setUserType("A"));
+      navigate("/admin/dashboard");
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;

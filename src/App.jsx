@@ -78,33 +78,36 @@ import HomeNewPage from "./Pages/HomeNewPage";
 import Sidebar from "./Component/Sidebar";
 import Layout from "./Component/Layout";
 import AdminCategory from "./Pages/AdminCategory";
+import { logout } from "./features/authenticate";
+import ProtectedRoute from "./Component/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
   const authenticate = useSelector((state) => state.auth.value);
   const role = useSelector((state) => state.person.value);
-  const personId = useSelector((state) => state.person.id);
-  const token = localStorage.getItem("LoginToken");
 
   const prevRoleRef = useRef(null);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    setTimeout(
-      () => {
-        localStorage.removeItem("LoginToken");
-      },
-      1000 * 60 * 60 * 24,
-    );
-  });
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!token) {
-      navigate("/app/signin");
+    if (auth.expiry) {
+      const remainingTime = auth.expiry - Date.now();
+
+      if (remainingTime > 0) {
+        const timer = setTimeout(() => {
+          dispatch(logout());
+        }, remainingTime);
+
+        return () => clearTimeout(timer);
+      } else {
+        dispatch(logout());
+      }
     }
-  }, [token]);
+  }, [auth.expiry]);
 
   useEffect(() => {
     if (pathname.startsWith("/admin")) {
@@ -113,17 +116,16 @@ function App() {
       dispatch(setPersonRole("app"));
     }
   }, [pathname]);
+  
 
   useEffect(() => {
     if (prevRoleRef.current === null) {
       prevRoleRef.current = role;
       return;
     }
-
     if (prevRoleRef.current !== role && role) {
       navigate(`/${role}/signin`);
     }
-
     prevRoleRef.current = role;
   }, [role]);
 
@@ -174,7 +176,14 @@ function App() {
 
         <Route path="admin/signin" element={<AdminSignIn />} />
 
-        <Route path={`/`} element={<Layout />}>
+        <Route
+          path={`/`}
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="app/dashboard" element={<DashBoardUser />} />
           <Route
             path="app/dashboard/applications"

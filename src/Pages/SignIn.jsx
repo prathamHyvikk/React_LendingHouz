@@ -39,21 +39,32 @@ const SignIn = () => {
 
       toast.success(response.data.message);
 
-      localStorage.setItem("LoginToken", response.data.data.token);
-      if (checkbox == true) {
-        localStorage.setItem("token", response.data.data.token);
-      }
+      // localStorage.setItem("LoginToken", response.data.data.token);
+      // if (checkbox == true) {
+      //   localStorage.setItem("token", response.data.data.token);
+      // }
 
-      const timeOut = 1000 * 60 * 60 * 24 * 30;
-      setTimeout(() => {
-        localStorage.removeItem("token");
-      }, 5000);
+      // const timeOut = 1000 * 60 * 60 * 24 * 30;
+      // setTimeout(() => {
+      //   localStorage.removeItem("token");
+      // }, 5000);
 
-      navigate("/");
-      dispatch(setAuthenticate(true));
+      const expiryTime = checkbox
+        ? Date.now() + 1000 * 60 * 60 * 24 * 30
+        : Date.now() + 1000 * 60 * 60 * 24; // 24 hours
+
+      dispatch(
+        setAuthenticate({
+          value: true,
+          expiry: expiryTime,
+        }),
+      );
+
       dispatch(setPersonRole("app"));
       dispatch(setId(response.data.data.id));
       dispatch(setUserType("C"));
+
+      navigate("/");
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;
@@ -135,7 +146,7 @@ const SignIn = () => {
                 </Link>
 
                 <p className="text-center text-gray-700 pt-4">
-                  Dont Have an Account?{" "} <br />
+                  Dont Have an Account? <br />
                   <Link
                     to="/app/signup"
                     className="sora-bold text-gray-900 hover:text-blue-900 transition"

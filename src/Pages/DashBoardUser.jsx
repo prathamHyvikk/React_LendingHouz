@@ -41,7 +41,7 @@ const DashBoardUser = () => {
   const [totalInActive, setTotalInActive] = useState(0);
   const [totalReferral, setTotalReferral] = useState(0);
   const role = useSelector((state) => state.person.value);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state)=>state.auth.token);
   const userId = useSelector((state) => state.person.id);
 
   useEffect(() => {

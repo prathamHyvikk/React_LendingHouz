@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [loading, setLoading] = useState(false);
 
   const role = useSelector((state) => state.person.value);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
   const userProfile = useSelector((state) => state.person.user);
   const adminProfile = useSelector((state) => state.person.admin);
@@ -121,7 +121,6 @@ const Sidebar = () => {
     const currentProfile = role === "app" ? userProfile : adminProfile;
 
     if (currentProfile && Object.keys(currentProfile).length > 0) {
-      
       setFullName(currentProfile.name || "");
       setTitle(currentProfile.title || "");
       setImage(currentProfile.image_url || "");

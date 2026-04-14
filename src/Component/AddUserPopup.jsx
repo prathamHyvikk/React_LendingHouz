@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { IoClose, IoCloudUploadOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const AddUserPopup = ({ onClose, refreshUsers }) => {
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -21,21 +22,18 @@ const AddUserPopup = ({ onClose, refreshUsers }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    
     const timer = setTimeout(() => setIsOpen(true), 10);
     return () => clearTimeout(timer);
   }, []);
 
   const handleClose = () => {
     setIsOpen(false);
-   
+
     setTimeout(onClose, 300);
   };
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-
-   
 
     formData.append("name", data.name);
     formData.append("username", data.username);

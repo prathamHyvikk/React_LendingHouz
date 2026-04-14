@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const EditProduct = ({ data, setShowAddProduct, setAgainFetchProducts }) => {
   console.log(data);
@@ -20,7 +21,7 @@ const EditProduct = ({ data, setShowAddProduct, setAgainFetchProducts }) => {
   const [condition, setCondition] = useState("");
 
   const max_file = 2;
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   // 1. Populate state with existing data
   useEffect(() => {

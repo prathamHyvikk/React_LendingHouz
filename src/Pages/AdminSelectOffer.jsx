@@ -18,7 +18,7 @@ const AdminSelectOffer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
   const [financePopup, setFinancePopup] = useState(false);
   const [cartTotalQty, setCartTotalQty] = useState(0);

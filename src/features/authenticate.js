@@ -4,7 +4,8 @@ export const authenticate = createSlice({
   name: "authenticate",
   initialState: {
     value: false,
-    expiry: null, 
+    expiry: null,
+    token: "",
   },
   reducers: {
     setAuthenticate: (state, action) => {
@@ -15,8 +16,12 @@ export const authenticate = createSlice({
       state.value = false;
       state.expiry = null;
     },
+
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
   },
 });
 
-export const { setAuthenticate, logout } = authenticate.actions;
+export const { setAuthenticate, logout , setToken } = authenticate.actions;
 export default authenticate.reducer;

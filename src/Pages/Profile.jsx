@@ -21,7 +21,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [enableEdit, setEnableEdit] = useState(false);
   const [updateValue, setUpdateValue] = useState(false);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
   const role = useSelector((state) => state.person.value);
 
@@ -96,7 +96,7 @@ const Profile = () => {
         } else {
           dispatch(setAdmin(response?.data?.data));
         }
-        
+
         dispatch(setRefreshKey(Date.now()));
       } catch (error) {
         const errors = error.response.data.errors;

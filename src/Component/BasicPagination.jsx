@@ -3,9 +3,10 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const BasicPagination = ({ lastPage, url, setProducts, userId = "" }) => {
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 

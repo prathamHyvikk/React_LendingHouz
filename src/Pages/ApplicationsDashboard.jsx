@@ -35,7 +35,7 @@ const ApplicationsDashboard = () => {
   const [lastPage, setLastPage] = useState();
 
   const role = useSelector((state) => state.person.value);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
   const marketplace = false;
 

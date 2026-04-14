@@ -25,7 +25,7 @@ const HeaderTable = ({
   const [showOptions, setShowOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [categories, setCategories] = useState([]);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const categoryRef = useRef();
 
   const fetchCategories = async () => {

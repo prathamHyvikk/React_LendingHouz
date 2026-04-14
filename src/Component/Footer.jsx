@@ -3,12 +3,13 @@ import logo from "/assets/Images/header-logo.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
   const year = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

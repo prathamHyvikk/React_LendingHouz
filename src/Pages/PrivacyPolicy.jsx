@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
   const role = useSelector((state) => state.person.value);
   const [content, setContent] = React.useState("");
   const [loading, setLoading] = useState(false);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const getContent = async () => {
     setLoading(true);
@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setContent(response?.data);

@@ -21,7 +21,7 @@ export default function CartSteper() {
   const [financeData, setFinanceData] = useState();
   const [totalAmount, setTotalAmount] = useState();
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const application_id = localStorage.getItem("application_id");
   const method = localStorage.getItem("method");
   const userId = useSelector((state) => state.person.id);

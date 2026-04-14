@@ -11,8 +11,7 @@ const AdminTearmsAndConditions = () => {
   const [showEditor, setShowEditor] = React.useState(false);
   const [content, setContent] = React.useState("");
   const [loading, setLoading] = useState(false);
-  const LoginToken = localStorage.getItem("LoginToken");
-
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const getContent = async () => {
     setLoading(true);
@@ -26,10 +25,9 @@ const AdminTearmsAndConditions = () => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
-    
       setContent(response?.data);
     } catch (error) {
       if (error?.response) {
@@ -92,8 +90,6 @@ const AdminTearmsAndConditions = () => {
                       ></path>
                     </svg>
                   </div>
-
-                  
                 </div>
               ) : null}
 

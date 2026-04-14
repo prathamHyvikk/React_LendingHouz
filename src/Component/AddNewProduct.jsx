@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
 
   const max_file = 2;
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
@@ -41,7 +42,6 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
 
   const handleOtherImages = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -102,12 +102,10 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
     } catch (error) {
       setLoading(false);
       if (error.response && error.response.data) {
-        const apiErrors = error.response.data.errors; 
+        const apiErrors = error.response.data.errors;
         setError(apiErrors);
 
-      
         if (typeof apiErrors === "object" && apiErrors !== null) {
-          
           const firstKey = Object.keys(apiErrors)[0];
           const message = apiErrors[firstKey];
 

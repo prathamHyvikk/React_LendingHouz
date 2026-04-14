@@ -11,6 +11,7 @@ import SmallCard from "../Component/SmallCard";
 import axios from "axios";
 import toast from "react-hot-toast";
 import BasicPagination from "../Component/BasicPagination";
+import { useSelector } from "react-redux";
 
 const MarketPlace = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
@@ -20,7 +21,7 @@ const MarketPlace = () => {
   const [lastPage, setLastPage] = useState();
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -82,14 +83,15 @@ const MarketPlace = () => {
                     No Products Available{" "}
                   </p>
                 )}
-                {!loading && products?.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}
-                  >
-                    <SmallCard data={item} />
-                  </Link>
-                ))}
+                {!loading &&
+                  products?.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={`/app/dashboard/marketplace/product/product-detail/${item?.id}`}
+                    >
+                      <SmallCard data={item} />
+                    </Link>
+                  ))}
               </div>
             </div>
           </div>

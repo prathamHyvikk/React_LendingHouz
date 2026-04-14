@@ -12,6 +12,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import BasicPagination from "../Component/BasicPagination";
 import EditProduct from "../Component/EditProduct";
+import { useSelector } from "react-redux";
 
 const AdminMarketPlace = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
@@ -23,7 +24,7 @@ const AdminMarketPlace = () => {
   const [editProductData, setEditProductData] = useState({});
   const [editPopup, setEditPopup] = useState(false);
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const fetchProducts = async () => {
     setLoading(true);
     try {

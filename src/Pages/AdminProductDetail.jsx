@@ -25,7 +25,7 @@ const AdminProductDetail = () => {
 
   const [cartTotalQty, setCartTotalQty] = useState(0);
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const { id } = useParams();
   const userId = useSelector((state) => state.person.id);
@@ -363,7 +363,7 @@ const AdminProductDetail = () => {
                 )}
               </div>
 
-                 {/* Rating */}
+              {/* Rating */}
 
               {/* <div className="border-t border-gray-200 pt-6">
                 <div className="flex items-start gap-4">

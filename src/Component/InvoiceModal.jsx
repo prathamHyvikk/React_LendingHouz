@@ -3,13 +3,14 @@ import ModalWrapper from "./ModalWrapper";
 import logoImage from "/assets/Images/logo.png";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const InvoiceModal = ({ onClose, invoice }) => {
   const printRef = useRef();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const fetchInvoice = async () => {
     setLoading(true);
@@ -40,7 +41,8 @@ const InvoiceModal = ({ onClose, invoice }) => {
     }
   }, [invoice]);
 
-  const { order, user, items, grand_total, application,tfc_invoice } = data || {};
+  const { order, user, items, grand_total, application, tfc_invoice } =
+    data || {};
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -330,4 +332,3 @@ const InvoiceModal = ({ onClose, invoice }) => {
 };
 
 export default InvoiceModal;
-

@@ -9,7 +9,7 @@ const TearmsAndConditions = () => {
   const role = useSelector((state) => state.person.value);
   const [content, setContent] = React.useState("");
   const [loading, setLoading] = useState(false);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const getContent = async () => {
     setLoading(true);
@@ -23,7 +23,7 @@ const TearmsAndConditions = () => {
           headers: {
             Authorization: `Bearer ${LoginToken}`,
           },
-        }
+        },
       );
 
       setContent(response?.data);
@@ -31,7 +31,7 @@ const TearmsAndConditions = () => {
       if (error?.response) {
         toast.error(error?.response.data.message);
       }
-    }finally{
+    } finally {
       setLoading(false);
     }
   };

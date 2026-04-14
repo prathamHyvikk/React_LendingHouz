@@ -4,6 +4,7 @@ import "../joditEditor.css";
 import { IoClose, IoSaveOutline } from "react-icons/io5";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const TextEditor = ({
   placeholder,
@@ -14,7 +15,7 @@ const TextEditor = ({
   postName,
 }) => {
   const editor = useRef(null);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setId, setPersonRole, setUserType } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { setAuthenticate } from "../features/authenticate";
+import { setAuthenticate, setToken } from "../features/authenticate";
 import Input from "../Component/Input";
 
 const SignIn = () => {
@@ -59,6 +59,7 @@ const SignIn = () => {
           expiry: expiryTime,
         }),
       );
+      dispatch(setToken(response.data.data.token));
 
       dispatch(setPersonRole("app"));
       dispatch(setId(response.data.data.id));

@@ -31,7 +31,7 @@ const Users = () => {
   const [search, setSearch] = useState("");
   const [addUserPopup, setAddUserPopup] = useState(false);
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     document.body.style.overflow =

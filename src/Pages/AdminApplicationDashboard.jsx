@@ -28,7 +28,7 @@ const AdminApplicationsDashboard = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const role = useSelector((state) => state.person.value);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   // const userId = useSelector((state) => state.person.id);
   const [totalApplications, setTotalApplications] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);

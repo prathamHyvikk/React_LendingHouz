@@ -23,7 +23,7 @@ const EmploymentAndIncom = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const personId = useSelector((state) => state.person.id);
   const navigate = useNavigate();

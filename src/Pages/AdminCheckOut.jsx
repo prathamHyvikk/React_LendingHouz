@@ -38,7 +38,7 @@ const AdminCheckOut = () => {
   const totalAmount = localStorage.getItem("totalAmount");
   const application_id = localStorage.getItem("application_id");
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
 
   console.log(alignment);

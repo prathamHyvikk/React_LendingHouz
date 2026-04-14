@@ -22,7 +22,7 @@ const ViewUser = () => {
   const [loading, setLoading] = useState(false);
   const [enableEdit, setEnableEdit] = useState(false);
   const [updateValue, setUpdateValue] = useState(false);
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const { uid } = useParams();
   console.log(uid);
   const role = useSelector((state) => state.person.value);
@@ -95,7 +95,6 @@ const ViewUser = () => {
         setEnableEdit(false);
         setPassword("");
         navigate("/admin/dashboard/users");
-       
       } catch (error) {
         const errors = error.response.data.errors;
         if (errors) {

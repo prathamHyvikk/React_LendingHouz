@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const AdminCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -9,7 +10,7 @@ const AdminCategory = () => {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const topRef = useRef(null);
 
   // Shared Headers
@@ -265,12 +266,12 @@ const AdminCategory = () => {
                     </td>
                   </tr>
                 ) : categories.length > 0 ? (
-                  categories.map((cat,i) => (
+                  categories.map((cat, i) => (
                     <tr
                       key={cat.id}
                       className="hover:bg-gray-50 transition-colors"
                     >
-                      <td className="p-4 text-gray-600">{i+1}</td>
+                      <td className="p-4 text-gray-600">{i + 1}</td>
                       <td className="p-4 font-medium text-gray-800">
                         {cat.name}
                       </td>

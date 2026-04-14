@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const ConfirmFinance = ({
   setActiveStep,
@@ -10,7 +11,7 @@ const ConfirmFinance = ({
   const [showOptions, setShowOptions] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
 
   const fetchCategories = async () => {
     try {

@@ -51,7 +51,7 @@ export default function CustomeStepper() {
     }
   }, [arrivedCategory]);
 
-  const LoginToken = localStorage.getItem("LoginToken");
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
   const fetchUser = async () => {
     try {

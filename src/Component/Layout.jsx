@@ -13,7 +13,7 @@ const Layout = () => {
   const { pathname } = useLocation();
 
   const cartQuantity = useSelector((state) => state.cart.quantity);
-  console.log(cartQuantity);
+  // console.log(cartQuantity);
 
   const role = useSelector((state) => state.person.value);
 

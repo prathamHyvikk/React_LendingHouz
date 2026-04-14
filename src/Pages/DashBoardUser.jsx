@@ -149,7 +149,7 @@ const DashBoardUser = () => {
     fetchTotal();
   }, []);
 
-  console.log(invoiceDetail);
+  // console.log(invoiceDetail);
   const getStatusStyle = (status) => {
     switch (status) {
       case "Approved":

@@ -133,7 +133,7 @@ const AdminDashboard = () => {
   };
 
   const handleInvoice = (item) => {
-    console.log(item);
+    // console.log(item);
     setShowInvoice(true);
     setInvoiceDetail(item);
   };

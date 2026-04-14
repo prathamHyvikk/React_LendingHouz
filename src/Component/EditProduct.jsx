@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const EditProduct = ({ data, setShowAddProduct, setAgainFetchProducts }) => {
-  console.log(data);
+  // console.log(data);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");

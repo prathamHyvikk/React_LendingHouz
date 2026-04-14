@@ -24,7 +24,7 @@ const ViewUser = () => {
   const [updateValue, setUpdateValue] = useState(false);
   const LoginToken = useSelector((state) => state.auth.token);
   const { uid } = useParams();
-  console.log(uid);
+  // console.log(uid);
   const role = useSelector((state) => state.person.value);
 
   const dispatch = useDispatch();

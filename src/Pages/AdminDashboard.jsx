@@ -221,74 +221,80 @@ const AdminDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {applications.length > 0 ? (
-                    applications
-                      ?.filter(
-                        (item) =>
-                          item?.lender_name
-                            ?.toLowerCase()
-                            .includes(search.toLowerCase()) ||
-                          item?.application_status
-                            ?.toLowerCase()
-                            .includes(search.toLowerCase()) ||
-                          item?.requested_income
-                            ?.toLowerCase()
-                            .includes(search.toLowerCase()) ||
-                          item?.application_id?.toString().includes(search),
-                      )
-                      ?.map((item, i) => (
-                        <tr key={i} className="hover:bg-gray-50 text-nowrap">
-                          <Td>#{item.application_id}</Td>
-                          <Td>{item.name}</Td>
-                          {role == "admin" && <Td>{item.business}</Td>}
-                          <Td
-                            className={`${getStatusStyle(item.application_status)}`}
-                          >
-                            {item.application_status}
-                          </Td>
-                          <Td className="">$ {item.requested_income}</Td>
-                          <Td className="" center={""}>
-                            {item.created_at?.split("T")[0]}
-                          </Td>
+                  {applications.length > 0
+                    ? applications
+                        ?.filter(
+                          (item) =>
+                            item?.lender_name
+                              ?.toLowerCase()
+                              .includes(search.toLowerCase()) ||
+                            item?.application_status
+                              ?.toLowerCase()
+                              .includes(search.toLowerCase()) ||
+                            item?.requested_income
+                              ?.toLowerCase()
+                              .includes(search.toLowerCase()) ||
+                            item?.application_id?.toString().includes(search),
+                        )
+                        ?.map((item, i) => (
+                          <tr key={i} className="hover:bg-gray-50 text-nowrap">
+                            <Td>#{item.application_id}</Td>
+                            <Td>{item.name}</Td>
+                            {role == "admin" && <Td>{item.business}</Td>}
+                            <Td
+                              className={`${getStatusStyle(item.application_status)}`}
+                            >
+                              {item.application_status}
+                            </Td>
+                            <Td className="">$ {item.requested_income}</Td>
+                            <Td className="" center={""}>
+                              {item.created_at?.split("T")[0]}
+                            </Td>
 
-                          <Td center={"yes"} className="flex justify-center">
-                            <IconBtn
-                              href={`/${role}/dashboard/marketplace`}
-                              icon={<CiShop />}
-                            />
-                          </Td>
-
-                          {item.application_status == "Used" ? (
-                            <Td center={"yes"}>
+                            <Td center={"yes"} className="flex justify-center">
                               <IconBtn
-                                icon={<ImAttachment />}
-                                onClick={() => handleInvoice(item)}
+                                href={`/${role}/dashboard/marketplace`}
+                                icon={<CiShop />}
                               />
                             </Td>
-                          ) : (
-                            <Td center={"yes"}></Td>
-                          )}
 
-                          <Td center>
-                            <IconBtn
-                              icon={<IoEyeOutline />}
-                              onClick={() => handleApplicationInfo(item)}
-                            />
-                          </Td>
+                            {item.application_status == "Used" ? (
+                              <Td center={"yes"}>
+                                <IconBtn
+                                  icon={<ImAttachment />}
+                                  onClick={() => handleInvoice(item)}
+                                />
+                              </Td>
+                            ) : (
+                              <Td center={"yes"}></Td>
+                            )}
+
+                            <Td center>
+                              <IconBtn
+                                icon={<IoEyeOutline />}
+                                onClick={() => handleApplicationInfo(item)}
+                              />
+                            </Td>
+                          </tr>
+                        ))
+                    : !loading && (
+                        <tr
+                          center={"yes"}
+                          className="col-span-7 text-nowrap text-[#364153] font-bold text-sm text-start"
+                        >
+                          <td colSpan="8" className="py-10 text-center">
+                            No Application Found
+                          </td>
                         </tr>
-                      ))
-                  ) : (
-                    <tr
-                      center={"yes"}
-                      className="col-span-7 text-nowrap text-[#364153] font-bold text-sm text-start"
-                    >
-                      <td colSpan="8" className="py-10 text-center">
-                        No Application Found
-                      </td>
-                    </tr>
-                  )}
+                      )}
                 </tbody>
               </table>
+
+              {loading && (
+                <div className="my-15 w-full mx-auto flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+                </div>
+              )}
 
               <div className="my-8 mx-auto flex justify-center w-full">
                 <BasicPagination
@@ -297,12 +303,6 @@ const AdminDashboard = () => {
                   setProducts={setApplications}
                 />
               </div>
-
-              {loading && (
-                <div className="my-15 w-full mx-auto flex justify-center items-center">
-                  <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
-                </div>
-              )}
             </div>
 
             <div className="mt-8">

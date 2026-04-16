@@ -310,6 +310,12 @@ const ApplicationsDashboard = () => {
                 </tbody>
               </table>
 
+              {loading && (
+                <div className="my-10 h-full flex justify-center items-center w-full">
+                  <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
+                </div>
+              )}
+
               <div className="my-8 mx-auto flex justify-center w-full">
                 <BasicPagination
                   lastPage={lastPage}
@@ -318,12 +324,6 @@ const ApplicationsDashboard = () => {
                   setProducts={setApplications}
                 />
               </div>
-
-              {loading && (
-                <div className="my-10 h-full flex justify-center items-center w-full">
-                  <div className="animate-spin rounded-full h-15 w-15 border-b-2 border-gray-900"></div>
-                </div>
-              )}
             </div>
           </div>
 

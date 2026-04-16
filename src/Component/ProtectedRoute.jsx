@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
   if (!auth) {
     return (
       <>
-        {toast.error("Session expired. Please login again.")}
+        {toast.error(" Please login .")}
         <Navigate to="/app/signin" replace />
       </>
     );

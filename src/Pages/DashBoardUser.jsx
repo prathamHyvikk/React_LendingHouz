@@ -41,7 +41,7 @@ const DashBoardUser = () => {
   const [totalInActive, setTotalInActive] = useState(0);
   const [totalReferral, setTotalReferral] = useState(0);
   const role = useSelector((state) => state.person.value);
-  const LoginToken = useSelector((state)=>state.auth.token);
+  const LoginToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.person.id);
 
   useEffect(() => {
@@ -291,6 +291,12 @@ const DashBoardUser = () => {
                 </tbody>
               </table>
 
+              {loading && (
+                <div className="my-15 w-full mx-auto flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
+                </div>
+              )}
+
               <div className="my-8 mx-auto flex justify-center w-full">
                 <BasicPagination
                   lastPage={lastPage}
@@ -299,12 +305,6 @@ const DashBoardUser = () => {
                   setProducts={setApplications}
                 />
               </div>
-
-              {loading && (
-                <div className="my-15 w-full mx-auto flex justify-center items-center">
-                  <div className="animate-spin rounded-full h-13 w-13 border-b-3 border-gray-900"></div>
-                </div>
-              )}
             </div>
 
             <div className="mt-8">

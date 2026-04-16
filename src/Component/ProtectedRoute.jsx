@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const auth = useSelector((state) => state.auth.value);
+  const token = useSelector((state) => state.auth.token);
 
-  if (!auth) {
+  if (!token) {
     return (
       <>
         {toast.error(" Please login .")}

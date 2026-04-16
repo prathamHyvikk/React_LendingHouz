@@ -3,7 +3,7 @@ import logoImage from "/assets/Images/logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setId, setPersonRole, setUserType } from "../features/personRole";
-import { setAuthenticate } from "../features/authenticate";
+import { setAuthenticate, setToken } from "../features/authenticate";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FaRegUser } from "react-icons/fa";
@@ -73,7 +73,7 @@ const Sidebar = () => {
   const currentPath = window.location.pathname;
 
   const handleLogout = () => {
-    localStorage.removeItem("LoginToken");
+    dispatch(setToken(null));
     dispatch(setAuthenticate(false));
     dispatch(setPersonRole(""));
     dispatch(setId(null));

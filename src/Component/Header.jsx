@@ -192,7 +192,10 @@ function Header({ btncategory }) {
                 <Link className="px-4 py-2 hover:bg-gray-100" to="/appliance">
                   Appliance
                 </Link>
-                <Link className="px-4 py-2 hover:bg-gray-100" to="/home-finance">
+                <Link
+                  className="px-4 py-2 hover:bg-gray-100"
+                  to="/home-finance"
+                >
                   Home Finance
                 </Link>
               </div>
@@ -372,9 +375,12 @@ function Header({ btncategory }) {
           <Link to="/become-partner" className="sora-bold text-black  ">
             Become Partner
           </Link>
-          <button className="md:py-4 w-fit p-3 cursor-pointer md:px-10 primary-text bg-white rounded-2xl sora-bold tracking-wide">
-            Get Started <i className="ri-arrow-right-long-line"></i>
-          </button>
+          {/* <button className="md:py-4 w-fit p-3 cursor-pointer md:px-10 primary-text bg-white rounded-2xl sora-bold tracking-wide"> */}
+          <BtnGetStart
+            category={"Home"}
+            className={"!bg-white !text-[#ff9201]"}
+          />
+          {/* </button> */}
         </nav>
       </div>
 

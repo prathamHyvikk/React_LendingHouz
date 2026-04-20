@@ -16,7 +16,7 @@ function BlogDetails() {
           </p>
 
           {/* Title */}
-          <h1 className="sora-medium  text-2xl  sm:text-[35px] md:text-3xl sm:text-[50px]  leading-10  text-gray-900 mb-4">
+          <h1 className="sora-medium  text-2xl  sm:text-[35px] md:text-3xl  leading-10  text-gray-900 mb-4">
             How to Get Approved for a Home Loan Faster
           </h1>
 

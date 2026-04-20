@@ -3,7 +3,7 @@ import "../Component/Utility.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function BtnGetStart({ category = "default" }) {
+function BtnGetStart({ category = "default", className }) {
   const authenticate = useSelector((state) => state.auth.value);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function BtnGetStart({ category = "default" }) {
 
     if (authenticate == false) {
       navigate("/app/signin");
-    }else{
+    } else {
       navigate("/app/dashboard/applications/new-application", {
         state: {
           category: category,
@@ -35,7 +35,7 @@ function BtnGetStart({ category = "default" }) {
     <div>
       <button
         onClick={handleClick}
-        className=" cursor-pointer py-4 px-7  primary-bg rounded-xl sora-semibold text-white flex items-center gap-2 group transition-all duration-300 hover:shadow-lg"
+        className={` cursor-pointer py-4 px-7  primary-bg rounded-xl sora-semibold text-white flex items-center gap-2 group transition-all duration-300 hover:shadow-lg ${className}`}
       >
         Get Started
         <i className="ri-arrow-right-long-line transform transition-all duration-300 group-hover:translate-x-2 group-hover:scale-x-125"></i>

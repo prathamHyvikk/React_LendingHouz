@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logoImg from "/assets/Images/logo.png";
 import bgImage from "/assets/Images/background-image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setId, setPersonRole, setUserType } from "../features/personRole";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,6 +18,7 @@ const AdminSignIn = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
 
   const { pathname } = useLocation();
 
@@ -69,8 +70,8 @@ const AdminSignIn = () => {
     } catch (error) {
       if (error.response) {
         const apiErrors = error.response.data.errors;
-        setError(apiErrors);
         if (apiErrors) {
+          setErrors(apiErrors);
           const firstError = Object.values(apiErrors)?.[0];
 
           // if (firstError) {
@@ -78,14 +79,15 @@ const AdminSignIn = () => {
           // }
         } else {
           toast.error(error?.response.data.message);
+          setErrors(error?.response.data.message);
         }
       }
+    } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       navigate("/admin/dashboard");
     }

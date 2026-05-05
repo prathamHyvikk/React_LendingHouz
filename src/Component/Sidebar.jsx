@@ -130,6 +130,11 @@ const Sidebar = () => {
     }
   }, [userId, role, userProfile, adminProfile]);
 
+  console.log("role:", role);
+  console.log("userId:", userId);
+  console.log("userProfile:", userProfile);
+  console.log("adminProfile:", adminProfile);
+
   // useEffect(() => {
   //   if (refreshKey && userId) {
   //     fetchUser();

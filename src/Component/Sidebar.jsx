@@ -136,11 +136,7 @@ const Sidebar = () => {
     }
   }, [refreshKey, userId]);
 
-  // useEffect(() => {
-  //   if (refreshKey && userId) {
-  //     fetchUser();
-  //   }
-  // }, [refreshKey, userId]);
+
 
   return (
     <>

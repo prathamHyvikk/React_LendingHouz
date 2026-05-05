@@ -47,6 +47,7 @@ const TextEditor = ({
         { name: postName, value: content },
         { headers: { Authorization: `Bearer ${LoginToken}` } },
       );
+      console.log(content);
       toast.success("Content updated successfully");
       handleClose();
     } catch (error) {

@@ -47,9 +47,10 @@ const Sidebar = () => {
     {
       name: "MarketPlace",
       href: "dashboard/marketplace",
-      icon: "fas fa-shield-alt",
+      icon: "fa-solid fa-store",
       dataPage: "marketplace",
     },
+
     {
       name: "Category", // Added Category
       href: "dashboard/category",

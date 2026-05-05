@@ -179,9 +179,9 @@ function App() {
         <Route
           path={`/`}
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <Layout />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         >
           <Route path="app/dashboard" element={<DashBoardUser />} />

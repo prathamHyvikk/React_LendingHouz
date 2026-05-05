@@ -128,7 +128,7 @@ const Sidebar = () => {
     } else if (userId) {
       fetchUser();
     }
-  }, [userId, role, userProfile, adminProfile]);
+  }, [userId, role, userProfile, adminProfile, LoginToken]);
 
   console.log("role:", role);
   console.log("userId:", userId);

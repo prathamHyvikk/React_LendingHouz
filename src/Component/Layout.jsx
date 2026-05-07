@@ -21,7 +21,7 @@ const Layout = () => {
     <div className="flex h-screen relative overflow-hidden ">
       <Sidebar />
       <div className="w-full bg-gray-50 overflow-auto">
-        <div className=" p-4 lg:p-8  sora cursor-pointer max-lg:mt-22 flex mx-auto lg:flex-col justify-end items-end ">
+        <div className=" px-4 lg:px-8  pt-4 lg:pt-8  sora cursor-pointer max-lg:mt-22 flex mx-auto lg:flex-col justify-end items-end ">
           {pathname !== `/${role}/dashboard/notifications` && (
             <div className="flex items-center space-x-4">
               {/* <input
@@ -30,11 +30,11 @@ const Layout = () => {
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#0080C6]"
               /> */}
 
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 ">
                 {role === "app" && (
                   <Link
                     to={`/app/dashboard/cart/select-offer`}
-                    className="relative cursor-pointer inline-block"
+                    className="relative cursor-pointer block"
                   >
                     <FaShoppingCart className="text-[24px]" />
                     <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] sora-bold rounded-full flex items-center justify-center border-2 border-white">
@@ -57,7 +57,7 @@ const Layout = () => {
             </div>
           )}
         </div>
-        <div className="flex-1 p-4 lg:p-8 ">
+        <div className="flex-1 px-4 lg:px-8 pt-2 lg:pt-0 pb-4 lg:pb-8 ">
           <Outlet />
         </div>
       </div>

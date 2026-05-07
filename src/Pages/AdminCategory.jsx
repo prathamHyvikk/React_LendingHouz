@@ -55,14 +55,17 @@ const AdminCategory = () => {
   // ADD
   const handleAdd = async (e) => {
     e.preventDefault();
-    if (!name.trim()) return toast.error("Please enter a category name");
+
+    if (!name.trim()) {
+      return toast.error("Please enter a category name");
+    }
 
     const formData = new FormData();
-
     formData.append("name", name);
 
     try {
       setLoading(true);
+
       const response = await axios.post(
         "https://cpanel.lendinghouz.com/api/categories",
         formData,
@@ -71,8 +74,10 @@ const AdminCategory = () => {
 
       setName("");
       setEditId(null);
+      console.log("try block");
+
+      toast.success(response.data.message);
       fetchCategories();
-      toast.success(editId ? response.data.message : response.data.message);
     } catch (error) {
       const apiError = error.response.data.errors;
       if (apiError) {
@@ -186,12 +191,12 @@ const AdminCategory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="min-h-screen bg-gray-50 ">
       <div ref={topRef} />
-      <div className="max-w-6xl mx-auto">
+      <div className=" mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-[#002E6D]">
+          <h1 className="!text-2xl md:!text-3xl font-bold text-[#002E6D]">
             Category Management
           </h1>
           <div className="w-16 h-1 bg-yellow-400 mt-2 rounded-full"></div>

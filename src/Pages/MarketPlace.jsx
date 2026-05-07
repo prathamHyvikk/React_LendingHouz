@@ -113,12 +113,6 @@ const MarketPlace = () => {
           />
         )}
       </AdminLayout>
-      <br />
-      <br />
-      <div onClick={()=>console.log("div")}>
-        
-        <button onClick={()=>console.log("btn")}>Test</button>
-      </div>
     </>
   );
 };

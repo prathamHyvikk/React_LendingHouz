@@ -10,6 +10,7 @@ const Profile = () => {
   const [uploadFile, setUploadFile] = useState(null);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [Title, setTitle] = useState("");
@@ -46,6 +47,7 @@ const Profile = () => {
 
       setUserName(user?.username ?? "");
       setEmail(user?.email ?? "");
+      setPhone(user?.phone ?? "");
       setFullName(user?.name ?? "");
       setTitle(user?.role ?? "");
       setImage(user?.image_url ?? "");
@@ -74,6 +76,7 @@ const Profile = () => {
         formData.append("id", userId);
         formData.append("username", userName);
         formData.append("email", email);
+        formData.append("phone", phone);
         formData.append("name", fullName);
         formData.append("title", Title);
         formData.append("language", language);
@@ -177,10 +180,6 @@ const Profile = () => {
                 </a>
                 <span className="text-gray-500"> - {Title}</span>
               </p>
-              <p className="text-sm text-gray-400 mb-6">
-                Avatar by <span className="text-gray-600">gravatar.com</span>.
-                Or upload your own...
-              </p>
 
               <div className="border-2 relative border-dashed border-gray-300 rounded-lg p-6 text-center">
                 <label className="cursor-pointer block">
@@ -254,6 +253,24 @@ const Profile = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <label className="text-gray-600">
+                  Phone <span className="text-red-500">*</span>
+                </label>
+                <div
+                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
+                >
+                  <input
+                    type="number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    disabled={enableEdit === false ? true : false}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <label className="text-gray-600">Password</label>
                 <div
                   className={`md:col-span-3 relative ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
@@ -313,24 +330,6 @@ const Profile = () => {
                     disabled={enableEdit === false ? true : false}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700"
                   />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-                <label className="text-gray-600">Language</label>
-                <div
-                  className={`md:col-span-3 ${enableEdit ? "" : "bg-[#f2f2f2]"}`}
-                >
-                  <select
-                    onChange={(e) => setLanguage(e.target.value)}
-                    disabled={enableEdit === false ? true : false}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-gray-700 bg-white cursor-pointer"
-                  >
-                    <option defaultValue={"english"}>English</option>
-                    <option>Spanish</option>
-                    <option>French</option>
-                    <option>German</option>
-                  </select>
                 </div>
               </div>
             </form>

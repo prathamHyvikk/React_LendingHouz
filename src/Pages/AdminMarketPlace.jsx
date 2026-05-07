@@ -59,7 +59,16 @@ const AdminMarketPlace = () => {
       toast.success(response?.data?.message);
       setAgainFetchProducts(true);
     } catch (error) {
-      toast.error(error?.response.data.message);
+      const apiError = error.response.data.errors;
+      if (apiError) {
+        Object.entries(apiError).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -82,7 +91,16 @@ const AdminMarketPlace = () => {
       setEditProductData(response?.data);
       setEditPopup(true);
     } catch (error) {
-      toast.error(error?.response.data.message);
+      const apiError = error.response.data.errors;
+      if (apiError) {
+        Object.entries(apiError).forEach(([field, messages]) => {
+          messages.forEach((msg) => {
+            toast.error(` ${msg}`);
+          });
+        });
+      } else {
+        toast.error(error?.response.data.message);
+      }
     } finally {
       setLoading(false);
     }

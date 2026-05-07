@@ -154,7 +154,7 @@ const Users = () => {
         </div>
 
         {/* TABLE */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
+        <div className=" bg-white rounded-lg shadow-sm p-4 ">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <input
@@ -181,16 +181,16 @@ const Users = () => {
           </div>
 
           <div className="overflow-x-auto border border-gray-200 rounded-xl shadow-sm mt-4">
-            <table className="w-full text-sm text-left text-nowrap">
-              <thead className="bg-gray-100 text-gray-700">
+            <table className="w-full  text-sm text-left text-nowrap">
+              <thead className="bg-gray-100 text-gray-700  ">
                 <tr>
-                  <Th>Customer Name</Th>
-                  <Th>Phone</Th>
-                  <Th>Email</Th>
-                  <Th>Date Of Birth</Th>
-                  <Th>Title</Th>
-                  <Th>Edit</Th>
-                  <Th>Delete</Th>
+                  <Th className="!text-center">Customer Name</Th>
+                  <Th className="!text-center">Phone</Th>
+                  <Th className="!text-center">Email</Th>
+                  <Th className="!text-center">Date Of Birth</Th>
+                  <Th className="!text-center">Title</Th>
+                  <Th className="!text-center">Edit</Th>
+                  <Th className="!text-center">Delete</Th>
                 </tr>
               </thead>
 

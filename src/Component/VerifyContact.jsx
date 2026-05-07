@@ -53,6 +53,7 @@ const VerifyContact = ({ setActiveStep, verifyContact, setVerifyContact }) => {
     if (!zipcode) return toast.error("zipcode code is required");
     if (!city) return toast.error("City is required");
     if (!state) return toast.error("State is required");
+    if (state.length > 2) return toast.error("State must be 2 letters");
     if (!chk_correct) return toast.error("Please check the box");
 
     setActiveStep((s) => s + 1);

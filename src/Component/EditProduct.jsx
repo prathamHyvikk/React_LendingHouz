@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
@@ -19,6 +19,7 @@ const EditProduct = ({ data, setShowAddProduct, setAgainFetchProducts }) => {
   const [image, setImage] = useState(null);
   const [otherImage, setOtherImage] = useState([]);
   const [condition, setCondition] = useState("");
+  const fileInputRef = useRef(null);
 
   const max_file = 2;
   const LoginToken = useSelector((state) => state.auth.token);
@@ -71,6 +72,22 @@ const EditProduct = ({ data, setShowAddProduct, setAgainFetchProducts }) => {
       return;
     }
     setOtherImage((prev) => [...prev, ...selectedFiles]);
+
+    const MAX_SIZE = 2 * 1024 * 1024;
+    const oversizedFiles = selectedFiles.filter((file) => file.size > MAX_SIZE);
+    console.log(oversizedFiles);
+
+    if (oversizedFiles.length > 0) {
+      oversizedFiles.forEach((file) => {
+        toast.error(`${file.name} exceeds 2MB size limit`);
+      });
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
+
+      return;
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -308,6 +325,7 @@ const EditProduct = ({ data, setShowAddProduct, setAgainFetchProducts }) => {
                   <input
                     type="file"
                     name="image"
+                    ref={fileInputRef}
                     onChange={(e) => setImage(e.target.files[0])}
                     accept="image/*"
                     className="w-full   px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-(--primary-color) focus:border-transparent"

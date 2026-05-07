@@ -56,7 +56,9 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   const handleOtherImages = (e) => {
     const selectedFiles = Array.from(e.target.files);
 
-    // check new selection only
+    const MAX_SIZE = 2 * 1024 * 1024; // 2MB
+
+    // check image count
     if (selectedFiles.length > max_file) {
       toast.error(`You can upload maximum ${max_file} images`);
 
@@ -67,7 +69,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
       return;
     }
 
-    // check total images
+    // check total image count
     if (otherImage.length + selectedFiles.length > max_file) {
       toast.error(`Total images cannot exceed ${max_file}`);
 
@@ -78,9 +80,25 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
       return;
     }
 
+    // check file size
+    const oversizedFiles = selectedFiles.filter((file) => file.size > MAX_SIZE);
+    console.log(oversizedFiles);
+
+    if (oversizedFiles.length > 0) {
+      oversizedFiles.forEach((file) => {
+        toast.error(`${file.name} exceeds 2MB size limit`);
+      });
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
+
+      return;
+    }
+
     setOtherImage((prev) => [...prev, ...selectedFiles]);
 
-    // reset input after successful selection
+    // clear input
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }

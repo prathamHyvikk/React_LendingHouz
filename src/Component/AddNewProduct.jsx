@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
@@ -18,6 +18,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   const [image, setImage] = useState();
   const [otherImage, setOtherImage] = useState([]);
   const [condition, setCondition] = useState("");
+  const fileInputRef = useRef(null);
 
   const max_file = 2;
 
@@ -55,16 +56,34 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
   const handleOtherImages = (e) => {
     const selectedFiles = Array.from(e.target.files);
 
-    // total after selection
-    const totalFiles = otherImage.length + selectedFiles.length;
+    // check new selection only
+    if (selectedFiles.length > max_file) {
+      toast.error(`You can upload maximum ${max_file} images`);
 
-    if (totalFiles > max_file) {
-      toast.error(`You can upload a maximum of ${max_file} images.`);
-      e.target.value = "";
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
+
+      return;
+    }
+
+    // check total images
+    if (otherImage.length + selectedFiles.length > max_file) {
+      toast.error(`Total images cannot exceed ${max_file}`);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
+
       return;
     }
 
     setOtherImage((prev) => [...prev, ...selectedFiles]);
+
+    // reset input after successful selection
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -342,6 +361,7 @@ const AddNewProduct = ({ setShowAddProduct, setAgainFetchProducts }) => {
                 <input
                   type="file"
                   name="otherImage"
+                  ref={fileInputRef}
                   multiple
                   onChange={(e) => handleOtherImages(e)}
                   accept="image/*"

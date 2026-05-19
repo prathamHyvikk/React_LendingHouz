@@ -136,8 +136,6 @@ const Sidebar = () => {
     }
   }, [refreshKey, userId]);
 
-
-
   return (
     <>
       {/* hemburger icon - Mobile view */}
@@ -203,6 +201,7 @@ const Sidebar = () => {
                 ) : (
                   <NavLink
                     to={`/${role}/${item.href}`}
+                    onClick={() => setShowSidebar(false)}
                     className={`flex items-center sm:px-6 px-3 py-3 max-sm:text-sm text-[#002E6D] hover:bg-[#D7F4FE] transition-all page-Link
                 ${
                   currentPath == `/${role}/${item.href}`
@@ -221,7 +220,10 @@ const Sidebar = () => {
         </nav>
 
         <div className="absolute bottom-0 sm:w-64 p-6 border-t border-gray-300">
-          <Link to={`/${role}/dashboard/profile`}>
+          <Link
+            onClick={() => setShowSidebar(false)}
+            to={`/${role}/dashboard/profile`}
+          >
             <div className="flex items-center">
               <div className="sm:w-10 w-8 sm:h-10 h-8 overflow-hidden rounded-full bg-gray-300 flex items-center justify-center">
                 {image ? (

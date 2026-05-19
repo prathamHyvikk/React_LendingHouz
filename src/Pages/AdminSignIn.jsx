@@ -14,7 +14,7 @@ const AdminSignIn = () => {
   const [email, setEmail] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errors, setError] = useState({});
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
